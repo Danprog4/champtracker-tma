@@ -52,3 +52,6 @@ export const challengesTable = pgTable('challenges', {
 
   userCheckedDates: timestamp('user_checked_dates').array(),
 });
+
+export type Challenge = InferSelectModel<typeof challengesTable>;
+export type NewChallenge = InferInsertModel<typeof challengesTable>;
