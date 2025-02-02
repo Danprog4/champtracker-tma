@@ -1,30 +1,20 @@
-import { Challenge } from '@back-types';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { createNewChallenge, getChallenges } from './api/challenge';
+import { TasksPage } from './components/tasks-page';
+import { useChallenges } from './hooks/useChallenges';
 
 function App() {
-  const queryClient = useQueryClient();
+  const {
+    challenges,
+    createChallenge,
+    isChallengesLoading,
+    isCreateChallengePending,
+  } = useChallenges();
 
-  const { data: challenges } = useQuery<Challenge[]>({
-    queryKey: ['challenges'],
-    queryFn: getChallenges,
-  });
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: createNewChallenge,
-    onSuccess: (data) => {
-      queryClient.setQueryData(['challenges'], (old: Challenge[]) => {
-        return [...old, data];
-      });
-    },
-  });
-
-  if (!challenges) {
+  if (isChallengesLoading || !challenges) {
     return 'loading...';
   }
 
   const handleCreateChallenge = () => {
-    mutate({
+    createChallenge({
       title: 'Test Challenge',
       duration: 30,
       color: '#FF0000',
@@ -37,21 +27,23 @@ function App() {
 
   return (
     <div>
-      <div className="flex flex-col gap-2">
-        {!challenges.length && 'no challenges yet, create new '}
-        {challenges?.map((ch) => {
-          return <ChallengeView challenge={ch} />;
-        })}
+      <TasksPage />
+
+      <div className="invisible">
+        <div className="flex flex-col gap-2">
+          {!challenges.length && 'no challenges yet, create new '}
+          {challenges?.map((ch) => {
+            return <ChallengeView challenge={ch} />;
+          })}
+        </div>
+
+        <button
+          onClick={handleCreateChallenge}
+          className="bg-amber-300 text-black p-2 rounded"
+        >
+          {isCreateChallengePending ? 'loading...' : 'Create new challenge'}
+        </button>
       </div>
-
-      {isPending && 'loading...'}
-
-      <button
-        onClick={handleCreateChallenge}
-        className="bg-amber-300 text-black p-2 rounded"
-      >
-        Create new challenge
-      </button>
     </div>
   );
 }
