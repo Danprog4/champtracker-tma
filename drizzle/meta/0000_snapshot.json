@@ -1,0 +1,171 @@
+{
+  "id": "124bd8a8-872c-4a10-a82d-712f54e4b8a6",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigint",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isPremium": {
+          "name": "isPremium",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "language": {
+          "name": "language",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "photoUrl": {
+          "name": "photoUrl",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.challenges": {
+      "name": "challenges",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "duration": {
+          "name": "duration",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "color": {
+          "name": "color",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "challengeStartAt": {
+          "name": "challengeStartAt",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "regularity": {
+          "name": "regularity",
+          "type": "regularity_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "days_of_week": {
+          "name": "days_of_week",
+          "type": "integer[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "taskDates": {
+          "name": "taskDates",
+          "type": "varchar(255)[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userCheckedDates": {
+          "name": "userCheckedDates",
+          "type": "varchar(255)[]",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "challenges_userId_users_id_fk": {
+          "name": "challenges_userId_users_id_fk",
+          "tableFrom": "challenges",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.regularity_enum": {
+      "name": "regularity_enum",
+      "schema": "public",
+      "values": [
+        "everyday",
+        "fewTimesAWeek"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
