@@ -1,6 +1,6 @@
+import { CreateChallengeReq } from '@back-types';
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import axios from 'axios';
-import { Challenge } from '@back-types';
 
 export const getChallenges = async () => {
   const { initDataRaw } = retrieveLaunchParams();
@@ -14,12 +14,12 @@ export const getChallenges = async () => {
   return response.data;
 };
 
-export const createNewChallenge = async (challenge: Challenge) => {
+export const createNewChallenge = async (body: CreateChallengeReq) => {
   const { initDataRaw } = retrieveLaunchParams();
 
   const response = await axios.post(
     'http://localhost:3000/createChallenge',
-    challenge,
+    body,
     {
       headers: {
         'x-init-data': initDataRaw,

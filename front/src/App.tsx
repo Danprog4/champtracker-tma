@@ -1,6 +1,6 @@
+import { Challenge } from '@back-types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createNewChallenge, getChallenges } from './api/challenge';
-import { Challenge } from '@back-types';
 
 function App() {
   const queryClient = useQueryClient();
@@ -11,17 +11,11 @@ function App() {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationKey: ['challenges'],
-    mutationFn: (body: Challenge) => {
-      return createNewChallenge(body);
-    },
-
-    onSuccess: (newChallenge) => {
-      console.log('newChallenge', newChallenge);
-      queryClient.setQueryData(['challenges'], (old: Challenge[]) => [
-        ...old,
-        newChallenge,
-      ]);
+    mutationFn: createNewChallenge,
+    onSuccess: (data) => {
+      queryClient.setQueryData(['challenges'], (old: Challenge[]) => {
+        return [...old, data];
+      });
     },
   });
 
@@ -31,16 +25,12 @@ function App() {
 
   const handleCreateChallenge = () => {
     mutate({
-      id: 33,
-      userId: 1,
       title: 'Test Challenge',
       duration: 30,
       color: '#FF0000',
-      createdAt: new Date().toISOString(),
       regularity: 'everyday',
       daysOfWeek: null,
       taskDates: [],
-      userCheckedDates: null,
       challengeStartAt: new Date().toISOString(),
     });
   };

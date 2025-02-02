@@ -8,7 +8,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@back-types": ["../src/db/schema"]
+      "@back-types": ["../src/types"]
     }
   }
 }

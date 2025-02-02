@@ -3,6 +3,7 @@ import { cors } from 'hono/cors';
 import { getValidatedUser } from './auth';
 import { createChallenge, getChallenges, updateChallenge } from './db/repo';
 import { NewChallenge, UpdateChallenge } from './db/schema';
+import { CreateChallengeReq } from './types';
 
 const app = new Hono();
 
@@ -18,11 +19,12 @@ app.get('/getChallenges', async (c) => {
 
 app.post('/createChallenge', async (c) => {
   const user = await getValidatedUser(c.req);
-  const body = await c.req.json<NewChallenge>();
+  const body = await c.req.json<CreateChallengeReq>();
 
   const challenge = await createChallenge({
     ...body,
     userId: user.id,
+    createdAt: new Date().toISOString(),
   });
 
   return c.json(challenge);
