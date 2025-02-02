@@ -1,0 +1,20 @@
+{
+  "name": "champtracker",
+  "scripts": {
+    "dev": "bun run --hot src/index.ts"
+  },
+  "dependencies": {
+    "@telegram-apps/init-data-node": "^2.0.2",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.1",
+    "hono": "^4.6.20",
+    "pg": "^8.13.1",
+    "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.2",
+    "@types/pg": "^8.11.11",
+    "drizzle-kit": "^0.30.4"
+  }
+}
