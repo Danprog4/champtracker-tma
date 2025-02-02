@@ -1,28 +1,12 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { getValidatedUser } from './auth';
-import {
-  getChallenges,
-  createChallenge,
-  updateChallenge,
-  type NewChallenge,
-  type UpdateChallenge,
-} from './db/repo/challenges';
-import { CreateChallenge } from '../types';
+import { createChallenge, getChallenges, updateChallenge } from './db/repo';
+import { NewChallenge, UpdateChallenge } from './db/schema';
 
 const app = new Hono();
 
-app.use(
-  '/*',
-  cors({
-    origin: ['http://localhost:5173'],
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowHeaders: ['Content-Type', 'x-init-data'],
-    exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
-    maxAge: 600,
-    credentials: true,
-  })
-);
+app.use('*', cors());
 
 app.get('/getChallenges', async (c) => {
   const user = await getValidatedUser(c.req);
@@ -34,15 +18,12 @@ app.get('/getChallenges', async (c) => {
 
 app.post('/createChallenge', async (c) => {
   const user = await getValidatedUser(c.req);
-  const body = await c.req.json<CreateChallenge>();
+  const body = await c.req.json<NewChallenge>();
 
   const challenge = await createChallenge({
     ...body,
-    createdAt: new Date(body.createdAt),
     userId: user.id,
   });
-
-  console.log('created new challenge with id', challenge.id);
 
   return c.json(challenge);
 });

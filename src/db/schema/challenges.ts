@@ -1,27 +1,14 @@
 import {
+  bigint,
+  integer,
+  pgEnum,
   pgTable,
   serial,
-  bigint,
   varchar,
-  integer,
-  timestamp,
-  boolean,
-  pgEnum,
 } from 'drizzle-orm/pg-core';
 
-import { type InferSelectModel, type InferInsertModel } from 'drizzle-orm';
-
-export const usersTable = pgTable('users', {
-  id: bigint({ mode: 'number' }).primaryKey(),
-  name: varchar({ length: 255 }).notNull(),
-  username: varchar({ length: 255 }),
-  isPremium: boolean().notNull(),
-  language: varchar({ length: 255 }).notNull(),
-  photoUrl: varchar({ length: 255 }),
-});
-
-export type User = InferSelectModel<typeof usersTable>;
-export type NewUser = InferInsertModel<typeof usersTable>;
+import { type InferInsertModel, type InferSelectModel } from 'drizzle-orm';
+import { usersTable } from '.';
 
 export const regularityEnum = pgEnum('regularity_enum', [
   'everyday',
@@ -41,17 +28,22 @@ export const challengesTable = pgTable('challenges', {
 
   color: varchar({ length: 255 }).notNull(),
 
-  createdAt: timestamp('created_at').notNull().defaultNow(),
+  createdAt: varchar({ length: 255 }).notNull(),
+
+  challengeStartAt: varchar({ length: 255 }).notNull(),
 
   regularity: regularityEnum('regularity').notNull(),
 
   // null if regularity is set to everyday
   daysOfWeek: integer('days_of_week').array(),
 
-  taskDates: timestamp('task_dates').array().notNull(),
+  taskDates: varchar({ length: 255 }).array().notNull(),
 
-  userCheckedDates: timestamp('user_checked_dates').array(),
+  userCheckedDates: varchar({ length: 255 }).array(),
 });
 
 export type Challenge = InferSelectModel<typeof challengesTable>;
 export type NewChallenge = InferInsertModel<typeof challengesTable>;
+export type UpdateChallenge = Partial<
+  Omit<NewChallenge, 'userId' | 'id' | 'createdAt'>
+>;

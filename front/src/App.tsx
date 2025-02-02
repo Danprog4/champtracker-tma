@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createNewChallenge, getChallenges } from './api/challenge';
-import { Challenge } from './types';
+import { Challenge } from '@back-types';
 
 function App() {
   const queryClient = useQueryClient();
@@ -18,7 +18,10 @@ function App() {
 
     onSuccess: (newChallenge) => {
       console.log('newChallenge', newChallenge);
-      queryClient.setQueryData(['challenges'], (old) => [...old, newChallenge]);
+      queryClient.setQueryData(['challenges'], (old: Challenge[]) => [
+        ...old,
+        newChallenge,
+      ]);
     },
   });
 
@@ -38,6 +41,7 @@ function App() {
       daysOfWeek: null,
       taskDates: [],
       userCheckedDates: null,
+      challengeStartAt: new Date().toISOString(),
     });
   };
 

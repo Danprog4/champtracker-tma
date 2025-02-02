@@ -1,18 +1,6 @@
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import axios from 'axios';
-
-type Challenge = {
-  id: number;
-  userId: number;
-  title: string;
-  duration: number;
-  color: string;
-  createdAt: string;
-  regularity: 'everyday' | 'fewTimesAWeek';
-  daysOfWeek: number[] | null;
-  taskDates: Date[];
-  userCheckedDates: Date[] | null;
-};
+import { Challenge } from '@back-types';
 
 export const getChallenges = async () => {
   const { initDataRaw } = retrieveLaunchParams();

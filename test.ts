@@ -1,5 +1,4 @@
 import axios, { isAxiosError } from 'axios';
-import { CreateChallenge } from './types';
 
 const api = axios.create({
   baseURL: 'http://localhost:3000',
@@ -10,7 +9,7 @@ const api = axios.create({
 
 const testCreateChallenge = async (id: number) => {
   try {
-    const newChallenge: CreateChallenge = {
+    const newChallenge = {
       id: id,
       userId: 1,
       title: 'Test Challenge',

@@ -1,12 +1,6 @@
 import { db } from '..';
-import { challengesTable } from '../schema';
+import { challengesTable, NewChallenge, UpdateChallenge } from '../schema';
 import { eq, and } from 'drizzle-orm';
-import { type InferInsertModel } from 'drizzle-orm';
-
-export type NewChallenge = InferInsertModel<typeof challengesTable>;
-export type UpdateChallenge = Partial<
-  Omit<NewChallenge, 'id' | 'userId' | 'createdAt'>
->;
 
 export const getChallenges = async (userId: number) => {
   const challenges = await db
