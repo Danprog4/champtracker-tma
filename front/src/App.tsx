@@ -1,5 +1,4 @@
-import { TasksPage } from './components/tasks-page';
-import { useChallenges } from './hooks/useChallenges';
+import { useChallenges } from "./hooks/useChallenges";
 
 function App() {
   const {
@@ -10,15 +9,15 @@ function App() {
   } = useChallenges();
 
   if (isChallengesLoading || !challenges) {
-    return 'loading...';
+    return "loading...";
   }
 
   const handleCreateChallenge = () => {
     createChallenge({
-      title: 'Test Challenge',
+      title: "Test Challenge",
       duration: 30,
-      color: '#FF0000',
-      regularity: 'everyday',
+      color: "#FF0000",
+      regularity: "everyday",
       daysOfWeek: null,
       taskDates: [],
       challengeStartAt: new Date().toISOString(),
@@ -27,11 +26,9 @@ function App() {
 
   return (
     <div>
-      <TasksPage />
-
-      <div className="invisible">
+      <div>
         <div className="flex flex-col gap-2">
-          {!challenges.length && 'no challenges yet, create new '}
+          {!challenges.length && "no challenges yet, create new "}
           {challenges?.map((ch) => {
             return <ChallengeView challenge={ch} />;
           })}
@@ -41,7 +38,7 @@ function App() {
           onClick={handleCreateChallenge}
           className="bg-amber-300 text-black p-2 rounded"
         >
-          {isCreateChallengePending ? 'loading...' : 'Create new challenge'}
+          {isCreateChallengePending ? "loading..." : "Create new challenge"}
         </button>
       </div>
     </div>
@@ -58,7 +55,7 @@ type ChallengeProps = {
     duration: number;
     color: string;
     createdAt: string;
-    regularity: 'everyday' | 'fewTimesAWeek';
+    regularity: "everyday" | "fewTimesAWeek";
     daysOfWeek: number[] | null;
     taskDates: string[];
     userCheckedDates: string[] | null;
@@ -70,19 +67,19 @@ const ChallengeView = ({ challenge }: ChallengeProps) => {
     <div
       style={{
         border: `2px solid ${challenge.color}`,
-        padding: '1rem',
-        margin: '1rem',
+        padding: "1rem",
+        margin: "1rem",
       }}
     >
       <h3>{challenge.title}</h3>
       <div>Duration: {challenge.duration} days</div>
       <div>Regularity: {challenge.regularity}</div>
       {challenge.daysOfWeek && (
-        <div>Days of week: {challenge.daysOfWeek.join(', ')}</div>
+        <div>Days of week: {challenge.daysOfWeek.join(", ")}</div>
       )}
       <div>Created: {new Date(challenge.createdAt).toLocaleDateString()}</div>
       <div>
-        Progress: {challenge.userCheckedDates?.length || 0} /{' '}
+        Progress: {challenge.userCheckedDates?.length || 0} /{" "}
         {challenge.taskDates.length} days completed
       </div>
     </div>
