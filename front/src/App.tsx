@@ -1,4 +1,6 @@
+import { Route, Routes } from "react-router";
 import { useChallenges } from "./hooks/useChallenges";
+import { Paths } from "./Paths";
 
 function App() {
   const {
@@ -25,8 +27,8 @@ function App() {
   };
 
   return (
-    <div>
-      <div>
+    <div className="relative h-screen overflow-y-scroll rounded-lg bg-black text-white shadow-lg">
+      {/* <div>
         <div className="flex flex-col gap-2">
           {!challenges.length && "no challenges yet, create new "}
           {challenges?.map((ch) => {
@@ -40,7 +42,19 @@ function App() {
         >
           {isCreateChallengePending ? "loading..." : "Create new challenge"}
         </button>
-      </div>
+      </div> */}
+
+      <Routes>
+        {Paths.map((route, index) => {
+          return (
+            <Route
+              key={index}
+              path={route.path}
+              element={<route.element />}
+            ></Route>
+          );
+        })}
+      </Routes>
     </div>
   );
 }

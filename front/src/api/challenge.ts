@@ -10,7 +10,7 @@ export const getChallenges = async () => {
       'x-init-data': initDataRaw,
     },
   });
-
+  console.log(response.data)
   return response.data;
 };
 
@@ -26,6 +26,6 @@ export const createNewChallenge = async (body: CreateChallengeReq) => {
       },
     }
   );
-
+    console.log(response.data)
   return response.data;
 };
