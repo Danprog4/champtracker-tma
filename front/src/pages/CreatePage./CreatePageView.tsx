@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Colors } from "@/bgColors.config";
+import DurationModal from "@/components/DurationModal/DurationModal";
+import RegularityModal from "@/components/RegularityModal/RegularityModal";
+import StartModal from "@/components/StartModal/StartModal";
+import { Switch } from "@/components/ui/switch";
 
 interface CreateDumpProps {
   card: any;
@@ -8,8 +12,8 @@ interface CreateDumpProps {
   setTitle: (value: string) => void;
   color: string;
   setColor: (value: string) => void;
-  regularity: string;
-  setRegularity: (value: string) => void;
+  regularity: "everyday" | "fewTimesAWeek";
+  setRegularity: (value: "everyday" | "fewTimesAWeek") => void;
   duration: number;
   setDuration: (value: number) => void;
   date: Date | undefined;
@@ -87,19 +91,19 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         <span className="mb-2 mt-2 text-gray-300">Условия</span>
       </div>
       <div className="flex flex-col items-center justify-center">
-        {/* <Modal
+        <RegularityModal
           regularity={regularity}
           setRegularity={setRegularity}
           daysOfWeek={daysOfWeek}
           setDaysOfWeek={setDaysOfWeek}
         />
-        <DurModal
+        <DurationModal
           duration={duration}
           setDuration={setDuration}
           id={card?.id}
           regularity={regularity}
         />
-        <StartModal date={date} setDate={setDate} disabled={false} /> */}
+        <StartModal date={date} setDate={setDate} disabled={false} />
       </div>
       <div className="mt-4 flex flex-col pl-5 pt-4 text-start">
         <span className="mb-2 text-gray-300">Уведомления</span>
@@ -107,7 +111,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
       <div className="flex flex-col items-center justify-center gap-2">
         <div className="flex h-[44px] w-[90vw] items-center justify-between rounded-md bg-gray-700 p-[10px]">
           <span>Включить уведомления</span>
-          {/* <Switch onClick={() => setIsNotifications(!isNotifications)} /> */}
+          <Switch onClick={() => setIsNotifications(!isNotifications)} />
         </div>
         {isNotifications && (
           <div className="flex h-[60px] w-[90vw] flex-col justify-center rounded-md bg-gray-700 p-[10px]">

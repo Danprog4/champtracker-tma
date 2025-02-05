@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import { mockTelegramEnv, init } from "@telegram-apps/sdk";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router";
+import "./index.css";
 
 const queryClient = new QueryClient();
 

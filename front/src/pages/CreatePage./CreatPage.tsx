@@ -23,15 +23,17 @@ const CreateSmart: React.FC = () => {
   const [isNotifications, setIsNotifications] = useState(false);
   const [notifications, setNotifications] = useState("");
   const [color, setColor] = useState(category?.color || "bg-pink-200");
-  const [regularity, setRegularity] = useState("Everyday");
-  const [duration, setDuration] = useState(regularity === "Everyday" ? 30 : 84);
+  const [regularity, setRegularity] = useState<"everyday" | "fewTimesAWeek">(
+    "everyday"
+  );
+  const [duration, setDuration] = useState(regularity === "everyday" ? 30 : 84);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>([]);
 
   useEffect(() => {
-    if (regularity === "Everyday") {
+    if (regularity === "everyday") {
       setDuration(30);
-    } else if (regularity === "Few times a week") {
+    } else if (regularity === "fewTimesAWeek") {
       setDuration(84);
     } else {
       setDuration(30);
@@ -63,10 +65,10 @@ const CreateSmart: React.FC = () => {
         title,
         duration,
         color,
-        regularity: "everyday",
-        daysOfWeek: null,
+        regularity,
+        daysOfWeek,
         taskDates: taskDays,
-        challengeStartAt: new Date().toISOString(),
+        challengeStartAt: startDate.toISOString(),
       });
       toast("Задание успешно сохранено!");
       navigate("/");

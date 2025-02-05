@@ -27,12 +27,12 @@ export const getDatesForDaysOfWeek = (
   startDate: Date,
   duration: number,
   selectedDays: number[],
-  regularity: string
+  regularity: "everyday" | "fewTimesAWeek"
 ): string[] => {
   const taskDays: string[] = [];
   let currentDate = dayjs(startDate);
 
-  if (regularity !== "Everyday") {
+  if (regularity !== "everyday") {
     for (let i = 0; i < duration; i++) {
       if (selectedDays.includes(currentDate.day())) {
         taskDays.push(currentDate.format("YYYY-MM-DD"));
