@@ -20,9 +20,9 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
     checkDay(challengeId, dayCount);
   };
 
-  const isChecked =
-    challenge.userCheckedDates &&
-    challenge.userCheckedDates.includes(dayjs().toISOString());
+  const isDayChecked = challenge.userCheckedDates?.some((date) =>
+    dayjs(date).isSame(dayjs(), 'day'),
+  );
 
   return (
     <Link
@@ -71,7 +71,7 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
           }}
         >
           <div className="text-md font-extrabold text-white">
-            {isChecked ? (
+            {isDayChecked ? (
               <img src={CheckImg} alt="check_image" className="w-[30px]" />
             ) : (
               <span>
