@@ -206,7 +206,6 @@ const UpdatePage: React.FC = () => {
           title={"УДАЛИТЬ ЗАДАНИЕ"}
           handleFunc={() => {
             deleteChallengeMutation(task.id);
-            navigate("/");
           }}
         />
       </div>

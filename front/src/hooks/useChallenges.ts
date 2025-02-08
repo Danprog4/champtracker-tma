@@ -7,9 +7,12 @@ import {
 import { queryKeys } from "@/query-keys";
 import { Challenge, UpdateChallenge } from "@back-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+
 
 export const useChallenges = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: challenges, isLoading: isChallengesLoading } = useQuery<
     Challenge[]
@@ -58,7 +61,8 @@ export const useChallenges = () => {
         (old: Challenge[] = []) => {
           return old.filter((ch) => ch.id !== deletedChallenge.id);
         }
-      );     
+      );  
+      navigate("/")   
     },
   });
 
