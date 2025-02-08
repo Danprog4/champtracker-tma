@@ -3,20 +3,21 @@ import {
   createNewChallenge,
   updateChallenge,
   deleteChallenge,
-} from "@/api/challenge";
-import { queryKeys } from "@/query-keys";
-import { Challenge, UpdateChallenge } from "@back-types";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-
+} from '@/api/challenge';
+import { queryKeys } from '@/query-keys';
+import { Challenge, UpdateChallenge } from '@back-types';
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 export const useChallenges = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { data: challenges, isLoading: isChallengesLoading } = useQuery<
-    Challenge[]
-  >({
+  const { data: challenges } = useSuspenseQuery<Challenge[]>({
     queryKey: [queryKeys.challenges],
     queryFn: getChallenges,
   });
@@ -53,16 +54,15 @@ export const useChallenges = () => {
     mutate: deleteChallengeMutation,
     isPending: isDeleteChallengePending,
   } = useMutation({
-    mutationFn: (challengeId: number) =>
-      deleteChallenge(challengeId),
+    mutationFn: (challengeId: number) => deleteChallenge(challengeId),
     onSuccess: (deletedChallenge) => {
       queryClient.setQueryData(
         [queryKeys.challenges],
         (old: Challenge[] = []) => {
           return old.filter((ch) => ch.id !== deletedChallenge.id);
         }
-      );  
-      navigate("/")   
+      );
+      navigate('/');
     },
   });
 
@@ -71,9 +71,9 @@ export const useChallenges = () => {
     dayCount: number, // dayCount is now the second argument
     dayBeforeToday: (date: string) => boolean
   ) => {
-    console.log("taskId:", taskId, typeof taskId);
+    console.log('taskId:', taskId, typeof taskId);
     console.log(
-      "Available task IDs:",
+      'Available task IDs:',
       challenges?.map((task) => task.id)
     );
 
@@ -83,12 +83,12 @@ export const useChallenges = () => {
 
     // Получим целевую дату на основе dayCount
     const targetDate = task.taskDates[dayCount];
-    console.log("no date", targetDate);
+    console.log('no date', targetDate);
     if (!targetDate) return;
 
     // Проверим, раньше ли сегодняшней даты эта целевая
     const isBeforeToday = dayBeforeToday(targetDate);
-    console.log("day is not before");
+    console.log('day is not before');
     if (!isBeforeToday) return;
 
     // Определим, был ли день уже проверен
@@ -114,12 +114,18 @@ export const useChallenges = () => {
     });
   };
 
-  const getOneChallege = (id: number): Challenge | undefined => {
-    return challenges?.find((ch) => ch.id === id);
+  const getOneChallege = (id: number): Challenge | null => {
+    const found = challenges.find((ch) => ch.id === id);
+
+    if (!found) {
+      return null;
+    }
+
+    return found;
   };
+
   return {
     challenges,
-    isChallengesLoading,
 
     createChallenge,
     isCreateChallengePending,

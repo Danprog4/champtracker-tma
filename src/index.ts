@@ -1,7 +1,12 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { getValidatedUser } from './auth';
-import { createChallenge, deleteChallenge, getChallenges, updateChallenge } from './db/repo';
+import {
+  createChallenge,
+  deleteChallenge,
+  getChallenges,
+  updateChallenge,
+} from './db/repo';
 import { NewChallenge, UpdateChallenge } from './db/schema';
 import { CreateChallengeReq } from './types';
 import dayjs = require('dayjs');
@@ -34,6 +39,7 @@ app.post('/createChallenge', async (c) => {
 app.put('/updateChallenge/:id', async (c) => {
   const user = await getValidatedUser(c.req);
   const id = Number(c.req.param('id'));
+
   const body = await c.req.json<UpdateChallenge>();
 
   const challenge = await updateChallenge(id, user.id, body);
@@ -46,8 +52,8 @@ app.put('/updateChallenge/:id', async (c) => {
 });
 
 app.delete('/deleteChallenge/:id', async (c) => {
-  const user = await getValidatedUser(c.req); 
-  const id = Number(c.req.param('id')); 
+  const user = await getValidatedUser(c.req);
+  const id = Number(c.req.param('id'));
 
   const deletedChallenge = await deleteChallenge(id, user.id);
 
@@ -57,6 +63,5 @@ app.delete('/deleteChallenge/:id', async (c) => {
 
   return c.json({ message: 'Challenge deleted successfully' });
 });
-
 
 export default app;

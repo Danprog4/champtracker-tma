@@ -1,39 +1,37 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import CrossImg from "../../assets/images/Krestiksvgpng.ru_.svg";
-import RegularityModal from "@/components/RegularityModal/RegularityModal";
-import DurationModal from "@/components/DurationModal/DurationModal";
-import StartModal from "@/components/StartModal/StartModal";
-import { Switch } from "@/components/ui/switch";
-import { cn } from "@/lib/utils";
-import { Colors } from "@/bgColors.config";
-import { getDatesForDaysOfWeek } from "@/lib/dateUtils";
-import dayjs from "dayjs";
-import { useChallenges } from "@/hooks/useChallenges";
-import { Alert } from "@/components/ui/alert";
+import React, { useState, useEffect, useMemo } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import CrossImg from '../../assets/images/Krestiksvgpng.ru_.svg';
+import RegularityModal from '@/components/RegularityModal/RegularityModal';
+import DurationModal from '@/components/DurationModal/DurationModal';
+import StartModal from '@/components/StartModal/StartModal';
+import { Switch } from '@/components/ui/switch';
+import { cn } from '@/lib/utils';
+import { Colors } from '@/bgColors.config';
+import { getDatesForDaysOfWeek } from '@/lib/dateUtils';
+import dayjs from 'dayjs';
+import { useChallenges } from '@/hooks/useChallenges';
+import { Alert } from '@/components/ui/alert';
 
+// TODO: use suspense everywhere instead of simple useQuery
 const UpdatePage: React.FC = () => {
-  const navigate = useNavigate();
-  const { taskId } = useParams<{ taskId: string }>();
+  const taskId = Number(useParams<{ taskId: string }>().taskId);
+
   const { getOneChallege, updateChallengeMutation, deleteChallengeMutation } =
     useChallenges();
 
-  useEffect(() => {
-    if (!taskId || !getOneChallege(Number(taskId))) {
-      navigate("/");
-    }
-  }, [taskId, getOneChallege, navigate]);
+  const task = getOneChallege(taskId);
 
-  const task = taskId ? getOneChallege(Number(taskId)) : undefined;
-  if (!task) return null;
+  if (!task) {
+    throw new Error('Task not found');
+  }
 
   const [isNotifications, setIsNotifications] = useState(false);
-  const [notifications, setNotifications] = useState("");
+  const [notifications, setNotifications] = useState('');
   const [color, setColor] = useState(task.color);
-  const [title, setTitle] = useState(task.title || "CHALLENGE NAME");
+  const [title, setTitle] = useState(task.title || 'CHALLENGE NAME');
   const [regularity, setRegularity] = useState(task.regularity);
   const [duration, setDuration] = useState(task.duration);
-  const startedDate = dayjs(task.challengeStartAt).format("DD.MM.YYYY");
+  const startedDate = dayjs(task.challengeStartAt).format('DD.MM.YYYY');
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>(task.daysOfWeek || []);
 
   const taskDays = useMemo(() => {
@@ -41,6 +39,7 @@ const UpdatePage: React.FC = () => {
   }, [duration, daysOfWeek, regularity]);
 
   const checkIfChanged = useMemo(() => {
+    if (!task) return false;
     return (
       color !== task.color ||
       duration !== task.duration ||
@@ -49,6 +48,14 @@ const UpdatePage: React.FC = () => {
       JSON.stringify(daysOfWeek) !== JSON.stringify(task.daysOfWeek)
     );
   }, [color, duration, title, regularity, daysOfWeek, task]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!taskId || !getOneChallege(Number(taskId))) {
+      navigate('/');
+    }
+  }, [taskId, getOneChallege, navigate]);
 
   const handleReset = () => {
     if (!taskId) return;
@@ -62,7 +69,7 @@ const UpdatePage: React.FC = () => {
     };
 
     updateChallengeMutation({ id: Number(taskId), body: resetTask });
-    navigate("/");
+    navigate('/');
   };
 
   const handleSave = () => {
@@ -81,7 +88,7 @@ const UpdatePage: React.FC = () => {
     };
 
     updateChallengeMutation({ id: Number(taskId), body: updatedTask });
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -99,8 +106,8 @@ const UpdatePage: React.FC = () => {
           <span className="mt-4 text-sm">Название</span>
           <div
             className={cn(
-              "mr-[5%] mt-3 text-2xl font-extrabold uppercase",
-              title === "НАЗВАНИЕ ЗАДАНИЯ" && "opacity-[0.3]"
+              'mr-[5%] mt-3 text-2xl font-extrabold uppercase',
+              title === 'НАЗВАНИЕ ЗАДАНИЯ' && 'opacity-[0.3]'
             )}
           >
             <input
@@ -111,7 +118,7 @@ const UpdatePage: React.FC = () => {
                 const inputValue = e.target.value.toUpperCase();
                 const filteredValue = inputValue.replace(
                   /[^a-zA-Zа-яА-Я\s]/g,
-                  ""
+                  ''
                 );
                 setTitle(filteredValue);
               }}
@@ -164,7 +171,7 @@ const UpdatePage: React.FC = () => {
                 const inputValue = e.target.value;
                 const filteredValue = inputValue.replace(
                   /[^a-zA-Zа-яА-Я\s]/g,
-                  ""
+                  ''
                 );
                 setNotifications(filteredValue);
               }}
@@ -183,7 +190,7 @@ const UpdatePage: React.FC = () => {
             key={classColor}
             className={cn(
               `h-[78px] w-[78px] cursor-pointer rounded-full ${classColor}`,
-              color === classColor && "border-4 border-white"
+              color === classColor && 'border-4 border-white'
             )}
             onClick={() => setColor(classColor)}
           ></div>
@@ -191,19 +198,19 @@ const UpdatePage: React.FC = () => {
       </div>
       <div className="mb-5 flex items-center justify-center">
         <Alert
-          bgColor={"bg-gray-500"}
+          bgColor={'bg-gray-500'}
           desc={`После нажатия кнопки продолжить вы потеряете весь прогресс и задание автоматически начнется с сегодняшнего дня`}
-          question={"Вы действительно хотите сбросить весь ваш прогресс?"}
-          title={"СБРОСИТЬ ЗАДАНИЕ"}
+          question={'Вы действительно хотите сбросить весь ваш прогресс?'}
+          title={'СБРОСИТЬ ЗАДАНИЕ'}
           handleFunc={handleReset}
         />
       </div>
       <div className="flex items-center justify-center pb-24">
         <Alert
-          bgColor={"bg-red-500"}
+          bgColor={'bg-red-500'}
           desc={`После нажатия кнопки продолжить вы навсегда удалите задание без возможности к восстановлению`}
-          question={"Вы действительно хотите удалить ваше задание?"}
-          title={"УДАЛИТЬ ЗАДАНИЕ"}
+          question={'Вы действительно хотите удалить ваше задание?'}
+          title={'УДАЛИТЬ ЗАДАНИЕ'}
           handleFunc={() => {
             deleteChallengeMutation(task.id);
           }}
@@ -214,8 +221,8 @@ const UpdatePage: React.FC = () => {
         <button
           onClick={handleSave}
           className={cn(
-            "fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-gray-600 p-5",
-            checkIfChanged && "bg-pink-600"
+            'fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-gray-600 p-5',
+            checkIfChanged && 'bg-pink-600'
           )}
           disabled={!checkIfChanged}
         >
