@@ -45,17 +45,9 @@ export const challengesTable = pgTable('challenges', {
   // null if regularity is set to everyday
   daysOfWeek: integer('days_of_week').array(),
 
-  taskDates: timestamp('task_dates', {
-    withTimezone: true,
-    mode: 'string',
-  })
-    .array()
-    .notNull(),
+  taskDates: varchar({ length: 255 }).array().notNull(),
 
-  userCheckedDates: timestamp('user_checked_dates', {
-    withTimezone: true,
-    mode: 'string',
-  }).array(),
+  userCheckedDates: varchar({ length: 255 }).array(),
 });
 
 export type Challenge = InferSelectModel<typeof challengesTable>;
