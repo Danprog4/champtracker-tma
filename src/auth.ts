@@ -13,6 +13,8 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
   // берем init daty из хедера
   const initData = req.header('x-init-data');
 
+  console.log('getValidatedUser() initdata', initData);
+
   if (!initData) {
     throw new Error('no x-init-data');
   }

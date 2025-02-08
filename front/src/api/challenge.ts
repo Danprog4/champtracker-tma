@@ -2,10 +2,37 @@ import { CreateChallengeReq, UpdateChallenge } from '@back-types';
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const createInvoice = async () => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.get(`${API_URL}/createInvoice`, {
+    headers: {
+      'x-init-data': initDataRaw,
+    },
+  });
+
+  return response.data;
+};
+
+export const getPremium = async () => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.get(`${API_URL}/getPremium`, {
+    headers: {
+      'x-init-data': initDataRaw,
+    },
+  });
+
+  return response.data;
+};
+
 export const getChallenges = async () => {
   const { initDataRaw } = retrieveLaunchParams();
 
-  const response = await axios.get('http://localhost:3000/getChallenges', {
+  console.log('API_URL', API_URL);
+  const response = await axios.get(`${API_URL}/getChallenges`, {
     headers: {
       'x-init-data': initDataRaw,
     },
@@ -21,15 +48,11 @@ export const createNewChallenge = async (body: CreateChallengeReq) => {
 
   console.log('POST /createChallenge', body);
 
-  const response = await axios.post(
-    'http://localhost:3000/createChallenge',
-    body,
-    {
-      headers: {
-        'x-init-data': initDataRaw,
-      },
+  const response = await axios.post(`${API_URL}/createChallenge`, body, {
+    headers: {
+      'x-init-data': initDataRaw,
     },
-  );
+  });
 
   return response.data;
 };
@@ -37,15 +60,11 @@ export const createNewChallenge = async (body: CreateChallengeReq) => {
 export const updateChallenge = async (body: UpdateChallenge, id: number) => {
   const { initDataRaw } = retrieveLaunchParams();
 
-  const response = await axios.put(
-    `http://localhost:3000/updateChallenge/${id}`,
-    body,
-    {
-      headers: {
-        'x-init-data': initDataRaw,
-      },
+  const response = await axios.put(`${API_URL}/updateChallenge/${id}`, body, {
+    headers: {
+      'x-init-data': initDataRaw,
     },
-  );
+  });
 
   return response.data;
 };
@@ -54,7 +73,7 @@ export const deleteChallenge = async (challengeId: number) => {
   const { initDataRaw } = retrieveLaunchParams();
 
   const response = await axios.delete(
-    `http://localhost:3000/deleteChallenge/${challengeId}`,
+    `${API_URL}/deleteChallenge/${challengeId}`,
     {
       headers: {
         'x-init-data': initDataRaw,

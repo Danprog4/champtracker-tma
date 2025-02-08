@@ -28,3 +28,16 @@ export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
 
   return users[0];
 };
+
+export const getPremium = async (id: number): Promise<boolean> => {
+  const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
+
+  return Boolean(users[0].premiumUntil);
+};
+
+export const updatePremium = async (id: number, premiumUntil: string) => {
+  await db
+    .update(usersTable)
+    .set({ premiumUntil })
+    .where(eq(usersTable.id, id));
+};

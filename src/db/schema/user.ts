@@ -1,4 +1,10 @@
-import { bigint, boolean, pgTable, varchar } from 'drizzle-orm/pg-core';
+import {
+  bigint,
+  boolean,
+  pgTable,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core';
 
 import { type InferInsertModel, type InferSelectModel } from 'drizzle-orm';
 
@@ -9,6 +15,16 @@ export const usersTable = pgTable('users', {
   isPremium: boolean().notNull(),
   language: varchar({ length: 255 }).notNull(),
   photoUrl: varchar({ length: 255 }),
+  premiumUntil: timestamp('premium_until', {
+    withTimezone: true,
+    mode: 'string',
+  }),
+  createdAt: timestamp('created_at', {
+    withTimezone: true,
+    mode: 'string',
+  })
+    .notNull()
+    .defaultNow(),
 });
 
 export type User = InferSelectModel<typeof usersTable>;

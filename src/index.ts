@@ -5,22 +5,38 @@ import {
   createChallenge,
   deleteChallenge,
   getChallenges,
+  getPremium,
   updateChallenge,
 } from './db/repo';
 import { UpdateChallenge } from './db/schema';
 import { CreateChallengeReq } from './types';
 import dayjs = require('dayjs');
+import { handleCreateInvoice } from './create-invoice';
 
 const app = new Hono();
 
 app.use('*', cors());
 
+app.get('/getPremium', async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  const premium = await getPremium(user.id);
+
+  return c.json({ premium });
+});
+
+app.get('/createInvoice', async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  const invoice = await handleCreateInvoice(user.id);
+
+  return c.json({ invoiceUrl: invoice.invoiceUrl });
+});
+
 app.get('/getChallenges', async (c) => {
   const user = await getValidatedUser(c.req);
 
   const challenges = await getChallenges(user.id);
-
-  console.log('GET /getChallenges backend', challenges);
 
   return c.json(challenges);
 });

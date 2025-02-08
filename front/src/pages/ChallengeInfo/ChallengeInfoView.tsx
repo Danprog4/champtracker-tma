@@ -5,6 +5,7 @@ import { Challenge } from '@back-types';
 import { dayBeforeToday, formatDate } from '@/lib/dateUtils';
 import dayjs from 'dayjs';
 import { useChallenges } from '@/hooks/useChallenges';
+import { BuyPremium } from '@/components/BuyPremium';
 
 type ChallengeInfoDisplayProps = {
   challenge: Challenge;
@@ -20,6 +21,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
   weeks,
 }) => {
   const { checkDay } = useChallenges();
+
   return (
     <div
       className={`flex min-h-screen flex-col p-[15px] ${challenge.color} pb-20 pt-10`}

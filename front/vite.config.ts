@@ -6,6 +6,9 @@ import path from 'path';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), TanStackRouterVite()],
+  server: {
+    allowedHosts: ['localhost', '127.0.0.1', 'ivan-front.router9.xyz'],
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
