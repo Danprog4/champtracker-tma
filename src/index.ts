@@ -61,7 +61,7 @@ app.delete('/deleteChallenge/:id', async (c) => {
     return c.json({ error: 'Challenge not found or already deleted' }, 404);
   }
 
-  return c.json({ message: 'Challenge deleted successfully' });
+  return c.json({ id: deletedChallenge.id });
 });
 
 export default app;

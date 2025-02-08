@@ -1,5 +1,10 @@
 import { db } from '..';
-import { Challenge, challengesTable, NewChallenge, UpdateChallenge } from '../schema';
+import {
+  Challenge,
+  challengesTable,
+  NewChallenge,
+  UpdateChallenge,
+} from '../schema';
 import { eq, and } from 'drizzle-orm';
 
 export const getChallenges = async (userId: number) => {
@@ -34,12 +39,16 @@ export const updateChallenge = async (
   return updatedChallenge;
 };
 
-
 export const deleteChallenge = async (challengeId: number, userId: number) => {
-  const deletedChallenge = await db
+  const [deletedChallenge] = await db
     .delete(challengesTable)
-    .where(and(eq(challengesTable.id, challengeId), eq(challengesTable.userId, userId)))
-    .returning(); 
+    .where(
+      and(
+        eq(challengesTable.id, challengeId),
+        eq(challengesTable.userId, userId)
+      )
+    )
+    .returning();
 
   return deletedChallenge;
 };

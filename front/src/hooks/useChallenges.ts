@@ -55,7 +55,7 @@ export const useChallenges = () => {
     isPending: isDeleteChallengePending,
   } = useMutation({
     mutationFn: (challengeId: number) => deleteChallenge(challengeId),
-    onSuccess: (deletedChallenge) => {
+    onSuccess: (deletedChallenge: { id: number }) => {
       queryClient.setQueryData(
         [queryKeys.challenges],
         (old: Challenge[] = []) => {
