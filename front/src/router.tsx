@@ -86,7 +86,6 @@ const updateRoute = createRoute({
   path: 'update/$taskId',
   component: UpdatePageContainer,
   errorComponent: (error) => {
-    console.log(error);
     return <Navigate to="/" />;
   },
 });

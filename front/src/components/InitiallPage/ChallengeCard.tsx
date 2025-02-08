@@ -1,14 +1,10 @@
-import {
-  calculateDaysSinceStart,
-  dayBeforeToday,
-  formatDate,
-} from '@/lib/dateUtils';
+import { useChallenges } from '@/hooks/useChallenges';
+import { calculateDaysSinceStart } from '@/lib/dateUtils';
 import { Months } from '@/Months.config';
 import { Challenge } from '@back-types';
 import { Link } from '@tanstack/react-router';
-import CheckImg from '../../assets/images/icons8-галочка.svg';
 import dayjs from 'dayjs';
-import { useChallenges } from '@/hooks/useChallenges';
+import CheckImg from '../../assets/images/icons8-галочка.svg';
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -21,10 +17,12 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
   const { checkDay } = useChallenges();
 
   const handleDayClick = (challengeId: string, dayCount: number) => {
-    checkDay(challengeId, dayCount, dayBeforeToday);
+    checkDay(challengeId, dayCount);
   };
 
-  console.log(challenge.id);
+  const isChecked =
+    challenge.userCheckedDates &&
+    challenge.userCheckedDates.includes(dayjs().toISOString());
 
   return (
     <Link
@@ -68,13 +66,12 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            console.log('clicked');
+
             handleDayClick(challenge.id.toString(), daysSinceStart - 1);
           }}
         >
           <div className="text-md font-extrabold text-white">
-            {challenge.userCheckedDates &&
-            challenge.userCheckedDates.includes(formatDate(new Date())) ? (
+            {isChecked ? (
               <img src={CheckImg} alt="check_image" className="w-[30px]" />
             ) : (
               <span>

@@ -7,7 +7,7 @@ import {
   getChallenges,
   updateChallenge,
 } from './db/repo';
-import { NewChallenge, UpdateChallenge } from './db/schema';
+import { UpdateChallenge } from './db/schema';
 import { CreateChallengeReq } from './types';
 import dayjs = require('dayjs');
 
@@ -20,6 +20,8 @@ app.get('/getChallenges', async (c) => {
 
   const challenges = await getChallenges(user.id);
 
+  console.log('GET /getChallenges backend', challenges);
+
   return c.json(challenges);
 });
 
@@ -30,7 +32,6 @@ app.post('/createChallenge', async (c) => {
   const challenge = await createChallenge({
     ...body,
     userId: user.id,
-    createdAt: dayjs().format('YYYY-MM-DD'),
   });
 
   return c.json(challenge);

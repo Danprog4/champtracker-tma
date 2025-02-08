@@ -1,11 +1,13 @@
-import { Challenge } from "@back-types";
-import ChallengeCard from "./ChallengeCard";
+import { Challenge } from '@back-types';
+import ChallengeCard from './ChallengeCard';
 
 type ChallengeListProps = {
   challenges: Challenge[];
 };
 
 const ChallengeList = ({ challenges }: ChallengeListProps) => {
+  console.log('ChallengeList', challenges);
+
   return (
     <div className="mt-24 flex flex-col items-center justify-center gap-2">
       {challenges.map((challenge, index) => (

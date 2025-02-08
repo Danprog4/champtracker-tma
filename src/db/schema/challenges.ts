@@ -4,12 +4,12 @@ import {
   pgEnum,
   pgTable,
   serial,
+  timestamp,
   varchar,
 } from 'drizzle-orm/pg-core';
 
 import { type InferInsertModel, type InferSelectModel } from 'drizzle-orm';
 import { usersTable } from '.';
-
 export const regularityEnum = pgEnum('regularity_enum', [
   'everyday',
   'fewTimesAWeek',
@@ -28,18 +28,34 @@ export const challengesTable = pgTable('challenges', {
 
   color: varchar({ length: 255 }).notNull(),
 
-  createdAt: varchar({ length: 255 }).notNull(),
+  createdAt: timestamp('created_at', {
+    withTimezone: true,
+    mode: 'string',
+  })
+    .notNull()
+    .defaultNow(),
 
-  challengeStartAt: varchar({ length: 255 }).notNull(),
+  challengeStartAt: timestamp('challenge_start_at', {
+    withTimezone: true,
+    mode: 'string',
+  }).notNull(),
 
   regularity: regularityEnum('regularity').notNull(),
 
   // null if regularity is set to everyday
   daysOfWeek: integer('days_of_week').array(),
 
-  taskDates: varchar({ length: 255 }).array().notNull(),
+  taskDates: timestamp('task_dates', {
+    withTimezone: true,
+    mode: 'string',
+  })
+    .array()
+    .notNull(),
 
-  userCheckedDates: varchar({ length: 255 }).array(),
+  userCheckedDates: timestamp('user_checked_dates', {
+    withTimezone: true,
+    mode: 'string',
+  }).array(),
 });
 
 export type Challenge = InferSelectModel<typeof challengesTable>;

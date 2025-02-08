@@ -31,7 +31,7 @@ const UpdatePage: React.FC = () => {
   const [title, setTitle] = useState(task.title || 'CHALLENGE NAME');
   const [regularity, setRegularity] = useState(task.regularity);
   const [duration, setDuration] = useState(task.duration);
-  const startedDate = dayjs(task.challengeStartAt).format('DD.MM.YYYY');
+  const startedDate = dayjs(task.challengeStartAt).toISOString();
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>(task.daysOfWeek || []);
 
   const taskDays = useMemo(() => {
@@ -64,8 +64,8 @@ const UpdatePage: React.FC = () => {
       ...task,
       userCheckedDates: [],
       taskDates: taskDays,
-      challengeStartAt: dayjs().format("YYYY-MM-DD"),
-      createdAt: dayjs().format("YYYY-MM-DD"),
+      challengeStartAt: dayjs().toISOString(),
+      createdAt: dayjs().toISOString(),
     };
 
     updateChallengeMutation({ id: Number(taskId), body: resetTask });

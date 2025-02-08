@@ -5,7 +5,6 @@ import { useChallenges } from '@/hooks/useChallenges';
 
 const InitiallPageView = () => {
   const { challenges } = useChallenges();
-  console.log({ challenges });
 
   return (
     <div className="flex h-screen flex-col">

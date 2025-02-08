@@ -23,8 +23,6 @@ const testCreateChallenge = async (id: number) => {
     };
 
     const postResponse = await api.post('/createChallenge', newChallenge);
-
-    console.log('New Challenge:', postResponse.data);
   } catch (e) {
     if (isAxiosError(e)) {
       console.error(e.message);
@@ -35,7 +33,6 @@ const testCreateChallenge = async (id: number) => {
 const testGetChallenges = async () => {
   try {
     const response = await api.get('/getChallenges');
-    console.log('Got all challenges:', response.data);
   } catch (e) {
     if (isAxiosError(e)) {
       console.error(e.message);
@@ -48,8 +45,6 @@ const testUpdateChallenge = async (id: number) => {
     const updateResponse = await api.put(`/updateChallenge/${id}`, {
       title: 'Updated Test Challenge',
     });
-
-    console.log('Updated Challenge:', updateResponse.data);
   } catch (e) {
     if (isAxiosError(e)) {
       console.error(e.message);

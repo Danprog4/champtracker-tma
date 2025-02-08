@@ -67,7 +67,7 @@ const CreateSmart: React.FC = () => {
         regularity,
         daysOfWeek,
         taskDates,
-        challengeStartAt: dayjs(startDate).format("YYYY-MM-DD"),
+        challengeStartAt: dayjs(startDate).toISOString(),
       });
       toast('Задание успешно сохранено!');
       navigate({ to: '/' });

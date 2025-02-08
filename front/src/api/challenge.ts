@@ -10,12 +10,16 @@ export const getChallenges = async () => {
       'x-init-data': initDataRaw,
     },
   });
-  console.log(response.data);
+
+  console.log('/getChallenges api', response.data);
+
   return response.data;
 };
 
 export const createNewChallenge = async (body: CreateChallengeReq) => {
   const { initDataRaw } = retrieveLaunchParams();
+
+  console.log('POST /createChallenge', body);
 
   const response = await axios.post(
     'http://localhost:3000/createChallenge',
@@ -26,7 +30,7 @@ export const createNewChallenge = async (body: CreateChallengeReq) => {
       },
     },
   );
-  console.log(response.data);
+
   return response.data;
 };
 
@@ -42,7 +46,7 @@ export const updateChallenge = async (body: UpdateChallenge, id: number) => {
       },
     },
   );
-  console.log(response.data);
+
   return response.data;
 };
 
@@ -57,6 +61,6 @@ export const deleteChallenge = async (challengeId: number) => {
       },
     },
   );
-  console.log(response.data);
+
   return response.data;
 };

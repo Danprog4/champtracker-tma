@@ -11,7 +11,6 @@ type ChallengeInfoDisplayProps = {
   today: string;
   calculateDaysSinceStart: number;
   weeks: any[];
-  formatToDDMMYYYY: (date: Date) => string;
 };
 
 export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
@@ -19,7 +18,6 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
   today,
   calculateDaysSinceStart,
   weeks,
-  formatToDDMMYYYY,
 }) => {
   const { checkDay } = useChallenges();
   return (
@@ -79,9 +77,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
             return (
               <button
                 onClick={() => {
-                  console.log(index, 'index of the day');
-                  checkDay(challenge.id.toString(), index, dayBeforeToday);
-                  console.log(challenge.userCheckedDates);
+                  checkDay(challenge.id.toString(), index);
                 }}
                 key={day}
                 className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
@@ -112,9 +108,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
 
                   return (
                     <button
-                      onClick={() =>
-                        checkDay(challenge.id.toString(), index, dayBeforeToday)
-                      }
+                      onClick={() => checkDay(challenge.id.toString(), index)}
                       key={day}
                       className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
                         isToday && 'bg-yellow-500'

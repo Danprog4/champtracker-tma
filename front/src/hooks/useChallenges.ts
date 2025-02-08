@@ -1,9 +1,10 @@
 import {
-  getChallenges,
   createNewChallenge,
-  updateChallenge,
   deleteChallenge,
+  getChallenges,
+  updateChallenge,
 } from '@/api/challenge';
+import { dayBeforeToday } from '@/lib/dateUtils';
 import { queryKeys } from '@/query-keys';
 import { Challenge, UpdateChallenge } from '@back-types';
 import {
@@ -69,26 +70,19 @@ export const useChallenges = () => {
   const checkDay = (
     taskId: string,
     dayCount: number, // dayCount is now the second argument
-    dayBeforeToday: (date: string) => boolean,
   ) => {
-    console.log('taskId:', taskId, typeof taskId);
-    console.log(
-      'Available task IDs:',
-      challenges?.map((task) => task.id),
-    );
-
     // Найдем нужное задание
     const task = challenges?.find((task) => task.id === Number(taskId));
     if (!task) return;
 
     // Получим целевую дату на основе dayCount
     const targetDate = task.taskDates[dayCount];
-    console.log('no date', targetDate);
+
     if (!targetDate) return;
 
     // Проверим, раньше ли сегодняшней даты эта целевая
     const isBeforeToday = dayBeforeToday(targetDate);
-    console.log('day is not before');
+
     if (!isBeforeToday) return;
 
     // Определим, был ли день уже проверен

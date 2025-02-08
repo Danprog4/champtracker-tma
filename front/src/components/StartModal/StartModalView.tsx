@@ -1,10 +1,9 @@
-"use client";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Drawer } from "vaul";
-import { Calendar } from "@/components/ui/calendar";
-import dayjs, { Dayjs } from "dayjs";
-import { Months } from "@/Months.config";
-import { useEffect } from "react";
+'use client';
+import { Calendar } from '@/components/ui/calendar';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Months } from '@/Months.config';
+import dayjs, { Dayjs } from 'dayjs';
+import { Drawer } from 'vaul';
 
 interface StartDrawerProps {
   isOpen: boolean;
@@ -53,21 +52,21 @@ export default function StartModalView({
     <Drawer.Root open={isOpen} onOpenChange={onOpenChange}>
       <Drawer.Trigger
         className={`mt-2 flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px] ${
-          disabled && "bg-gray-800"
+          disabled && 'bg-gray-800'
         }`}
         disabled={disabled}
       >
         <span>Старт</span>
         <span className="text-gray-400">
           {startedDate ||
-            (tempStartTime === "Now" && "Сейчас >") ||
-            (tempStartTime === "Tomorrow" && "Завтра >") ||
+            (tempStartTime === 'Now' && 'Сейчас >') ||
+            (tempStartTime === 'Tomorrow' && 'Завтра >') ||
             (isValidDate(tempDate) &&
-              (dayjs(tempDate).isSame(today, "day")
-                ? "Сегодня >"
-                : dayjs(tempDate).isSame(today.add(1, "day"), "day")
-                ? "Завтра >"
-                : `${dayjs(tempDate).format("DD.MM.YYYY")} >`))}
+              (dayjs(tempDate).isSame(today, 'day')
+                ? 'Сегодня >'
+                : dayjs(tempDate).isSame(today.add(1, 'day'), 'day')
+                  ? 'Завтра >'
+                  : `${dayjs(tempDate).format('DD.MM.YYYY')} >`))}
         </span>
       </Drawer.Trigger>
       <Drawer.Portal>
@@ -100,17 +99,17 @@ export default function StartModalView({
                 >
                   <span>Своя дата</span>
                   {isValidDate(tempDate) &&
-                    !dayjs(tempDate).isSame(today, "day") &&
-                    !dayjs(tempDate).isSame(today.add(1, "day"), "day") && (
+                    !dayjs(tempDate).isSame(today, 'day') &&
+                    !dayjs(tempDate).isSame(today.add(1, 'day'), 'day') && (
                       <span>{`${
                         tempDate?.getDate() <= 9
-                          ? "0" + tempDate?.getDate()
+                          ? '0' + tempDate?.getDate()
                           : tempDate?.getDate()
                       } ${Months[monthNumber]}`}</span>
                     )}
                 </RadioGroupItem>
               </RadioGroup>
-              {tempStartTime === "Own date" && (
+              {tempStartTime === 'Own date' && (
                 <Calendar
                   mode="single"
                   selected={tempDate}
