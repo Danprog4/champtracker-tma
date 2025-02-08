@@ -4,6 +4,7 @@ import { getValidatedUser } from './auth';
 import { createChallenge, getChallenges, updateChallenge } from './db/repo';
 import { NewChallenge, UpdateChallenge } from './db/schema';
 import { CreateChallengeReq } from './types';
+import dayjs = require('dayjs');
 
 const app = new Hono();
 
@@ -23,8 +24,9 @@ app.post('/createChallenge', async (c) => {
 
   const challenge = await createChallenge({
     ...body,
+    // taskDates: taskDates.map(date => date.toISOString()),
     userId: user.id,
-    createdAt: new Date().toISOString(),
+    createdAt: dayjs().toISOString(),
   });
 
   return c.json(challenge);

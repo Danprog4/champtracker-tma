@@ -6,12 +6,16 @@ import { formatDate } from "@/lib/dateUtils";
 import { getDatesForDaysOfWeek } from "@/lib/dateUtils";
 import { categories } from "@/cards.config";
 import CreateDump from "./CreatePageView";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const CreateSmart: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { createChallenge } = useChallenges();
-
   const category = categories.find((category) =>
     category.items.some((item) => item.id === Number(id))
   );
@@ -27,17 +31,11 @@ const CreateSmart: React.FC = () => {
     "everyday"
   );
   const [duration, setDuration] = useState(regularity === "everyday" ? 30 : 84);
-  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [date, setDate] = useState<Dayjs | undefined>(undefined);
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>([]);
 
   useEffect(() => {
-    if (regularity === "everyday") {
-      setDuration(30);
-    } else if (regularity === "fewTimesAWeek") {
-      setDuration(84);
-    } else {
-      setDuration(30);
-    }
+    setDuration(regularity === "everyday" ? 30 : 84);
   }, [regularity]);
 
   const handleSave = async () => {
@@ -46,14 +44,15 @@ const CreateSmart: React.FC = () => {
       return;
     }
 
-    const startDate = new Date(date ? date : Date.now());
-
-    if (formatDate(startDate) < formatDate(new Date(Date.now()))) {
+    // Получаем startDate
+    const startDate = date ? dayjs(date) : dayjs();
+    if (startDate < dayjs()) {
       toast("Напишите возможное время (не в прошлом)");
       return;
     }
 
-    const taskDays = getDatesForDaysOfWeek(
+    // Получаем taskDays
+    const taskDates = getDatesForDaysOfWeek(
       startDate,
       duration,
       daysOfWeek,
@@ -61,14 +60,15 @@ const CreateSmart: React.FC = () => {
     );
 
     try {
-      await createChallenge({
+      // Создаем задание
+      createChallenge({
         title,
         duration,
         color,
         regularity,
         daysOfWeek,
-        taskDates: taskDays,
-        challengeStartAt: startDate.toISOString(),
+        taskDates,
+        challengeStartAt: dayjs(startDate).toISOString(),
       });
       toast("Задание успешно сохранено!");
       navigate("/");

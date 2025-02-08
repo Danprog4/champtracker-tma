@@ -5,6 +5,8 @@ import DurationModal from "@/components/DurationModal/DurationModal";
 import RegularityModal from "@/components/RegularityModal/RegularityModal";
 import StartModal from "@/components/StartModal/StartModal";
 import { Switch } from "@/components/ui/switch";
+import CrossImg from "../../assets/images/Krestiksvgpng.ru_.svg";
+import { Dayjs } from "dayjs";
 
 interface CreateDumpProps {
   card: any;
@@ -16,8 +18,8 @@ interface CreateDumpProps {
   setRegularity: (value: "everyday" | "fewTimesAWeek") => void;
   duration: number;
   setDuration: (value: number) => void;
-  date: Date | undefined;
-  setDate: (value: Date | undefined) => void;
+  date: Dayjs | undefined;
+  setDate: (value: Dayjs | undefined) => void;
   isNotifications: boolean;
   setIsNotifications: (value: boolean) => void;
   notifications: string;
@@ -54,7 +56,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
       <div className={`${color} h-[23%]`}>
         <div className="relative mb-2 mt-8 flex w-full">
           <Link to={getNavigationPath()} className="absolute inset-0">
-            <img src={""} alt="cross" className="m-2 h-10 w-10" />
+            <img src={CrossImg} alt="cross" className="m-2 h-10 w-10" />
           </Link>
           <span className="mt-[15.5px] w-full text-center text-black">
             Новое задание

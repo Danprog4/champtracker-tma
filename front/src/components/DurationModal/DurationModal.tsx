@@ -7,7 +7,7 @@ import DurationModalView from "./DurationModalView";
 type DurPropsSmart = {
   duration: number;
   setDuration: (duration: number) => void;
-  id: string;
+  id?: string;
   regularity: "everyday" | "fewTimesAWeek";
 };
 

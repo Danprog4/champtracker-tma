@@ -60,7 +60,7 @@ const AboutPage: React.FC = () => {
         <span>ЯЗЫК</span>
       </div>
       <footer className="mb-10 mr-5 mt-auto flex justify-between pl-5">
-        <div className="text-2xl font-bold">TaskMaster</div>
+        <div className="text-2xl font-bold">ChampTracker</div>
         <div className="flex flex-col items-end font-thin">
           <img
             src={CopyRightLogo}

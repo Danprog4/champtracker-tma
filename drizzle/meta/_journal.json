@@ -8,6 +8,13 @@
       "when": 1738527607216,
       "tag": "0000_curly_namor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1738855379771,
+      "tag": "0001_fat_micromacro",
+      "breakpoints": true
     }
   ]
 }

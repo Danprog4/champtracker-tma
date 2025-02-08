@@ -2,8 +2,9 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Drawer } from "vaul";
 import { Calendar } from "@/components/ui/calendar";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { Months } from "@/Months.config";
+import { useEffect } from "react";
 
 interface StartDrawerProps {
   isOpen: boolean;
@@ -16,7 +17,7 @@ interface StartDrawerProps {
   startedDate?: string;
   handleSave: () => void;
   startDate: string;
-  date?: Date;
+  date?: Dayjs;
 }
 
 export default function StartModalView({
@@ -116,7 +117,14 @@ export default function StartModalView({
                 <Calendar
                   mode="single"
                   selected={tempDate}
-                  onSelect={setTempDate}
+                  onSelect={(selectedDate) => {
+                    if (selectedDate) {
+                      const now = new Date();
+                      selectedDate.setHours(now.getHours());
+                      selectedDate.setMinutes(now.getMinutes());
+                      setTempDate(selectedDate);
+                    }
+                  }}
                   disabled={isDisabled}
                   className="mt-2 flex w-[90vw] items-center justify-center rounded-md border bg-gray-700"
                 />

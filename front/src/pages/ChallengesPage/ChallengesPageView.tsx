@@ -1,6 +1,8 @@
 import Slider from "@/components/ChallengesPage/Slider";
 import React from "react";
 import { Link } from "react-router-dom";
+import BackImg from "../../assets/images/back-svgrepo-com (2).svg";
+import AddImg from "../../assets/images/add-svgrepo-com.svg";
 
 const Challenges: React.FC = () => {
   return (
@@ -8,9 +10,9 @@ const Challenges: React.FC = () => {
       <div className="fixed z-10 flex w-[100vw] justify-between bg-black pb-2 pl-[16px] pr-5 pt-10">
         <Link to={"/"} className="">
           <img
-            src={""}
+            src={BackImg}
             className="h-[30px] w-[30px] object-contain"
-            alt="About"
+            alt="Back"
           />
         </Link>
       </div>
@@ -29,7 +31,7 @@ const Challenges: React.FC = () => {
         <div className="fixed bottom-[10px] z-20 flex h-[45px] w-[90vw] items-center justify-between rounded-lg bg-yellow-300 p-5">
           <Link to={"/card/create"}>
             <img
-              src={""}
+              src={AddImg}
               alt="Add"
               className="h-[20px] w-[20px] -translate-x-2"
             />

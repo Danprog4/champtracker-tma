@@ -3,6 +3,7 @@ import { Months } from "@/Months.config";
 import { Challenge } from "@back-types";
 import { Link } from "react-router";
 import CheckImg from "../../assets/images/icons8-галочка.svg";
+import dayjs from "dayjs";
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -10,9 +11,11 @@ type ChallengeCardProps = {
 };
 
 const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
-  const startDate = new Date(challenge.createdAt);
+  const startDate = dayjs(challenge.challengeStartAt).startOf("day");
   const daysSinceStart = calculateDaysSinceStart(challenge.taskDates);
-
+  console.log(startDate, "date");
+  console.log(dayjs().startOf("day"), "date2");
+  console.log(startDate.toISOString() === dayjs().startOf("day").toISOString());
   return (
     <Link
       to={`/challenge/${challenge.id}`}
@@ -32,8 +35,8 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
           </span>
           <div className="ml-1 mt-3 flex-col text-sm font-medium text-black">
             <div className="mb-[-7px]">
-              {`${startDate.getDate()} `}
-              {Months[startDate.getMonth() + 1]}
+              {`${startDate.date()} `}
+              {Months[startDate.month() + 1]}
             </div>
             <div>
               /
@@ -61,16 +64,32 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
               <img src={CheckImg} alt="check_image" className="w-[30px]" />
             ) : (
               <span>
-                {startDate > new Date() ? (
+                {startDate > dayjs() ? (
                   <div className="flex flex-col text-center">
                     <span className="text-xs font-light leading-3">НАЧАЛО</span>
                     <span>
-                      {`${startDate.getDate()} `}
-                      {Months[startDate.getMonth()]}
+                      {`${startDate.date()} `}
+                      {Months[startDate.month()]}
                     </span>
                   </div>
                 ) : (
-                  <span>ГОТОВО</span>
+                  <span>
+                    {challenge.regularity !== "everyday" &&
+                    startDate.toISOString() ===
+                      dayjs().startOf("day").toISOString() ? (
+                      <div className="flex flex-col text-center">
+                        <span className="text-xs font-light leading-3">
+                          ПЕРВЫЙ ДЕНЬ
+                        </span>
+                        <span>
+                          {`${dayjs(challenge.taskDates[0]).date()} `}
+                          {Months[dayjs(challenge.taskDates[0]).month()]}
+                        </span>
+                      </div>
+                    ) : (
+                      <span>ГОТОВО</span>
+                    )}
+                  </span>
                 )}
               </span>
             )}

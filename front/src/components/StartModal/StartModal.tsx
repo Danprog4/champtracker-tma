@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import StartModalView from "./StartModalView";
+import dayjs, { Dayjs } from "dayjs";
 
 interface StartModalViewProps {
-  date?: Date;
-  setDate?: (value: Date | undefined) => void;
+  date?: Dayjs;
+  setDate?: (value: Dayjs | undefined) => void;
   disabled: boolean;
   startedDate?: string;
 }
@@ -34,12 +35,15 @@ export default function StartModal({
   }, [tempStartTime]);
 
   const handleSave = () => {
-    if (setDate) {
-      setDate(tempDate);
+    if (setDate && tempDate) {
+      setDate(dayjs(tempDate));
     }
     setStartDate(tempStartTime);
     setIsOpen(false);
   };
+
+  console.log(tempDate, "temp");
+  console.log(date, "date");
 
   return (
     <StartModalView

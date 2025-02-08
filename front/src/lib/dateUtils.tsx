@@ -1,5 +1,11 @@
 import { Challenge } from "@back-types";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+// Подключаем плагины
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const calculateDaysSinceStart = (taskDates: string[]): number => {
   if (taskDates.length === 0) {
@@ -35,7 +41,7 @@ export const formatDate = (dateInput: Date | string): string => {
 };
 
 export const getDatesForDaysOfWeek = (
-  startDate: Date,
+  startDate: Dayjs,
   duration: number,
   selectedDays: number[] | null,
   regularity: string
@@ -46,17 +52,19 @@ export const getDatesForDaysOfWeek = (
   if (regularity !== "everyday") {
     for (let i = 0; i < duration; i++) {
       if (selectedDays && selectedDays.includes(currentDate.day())) {
-        taskDays.push(currentDate.toISOString()); // Сохраняем в ISO
+        taskDays.push(currentDate.format("YYYY-MM-DD")); // Без времени
       }
       currentDate = currentDate.add(1, "day");
     }
-  } else if (regularity === "everyday") {
+  } else {
     for (let i = 0; i < duration; i++) {
-      taskDays.push(currentDate.toISOString()); // Сохраняем в ISO
-      currentDate = currentDate.add(2, "day");
+      taskDays.push(currentDate.format("YYYY-MM-DD")); // Без времени
+      currentDate = currentDate.add(1, "day");
     }
   }
 
+  console.log("Текущая дата:", dayjs(new Date()).format("YYYY-MM-DD"));
+  console.log("taskDates:", taskDays);
   return taskDays;
 };
 
