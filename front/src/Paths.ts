@@ -1,6 +1,7 @@
 import AboutPage from "./pages/AboutPage/AboutPage";
 import Challenge from "./pages/Challenge/ChallengeView";
-import Challenges from "./pages/ChallengesPage/ChallengePageView";
+import ChallengeInfo from "./pages/ChallengeInfo/ChallengeInfo";
+import Challenges from "./pages/ChallengesPage/ChallengesPageView";
 import CreateSmart from "./pages/CreatePage./CreatPage";
 import HintsAndTipsPage from "./pages/HintsPage/HintsPage";
 import InitiallPageView from "./pages/InitiallPage/InitiallPageView";
@@ -14,4 +15,6 @@ export const Paths = [
     { path: "/card/create", element: CreateSmart },
     { path: "/about", element: AboutPage },
     { path: "/hints", element: HintsAndTipsPage },
+     { path: "/challenge/:taskId", element: ChallengeInfo },
+
 ]

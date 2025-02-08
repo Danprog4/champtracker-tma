@@ -35,16 +35,22 @@ export default function RegularityModal({
   const [tempRegularity, setTempRegularity] = useState(regularity);
   const [tempDaysOfWeek, setTempDaysOfWeek] = useState(daysOfWeek);
 
- const handleChangeRegularity = (option: "everyday" | "fewTimesAWeek") => {
-   if (setDuration) {
-     setDuration(option === "everyday" ? 30 : 84);
-   }
-   setTempRegularity(option);
-   if (option === "everyday") {
-     setTempDaysOfWeek([]);
-     setTempOutputDays([]);
-   }
- };
+  const handleChangeRegularity = (option: "everyday" | "fewTimesAWeek") => {
+    if (setDuration) {
+      setDuration(option === "everyday" ? 30 : 84);
+    }
+    setTempRegularity(option);
+    if (option === "everyday") {
+      setTempDaysOfWeek([]);
+      setTempOutputDays([]);
+    }
+  };
+
+  const handleClose = () => {
+    setTempRegularity(regularity);
+    setTempDaysOfWeek(daysOfWeek);
+    setTempOutputDays(outputDays);
+  };
 
   const handleToggleDay = (day: number, dayName: string) => {
     if (tempDaysOfWeek.includes(day)) {
@@ -79,6 +85,7 @@ export default function RegularityModal({
       handleChangeRegularity={handleChangeRegularity}
       handleToggleDay={handleToggleDay}
       handleSaveChanges={handleSaveChanges}
+      handleClose={handleClose}
     />
   );
 }

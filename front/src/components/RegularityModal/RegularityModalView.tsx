@@ -12,6 +12,7 @@ interface RegularityModalViewProps {
   handleChangeRegularity: (value: "everyday" | "fewTimesAWeek") => void;
   handleToggleDay: (day: number, dayName: string) => void;
   handleSaveChanges: () => void;
+  handleClose: () => void;
 }
 
 export default function RegularityModalView({
@@ -23,9 +24,10 @@ export default function RegularityModalView({
   handleChangeRegularity,
   handleToggleDay,
   handleSaveChanges,
+  handleClose,
 }: RegularityModalViewProps) {
   return (
-    <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
+    <Drawer.Root open={isOpen} onOpenChange={setIsOpen} onClose={handleClose}>
       <Drawer.Trigger className="flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px]">
         <span>Регулярность</span>
         <span className="text-gray-400">

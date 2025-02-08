@@ -2,6 +2,7 @@ import { calculateDaysSinceStart, formatDate } from "@/lib/dateUtils";
 import { Months } from "@/Months.config";
 import { Challenge } from "@back-types";
 import { Link } from "react-router";
+import CheckImg from "../../assets/images/icons8-галочка.svg";
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -57,7 +58,7 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
           <div className="text-md font-extrabold text-white">
             {challenge.userCheckedDates &&
             challenge.userCheckedDates.includes(formatDate(new Date())) ? (
-              <img src={""} alt="check_image" className="w-[30px]" />
+              <img src={CheckImg} alt="check_image" className="w-[30px]" />
             ) : (
               <span>
                 {startDate > new Date() ? (

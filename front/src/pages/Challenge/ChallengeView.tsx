@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { categories } from "@/cards.config";
+import CrossImg from "../../assets/images/—Pngtree—vector cross icon_4254623.png";
 
 const ChallengeView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,7 +22,7 @@ const ChallengeView: React.FC = () => {
         />
         <Link to={"/new"} className="fixed right-0 top-0 z-10 pr-[16px] pt-6">
           <img
-            src={""}
+            src={CrossImg}
             alt="cross"
             className="h-[35px] w-[35px] rounded-full"
           />

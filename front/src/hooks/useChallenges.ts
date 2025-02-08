@@ -23,10 +23,9 @@ export const useChallenges = () => {
       },
     });
 
-  const getOneChallege = (id: number) => {
-    return challenges?.filter((ch) => ch.id === id);
+  const getOneChallege = (id: number): Challenge | undefined => {
+    return challenges?.find((ch) => ch.id === id);
   };
-
   return {
     challenges,
     isChallengesLoading,
