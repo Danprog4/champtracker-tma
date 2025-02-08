@@ -25,7 +25,7 @@ app.post('/createChallenge', async (c) => {
   const challenge = await createChallenge({
     ...body,
     userId: user.id,
-    createdAt: dayjs().toISOString(),
+    createdAt: dayjs().format('YYYY-MM-DD'),
   });
 
   return c.json(challenge);

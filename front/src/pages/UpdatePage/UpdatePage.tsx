@@ -57,8 +57,8 @@ const UpdatePage: React.FC = () => {
       ...task,
       userCheckedDates: [],
       taskDates: taskDays,
-      challengeStartAt: dayjs().toISOString(),
-      createdAt: dayjs().toISOString(),
+      challengeStartAt: dayjs().format("YYYY-MM-DD"),
+      createdAt: dayjs().format("YYYY-MM-DD"),
     };
 
     updateChallengeMutation({ id: Number(taskId), body: resetTask });
