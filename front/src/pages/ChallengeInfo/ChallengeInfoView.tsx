@@ -10,7 +10,6 @@ type ChallengeInfoDisplayProps = {
   challenge: Challenge;
   today: string;
   calculateDaysSinceStart: number;
-  calculateNextDay: string;
   weeks: any[];
   formatToDDMMYYYY: (date: Date) => string;
 };
@@ -107,13 +106,9 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
 
                   return (
                     <button
-                      //   onClick={() =>
-                      //     checkDay(
-                      //       challenge.id.toString(),
-                      //       indexDay,
-                      //       dayBeforeToday
-                      //     )
-                      //   }
+                      onClick={() =>
+                        checkDay(challenge.id.toString(), index, dayBeforeToday)
+                      }
                       key={day}
                       className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
                         isToday && "bg-yellow-500"
@@ -144,32 +139,32 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
           </div>
         )}
 
-      {calculateDaysSinceStart > 0 ||
-        (dayjs(challenge.challengeStartAt).startOf("day").toISOString() ===
-          dayjs().startOf("day").toISOString() && (
-          <div>
-            <div className="mb-5">
-              <div className="mb-1 border border-black"></div>
-              <div className="flex justify-between text-black">
-                <div className="text-xs font-light">ПРОЙДЕННЫХ ДНЕЙ</div>
-                <div className="text-3xl font-extrabold">
-                  {Math.max(0, calculateDaysSinceStart)}
-                </div>
-              </div>
-            </div>
-            <div className="mb-5">
-              <div className="mb-1 border border-black"></div>
-              <div className="flex justify-between text-black">
-                <div className="text-xs font-light">ВЫПОЛНЕННЫХ ДНЕЙ</div>
-                <div className="text-3xl font-extrabold">
-                  {challenge.userCheckedDates
-                    ? challenge.userCheckedDates.length
-                    : 0}
-                </div>
+      {(calculateDaysSinceStart > 0 ||
+        dayjs(challenge.challengeStartAt).startOf("day").toISOString() ===
+          dayjs().startOf("day").toISOString()) && (
+        <div>
+          <div className="mb-5">
+            <div className="mb-1 border border-black"></div>
+            <div className="flex justify-between text-black">
+              <div className="text-xs font-light">ПРОЙДЕННЫХ ДНЕЙ</div>
+              <div className="text-3xl font-extrabold">
+                {Math.max(0, calculateDaysSinceStart)}
               </div>
             </div>
           </div>
-        ))}
+          <div className="mb-5">
+            <div className="mb-1 border border-black"></div>
+            <div className="flex justify-between text-black">
+              <div className="text-xs font-light">ВЫПОЛНЕННЫХ ДНЕЙ</div>
+              <div className="text-3xl font-extrabold">
+                {challenge.userCheckedDates
+                  ? challenge.userCheckedDates.length
+                  : 0}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="flex items-center justify-center pl-0 font-extrabold">
         <Link

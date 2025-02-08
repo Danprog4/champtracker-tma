@@ -1,9 +1,14 @@
-import { calculateDaysSinceStart, formatDate } from "@/lib/dateUtils";
+import {
+  calculateDaysSinceStart,
+  dayBeforeToday,
+  formatDate,
+} from "@/lib/dateUtils";
 import { Months } from "@/Months.config";
 import { Challenge } from "@back-types";
 import { Link } from "react-router";
 import CheckImg from "../../assets/images/icons8-галочка.svg";
 import dayjs from "dayjs";
+import { useChallenges } from "@/hooks/useChallenges";
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -13,9 +18,12 @@ type ChallengeCardProps = {
 const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
   const startDate = dayjs(challenge.challengeStartAt).startOf("day");
   const daysSinceStart = calculateDaysSinceStart(challenge.taskDates);
-  console.log(startDate, "date");
-  console.log(dayjs().startOf("day"), "date2");
-  console.log(startDate.toISOString() === dayjs().startOf("day").toISOString());
+  const { checkDay } = useChallenges();
+
+  const handleDayClick = (challengeId: string, dayCount: number) => {
+    checkDay(challengeId, dayCount, dayBeforeToday);
+  };
+
   return (
     <Link
       to={`/challenge/${challenge.id}`}
@@ -55,7 +63,8 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            // handleDayClick(challenge.id, daysSinceStart);
+            console.log("clicked");
+            handleDayClick(challenge.id.toString(), daysSinceStart - 1);
           }}
         >
           <div className="text-md font-extrabold text-white">
@@ -75,8 +84,7 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
                 ) : (
                   <span>
                     {challenge.regularity !== "everyday" &&
-                    startDate.toISOString() ===
-                      dayjs().startOf("day").toISOString() ? (
+                    startDate !== dayjs().startOf("day") ? (
                       <div className="flex flex-col text-center">
                         <span className="text-xs font-light leading-3">
                           ПЕРВЫЙ ДЕНЬ

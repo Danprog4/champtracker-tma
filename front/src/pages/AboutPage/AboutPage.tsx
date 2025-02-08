@@ -1,7 +1,7 @@
 import React from "react";
 import CrossImg from "../../assets/images/—Pngtree—vector cross icon_4254623.png";
 import GitHubLogo from "../../assets/images/GitHub-Logo.wine.svg";
-import TelegramLogo from "../../assets/images/Telegram_(software)-X-Black-Logo.wine.svg";
+import TelegramLogo from "../../assets/images/telegram-svgrepo-com (3).svg";
 import CopyRightLogo from "../../assets/images/5a369c1a2cfcd0.4577110515135283461843.png";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
@@ -44,11 +44,11 @@ const AboutPage: React.FC = () => {
           rel="noopener noreferrer"
         >
           <img
-            className="h-[55px] w-[55px]"
+            className="h-[58px] w-[58px]"
             src={TelegramLogo}
             alt="Telegram"
           />
-          <span className="font-bold text-black">@danikpavlovski</span>
+          <span className="font-bold text-black mb-1">@danikpavlovski</span>
         </a>
       </div>
       <div

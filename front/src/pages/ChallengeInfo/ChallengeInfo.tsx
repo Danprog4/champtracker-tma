@@ -6,7 +6,6 @@ import { ChallengeInfoDisplay } from "./ChallengeInfoView";
 import {
   formatDate,
   calculateDaysSinceStart,
-  calculateNextDay,
   calculateWeeks,
 } from "@/lib/dateUtils";
 import dayjs from "dayjs";
@@ -36,11 +35,7 @@ const ChallengeInfoContainer: React.FC = () => {
     challenge,
     today,
     calculateDaysSinceStart: calculateDaysSinceStart(challenge.taskDates),
-    calculateNextDay: calculateNextDay(
-      new Date(),
-      challenge.taskDates,
-      challenge.userCheckedDates
-    ),
+
     weeks: calculateWeeks(challenge),
     formatToDDMMYYYY,
   };

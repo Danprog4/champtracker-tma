@@ -10,11 +10,13 @@ import { Colors } from "@/bgColors.config";
 import { getDatesForDaysOfWeek } from "@/lib/dateUtils";
 import dayjs from "dayjs";
 import { useChallenges } from "@/hooks/useChallenges";
+import { Alert } from "@/components/ui/alert";
 
 const UpdatePage: React.FC = () => {
   const navigate = useNavigate();
   const { taskId } = useParams<{ taskId: string }>();
-  const { getOneChallege, updateChallengeMutation } = useChallenges();
+  const { getOneChallege, updateChallengeMutation, deleteChallengeMutation } =
+    useChallenges();
 
   useEffect(() => {
     if (!taskId || !getOneChallege(Number(taskId))) {
@@ -34,7 +36,6 @@ const UpdatePage: React.FC = () => {
   const startedDate = dayjs(task.challengeStartAt).format("DD.MM.YYYY");
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>(task.daysOfWeek || []);
 
-  // Пересчитываем taskDays с использованием useMemo, чтобы избежать лишних перерисовок
   const taskDays = useMemo(() => {
     return getDatesForDaysOfWeek(dayjs(), duration, daysOfWeek, regularity);
   }, [duration, daysOfWeek, regularity]);
@@ -55,8 +56,9 @@ const UpdatePage: React.FC = () => {
     const resetTask = {
       ...task,
       userCheckedDates: [],
-      taskDays, // Используем пересчитанный taskDays
-      startDate: dayjs(),
+      taskDates: taskDays,
+      challengeStartAt: dayjs().toISOString(),
+      createdAt: dayjs().toISOString(),
     };
 
     updateChallengeMutation({ id: Number(taskId), body: resetTask });
@@ -73,7 +75,9 @@ const UpdatePage: React.FC = () => {
       regularity,
       daysOfWeek,
       title,
-      taskDates: taskDays, // Используем пересчитанный taskDays
+      taskDates: taskDays,
+      userCheckedDates:
+        regularity !== task.regularity ? [] : task.userCheckedDates,
     };
 
     updateChallengeMutation({ id: Number(taskId), body: updatedTask });
@@ -93,13 +97,27 @@ const UpdatePage: React.FC = () => {
         </div>
         <div className="flex flex-col pl-5 text-start text-black">
           <span className="mt-4 text-sm">Название</span>
-          <input
-            type="text"
-            className="w-full border-none bg-transparent text-black placeholder:text-gray-500 focus:outline-none"
-            value={title}
-            onChange={(e) => setTitle(e.target.value.toUpperCase())}
-            placeholder="НАЗВАНИЕ ЗАДАНИЯ"
-          />
+          <div
+            className={cn(
+              "mr-[5%] mt-3 text-2xl font-extrabold uppercase",
+              title === "НАЗВАНИЕ ЗАДАНИЯ" && "opacity-[0.3]"
+            )}
+          >
+            <input
+              type="text"
+              className="w-full border-none bg-transparent text-black placeholder:text-gray-500 focus:outline-none"
+              value={title}
+              onChange={(e) => {
+                const inputValue = e.target.value.toUpperCase();
+                const filteredValue = inputValue.replace(
+                  /[^a-zA-Zа-яА-Я\s]/g,
+                  ""
+                );
+                setTitle(filteredValue);
+              }}
+              placeholder="НАЗВАНИЕ ЗАДАНИЯ"
+            />
+          </div>
         </div>
       </div>
 
@@ -142,7 +160,14 @@ const UpdatePage: React.FC = () => {
               value={notifications}
               className="border-none bg-transparent text-gray-300 placeholder:text-gray-500 focus:outline-none"
               placeholder="Мотивируй себя"
-              onChange={(e) => setNotifications(e.target.value)}
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                const filteredValue = inputValue.replace(
+                  /[^a-zA-Zа-яА-Я\s]/g,
+                  ""
+                );
+                setNotifications(filteredValue);
+              }}
             />
           </div>
         )}
@@ -163,6 +188,27 @@ const UpdatePage: React.FC = () => {
             onClick={() => setColor(classColor)}
           ></div>
         ))}
+      </div>
+      <div className="mb-5 flex items-center justify-center">
+        <Alert
+          bgColor={"bg-gray-500"}
+          desc={`После нажатия кнопки продолжить вы потеряете весь прогресс и задание автоматически начнется с сегодняшнего дня`}
+          question={"Вы действительно хотите сбросить весь ваш прогресс?"}
+          title={"СБРОСИТЬ ЗАДАНИЕ"}
+          handleFunc={handleReset}
+        />
+      </div>
+      <div className="flex items-center justify-center pb-24">
+        <Alert
+          bgColor={"bg-red-500"}
+          desc={`После нажатия кнопки продолжить вы навсегда удалите задание без возможности к восстановлению`}
+          question={"Вы действительно хотите удалить ваше задание?"}
+          title={"УДАЛИТЬ ЗАДАНИЕ"}
+          handleFunc={() => {
+            deleteChallengeMutation(task.id);
+            navigate("/");
+          }}
+        />
       </div>
 
       <div className="flex items-center justify-center pl-0 font-extrabold">

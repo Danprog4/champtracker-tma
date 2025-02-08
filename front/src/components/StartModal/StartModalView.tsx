@@ -43,9 +43,9 @@ export default function StartModalView({
   const isDisabled = (date: Date) => {
     const today = new Date();
     return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
+      date.getDate() < today.getDate() &&
+      date.getMonth() <= today.getMonth() &&
+      date.getFullYear() <= today.getFullYear()
     );
   };
 
@@ -59,18 +59,15 @@ export default function StartModalView({
       >
         <span>Старт</span>
         <span className="text-gray-400">
-          {startedDate
-            ? startedDate
-            : tempStartTime === "Now"
-            ? "Сейчас >"
-            : tempStartTime === "Tomorrow"
-            ? "Завтра >"
-            : isValidDate(date) &&
-              `${
-                date?.getDate() <= 9 ? "0" + date.getDate() : date.getDate()
-              }.${
-                monthNumber <= 9 ? "0" + monthNumber : monthNumber
-              }.${date?.getFullYear()} >`}
+          {startedDate ||
+            (tempStartTime === "Now" && "Сейчас >") ||
+            (tempStartTime === "Tomorrow" && "Завтра >") ||
+            (isValidDate(tempDate) &&
+              (dayjs(tempDate).isSame(today, "day")
+                ? "Сегодня >"
+                : dayjs(tempDate).isSame(today.add(1, "day"), "day")
+                ? "Завтра >"
+                : `${dayjs(tempDate).format("DD.MM.YYYY")} >`))}
         </span>
       </Drawer.Trigger>
       <Drawer.Portal>

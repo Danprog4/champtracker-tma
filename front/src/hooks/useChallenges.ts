@@ -2,6 +2,7 @@ import {
   getChallenges,
   createNewChallenge,
   updateChallenge,
+  deleteChallenge,
 } from "@/api/challenge";
 import { queryKeys } from "@/query-keys";
 import { Challenge, UpdateChallenge } from "@back-types";
@@ -32,7 +33,7 @@ export const useChallenges = () => {
     isPending: isUpdateChallengePending,
   } = useMutation({
     mutationFn: ({ id, body }: { id: number; body: UpdateChallenge }) =>
-      updateChallenge(body, id), 
+      updateChallenge(body, id),
     onSuccess: (updatedChallenge) => {
       queryClient.setQueryData(
         [queryKeys.challenges],
@@ -44,21 +45,46 @@ export const useChallenges = () => {
       );
     },
   });
-   const checkDay = (
+
+  const {
+    mutate: deleteChallengeMutation,
+    isPending: isDeleteChallengePending,
+  } = useMutation({
+    mutationFn: (challengeId: number) =>
+      deleteChallenge(challengeId),
+    onSuccess: (deletedChallenge) => {
+      queryClient.setQueryData(
+        [queryKeys.challenges],
+        (old: Challenge[] = []) => {
+          return old.filter((ch) => ch.id !== deletedChallenge.id);
+        }
+      );     
+    },
+  });
+
+  const checkDay = (
     taskId: string,
     dayCount: number, // dayCount is now the second argument
     dayBeforeToday: (date: string) => boolean
   ) => {
+    console.log("taskId:", taskId, typeof taskId);
+    console.log(
+      "Available task IDs:",
+      challenges?.map((task) => task.id)
+    );
+
     // Найдем нужное задание
     const task = challenges?.find((task) => task.id === Number(taskId));
     if (!task) return;
 
     // Получим целевую дату на основе dayCount
     const targetDate = task.taskDates[dayCount];
+    console.log("no date", targetDate);
     if (!targetDate) return;
 
     // Проверим, раньше ли сегодняшней даты эта целевая
     const isBeforeToday = dayBeforeToday(targetDate);
+    console.log("day is not before");
     if (!isBeforeToday) return;
 
     // Определим, был ли день уже проверен
@@ -84,8 +110,6 @@ export const useChallenges = () => {
     });
   };
 
-  
-
   const getOneChallege = (id: number): Challenge | undefined => {
     return challenges?.find((ch) => ch.id === id);
   };
@@ -98,6 +122,9 @@ export const useChallenges = () => {
 
     updateChallengeMutation,
     isUpdateChallengePending,
+
+    deleteChallengeMutation,
+    isDeleteChallengePending,
 
     checkDay,
 

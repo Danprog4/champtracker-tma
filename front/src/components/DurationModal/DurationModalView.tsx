@@ -45,6 +45,7 @@ const DurationModalView: React.FC<DurProps> = ({
   handleSave,
   handleClose,
 }) => {
+  console.log(isCustomDuration);
   return (
     <Drawer.Root onClose={handleClose} onOpenChange={setIsOpen} open={isOpen}>
       <Drawer.Trigger className="mt-2 flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px]">
@@ -138,7 +139,7 @@ const DurationModalView: React.FC<DurProps> = ({
               >
                 <span
                   className={
-                    isLong || !tempDuration || inputDuration === ""
+                    (isCustomDuration && isLong) || !inputDuration
                       ? "text-gray-500"
                       : ""
                   }

@@ -45,6 +45,22 @@ export const updateChallenge = async (body: UpdateChallenge, id: number) => {
       },
     }
   );
-    console.log(response.data)
+  console.log(response.data)
   return response.data;
 };
+
+export const deleteChallenge = async (challengeId: number) => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.delete(
+    `http://localhost:3000/deleteChallenge/${challengeId}`,
+    {
+      headers: {
+        'x-init-data': initDataRaw,
+      },
+    }
+  );
+  console.log(response.data)
+  return response.data;
+};
+
