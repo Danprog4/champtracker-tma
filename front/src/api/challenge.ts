@@ -1,7 +1,6 @@
 import { CreateChallengeReq, UpdateChallenge } from '@back-types';
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 export const getChallenges = async () => {
   const { initDataRaw } = retrieveLaunchParams();
@@ -25,7 +24,7 @@ export const createNewChallenge = async (body: CreateChallengeReq) => {
       headers: {
         'x-init-data': initDataRaw,
       },
-    }
+    },
   );
   console.log(response.data);
   return response.data;
@@ -41,7 +40,7 @@ export const updateChallenge = async (body: UpdateChallenge, id: number) => {
       headers: {
         'x-init-data': initDataRaw,
       },
-    }
+    },
   );
   console.log(response.data);
   return response.data;
@@ -56,7 +55,7 @@ export const deleteChallenge = async (challengeId: number) => {
       headers: {
         'x-init-data': initDataRaw,
       },
-    }
+    },
   );
   console.log(response.data);
   return response.data;

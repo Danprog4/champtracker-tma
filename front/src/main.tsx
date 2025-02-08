@@ -1,11 +1,11 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
-import { mockTelegramEnv, init } from "@telegram-apps/sdk";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter } from "react-router";
-import "./index.css";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import { mockTelegramEnv, init } from '@telegram-apps/sdk';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from '@tanstack/react-router';
+import { router } from './router';
+import './index.css';
 
 const queryClient = new QueryClient();
 
@@ -16,19 +16,17 @@ if (import.meta.env.DEV) {
 
     // do not care about this part
     themeParams: {},
-    version: "7.2",
-    platform: "tdesktop",
+    version: '7.2',
+    platform: 'tdesktop',
   });
 }
 
 init();
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </QueryClientProvider>
-  </StrictMode>
+  </StrictMode>,
 );

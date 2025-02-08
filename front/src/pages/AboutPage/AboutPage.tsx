@@ -1,21 +1,21 @@
-import React from "react";
-import CrossImg from "../../assets/images/—Pngtree—vector cross icon_4254623.png";
-import GitHubLogo from "../../assets/images/GitHub-Logo.wine.svg";
-import TelegramLogo from "../../assets/images/telegram-svgrepo-com (3).svg";
-import CopyRightLogo from "../../assets/images/5a369c1a2cfcd0.4577110515135283461843.png";
-import { Link } from "react-router-dom";
-import { toast } from "sonner";
+import React from 'react';
+import CrossImg from '../../assets/images/—Pngtree—vector cross icon_4254623.png';
+import GitHubLogo from '../../assets/images/GitHub-Logo.wine.svg';
+import TelegramLogo from '../../assets/images/telegram-svgrepo-com (3).svg';
+import CopyRightLogo from '../../assets/images/5a369c1a2cfcd0.4577110515135283461843.png';
+import { Link } from '@tanstack/react-router';
+import { toast } from 'sonner';
 
 const AboutPage: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="fixed flex w-full items-center justify-start bg-black pl-[13px] pt-8">
-        <Link to={"/"}>
+        <Link to="/">
           <img src={CrossImg} alt="Close" className="h-[35px] w-[35px]" />
         </Link>
       </header>
       <Link
-        to={"/hints"}
+        to="/hints"
         className="mt-28 flex h-[33vh] w-[100vw] items-center justify-center rounded-full bg-yellow-400"
       >
         <span className="text-center text-2xl font-extrabold text-black">
@@ -53,7 +53,7 @@ const AboutPage: React.FC = () => {
       </div>
       <div
         onClick={() =>
-          toast("К сожалению, сейчас доступен только русский язык")
+          toast('К сожалению, сейчас доступен только русский язык')
         }
         className="mb-10 flex h-[8vh] w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl font-extrabold text-black"
       >

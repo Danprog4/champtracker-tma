@@ -1,25 +1,24 @@
-import React, { useRef, useState } from "react";
-import { categories } from "@/cards.config";
-import { Link } from "react-router-dom";
+import { categories } from '@/cards.config';
+import { Link } from '@tanstack/react-router';
+import { useRef, useState } from 'react';
 
 const Slider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<{ [key: number]: number }>(
     {}
   );
-  const sliderRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
+  const sliderRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Функция для обновления индекса активного слайда
   const handleScroll = (categoryIndex: number) => {
     const slider = sliderRefs.current[categoryIndex];
     if (!slider) return;
 
-    const scrollLeft = slider.scrollLeft; // Текущая прокрутка
-    const cardWidth = 250 + 16; // Ширина карточки + отступ (если есть)
-    const newIndex = Math.round(scrollLeft / cardWidth) + 1;
+    const cardWidth = 250 + 16; // card width + margin
+    const scrollPosition = slider.scrollLeft;
+    const currentIndex = Math.round(scrollPosition / cardWidth) + 1;
 
     setCurrentSlide((prev) => ({
       ...prev,
-      [categoryIndex]: newIndex,
+      [categoryIndex]: currentIndex,
     }));
   };
 
@@ -41,7 +40,8 @@ const Slider: React.FC = () => {
           >
             {category.items.map((card, cardIndex) => (
               <Link
-                to={`/card/${card.id}`}
+                to="/card/$id"
+                params={{ id: String(card.id) }}
                 key={cardIndex}
                 className={`relative flex-shrink-0 bg-cover ${category.color} rounded-lg`}
               >

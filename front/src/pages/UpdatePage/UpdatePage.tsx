@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from '@tanstack/react-router';
 import CrossImg from '../../assets/images/Krestiksvgpng.ru_.svg';
 import RegularityModal from '@/components/RegularityModal/RegularityModal';
 import DurationModal from '@/components/DurationModal/DurationModal';
@@ -14,7 +14,7 @@ import { Alert } from '@/components/ui/alert';
 
 // TODO: use suspense everywhere instead of simple useQuery
 const UpdatePage: React.FC = () => {
-  const taskId = Number(useParams<{ taskId: string }>().taskId);
+  const taskId = Number(useParams({ strict: false }).taskId);
 
   const { getOneChallege, updateChallengeMutation, deleteChallengeMutation } =
     useChallenges();
@@ -53,7 +53,7 @@ const UpdatePage: React.FC = () => {
 
   useEffect(() => {
     if (!taskId || !getOneChallege(Number(taskId))) {
-      navigate('/');
+      navigate({ to: '/' });
     }
   }, [taskId, getOneChallege, navigate]);
 
@@ -69,7 +69,7 @@ const UpdatePage: React.FC = () => {
     };
 
     updateChallengeMutation({ id: Number(taskId), body: resetTask });
-    navigate('/');
+    navigate({ to: '/' });
   };
 
   const handleSave = () => {
@@ -88,14 +88,20 @@ const UpdatePage: React.FC = () => {
     };
 
     updateChallengeMutation({ id: Number(taskId), body: updatedTask });
-    navigate('/');
+    navigate({ to: '/' });
   };
 
   return (
     <div className="flex h-full flex-col">
       <div className={`${color} h-[20vh] pb-5`}>
         <div className="relative mb-2 mt-8 flex w-full">
-          <Link to={`/challenge/${task.id}`} className="absolute inset-0">
+          <Link
+            to={`/challenge/$taskId`}
+            params={{
+              taskId: task.id.toString(),
+            }}
+            className="absolute inset-0"
+          >
             <img src={CrossImg} alt="cross" className="m-2 h-10 w-10" />
           </Link>
           <span className="mt-[15.5px] w-full text-center text-black">
@@ -107,7 +113,7 @@ const UpdatePage: React.FC = () => {
           <div
             className={cn(
               'mr-[5%] mt-3 text-2xl font-extrabold uppercase',
-              title === 'НАЗВАНИЕ ЗАДАНИЯ' && 'opacity-[0.3]'
+              title === 'НАЗВАНИЕ ЗАДАНИЯ' && 'opacity-[0.3]',
             )}
           >
             <input
@@ -118,7 +124,7 @@ const UpdatePage: React.FC = () => {
                 const inputValue = e.target.value.toUpperCase();
                 const filteredValue = inputValue.replace(
                   /[^a-zA-Zа-яА-Я\s]/g,
-                  ''
+                  '',
                 );
                 setTitle(filteredValue);
               }}
@@ -171,7 +177,7 @@ const UpdatePage: React.FC = () => {
                 const inputValue = e.target.value;
                 const filteredValue = inputValue.replace(
                   /[^a-zA-Zа-яА-Я\s]/g,
-                  ''
+                  '',
                 );
                 setNotifications(filteredValue);
               }}
@@ -190,7 +196,7 @@ const UpdatePage: React.FC = () => {
             key={classColor}
             className={cn(
               `h-[78px] w-[78px] cursor-pointer rounded-full ${classColor}`,
-              color === classColor && 'border-4 border-white'
+              color === classColor && 'border-4 border-white',
             )}
             onClick={() => setColor(classColor)}
           ></div>
@@ -222,7 +228,7 @@ const UpdatePage: React.FC = () => {
           onClick={handleSave}
           className={cn(
             'fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-gray-600 p-5',
-            checkIfChanged && 'bg-pink-600'
+            checkIfChanged && 'bg-pink-600',
           )}
           disabled={!checkIfChanged}
         >

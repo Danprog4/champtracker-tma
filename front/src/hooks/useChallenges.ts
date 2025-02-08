@@ -11,7 +11,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 
 export const useChallenges = () => {
   const queryClient = useQueryClient();
@@ -43,9 +43,9 @@ export const useChallenges = () => {
         [queryKeys.challenges],
         (old: Challenge[] = []) => {
           return old.map((ch) =>
-            ch.id === updatedChallenge.id ? updatedChallenge : ch
+            ch.id === updatedChallenge.id ? updatedChallenge : ch,
           );
-        }
+        },
       );
     },
   });
@@ -60,21 +60,21 @@ export const useChallenges = () => {
         [queryKeys.challenges],
         (old: Challenge[] = []) => {
           return old.filter((ch) => ch.id !== deletedChallenge.id);
-        }
+        },
       );
-      navigate('/');
+      navigate({ to: '/' });
     },
   });
 
   const checkDay = (
     taskId: string,
     dayCount: number, // dayCount is now the second argument
-    dayBeforeToday: (date: string) => boolean
+    dayBeforeToday: (date: string) => boolean,
   ) => {
     console.log('taskId:', taskId, typeof taskId);
     console.log(
       'Available task IDs:',
-      challenges?.map((task) => task.id)
+      challenges?.map((task) => task.id),
     );
 
     // Найдем нужное задание
@@ -97,7 +97,7 @@ export const useChallenges = () => {
     // Обновляем состояние дней
     const updatedCheckedDays = isDateChecked
       ? task.userCheckedDates?.filter(
-          (checkedDate) => checkedDate !== targetDate
+          (checkedDate) => checkedDate !== targetDate,
         ) || [] // Убираем дату из списка
       : [...(task.userCheckedDates || []), targetDate]; // Добавляем дату в список
 

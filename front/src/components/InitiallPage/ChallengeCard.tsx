@@ -2,13 +2,13 @@ import {
   calculateDaysSinceStart,
   dayBeforeToday,
   formatDate,
-} from "@/lib/dateUtils";
-import { Months } from "@/Months.config";
-import { Challenge } from "@back-types";
-import { Link } from "react-router";
-import CheckImg from "../../assets/images/icons8-галочка.svg";
-import dayjs from "dayjs";
-import { useChallenges } from "@/hooks/useChallenges";
+} from '@/lib/dateUtils';
+import { Months } from '@/Months.config';
+import { Challenge } from '@back-types';
+import { Link } from '@tanstack/react-router';
+import CheckImg from '../../assets/images/icons8-галочка.svg';
+import dayjs from 'dayjs';
+import { useChallenges } from '@/hooks/useChallenges';
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -16,7 +16,7 @@ type ChallengeCardProps = {
 };
 
 const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
-  const startDate = dayjs(challenge.challengeStartAt).startOf("day");
+  const startDate = dayjs(challenge.challengeStartAt).startOf('day');
   const daysSinceStart = calculateDaysSinceStart(challenge.taskDates);
   const { checkDay } = useChallenges();
 
@@ -24,13 +24,18 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
     checkDay(challengeId, dayCount, dayBeforeToday);
   };
 
+  console.log(challenge.id);
+
   return (
     <Link
-      to={`/challenge/${challenge.id}`}
+      to={`/challenge/$taskId`}
+      params={{
+        taskId: challenge.id.toString(),
+      }}
       className={`${
         challenge.color
       } flex h-[16vh] w-[90vw] items-center justify-between rounded-lg p-3 pr-0 ${
-        isLast && "mb-10"
+        isLast && 'mb-10'
       }`}
     >
       <div className="flex flex-col">
@@ -49,9 +54,9 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
             <div>
               /
               {`${
-                challenge.regularity === "everyday"
-                  ? challenge.duration + " дн."
-                  : challenge.duration / 7 + " нед."
+                challenge.regularity === 'everyday'
+                  ? challenge.duration + ' дн.'
+                  : challenge.duration / 7 + ' нед.'
               }`}
             </div>
           </div>
@@ -63,7 +68,7 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            console.log("clicked");
+            console.log('clicked');
             handleDayClick(challenge.id.toString(), daysSinceStart - 1);
           }}
         >
@@ -83,8 +88,8 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
                   </div>
                 ) : (
                   <span>
-                    {challenge.regularity !== "everyday" &&
-                    startDate !== dayjs().startOf("day") ? (
+                    {challenge.regularity !== 'everyday' &&
+                    startDate !== dayjs().startOf('day') ? (
                       <div className="flex flex-col text-center">
                         <span className="text-xs font-light leading-3">
                           ПЕРВЫЙ ДЕНЬ

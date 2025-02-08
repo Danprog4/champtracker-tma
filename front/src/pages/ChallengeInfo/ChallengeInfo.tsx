@@ -1,22 +1,24 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { toast } from "sonner";
-import { useChallenges } from "@/hooks/useChallenges";
-import { ChallengeInfoDisplay } from "./ChallengeInfoView";
+import React from 'react';
+
+import { toast } from 'sonner';
+import { useChallenges } from '@/hooks/useChallenges';
+import { ChallengeInfoDisplay } from './ChallengeInfoView';
 import {
   formatDate,
   calculateDaysSinceStart,
   calculateWeeks,
-} from "@/lib/dateUtils";
-import dayjs from "dayjs";
+} from '@/lib/dateUtils';
+import { getRouteApi } from '@tanstack/react-router';
+
+const routeApi = getRouteApi('/challenge/$taskId');
 
 const ChallengeInfoContainer: React.FC = () => {
-  const { taskId } = useParams<{ taskId: string }>();
+  const { taskId } = routeApi.useParams();
   const { getOneChallege } = useChallenges();
   const challenge = getOneChallege(Number(taskId));
 
   if (!challenge) {
-    toast("Задача не найдена");
+    toast('Задача не найдена');
     return null;
   }
 
@@ -24,8 +26,8 @@ const ChallengeInfoContainer: React.FC = () => {
   const today = formatDate(nowDate);
 
   const formatToDDMMYYYY = (date: Date): string => {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
 
     return `${day}.${month}.${year}`;

@@ -1,6 +1,6 @@
-import { Link } from "react-router";
-import AboutImg from "../../assets/images/menu-symbol-of-three-parallel-lines-svgrepo-com (1).svg";
-import PlusImg from "../../assets/images/plus-svgrepo-com.svg";
+import { Link } from '@tanstack/react-router';
+import AboutImg from '../../assets/images/menu-symbol-of-three-parallel-lines-svgrepo-com (1).svg';
+import PlusImg from '../../assets/images/plus-svgrepo-com.svg';
 
 const Header = () => {
   return (
