@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, useParams } from '@tanstack/react-router';
-import { categories } from '@/cards.config';
-import CrossImg from '../../assets/images/—Pngtree—vector cross icon_4254623.png';
+import React from "react";
+import { Link, useParams } from "@tanstack/react-router";
+import { categories } from "@/cards.config";
+import CrossImg from "../../assets/images/—Pngtree—vector cross icon_4254623.png";
 
 const ChallengeView: React.FC = () => {
-  const { id } = useParams({ from: '/card/$id' });
+  const { id } = useParams({ from: "/card/$id" });
   const category = categories.find((category) =>
     category.items.some((item) => item.id === Number(id))
   );

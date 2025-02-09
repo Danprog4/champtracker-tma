@@ -1,7 +1,7 @@
-import { Challenge } from '@back-types';
-import dayjs, { Dayjs } from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import { Challenge } from "@back-types";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 // Подключаем плагины
 dayjs.extend(utc);
@@ -10,7 +10,7 @@ dayjs.extend(timezone);
 export const formatDateWithTimezone = (date: string | Date | Dayjs): string => {
   const formattedDate = dayjs(date)
     .tz(dayjs.tz.guess())
-    .format('YYYY-MM-DD HH:mm:ssZ');
+    .format("YYYY-MM-DD HH:mm:ssZ");
   return formattedDate;
 };
 
@@ -36,22 +36,22 @@ export const calculateDaysSinceStart = (taskDates: string[]): number => {
 };
 
 export const formatDate = (dateInput: Date | string): string => {
-  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
 
   const day = date.getUTCDate();
   const month = date.getUTCMonth() + 1;
   const year = date.getUTCFullYear();
 
-  return `${year}-${month.toString().padStart(2, '0')}-${day
+  return `${year}-${month.toString().padStart(2, "0")}-${day
     .toString()
-    .padStart(2, '0')}`;
+    .padStart(2, "0")}`;
 };
 
 export const getDatesForDaysOfWeek = (
   startDate: Dayjs,
   duration: number,
   selectedDays: number[] | null,
-  regularity: string,
+  regularity: string
 ): string[] => {
   const taskDays: string[] = [];
 
@@ -69,32 +69,38 @@ export const getDatesForDaysOfWeek = (
   //   }
   // }
 
-  if (regularity === 'everyday') {
+  if (regularity === "everyday") {
     for (let i = 0; i < duration; i++) {
-      const currentDate = dayjs(startDate).add(i, 'day');
+      const currentDate = dayjs(startDate).add(i, "day");
       taskDays.push(formatDateWithTimezone(currentDate));
     }
   } else {
     for (let i = 0; i < duration; i++) {
-      const currentDate = dayjs(startDate).add(i, 'day');
+      const currentDate = dayjs(startDate).add(i, "day");
       if (selectedDays && selectedDays.includes(currentDate.day())) {
         taskDays.push(formatDateWithTimezone(currentDate));
       }
     }
   }
 
-  console.log('getDatesForDaysOfWeek()', taskDays);
+  console.log("getDatesForDaysOfWeek()", taskDays);
 
   return taskDays;
 };
 
 export const dayBeforeToday = (date: string): boolean => {
   const dateToCompare = new Date(date);
-  return dateToCompare < new Date();
+  const today = new Date();
+
+  // Убираем время, оставляя только дату
+  dateToCompare.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  return dateToCompare <= today; // Теперь можно нажать в тот же день
 };
 
 export const calculateWeeks = (
-  challenge: Challenge,
+  challenge: Challenge
 ): {
   week: number;
   days: string[];
@@ -103,7 +109,7 @@ export const calculateWeeks = (
   let currentWeek = [];
 
   if (!challenge.daysOfWeek || challenge.daysOfWeek.length === 0) {
-    console.error('challenge.daysOfWeek is null or empty');
+    console.error("challenge.daysOfWeek is null or empty");
     return [];
   }
 
