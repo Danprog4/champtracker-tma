@@ -16,8 +16,6 @@ export const usePremium = () => {
     queryFn: getPremium,
   });
 
-  console.log('isPremium', premium);
-
   const {
     mutate,
     isPending: isBuyingPending,
@@ -54,5 +52,5 @@ export const usePremium = () => {
     mutate();
   };
 
-  return { handleBuyPremium, isBuyingPending, isPremium: premium };
+  return { handleBuyPremium, isBuyingPending, isPremium: premium.premium };
 };

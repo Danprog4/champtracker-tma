@@ -9,6 +9,7 @@ const InitiallPageView = () => {
   const { challenges } = useChallenges();
   const { isPremium } = usePremium();
 
+  console.log('isPremium', isPremium);
   return (
     <div className="flex h-screen flex-col">
       <Header />
