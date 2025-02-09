@@ -8,17 +8,17 @@ import './index.css';
 
 const queryClient = new QueryClient();
 
-// if (import.meta.env.DEV) {
-//   mockTelegramEnv({
-//     // important part
-//     initDataRaw: import.meta.env.VITE_MOCK_INIT_DATA,
+if (import.meta.env.DEV) {
+  mockTelegramEnv({
+    // important part
+    initDataRaw: import.meta.env.VITE_MOCK_INIT_DATA,
 
-//     // do not care about this part
-//     themeParams: {},
-//     version: '7.2',
-//     platform: 'tdesktop',
-//   });
-// }
+    // do not care about this part
+    themeParams: {},
+    version: '7.2',
+    platform: 'tdesktop',
+  });
+}
 
 init();
 

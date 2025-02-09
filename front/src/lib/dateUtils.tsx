@@ -103,7 +103,7 @@ export const calculateWeeks = (
   let currentWeek = [];
 
   if (!challenge.daysOfWeek || challenge.daysOfWeek.length === 0) {
-    console.error('challenge.daysOfWeek is null or empty');
+    // console.error('challenge.daysOfWeek is null or empty');
     return [];
   }
 
