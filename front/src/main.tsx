@@ -8,7 +8,8 @@ import "./index.css";
 
 const queryClient = new QueryClient();
 
-//delete this if you using real telegram bot, not the localhost
+// delete this if you using real telegram bot, not the localhost
+
 if (import.meta.env.DEV) {
   mockTelegramEnv({
     // important part
