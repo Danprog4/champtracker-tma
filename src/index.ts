@@ -5,8 +5,10 @@ import {
   createChallenge,
   deleteChallenge,
   getChallenges,
+  getOnBoarding,
   getPremium,
   updateChallenge,
+  updateOnBoarding,
 } from './db/repo';
 import { UpdateChallenge } from './db/schema';
 import { CreateChallengeReq } from './types';
@@ -17,6 +19,7 @@ const app = new Hono();
 
 app.use('*', cors());
 
+
 app.get('/getPremium', async (c) => {
   const user = await getValidatedUser(c.req);
 
@@ -24,6 +27,23 @@ app.get('/getPremium', async (c) => {
 
   return c.json({ premium });
 });
+
+
+app.get('/getOnBoarding', async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  const onBoarding = await getOnBoarding(user.id);
+  
+  return c.json({ onBoarding });
+})
+
+app.put('/updateOnBoarding', async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  await updateOnBoarding(user.id, true);
+
+  return c.json({ success: true, message: "OnBoarding status updated" });
+})
 
 app.get('/createInvoice', async (c) => {
   const user = await getValidatedUser(c.req);

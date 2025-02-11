@@ -14,11 +14,11 @@ const ChallengeView: React.FC = () => {
 
   return (
     <div className="mb-20 flex w-full flex-col">
-      <div className="relative">
+      <div className="relative rounded-b-3xl w-full">
         <img
           src={card?.imageUrl}
           alt={card?.title}
-          className={`h-[450px] ${category?.color} rounded-b-3xl`}
+          className={`${category?.color} h-[450px] w-full object-cover rounded-b-3xl`}
         />
         <Link to="/new" className="fixed right-0 top-0 z-10 pr-[16px] pt-6">
           <img
@@ -69,7 +69,10 @@ const ChallengeView: React.FC = () => {
       </div>
       <div className="flex items-center justify-center pl-0 font-extrabold">
         <Link
-          to={`/card/${card?.id}/create`}
+          to={"/card/$id/create"}
+          params={{
+            id: card!.id.toString(),
+          }}
           className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5"
         >
           <div className="">ПРОДОЛЖИТЬ</div>

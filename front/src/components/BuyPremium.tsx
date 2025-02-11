@@ -1,14 +1,19 @@
-import { Button } from '@/components/ui/button';
-import { Drawer } from 'vaul';
-import { TelegramStar } from './shared/TelegramStar';
-import { usePremium } from '@/hooks/usePremium';
+import { Button } from "@/components/ui/button";
+import { Drawer } from "vaul";
+import { TelegramStar } from "./shared/TelegramStar";
+import { usePremium } from "@/hooks/usePremium";
+import { ReactNode } from "@tanstack/react-router";
 
-export const BuyPremium = () => {
+interface BuyPremiumProps {
+  children: ReactNode;
+}
+
+export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
   const { handleBuyPremium, isBuyingPending } = usePremium();
 
   return (
     <Drawer.Root>
-      <Drawer.Trigger asChild>
+      {/* <Drawer.Trigger asChild>
         <Button
           variant="ghost"
           className="fixed left-4 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90"
@@ -16,7 +21,8 @@ export const BuyPremium = () => {
           <TelegramStar />
           <span>Premium</span>
         </Button>
-      </Drawer.Trigger>
+      </Drawer.Trigger> */}
+      <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
         <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 mt-24 flex flex-col rounded-t-[10px]">
@@ -59,9 +65,9 @@ export const BuyPremium = () => {
                   {isBuyingPending ? (
                     <span>Buying...</span>
                   ) : (
-                    <span>
-                      Upgrade for 10 <TelegramStar />
-                    </span>
+                    <div className="flex justify-center items-center gap-1">
+                      <span>Upgrade for 10</span> <TelegramStar />
+                    </div>
                   )}
                 </Button>
               </div>

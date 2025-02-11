@@ -4,6 +4,8 @@ import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+// Todo: add onboarding get 
+
 export const createInvoice = async () => {
   const { initDataRaw } = retrieveLaunchParams();
 
@@ -12,6 +14,34 @@ export const createInvoice = async () => {
       'x-init-data': initDataRaw,
     },
   });
+
+  return response.data;
+};
+
+export const getUserOnBoarding = async () => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.get(`${API_URL}/getOnBoarding`, {
+    headers: {
+      'x-init-data': initDataRaw,
+    },
+  });
+  console.log(response.data, 'api getOnBoarding()')
+  return response.data;
+};
+
+export const updateOnBoarding = async (onBoarding: boolean) => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.put(
+    `${API_URL}/updateOnBoarding`,
+    { onBoarding }, 
+    {
+      headers: {
+        "x-init-data": initDataRaw,
+      },
+    }
+  );
 
   return response.data;
 };

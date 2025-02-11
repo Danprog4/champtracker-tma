@@ -41,3 +41,16 @@ export const updatePremium = async (id: number, premiumUntil: string) => {
     .set({ premiumUntil })
     .where(eq(usersTable.id, id));
 };
+
+export const getOnBoarding = async (id: number): Promise<boolean> => {
+  const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
+
+  return Boolean(users[0].onBoarding);
+}
+
+export const updateOnBoarding = async (id: number, onBoarding: boolean) => {
+  await db
+    .update(usersTable)
+    .set({ onBoarding })
+    .where(eq(usersTable.id, id));
+};

@@ -15,6 +15,13 @@
       "when": 1738855379771,
       "tag": "0001_fat_micromacro",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1739284330703,
+      "tag": "0002_blue_doomsday",
+      "breakpoints": true
     }
   ]
 }

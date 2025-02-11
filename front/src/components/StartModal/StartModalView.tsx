@@ -1,9 +1,9 @@
-'use client';
-import { Calendar } from '@/components/ui/calendar';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Months } from '@/Months.config';
-import dayjs, { Dayjs } from 'dayjs';
-import { Drawer } from 'vaul';
+"use client";
+import { Calendar } from "@/components/ui/calendar";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Months } from "@/Months.config";
+import dayjs, { Dayjs } from "dayjs";
+import { Drawer } from "vaul";
 
 interface StartDrawerProps {
   isOpen: boolean;
@@ -17,6 +17,7 @@ interface StartDrawerProps {
   handleSave: () => void;
   startDate: string;
   date?: Dayjs;
+  isDisabledFunc: (date: Date) => boolean;
 }
 
 export default function StartModalView({
@@ -29,8 +30,7 @@ export default function StartModalView({
   disabled,
   startedDate,
   handleSave,
-  startDate,
-  date,
+  isDisabledFunc,
 }: StartDrawerProps) {
   const today = dayjs();
   const monthNumber = tempDate ? tempDate.getMonth() + 1 : 1;
@@ -39,34 +39,25 @@ export default function StartModalView({
     return date instanceof Date && !isNaN(date.getTime());
   };
 
-  const isDisabled = (date: Date) => {
-    const today = new Date();
-    return (
-      date.getDate() < today.getDate() &&
-      date.getMonth() <= today.getMonth() &&
-      date.getFullYear() <= today.getFullYear()
-    );
-  };
-
   return (
     <Drawer.Root open={isOpen} onOpenChange={onOpenChange}>
       <Drawer.Trigger
         className={`mt-2 flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px] ${
-          disabled && 'bg-gray-800'
+          disabled && "bg-gray-800"
         }`}
         disabled={disabled}
       >
         <span>Старт</span>
         <span className="text-gray-400">
           {startedDate ||
-            (tempStartTime === 'Now' && 'Сейчас >') ||
-            (tempStartTime === 'Tomorrow' && 'Завтра >') ||
+            (tempStartTime === "Now" && "Сейчас >") ||
+            (tempStartTime === "Tomorrow" && "Завтра >") ||
             (isValidDate(tempDate) &&
-              (dayjs(tempDate).isSame(today, 'day')
-                ? 'Сегодня >'
-                : dayjs(tempDate).isSame(today.add(1, 'day'), 'day')
-                  ? 'Завтра >'
-                  : `${dayjs(tempDate).format('DD.MM.YYYY')} >`))}
+              (dayjs(tempDate).isSame(today, "day")
+                ? "Сегодня >"
+                : dayjs(tempDate).isSame(today.add(1, "day"), "day")
+                  ? "Завтра >"
+                  : `${dayjs(tempDate).format("DD.MM.YYYY")} >`))}
         </span>
       </Drawer.Trigger>
       <Drawer.Portal>
@@ -74,7 +65,7 @@ export default function StartModalView({
         <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-gray-100 outline-none">
           <div className="h-full bg-black">
             <div className="mb-4 flex h-[13vw] items-center justify-center bg-gray-700 text-white">
-              Start
+              Старт
             </div>
             <div className="flex flex-col items-center justify-center text-gray-300">
               <RadioGroup
@@ -99,17 +90,17 @@ export default function StartModalView({
                 >
                   <span>Своя дата</span>
                   {isValidDate(tempDate) &&
-                    !dayjs(tempDate).isSame(today, 'day') &&
-                    !dayjs(tempDate).isSame(today.add(1, 'day'), 'day') && (
+                    !dayjs(tempDate).isSame(today, "day") &&
+                    !dayjs(tempDate).isSame(today.add(1, "day"), "day") && (
                       <span>{`${
                         tempDate?.getDate() <= 9
-                          ? '0' + tempDate?.getDate()
+                          ? "0" + tempDate?.getDate()
                           : tempDate?.getDate()
                       } ${Months[monthNumber]}`}</span>
                     )}
                 </RadioGroupItem>
               </RadioGroup>
-              {tempStartTime === 'Own date' && (
+              {tempStartTime === "Own date" && (
                 <Calendar
                   mode="single"
                   selected={tempDate}
@@ -121,7 +112,7 @@ export default function StartModalView({
                       setTempDate(selectedDate);
                     }
                   }}
-                  disabled={isDisabled}
+                  disabled={isDisabledFunc}
                   className="mt-2 flex w-[90vw] items-center justify-center rounded-md border bg-gray-700"
                 />
               )}

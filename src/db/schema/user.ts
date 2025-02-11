@@ -25,6 +25,7 @@ export const usersTable = pgTable('users', {
   })
     .notNull()
     .defaultNow(),
+  onBoarding: boolean().notNull().default(false),
 });
 
 export type User = InferSelectModel<typeof usersTable>;

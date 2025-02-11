@@ -1,7 +1,7 @@
-'use client';
-import { useEffect, useState } from 'react';
-import StartModalView from './StartModalView';
-import dayjs, { Dayjs } from 'dayjs';
+"use client";
+import { useEffect, useState } from "react";
+import StartModalView from "./StartModalView";
+import dayjs, { Dayjs } from "dayjs";
 
 interface StartModalViewProps {
   date?: Dayjs;
@@ -17,19 +17,19 @@ export default function StartModal({
   startedDate,
 }: StartModalViewProps) {
   const [tempDate, setTempDate] = useState<Date | undefined>(new Date());
-  const [startDate, setStartDate] = useState('Now');
+  const [startDate, setStartDate] = useState("Now");
   const [tempStartTime, setTempStartTime] = useState(startDate);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const today = new Date();
-    if (tempStartTime === 'Now') {
+    if (tempStartTime === "Now") {
       setTempDate(today);
-    } else if (tempStartTime === 'Tomorrow') {
+    } else if (tempStartTime === "Tomorrow") {
       const tomorrow = new Date(today);
       tomorrow.setDate(today.getDate() + 1);
       setTempDate(tomorrow);
-    } else if (tempStartTime === 'Own date') {
+    } else if (tempStartTime === "Own date") {
       setTempDate(today);
     }
   }, [tempStartTime]);
@@ -41,6 +41,17 @@ export default function StartModal({
     setStartDate(tempStartTime);
     setIsOpen(false);
   };
+
+  const isDisabled = (date: Date) => {
+    const today = new Date();
+    return (
+      date.getDate() < today.getDate() &&
+      date.getMonth() <= today.getMonth() &&
+      date.getFullYear() <= today.getFullYear()
+    );
+  };
+
+  console.log(tempDate);
 
   return (
     <StartModalView
@@ -55,6 +66,7 @@ export default function StartModal({
       handleSave={handleSave}
       startDate={startDate}
       date={date}
+      isDisabledFunc={isDisabled}
     />
   );
 }

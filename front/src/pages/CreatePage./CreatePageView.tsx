@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from '@tanstack/react-router';
-import { Colors } from '@/bgColors.config';
-import DurationModal from '@/components/DurationModal/DurationModal';
-import RegularityModal from '@/components/RegularityModal/RegularityModal';
-import StartModal from '@/components/StartModal/StartModal';
-import { Switch } from '@/components/ui/switch';
-import CrossImg from '../../assets/images/Krestiksvgpng.ru_.svg';
-import { Dayjs } from 'dayjs';
+import React from "react";
+import { Link } from "@tanstack/react-router";
+import { Colors } from "@/bgColors.config";
+import DurationModal from "@/components/DurationModal/DurationModal";
+import RegularityModal from "@/components/RegularityModal/RegularityModal";
+import StartModal from "@/components/StartModal/StartModal";
+import { Switch } from "@/components/ui/switch";
+import CrossImg from "../../assets/images/Krestiksvgpng.ru_.svg";
+import { Dayjs } from "dayjs";
 
 interface CreateDumpProps {
   card: any;
@@ -14,8 +14,8 @@ interface CreateDumpProps {
   setTitle: (value: string) => void;
   color: string;
   setColor: (value: string) => void;
-  regularity: 'everyday' | 'fewTimesAWeek';
-  setRegularity: (value: 'everyday' | 'fewTimesAWeek') => void;
+  regularity: "everyday" | "fewTimesAWeek";
+  setRegularity: (value: "everyday" | "fewTimesAWeek") => void;
   duration: number;
   setDuration: (value: number) => void;
   date: Dayjs | undefined;
@@ -49,7 +49,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
   setDaysOfWeek,
   handleSave,
 }) => {
-  const getNavigationPath = () => (card ? `/card/${card.id}` : '/');
+  const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
 
   return (
     <div className="flex h-screen flex-col">
@@ -65,11 +65,11 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         <div className="flex flex-col pl-5 text-start text-black">
           <div className="mr-[5%] mt-4 flex justify-between text-sm">
             <span>Название</span>
-            {title !== '' && <span>{title.length}/28</span>}
+            {title !== "" && <span>{title.length}/28</span>}
           </div>
           <div
             className={`mr-[5%] mt-3 text-2xl font-extrabold uppercase ${
-              title === 'НАЗВАНИЕ ЗАДАНИЯ' ? 'opacity-[0.3]' : ''
+              title === "НАЗВАНИЕ ЗАДАНИЯ" ? "opacity-[0.3]" : ""
             }`}
           >
             <input
@@ -80,7 +80,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
                 const inputValue = e.target.value.toUpperCase();
                 const filteredValue = inputValue.replace(
                   /[^a-zA-Zа-яА-Я\s]/g,
-                  '',
+                  ""
                 );
                 setTitle(filteredValue);
               }}
@@ -126,7 +126,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
                 const inputValue = e.target.value;
                 const filteredValue = inputValue.replace(
                   /[^a-zA-Zа-яА-Я\s]/g,
-                  '',
+                  ""
                 );
                 setNotifications(filteredValue);
               }}
@@ -142,7 +142,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
           <div
             key={classColor}
             className={`h-[78px] w-[78px] cursor-pointer rounded-full ${classColor} ${
-              color === classColor ? 'border-4 border-white' : ''
+              color === classColor ? "border-4 border-white" : ""
             }`}
             onClick={() => setColor(classColor)}
           ></div>
@@ -152,7 +152,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         <button
           onClick={handleSave}
           className={`fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5 ${
-            title.length === 0 ? 'bg-gray-600' : ''
+            title.length === 0 ? "bg-gray-600" : ""
           }`}
         >
           СОХРАНИТЬ

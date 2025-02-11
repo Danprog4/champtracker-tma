@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from '@tanstack/react-router';
-import SettingImg from '../../assets/images/settings-svgrepo-com.svg';
-import { Challenge } from '@back-types';
-import { dayBeforeToday, formatDate } from '@/lib/dateUtils';
-import dayjs from 'dayjs';
-import { useChallenges } from '@/hooks/useChallenges';
-import { BuyPremium } from '@/components/BuyPremium';
+import React from "react";
+import { Link } from "@tanstack/react-router";
+import SettingImg from "../../assets/images/settings-svgrepo-com.svg";
+import { Challenge } from "@back-types";
+import { dayBeforeToday, formatDate } from "@/lib/dateUtils";
+import dayjs from "dayjs";
+import { useChallenges } from "@/hooks/useChallenges";
 
 type ChallengeInfoDisplayProps = {
   challenge: Challenge;
@@ -21,18 +20,24 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
   weeks,
 }) => {
   const { checkDay } = useChallenges();
+  const displayDuration =
+    challenge.regularity === "everyday"
+      ? challenge.duration
+      : Math.ceil(challenge.duration / 7);
+  const displayRegularity =
+    challenge.regularity === "everyday" ? "ДН." : "НЕД.";
 
   return (
     <div
       className={`flex min-h-screen flex-col p-[15px] ${challenge.color} pb-20 pt-10`}
     >
       <div className="mb-10 flex items-center justify-between text-black">
-        <Link to={'/'} className="w-[30px]">
+        <Link to={"/"} className="w-[30px]">
           ←
         </Link>
         <span>Задание</span>
         <Link
-          to={'/update/$taskId'}
+          to={"/update/$taskId"}
           params={{
             taskId: challenge.id.toString(),
           }}
@@ -48,26 +53,22 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
         </div>
         <div className="flex flex-col">
           <div className="relative flex h-[70px] w-[70px] flex-col items-center justify-center rounded-full bg-pink-500">
-            <div className="text-[22px] font-extrabold">
-              {challenge.regularity === 'everyday'
-                ? challenge.duration
-                : Math.ceil(challenge.duration / 7)}
-            </div>
+            <div className="text-[22px] font-extrabold">{displayDuration}</div>
             <div className="mb-1 mt-[-5px] text-[10px] font-light">
-              {challenge.regularity === 'everyday' ? `ДН.` : `НЕД.`}
+              {displayRegularity}
             </div>
           </div>
           <div className="relative flex h-[70px] w-[70px] flex-col items-center justify-center rounded-full bg-pink-500">
             <div className="text-wrap text-center text-[10px] font-light">
-              {challenge.regularity === 'everyday'
-                ? 'Каждый день'
-                : 'Несколько раз в неделю'}
+              {challenge.regularity === "everyday"
+                ? "Каждый день"
+                : "Несколько раз в неделю"}
             </div>
           </div>
         </div>
       </div>
 
-      {challenge.regularity === 'everyday' ? (
+      {challenge.regularity === "everyday" ? (
         <div className="mb-[75px] grid grid-cols-5 gap-0">
           {challenge.taskDates.map((day, index) => {
             const hasChecked =
@@ -83,8 +84,8 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                 }}
                 key={day}
                 className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
-                  isToday && 'bg-yellow-500'
-                } ${hasFailed && 'bg-red-500'} ${hasChecked && 'bg-green-500'}`}
+                  isToday && "bg-yellow-500"
+                } ${hasFailed && "bg-red-500"} ${hasChecked && "bg-green-500"}`}
               >
                 <span>{index + 1}</span>
               </button>
@@ -113,9 +114,9 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                       onClick={() => checkDay(challenge.id.toString(), index)}
                       key={day}
                       className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
-                        isToday && 'bg-yellow-500'
-                      } ${hasFailed && 'bg-red-500'} ${
-                        hasChecked && 'bg-green-500'
+                        isToday && "bg-yellow-500"
+                      } ${hasFailed && "bg-red-500"} ${
+                        hasChecked && "bg-green-500"
                       }`}
                     >
                       <span>{indexDay + 1}</span>
@@ -128,22 +129,22 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
         </div>
       )}
       {calculateDaysSinceStart < 0 &&
-        dayjs(challenge.challengeStartAt).startOf('day').toISOString() !==
-          dayjs().startOf('day').toISOString() && (
+        dayjs(challenge.challengeStartAt).startOf("day").toISOString() !==
+          dayjs().startOf("day").toISOString() && (
           <div className="mb-5">
             <div className="mb-1 border border-black"></div>
             <div className="flex justify-between text-black">
               <div className="text-xs font-light">НАЧАЛО ЗАДАНИЯ</div>
               <div className="text-3xl font-extrabold">
-                {dayjs(challenge.challengeStartAt).format('DD.MM.YYYY')}
+                {dayjs(challenge.challengeStartAt).format("DD.MM.YYYY")}
               </div>
             </div>
           </div>
         )}
 
       {(calculateDaysSinceStart > 0 ||
-        dayjs(challenge.challengeStartAt).startOf('day').toISOString() ===
-          dayjs().startOf('day').toISOString()) && (
+        dayjs(challenge.challengeStartAt).startOf("day").toISOString() ===
+          dayjs().startOf("day").toISOString()) && (
         <div>
           <div className="mb-5">
             <div className="mb-1 border border-black"></div>
