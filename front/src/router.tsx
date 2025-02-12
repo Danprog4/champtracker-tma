@@ -7,11 +7,25 @@ import {
   useNavigate,
 } from "@tanstack/react-router";
 import { Navigate } from "@tanstack/react-router";
+// const App = lazy(() => import("./App"));
+// const YourChallengesPage = lazy(
+//   () => import("./pages/YourChallenges/YourChallengesPage")
+// );
+// const Challenges = lazy(
+//   () => import("./pages/ChallengesPage/ChallengesPageView")
+// );
+// const Challenge = lazy(() => import("./pages/Challenge/ChallengeView"));
+// const CreateSmart = lazy(() => import("./pages/CreatePage./CreatPage"));
+// const AboutPage = lazy(() => import("./pages/AboutPage/AboutPage"));
+// const HintsAndTipsPage = lazy(() => import("./pages/HintsPage/HintsPage"));
+// const ChallengeInfo = lazy(() => import("./pages/ChallengeInfo/ChallengeInfo"));
+// const UpdatePageContainer = lazy(() => import("./pages/UpdatePage/UpdatePage"));
+// const InitiallPage = lazy(() => import("./pages/InitiallPage/InitiallPage"));
 import App from "./App";
-import InitiallPageView from "./pages/InitiallPage/InitiallPageView";
+import InitiallPage from "./pages/InitiallPage/InitiallPage";
 import Challenges from "./pages/ChallengesPage/ChallengesPageView";
 import Challenge from "./pages/Challenge/ChallengeView";
-import CreateSmart from "./pages/CreatePage./CreatPage";
+import CreateSmart from "./pages/CreatePage/CreatPage";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import HintsAndTipsPage from "./pages/HintsPage/HintsPage";
 import ChallengeInfo from "./pages/ChallengeInfo/ChallengeInfo";
@@ -19,6 +33,9 @@ import UpdatePageContainer from "./pages/UpdatePage/UpdatePage";
 import { CarouselDApiDemo } from "./pages/CarouselPage/CarouselPage";
 import { useOnBoarding } from "./hooks/useOnBoarding";
 import { getUserOnBoarding } from "./api/challenge";
+import { useChallenges } from "./hooks/useChallenges";
+import { lazy, useEffect } from "react";
+import YourChallengesPage from "./pages/YourChallenges/YourChallengesPage";
 
 const rootRoute = createRootRoute({
   component: App,
@@ -39,15 +56,22 @@ const indexRoute = createRoute({
   path: "/",
   component: () => {
     const { isOnBoarding } = useOnBoarding();
-    console.log(isOnBoarding, "isOnBoarding");
     const navigate = useNavigate();
+    const { challenges } = useChallenges();
 
     // Redirect to '/welcome' if onBoarding is false
-    if (isOnBoarding === false) {
-      navigate({ to: "/welcome" });
+    useEffect(() => {
+      if (isOnBoarding === false) {
+        navigate({ to: "/welcome" });
+      }
+    }, [isOnBoarding, navigate]);
+
+    // Show YourChallengesPage if there are challenges, otherwise show InitiallPage
+    if (challenges.length > 0) {
+      return <YourChallengesPage />;
     }
 
-    return <InitiallPageView />;
+    return <InitiallPage />;
   },
 });
 
@@ -105,7 +129,18 @@ const updateRoute = createRoute({
 const carouselPage = createRoute({
   getParentRoute: () => rootRoute,
   path: "/welcome",
-  component: CarouselDApiDemo,
+  component: () => {
+    const { isOnBoarding } = useOnBoarding();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      if (isOnBoarding === true) {
+        navigate({ to: "/" });
+      }
+    }, [isOnBoarding, navigate]);
+
+    return <CarouselDApiDemo />;
+  },
 });
 
 // Build the route tree by adding children on the root route
