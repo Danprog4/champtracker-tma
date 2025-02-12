@@ -5,10 +5,9 @@ import BackImg from "../../assets/images/back-svgrepo-com (2).svg";
 import { usePremium } from "@/hooks/usePremium";
 import { BuyPremium } from "@/components/BuyPremium";
 import { CreateTaskButton } from "./TaskButton";
+import { useOnBoarding } from "@/hooks/useOnBoarding";
 
 const Challenges: React.FC = () => {
-  const { isPremium } = usePremium();
-
   return (
     <div className="relative flex flex-col items-start">
       <div className="fixed z-10 flex w-[100vw] justify-between bg-black pb-2 pl-[16px] pr-5 pt-10">
@@ -30,20 +29,11 @@ const Challenges: React.FC = () => {
 
       <Slider />
 
-      {isPremium ? (
-        <Link
-          to="/card/create"
-          className="flex w-full items-center justify-center pl-0 font-extrabold"
-        >
-          <CreateTaskButton />
-        </Link>
-      ) : (
-        <BuyPremium>
-          <div className="flex w-full items-center justify-center pl-0 font-extrabold z-0">
-            <CreateTaskButton />
-          </div>
-        </BuyPremium>
-      )}
+      <Link
+        to="/card/create"
+        className="flex w-full items-center justify-center pl-0 font-extrabold">
+        <CreateTaskButton />
+      </Link>
     </div>
   );
 };

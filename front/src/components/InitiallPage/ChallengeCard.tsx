@@ -1,10 +1,10 @@
-import { useChallenges } from '@/hooks/useChallenges';
-import { calculateDaysSinceStart } from '@/lib/dateUtils';
-import { Months } from '@/Months.config';
-import { Challenge } from '@back-types';
-import { Link } from '@tanstack/react-router';
-import dayjs from 'dayjs';
-import CheckImg from '../../assets/images/icons8-галочка.svg';
+import { useChallenges } from "@/hooks/useChallenges";
+import { calculateDaysSinceStart } from "@/lib/dateUtils";
+import { Months } from "@/Months.config";
+import { Challenge } from "@back-types";
+import { Link } from "@tanstack/react-router";
+import dayjs from "dayjs";
+import CheckImg from "../../assets/images/icons8-галочка.svg";
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -12,7 +12,7 @@ type ChallengeCardProps = {
 };
 
 const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
-  const startDate = dayjs(challenge.challengeStartAt).startOf('day');
+  const startDate = dayjs(challenge.challengeStartAt).startOf("day");
   const daysSinceStart = calculateDaysSinceStart(challenge.taskDates);
   const { checkDay } = useChallenges();
 
@@ -21,8 +21,11 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
   };
 
   const isDayChecked = challenge.userCheckedDates?.some((date) =>
-    dayjs(date).isSame(dayjs(), 'day'),
+    dayjs(date).isSame(dayjs(), "day")
   );
+
+  console.log(startDate, "startdate");
+  console.log(dayjs().startOf("day"));
 
   return (
     <Link
@@ -33,9 +36,8 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
       className={`${
         challenge.color
       } flex h-[16vh] w-[90vw] items-center justify-between rounded-lg p-3 pr-0 ${
-        isLast && 'mb-10'
-      }`}
-    >
+        isLast && "mb-10"
+      }`}>
       <div className="flex flex-col">
         <span className="text-lg font-extrabold text-black">
           {challenge.title}
@@ -52,9 +54,9 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
             <div>
               /
               {`${
-                challenge.regularity === 'everyday'
-                  ? challenge.duration + ' дн.'
-                  : challenge.duration / 7 + ' нед.'
+                challenge.regularity === "everyday"
+                  ? challenge.duration + " дн."
+                  : challenge.duration / 7 + " нед."
               }`}
             </div>
           </div>
@@ -68,8 +70,7 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
             event.stopPropagation();
 
             handleDayClick(challenge.id.toString(), daysSinceStart - 1);
-          }}
-        >
+          }}>
           <div className="text-md font-extrabold text-white">
             {isDayChecked ? (
               <img src={CheckImg} alt="check_image" className="w-[30px]" />
@@ -85,8 +86,8 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
                   </div>
                 ) : (
                   <span>
-                    {challenge.regularity !== 'everyday' &&
-                    startDate !== dayjs().startOf('day') ? (
+                    {challenge.regularity !== "everyday" &&
+                    startDate !== dayjs().startOf("day") ? (
                       <div className="flex flex-col text-center">
                         <span className="text-xs font-light leading-3">
                           ПЕРВЫЙ ДЕНЬ

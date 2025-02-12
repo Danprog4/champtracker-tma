@@ -26,10 +26,8 @@ export const useChallenges = () => {
   const { mutate: createChallenge, isPending: isCreateChallengePending } =
     useMutation({
       mutationFn: createNewChallenge,
-      onSuccess: (data) => {
-        queryClient.setQueryData([queryKeys.challenges], (old: Challenge[]) => {
-          return [...old, data];
-        });
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [queryKeys.challenges] });
       },
     });
 

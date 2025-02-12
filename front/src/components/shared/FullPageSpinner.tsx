@@ -1,5 +1,5 @@
-import { Loader2 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export const FullPageSpinner = () => {
   const [show, setShow] = useState(false);

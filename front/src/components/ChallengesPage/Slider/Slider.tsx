@@ -8,7 +8,6 @@ const SmartSlider: React.FC = () => {
     {}
   );
   const sliderRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const { isPremium } = usePremium();
 
   const handleScroll = (categoryIndex: number) => {
     const slider = sliderRefs.current[categoryIndex];
@@ -27,7 +26,6 @@ const SmartSlider: React.FC = () => {
       categories={categories}
       currentSlide={currentSlide}
       onScroll={handleScroll}
-      isPremium={isPremium}
     />
   );
 };

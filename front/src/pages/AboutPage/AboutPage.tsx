@@ -22,8 +22,7 @@ const AboutPage: React.FC = () => {
       </header>
       <Link
         to="/hints"
-        className="mt-28 flex h-[33vh] w-[100vw] items-center justify-center rounded-full bg-yellow-400"
-      >
+        className="mt-28 flex h-[33vh] w-[100vw] items-center justify-center rounded-full bg-yellow-400">
         <span className="text-center text-2xl font-extrabold text-black">
           СОВЕТЫ <br></br>И ПОДСКАЗКИ
         </span>
@@ -32,8 +31,7 @@ const AboutPage: React.FC = () => {
         <BuyPremium>
           <Button
             variant="ghost"
-            className="fixed left-4 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90"
-          >
+            className="fixed left-4 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
             <TelegramStar />
             <span>Premium</span>
           </Button>
@@ -48,8 +46,7 @@ const AboutPage: React.FC = () => {
           className="flex h-[50vw] w-[50vw] flex-col items-center justify-center rounded-3xl bg-blue-300"
           href="https://github.com/Danprog4/Challenge-Up"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <img className="h-[55px] w-[55px]" src={GitHubLogo} alt="GitHub" />
           <span className="font-bold text-black">Danprog4</span>
         </a>
@@ -57,8 +54,7 @@ const AboutPage: React.FC = () => {
           className="flex h-[50vw] w-[50vw] flex-col items-center justify-center rounded-3xl bg-orange-400"
           href="https://t.me/danikpavlovski"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <img
             className="h-[58px] w-[58px]"
             src={TelegramLogo}

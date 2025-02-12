@@ -8,13 +8,14 @@ import utc from "dayjs/plugin/utc";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import CreateDump from "./CreatePageView";
+import { FullPageSpinner } from "@/components/shared/FullPageSpinner";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const CreateSmart: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams({ strict: false });
-  const { createChallenge } = useChallenges();
+  const { createChallenge, isCreateChallengePending } = useChallenges();
   const category = categories.find((category) =>
     category.items.some((item) => item.id === Number(id))
   );
@@ -36,7 +37,7 @@ const CreateSmart: React.FC = () => {
   useEffect(() => {
     setDuration(regularity === "everyday" ? 30 : 84);
   }, [regularity]);
-
+  console.log(isCreateChallengePending, "isCreateChallengePending");
   const handleSave = async () => {
     if (!title || title === "НАЗВАНИЕ ЗАДАНИЯ") {
       toast("Напишите название задания");
@@ -63,7 +64,7 @@ const CreateSmart: React.FC = () => {
 
     try {
       // Создаем задание
-      createChallenge({
+      await createChallenge({
         title,
         duration,
         color,
@@ -80,26 +81,29 @@ const CreateSmart: React.FC = () => {
   };
 
   return (
-    <CreateDump
-      card={card}
-      title={title}
-      setTitle={setTitle}
-      color={color}
-      setColor={setColor}
-      regularity={regularity}
-      setRegularity={setRegularity}
-      duration={duration}
-      setDuration={setDuration}
-      date={date}
-      setDate={setDate}
-      isNotifications={isNotifications}
-      setIsNotifications={setIsNotifications}
-      notifications={notifications}
-      setNotifications={setNotifications}
-      daysOfWeek={daysOfWeek}
-      setDaysOfWeek={setDaysOfWeek}
-      handleSave={handleSave}
-    />
+    <>
+      {isCreateChallengePending && <FullPageSpinner />}
+      <CreateDump
+        card={card}
+        title={title}
+        setTitle={setTitle}
+        color={color}
+        setColor={setColor}
+        regularity={regularity}
+        setRegularity={setRegularity}
+        duration={duration}
+        setDuration={setDuration}
+        date={date}
+        setDate={setDate}
+        isNotifications={isNotifications}
+        setIsNotifications={setIsNotifications}
+        notifications={notifications}
+        setNotifications={setNotifications}
+        daysOfWeek={daysOfWeek}
+        setDaysOfWeek={setDaysOfWeek}
+        handleSave={handleSave}
+      />
+    </>
   );
 };
 
