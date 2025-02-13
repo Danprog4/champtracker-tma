@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "@tanstack/react-router";
 import { useChallenges } from "@/hooks/useChallenges";
 import { getDatesForDaysOfWeek } from "@/lib/dateUtils";
 import dayjs from "dayjs";
-import { Colors } from "@/bgColors.config";
 import UpdatePageView from "./UpdatePageView";
 
 const UpdatePage: React.FC = () => {
@@ -48,21 +47,6 @@ const UpdatePage: React.FC = () => {
     }
   }, [taskId, getOneChallege, navigate]);
 
-  const handleReset = () => {
-    if (!taskId) return;
-
-    const resetTask = {
-      ...task,
-      userCheckedDates: [],
-      taskDates: taskDays,
-      challengeStartAt: dayjs().toISOString(),
-      createdAt: dayjs().toISOString(),
-    };
-
-    updateChallengeMutation({ id: Number(taskId), body: resetTask });
-    navigate({ to: "/" });
-  };
-
   const handleSave = () => {
     if (!taskId) return;
 
@@ -100,7 +84,6 @@ const UpdatePage: React.FC = () => {
       setNotifications={setNotifications}
       isNotifications={isNotifications}
       setIsNotifications={setIsNotifications}
-      handleReset={handleReset}
       handleSave={handleSave}
       checkIfChanged={checkIfChanged}
       deleteChallengeMutation={deleteChallengeMutation}

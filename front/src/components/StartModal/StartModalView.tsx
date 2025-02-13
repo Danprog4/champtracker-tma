@@ -1,7 +1,7 @@
 "use client";
 import { Calendar } from "@/components/ui/calendar";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Months } from "@/Months.config";
+import { Months } from "@/configs/Months.config";
 import dayjs, { Dayjs } from "dayjs";
 import { Drawer } from "vaul";
 
@@ -45,8 +45,7 @@ export default function StartModalView({
         className={`mt-2 flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px] ${
           disabled && "bg-gray-800"
         }`}
-        disabled={disabled}
-      >
+        disabled={disabled}>
         <span>Старт</span>
         <span className="text-gray-400">
           {startedDate ||
@@ -70,24 +69,20 @@ export default function StartModalView({
             <div className="flex flex-col items-center justify-center text-gray-300">
               <RadioGroup
                 value={tempStartTime}
-                onValueChange={setTempStartTime}
-              >
+                onValueChange={setTempStartTime}>
                 <RadioGroupItem
                   value="Now"
-                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-700 p-[10px]"
-                >
+                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-700 p-[10px]">
                   Сейчас
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="Tomorrow"
-                  className="max-h-[40px] w-[90vw] rounded-none border-b-2 border-gray-600 bg-gray-700 p-[10px]"
-                >
+                  className="max-h-[40px] w-[90vw] rounded-none border-b-2 border-gray-600 bg-gray-700 p-[10px]">
                   Завтра
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="Own date"
-                  className="flex max-h-[40px] w-[90vw] justify-between rounded-t-none bg-gray-700 p-[10px]"
-                >
+                  className="flex max-h-[40px] w-[90vw] justify-between rounded-t-none bg-gray-700 p-[10px]">
                   <span>Своя дата</span>
                   {isValidDate(tempDate) &&
                     !dayjs(tempDate).isSame(today, "day") &&
@@ -119,8 +114,7 @@ export default function StartModalView({
             </div>
             <div
               className="flex items-center justify-center pl-0 font-extrabold"
-              onClick={handleSave}
-            >
+              onClick={handleSave}>
               <div className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-yellow-300 p-5">
                 <span>ГОТОВО</span>
               </div>

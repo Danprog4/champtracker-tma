@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { categories } from "@/cards.config";
-import { DurProps } from "./DurationModalView";
+import { categories } from "@/configs/cards.config";
 import DurationModalView from "./DurationModalView";
 
 type DurPropsSmart = {
@@ -50,6 +49,12 @@ const DurationModal: React.FC<DurPropsSmart> = ({
     setIsCustomDuration(!isPreset);
   }, [duration, presetDurations]);
 
+  const isButtonDisabled = (): boolean => {
+    return (isCustomDuration && inputDuration.length === 0) || isLong;
+  };
+
+  const isEveryday = regularity === "everyday";
+
   const handleDurationChange = (value: string) => {
     setInputDuration(value);
     const weeksOrDays = Number(value);
@@ -68,6 +73,16 @@ const DurationModal: React.FC<DurPropsSmart> = ({
 
     if (!isExceedingLimit) {
       setTempDuration(durationInDays);
+    }
+  };
+
+  const handleRadioChange = (value: string) => {
+    if (value === "Own duration") {
+      setIsCustomDuration(true);
+    } else {
+      setTempDuration(Number(value));
+      setInputDuration("");
+      setIsCustomDuration(false);
     }
   };
 
@@ -114,6 +129,9 @@ const DurationModal: React.FC<DurPropsSmart> = ({
       handleDurationChange={handleDurationChange}
       handleSave={handleSave}
       handleClose={handleClose}
+      isButtonDisabled={isButtonDisabled}
+      handleRadioChange={handleRadioChange}
+      isEveryday={isEveryday}
     />
   );
 };

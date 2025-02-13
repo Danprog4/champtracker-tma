@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "@tanstack/react-router";
-import { categories } from "@/cards.config";
+import { categories } from "@/configs/cards.config";
 import CrossImg from "../../assets/images/—Pngtree—vector cross icon_4254623.png";
 
 const ChallengeView: React.FC = () => {
@@ -73,8 +73,7 @@ const ChallengeView: React.FC = () => {
           params={{
             id: card!.id.toString(),
           }}
-          className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5"
-        >
+          className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5">
           <div className="">ПРОДОЛЖИТЬ</div>
         </Link>
       </div>

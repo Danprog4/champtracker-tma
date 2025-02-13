@@ -1,4 +1,4 @@
-import { categories } from "@/cards.config";
+import { categories } from "@/configs/cards.config";
 import { useChallenges } from "@/hooks/useChallenges";
 import { getDatesForDaysOfWeek } from "@/lib/dateUtils";
 import { useNavigate, useParams } from "@tanstack/react-router";
@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import CreateDump from "./CreatePageView";
 import { FullPageSpinner } from "@/components/shared/FullPageSpinner";
+import { usePremium } from "@/hooks/usePremium";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -26,35 +27,33 @@ const CreateSmart: React.FC = () => {
   const [title, setTitle] = useState(card?.title || "");
   const [isNotifications, setIsNotifications] = useState(false);
   const [notifications, setNotifications] = useState("");
-  const [color, setColor] = useState(category?.color || "bg-pink-200");
+  const [color, setColor] = useState(category?.color || "bg-pink-300");
   const [regularity, setRegularity] = useState<"everyday" | "fewTimesAWeek">(
     "everyday"
   );
   const [duration, setDuration] = useState(regularity === "everyday" ? 30 : 84);
   const [date, setDate] = useState<Dayjs | undefined>(undefined);
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>([]);
+  const { isPremium } = usePremium();
+  const { challenges } = useChallenges();
 
   useEffect(() => {
     setDuration(regularity === "everyday" ? 30 : 84);
   }, [regularity]);
-  console.log(isCreateChallengePending, "isCreateChallengePending");
+
   const handleSave = async () => {
     if (!title || title === "НАЗВАНИЕ ЗАДАНИЯ") {
       toast("Напишите название задания");
       return;
     }
 
-    // Получаем startDate
     const startDate = date ? dayjs(date) : dayjs();
-    console.log(startDate, "startDate ");
-    console.log(dayjs(), "dayjs");
-    console.log(startDate.startOf("day") < dayjs().startOf("day"));
+
     if (startDate.startOf("day") < dayjs().startOf("day")) {
       toast("Напишите возможное время");
       return;
     }
 
-    // Получаем taskDays
     const taskDates = getDatesForDaysOfWeek(
       startDate,
       duration,
@@ -63,7 +62,6 @@ const CreateSmart: React.FC = () => {
     );
 
     try {
-      // Создаем задание
       await createChallenge({
         title,
         duration,
@@ -102,6 +100,8 @@ const CreateSmart: React.FC = () => {
         daysOfWeek={daysOfWeek}
         setDaysOfWeek={setDaysOfWeek}
         handleSave={handleSave}
+        isPremium={isPremium}
+        challenges={challenges}
       />
     </>
   );

@@ -2,10 +2,7 @@ import Slider from "@/components/ChallengesPage/Slider/Slider";
 import React from "react";
 import { Link } from "@tanstack/react-router";
 import BackImg from "../../assets/images/back-svgrepo-com (2).svg";
-import { usePremium } from "@/hooks/usePremium";
-import { BuyPremium } from "@/components/BuyPremium";
-import { CreateTaskButton } from "./TaskButton";
-import { useOnBoarding } from "@/hooks/useOnBoarding";
+import { CreateTaskButton } from "../../components/ui/TaskButton";
 
 const Challenges: React.FC = () => {
   return (

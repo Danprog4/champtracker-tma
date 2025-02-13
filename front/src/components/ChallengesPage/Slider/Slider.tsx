@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { categories } from "@/cards.config";
+import { categories } from "@/configs/cards.config";
 import { usePremium } from "@/hooks/usePremium";
 import DumpSlider from "./SliderView";
 

@@ -7,8 +7,6 @@ type ChallengeListProps = {
 };
 
 const ChallengeList = ({ challenges }: ChallengeListProps) => {
-  console.log("ChallengeList", challenges);
-
   const sortedChallenges = challenges.sort((a, b) => {
     return dayjs(a.createdAt).diff(dayjs(b.createdAt));
   });

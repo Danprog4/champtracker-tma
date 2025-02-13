@@ -7,17 +7,17 @@ export const usePrefetchQueries = () => {
 
   useEffect(() => {
     queryClient.prefetchQuery({
-      queryKey: ["onBoarding"],
+      queryKey: [getUserOnBoarding.name],
       queryFn: getUserOnBoarding,
     });
 
     queryClient.prefetchQuery({
-      queryKey: ["challenges"],
+      queryKey: [getChallenges.name],
       queryFn: getChallenges,
     });
 
     queryClient.prefetchQuery({
-      queryKey: ["premium"],
+      queryKey: [getPremium.name],
       queryFn: getPremium,
     });
   }, [queryClient]);

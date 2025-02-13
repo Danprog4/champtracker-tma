@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
-import { Colors } from "@/bgColors.config";
 import DurationModal from "@/components/DurationModal/DurationModal";
 import RegularityModal from "@/components/RegularityModal/RegularityModal";
 import StartModal from "@/components/StartModal/StartModal";
-import { Switch } from "@/components/ui/switch";
 import CrossImg from "../../assets/images/Krestiksvgpng.ru_.svg";
 import { Dayjs } from "dayjs";
+import { BuyPremium } from "@/components/BuyPremium";
+import { TelegramStar } from "@/components/shared/TelegramStar";
+import { Challenge } from "@back-types";
+import Notifications from "@/components/Notifications/Notifications";
+import Title from "@/components/Tittle/Tittle";
+import ColorsSchema from "@/components/Colors/ColorsSchema";
 
 interface CreateDumpProps {
   card: any;
@@ -27,6 +31,8 @@ interface CreateDumpProps {
   daysOfWeek: number[];
   setDaysOfWeek: (value: number[]) => void;
   handleSave: () => void;
+  isPremium: boolean;
+  challenges: Challenge[];
 }
 
 const CreateDump: React.FC<CreateDumpProps> = ({
@@ -48,6 +54,8 @@ const CreateDump: React.FC<CreateDumpProps> = ({
   daysOfWeek,
   setDaysOfWeek,
   handleSave,
+  isPremium,
+  challenges,
 }) => {
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
 
@@ -62,35 +70,10 @@ const CreateDump: React.FC<CreateDumpProps> = ({
             Новое задание
           </span>
         </div>
-        <div className="flex flex-col pl-5 text-start text-black">
-          <div className="mr-[5%] mt-4 flex justify-between text-sm">
-            <span>Название</span>
-            {title !== "" && <span>{title.length}/28</span>}
-          </div>
-          <div
-            className={`mr-[5%] mt-3 text-2xl font-extrabold uppercase ${
-              title === "НАЗВАНИЕ ЗАДАНИЯ" ? "opacity-[0.3]" : ""
-            }`}
-          >
-            <input
-              type="text"
-              className="w-full border-none bg-transparent text-black placeholder:text-gray-500 focus:outline-none"
-              value={title}
-              onChange={(e) => {
-                const inputValue = e.target.value.toUpperCase();
-                const filteredValue = inputValue.replace(
-                  /[^a-zA-Zа-яА-Я\s]/g,
-                  ""
-                );
-                setTitle(filteredValue);
-              }}
-              placeholder="НАЗВАНИЕ ЗАДАНИЯ"
-            />
-          </div>
-        </div>
+        <Title title={title} setTitle={setTitle} />
       </div>
-      <div className="flex flex-col pl-5 pt-5 text-start">
-        <span className="mb-2 mt-2 text-gray-300">Условия</span>
+      <div className="mt-2 flex flex-col pl-5 pt-4 text-start">
+        <span className="mb-2 text-gray-300">Условия</span>
       </div>
       <div className="flex flex-col items-center justify-center">
         <RegularityModal
@@ -107,56 +90,33 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         />
         <StartModal date={date} setDate={setDate} disabled={false} />
       </div>
-      <div className="mt-4 flex flex-col pl-5 pt-4 text-start">
-        <span className="mb-2 text-gray-300">Уведомления</span>
-      </div>
-      <div className="flex flex-col items-center justify-center gap-2">
-        <div className="flex h-[44px] w-[90vw] items-center justify-between rounded-md bg-gray-700 p-[10px]">
-          <span>Включить уведомления</span>
-          <Switch onClick={() => setIsNotifications(!isNotifications)} />
-        </div>
-        {isNotifications && (
-          <div className="flex h-[60px] w-[90vw] flex-col justify-center rounded-md bg-gray-700 p-[10px]">
-            <span>Текст для уведомления</span>
-            <input
-              value={notifications}
-              className="border-none bg-transparent text-gray-300 placeholder:text-gray-500 focus:outline-none"
-              placeholder="Мотивируй себя"
-              onChange={(e) => {
-                const inputValue = e.target.value;
-                const filteredValue = inputValue.replace(
-                  /[^a-zA-Zа-яА-Я\s]/g,
-                  ""
-                );
-                setNotifications(filteredValue);
-              }}
-            />
-          </div>
-        )}
-      </div>
-      <div className="mt-4 flex flex-col pl-5 pt-4 text-start">
-        <span className="mb-2 text-gray-300">Цвет</span>
-      </div>
-      <div className="mb-20 grid grid-cols-5 gap-0">
-        {Colors.map((classColor: string) => (
-          <div
-            key={classColor}
-            className={`h-[78px] w-[78px] cursor-pointer rounded-full ${classColor} ${
-              color === classColor ? "border-4 border-white" : ""
-            }`}
-            onClick={() => setColor(classColor)}
-          ></div>
-        ))}
-      </div>
+      <Notifications
+        notifications={notifications}
+        isNotifications={isNotifications}
+        setIsNotifications={setIsNotifications}
+        setNotifications={setNotifications}
+      />
+      <ColorsSchema color={color} setColor={setColor} />
       <div className="flex items-center justify-center pl-0 font-extrabold">
-        <button
-          onClick={handleSave}
-          className={`fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5 ${
-            title.length === 0 ? "bg-gray-600" : ""
-          }`}
-        >
-          СОХРАНИТЬ
-        </button>
+        {isPremium || challenges.length < 1 ? (
+          <button
+            onClick={handleSave}
+            className={`fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5 ${
+              title.length === 0 ? "bg-gray-600" : ""
+            }`}>
+            СОХРАНИТЬ
+          </button>
+        ) : (
+          <BuyPremium>
+            <button
+              className={`fixed hover:opacity-90 bottom-[10px] flex h-[45px] w-[95vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5 ${
+                title.length === 0 ? "bg-gray-600" : ""
+              }`}>
+              <span>ПРЕМИУМ</span>
+              <TelegramStar className="-translate-y-0.5" />
+            </button>
+          </BuyPremium>
+        )}
       </div>
     </div>
   );

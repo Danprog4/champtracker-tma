@@ -23,12 +23,12 @@ const YourChallengesPage = () => {
             variant="ghost"
             className="fixed left-4 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
             <TelegramStar />
-            <span>Premium</span>
+            <span>Премиум</span>
           </Button>
         </BuyPremium>
       ) : (
-        <div className="fixed left-4 bottom-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 font-medium">
-          You have Premium! 🌟
+        <div className="fixed flex flex-nowrap gap-1 left-4 bottom-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 font-medium">
+          У вас есть премиум! <TelegramStar className="translate-y-0.5" />
         </div>
       )}
     </div>

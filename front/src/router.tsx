@@ -3,7 +3,6 @@ import {
   createRoute,
   createRouter,
   Link,
-  redirect,
   useNavigate,
 } from "@tanstack/react-router";
 import { Navigate } from "@tanstack/react-router";
@@ -32,10 +31,11 @@ import ChallengeInfo from "./pages/ChallengeInfo/ChallengeInfo";
 import UpdatePageContainer from "./pages/UpdatePage/UpdatePage";
 import { CarouselDApiDemo } from "./pages/CarouselPage/CarouselPage";
 import { useOnBoarding } from "./hooks/useOnBoarding";
-import { getUserOnBoarding } from "./api/challenge";
 import { useChallenges } from "./hooks/useChallenges";
-import { lazy, useEffect } from "react";
+import { useEffect } from "react";
 import YourChallengesPage from "./pages/YourChallenges/YourChallengesPage";
+
+// I don't have fucking idea how make it good (not govno code)
 
 const rootRoute = createRootRoute({
   component: App,
@@ -66,12 +66,13 @@ const indexRoute = createRoute({
       }
     }, [isOnBoarding, navigate]);
 
-    // Show YourChallengesPage if there are challenges, otherwise show InitiallPage
-    if (challenges.length > 0) {
-      return <YourChallengesPage />;
+    if (challenges.length < 1 && isOnBoarding === true) {
+      navigate({ to: "/initiall" });
     }
 
-    return <InitiallPage />;
+    // Show YourChallengesPage if there are challenges, otherwise show InitiallPage
+
+    return <YourChallengesPage />;
   },
 });
 
@@ -79,6 +80,21 @@ const newRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "new",
   component: Challenges,
+});
+
+const initiallRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "initiall",
+
+  component: () => {
+    const navigate = useNavigate();
+    const { challenges } = useChallenges();
+    if (challenges.length > 0) {
+      navigate({ to: "/" });
+    }
+
+    return <InitiallPage />;
+  },
 });
 
 const cardRoute = createRoute({
@@ -121,7 +137,7 @@ const updateRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "update/$taskId",
   component: UpdatePageContainer,
-  errorComponent: (error) => {
+  errorComponent: () => {
     return <Navigate to="/" />;
   },
 });
@@ -155,6 +171,7 @@ const routeTree = rootRoute.addChildren([
   challengeRoute,
   updateRoute,
   carouselPage,
+  initiallRoute,
 ]);
 
 // Create the router

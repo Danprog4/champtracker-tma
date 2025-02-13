@@ -46,18 +46,15 @@ export default function RegularityModalView({
             <div className="flex flex-col items-center justify-center text-gray-300">
               <RadioGroup
                 defaultValue={tempRegularity}
-                onValueChange={handleChangeRegularity}
-              >
+                onValueChange={handleChangeRegularity}>
                 <RadioGroupItem
                   value="everyday"
-                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-700 p-[10px]"
-                >
+                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-700 p-[10px]">
                   Каждый день
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="fewTimesAWeek"
-                  className="max-h-[40px] w-[90vw] rounded-t-none bg-gray-700 p-[10px]"
-                >
+                  className="max-h-[40px] w-[90vw] rounded-t-none bg-gray-700 p-[10px]">
                   Несколько раз в неделю
                 </RadioGroupItem>
               </RadioGroup>
@@ -70,36 +67,24 @@ export default function RegularityModalView({
                     "Четверг",
                     "Пятница",
                     "Суббота",
+                    "Воскресенье",
                   ].map((dayName, index) => {
-                    const day = index + 1;
+                    const day = index === 6 ? 0 : index + 1;
                     return (
                       <div
                         key={day}
-                        className="flex h-[40px] w-[90vw] items-center border-b-2 border-gray-600 bg-gray-700 p-[10px] text-sm font-medium"
-                      >
+                        className="flex h-[40px] w-[90vw] items-center border-b-2 border-gray-600 bg-gray-700 p-[10px] text-sm font-medium">
                         <div
                           className={cn(
                             "text-gray-300",
                             tempDaysOfWeek.includes(day) && "text-yellow-500"
                           )}
-                          onClick={() => handleToggleDay(day, dayName)}
-                        >
+                          onClick={() => handleToggleDay(day, dayName)}>
                           {dayName}
                         </div>
                       </div>
                     );
                   })}
-                  <div className="flex h-[40px] w-[90vw] items-center border-b-2 border-gray-600 bg-gray-700 p-[10px] text-sm font-medium">
-                    <div
-                      className={cn(
-                        "text-gray-300",
-                        tempDaysOfWeek.includes(0) && "text-yellow-500"
-                      )}
-                      onClick={() => handleToggleDay(0, "Воскресенье")}
-                    >
-                      Воскресенье
-                    </div>
-                  </div>
                 </div>
               )}
               {tempDaysOfWeek.length > 0 && tempDaysOfWeek.length <= 6 && (
@@ -111,16 +96,14 @@ export default function RegularityModalView({
             </div>
             <div
               className="flex items-center justify-center pl-0 font-extrabold"
-              onClick={handleSaveChanges}
-            >
+              onClick={handleSaveChanges}>
               <div className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-yellow-300 p-5">
                 <span
                   className={`${
                     tempDaysOfWeek.length === 0 &&
                     tempRegularity !== "everyday" &&
                     "text-gray-500"
-                  }`}
-                >
+                  }`}>
                   ГОТОВО
                 </span>
               </div>

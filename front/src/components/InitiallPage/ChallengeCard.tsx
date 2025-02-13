@@ -1,10 +1,11 @@
 import { useChallenges } from "@/hooks/useChallenges";
 import { calculateDaysSinceStart } from "@/lib/dateUtils";
-import { Months } from "@/Months.config";
+import { Months } from "@/configs/Months.config";
 import { Challenge } from "@back-types";
 import { Link } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import CheckImg from "../../assets/images/icons8-галочка.svg";
+import { DateInfo } from "./DateInfo";
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -12,52 +13,49 @@ type ChallengeCardProps = {
 };
 
 const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
-  const startDate = dayjs(challenge.challengeStartAt).startOf("day");
-  const daysSinceStart = calculateDaysSinceStart(challenge.taskDates);
+  const {
+    id,
+    title,
+    challengeStartAt,
+    color,
+    duration,
+    regularity,
+    taskDates,
+    userCheckedDates,
+  } = challenge;
   const { checkDay } = useChallenges();
+
+  const startDate = dayjs(challengeStartAt).startOf("day");
+  const daysSinceStart = calculateDaysSinceStart(taskDates);
+  const isDayChecked = userCheckedDates?.some((date) =>
+    dayjs(date).isSame(dayjs(), "day")
+  );
 
   const handleDayClick = (challengeId: string, dayCount: number) => {
     checkDay(challengeId, dayCount);
   };
 
-  const isDayChecked = challenge.userCheckedDates?.some((date) =>
-    dayjs(date).isSame(dayjs(), "day")
-  );
-
-  console.log(startDate, "startdate");
-  console.log(dayjs().startOf("day"));
+  const formattedStartDate = `${startDate.date()} ${Months[startDate.month()]}`;
+  const firstTaskDate = taskDates?.[0] ? dayjs(taskDates[0]) : null;
 
   return (
     <Link
       to={`/challenge/$taskId`}
-      params={{
-        taskId: challenge.id.toString(),
-      }}
-      className={`${
-        challenge.color
-      } flex h-[16vh] w-[90vw] items-center justify-between rounded-lg p-3 pr-0 ${
-        isLast && "mb-10"
-      }`}>
+      params={{ taskId: id.toString() }}
+      className={`${color} flex h-[16vh] w-[90vw] items-center justify-between rounded-lg p-3 pr-0 ${isLast ? "mb-10" : ""}`}>
       <div className="flex flex-col">
-        <span className="text-lg font-extrabold text-black">
-          {challenge.title}
-        </span>
+        <span className="text-lg font-extrabold text-black">{title}</span>
         <div className="mt-5 flex">
           <span className="text-5xl font-extrabold text-black">
-            {daysSinceStart < 0 ? 0 : daysSinceStart}
+            {Math.max(0, daysSinceStart)}
           </span>
           <div className="ml-1 mt-3 flex-col text-sm font-medium text-black">
-            <div className="mb-[-7px]">
-              {`${startDate.date()} `}
-              {Months[startDate.month() + 1]}
-            </div>
+            <div className="mb-[-7px]">{formattedStartDate}</div>
             <div>
               /
-              {`${
-                challenge.regularity === "everyday"
-                  ? challenge.duration + " дн."
-                  : challenge.duration / 7 + " нед."
-              }`}
+              {regularity === "everyday"
+                ? `${duration} дн.`
+                : `${duration / 7} нед.`}
             </div>
           </div>
         </div>
@@ -68,41 +66,22 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-
-            handleDayClick(challenge.id.toString(), daysSinceStart - 1);
+            handleDayClick(id.toString(), daysSinceStart - 1);
           }}>
           <div className="text-md font-extrabold text-white">
             {isDayChecked ? (
               <img src={CheckImg} alt="check_image" className="w-[30px]" />
+            ) : daysSinceStart <= 0 ? (
+              <DateInfo label="НАЧАЛО" date={formattedStartDate} />
+            ) : regularity !== "everyday" &&
+              !startDate.isSame(dayjs().startOf("day")) &&
+              firstTaskDate ? (
+              <DateInfo
+                label="ПЕРВЫЙ ДЕНЬ"
+                date={`${firstTaskDate.date()} ${Months[firstTaskDate.month()]}`}
+              />
             ) : (
-              <span>
-                {startDate > dayjs() ? (
-                  <div className="flex flex-col text-center">
-                    <span className="text-xs font-light leading-3">НАЧАЛО</span>
-                    <span>
-                      {`${startDate.date()} `}
-                      {Months[startDate.month()]}
-                    </span>
-                  </div>
-                ) : (
-                  <span>
-                    {challenge.regularity !== "everyday" &&
-                    startDate !== dayjs().startOf("day") ? (
-                      <div className="flex flex-col text-center">
-                        <span className="text-xs font-light leading-3">
-                          ПЕРВЫЙ ДЕНЬ
-                        </span>
-                        <span>
-                          {`${dayjs(challenge.taskDates[0]).date()} `}
-                          {Months[dayjs(challenge.taskDates[0]).month()]}
-                        </span>
-                      </div>
-                    ) : (
-                      <span>ГОТОВО</span>
-                    )}
-                  </span>
-                )}
-              </span>
+              <span>ГОТОВО</span>
             )}
           </div>
         </div>

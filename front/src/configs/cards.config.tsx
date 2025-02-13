@@ -1,13 +1,13 @@
-import ReadingImg from "./assets/images/081e0160-dffa-11ef-bf7c-02Reading42ac140003.jpg";
-import PianoImg from "./assets/images/3becdfd0-dffa-11ef-ba28-02Piano42ac140003.jpg";
-import GymImg from "./assets/images/10703a90-e085-11ef-8b9f-0242ac140003.jpg";
-import StretchingImg from "./assets/images/321ca710-e0a5-11ef-88e0-0242ac140003.jpg";
-import RunningImg from "./assets/images/4c61daa0-dffe-11ef-9334-0242aRunningc140003.jpg";
-import CookingImg from "./assets/images/9cbf1c80-dffb-11ef-9e4d-02Cooking42ac140003.jpg";
-import DrawingImg from "./assets/images/2db2be70-dffc-11ef-861b-0242ac140Drawing003.jpg";
-import SleepImg from "./assets/images/f4da4770-dffc-11ef-923b-0242acSleeping140003.jpg";
-import BicycleImg from "./assets/images/Bicycledffd-11ef-8e41-0242ac140003.jpg";
-import BlogImg from "./assets/images/Blogc140003.jpg";
+import ReadingImg from "../assets/images/081e0160-dffa-11ef-bf7c-02Reading42ac140003.jpg";
+import PianoImg from "../assets/images/3becdfd0-dffa-11ef-ba28-02Piano42ac140003.jpg";
+import GymImg from "../assets/images/10703a90-e085-11ef-8b9f-0242ac140003.jpg";
+import StretchingImg from "../assets/images/321ca710-e0a5-11ef-88e0-0242ac140003.jpg";
+import RunningImg from "../assets/images/4c61daa0-dffe-11ef-9334-0242aRunningc140003.jpg";
+import CookingImg from "../assets/images/9cbf1c80-dffb-11ef-9e4d-02Cooking42ac140003.jpg";
+import DrawingImg from "../assets/images/2db2be70-dffc-11ef-861b-0242ac140Drawing003.jpg";
+import SleepImg from "../assets/images/f4da4770-dffc-11ef-923b-0242acSleeping140003.jpg";
+import BicycleImg from "../assets/images/Bicycledffd-11ef-8e41-0242ac140003.jpg";
+import BlogImg from "../assets/images/Blogc140003.jpg";
 
 interface Card {
   id: number;
