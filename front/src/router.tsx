@@ -34,6 +34,7 @@ import { useOnBoarding } from "./hooks/useOnBoarding";
 import { useChallenges } from "./hooks/useChallenges";
 import { useEffect } from "react";
 import YourChallengesPage from "./pages/YourChallenges/YourChallengesPage";
+import { FullPageSpinner } from "./components/shared/FullPageSpinner";
 
 // I don't have fucking idea how make it good (not govno code)
 
@@ -54,24 +55,16 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
+  pendingComponent: FullPageSpinner,
   component: () => {
-    const { isOnBoarding } = useOnBoarding();
-    const navigate = useNavigate();
     const { challenges } = useChallenges();
-
-    // Redirect to '/welcome' if onBoarding is false
-    useEffect(() => {
-      if (isOnBoarding === false) {
-        navigate({ to: "/welcome" });
-      }
-    }, [isOnBoarding, navigate]);
-
-    if (challenges.length < 1 && isOnBoarding === true) {
-      navigate({ to: "/initiall" });
+    const { isOnBoarding } = useOnBoarding();
+    if (!isOnBoarding) {
+      return <Navigate to="/welcome" />;
     }
-
-    // Show YourChallengesPage if there are challenges, otherwise show InitiallPage
-
+    if (challenges.length === 0) {
+      return <Navigate to="/initiall" />;
+    }
     return <YourChallengesPage />;
   },
 });
@@ -86,15 +79,7 @@ const initiallRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "initiall",
 
-  component: () => {
-    const navigate = useNavigate();
-    const { challenges } = useChallenges();
-    if (challenges.length > 0) {
-      navigate({ to: "/" });
-    }
-
-    return <InitiallPage />;
-  },
+  component: InitiallPage,
 });
 
 const cardRoute = createRoute({
@@ -145,18 +130,7 @@ const updateRoute = createRoute({
 const carouselPage = createRoute({
   getParentRoute: () => rootRoute,
   path: "/welcome",
-  component: () => {
-    const { isOnBoarding } = useOnBoarding();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      if (isOnBoarding === true) {
-        navigate({ to: "/" });
-      }
-    }, [isOnBoarding, navigate]);
-
-    return <CarouselDApiDemo />;
-  },
+  component: CarouselDApiDemo,
 });
 
 // Build the route tree by adding children on the root route

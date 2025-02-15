@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { Challenge } from "@back-types";
 import { DateInfo } from "../DateInfo";
 import CheckImg from "../../../assets/images/icons8-галочка.svg";
 

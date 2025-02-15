@@ -40,9 +40,9 @@ app.get('/getOnBoarding', async (c) => {
 app.put('/updateOnBoarding', async (c) => {
   const user = await getValidatedUser(c.req);
 
-  await updateOnBoarding(user.id, true);
+  const status =  await updateOnBoarding(user.id, true);
 
-  return c.json({ success: true, message: "OnBoarding status updated" });
+  return c.json( status );
 })
 
 app.get('/createInvoice', async (c) => {

@@ -1,20 +1,37 @@
 import Slider from "@/components/ChallengesPage/Slider/Slider";
 import React from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useRouter } from "@tanstack/react-router";
 import BackImg from "../../assets/images/back-svgrepo-com (2).svg";
 import { CreateTaskButton } from "../../components/ui/TaskButton";
+import { useChallenges } from "@/hooks/useChallenges";
+import { useOnBoarding } from "@/hooks/useOnBoarding";
 
 const Challenges: React.FC = () => {
+  const router = useRouter();
+  const { challenges } = useChallenges();
+  const { isOnBoarding } = useOnBoarding();
+  const navigate = useNavigate();
   return (
     <div className="relative flex flex-col items-start">
       <div className="fixed z-10 flex w-[100vw] justify-between bg-black pb-2 pl-[16px] pr-5 pt-10">
-        <Link to="/">
+        <button
+          onClick={() => {
+            if (!isOnBoarding) {
+              navigate({ to: "/welcome" });
+            }
+            if (isOnBoarding && challenges.length === 0) {
+              navigate({ to: "/initiall" });
+            }
+            if (isOnBoarding && challenges.length > 0) {
+              navigate({ to: "/" });
+            }
+          }}>
           <img
             src={BackImg}
             className="h-[30px] w-[30px] object-contain"
             alt="Back"
           />
-        </Link>
+        </button>
       </div>
 
       <div className="mt-20 flex flex-col px-5">

@@ -12,7 +12,7 @@ export const usePremium = () => {
   const queryClient = useQueryClient();
 
   const { data: premium } = useSuspenseQuery({
-    queryKey: ['premium'],
+    queryKey: ['hiu'],
     queryFn: getPremium,
   });
 
@@ -38,7 +38,7 @@ export const usePremium = () => {
     on('invoice_closed', (payment: { slug: string; status: string }) => {
       if (payment.status === 'paid') {
         toast.success('Payment successful', { id: 'payment-successful' });
-        queryClient.invalidateQueries({ queryKey: ['premium'] });
+        queryClient.invalidateQueries({ queryKey: [getPremium.name] });
       } else if (
         payment.status === 'cancelled' ||
         payment.status === 'failed'

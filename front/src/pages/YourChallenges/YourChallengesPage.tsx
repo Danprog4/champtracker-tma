@@ -1,6 +1,5 @@
 import { BuyPremium } from "@/components/BuyPremium";
 import ChallengeList from "@/components/InitiallPage/ChallengeList";
-import EmptyState from "@/components/InitiallPage/EmpyState";
 import Header from "@/components/InitiallPage/Header";
 import { TelegramStar } from "@/components/shared/TelegramStar";
 import { Button } from "@/components/ui/button";

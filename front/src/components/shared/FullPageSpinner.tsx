@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 export const FullPageSpinner = () => {
   const [show, setShow] = useState(false);
 
+  console.log("beg");
+
   // this is a good pattern, чтобы ничего не моргало на быстром инете йоу
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,6 +16,8 @@ export const FullPageSpinner = () => {
   }, []);
 
   if (!show) return null;
+
+  console.log("add of the spinner");
 
   return (
     <div className="flex h-screen items-center justify-center">

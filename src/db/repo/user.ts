@@ -49,8 +49,11 @@ export const getOnBoarding = async (id: number): Promise<boolean> => {
 }
 
 export const updateOnBoarding = async (id: number, onBoarding: boolean) => {
-  await db
+  const users = await db
     .update(usersTable)
     .set({ onBoarding })
-    .where(eq(usersTable.id, id));
+    .where(eq(usersTable.id, id))
+    .returning({ onBoarding: usersTable.onBoarding });
+
+    return users[0].onBoarding;
 };

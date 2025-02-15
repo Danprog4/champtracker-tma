@@ -1,4 +1,4 @@
-import { CreateChallengeReq, UpdateChallenge } from '@back-types';
+import { Challenge, CreateChallengeReq, UpdateChallenge } from '@back-types';
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import axios from 'axios';
 
@@ -26,7 +26,7 @@ export const getUserOnBoarding = async () => {
       'x-init-data': initDataRaw,
     },
   });
-  console.log(response.data, 'api getOnBoarding()')
+
   return response.data;
 };
 
@@ -43,7 +43,7 @@ export const updateOnBoarding = async (onBoarding: boolean) => {
     }
   );
 
-  return response.data;
+  return response.data as boolean;
 };
 
 export const getPremium = async () => {
@@ -84,7 +84,7 @@ export const createNewChallenge = async (body: CreateChallengeReq) => {
     },
   });
 
-  return response.data;
+  return response.data as Challenge;
 };
 
 export const updateChallenge = async (body: UpdateChallenge, id: number) => {

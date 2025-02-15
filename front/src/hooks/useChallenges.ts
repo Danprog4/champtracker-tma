@@ -5,7 +5,6 @@ import {
   updateChallenge,
 } from '@/api/challenge';
 import { dayBeforeToday } from '@/lib/dateUtils';
-import { queryKeys } from '@/query-keys';
 import { Challenge, UpdateChallenge } from '@back-types';
 import {
   useMutation,
@@ -19,15 +18,16 @@ export const useChallenges = () => {
   const navigate = useNavigate();
 
   const { data: challenges } = useSuspenseQuery<Challenge[]>({
-    queryKey: [queryKeys.challenges],
+    queryKey: [getChallenges.name],
     queryFn: getChallenges,
   });
 
-  const { mutate: createChallenge, isPending: isCreateChallengePending } =
+  const { mutateAsync: createChallenge, isPending: isCreateChallengePending } =
     useMutation({
       mutationFn: createNewChallenge,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [queryKeys.challenges] });
+      onSuccess: (data) => {queryClient.setQueryData([getChallenges.name], (old: Challenge[] = []) => {
+        return [...old, data]
+      })
       },
     });
 
@@ -39,7 +39,7 @@ export const useChallenges = () => {
       updateChallenge(body, id),
     onSuccess: (updatedChallenge) => {
       queryClient.setQueryData(
-        [queryKeys.challenges],
+        [getChallenges.name],
         (old: Challenge[] = []) => {
           return old.map((ch) =>
             ch.id === updatedChallenge.id ? updatedChallenge : ch,
@@ -56,7 +56,7 @@ export const useChallenges = () => {
     mutationFn: (challengeId: number) => deleteChallenge(challengeId),
     onSuccess: (deletedChallenge: { id: number }) => {
       queryClient.setQueryData(
-        [queryKeys.challenges],
+        [getChallenges.name],
         (old: Challenge[] = []) => {
           return old.filter((ch) => ch.id !== deletedChallenge.id);
         },

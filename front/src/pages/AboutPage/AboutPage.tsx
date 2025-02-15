@@ -4,7 +4,6 @@ import GitHubLogo from "../../assets/images/GitHub-Logo.wine.svg";
 import TelegramLogo from "../../assets/images/telegram-svgrepo-com (3).svg";
 import CopyRightLogo from "../../assets/images/5a369c1a2cfcd0.4577110515135283461843.png";
 import { Link } from "@tanstack/react-router";
-import { toast } from "sonner";
 import { BuyPremium } from "@/components/BuyPremium";
 import { usePremium } from "@/hooks/usePremium";
 import { Button } from "@/components/ui/button";
@@ -37,8 +36,8 @@ const AboutPage: React.FC = () => {
           </Button>
         </BuyPremium>
       ) : (
-        <div className="fixed left-4 bottom-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 font-medium">
-          You have Premium! 🌟
+        <div className="fixed flex flex-nowrap left-4 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
+          У вас есть премиум! <TelegramStar className="translate-y-0.5" />
         </div>
       )}
       <div className="flex">

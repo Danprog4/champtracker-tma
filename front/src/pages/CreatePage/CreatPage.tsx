@@ -71,8 +71,8 @@ const CreateSmart: React.FC = () => {
         taskDates,
         challengeStartAt: dayjs(startDate).toISOString(),
       });
-      toast("Задание успешно сохранено!");
       navigate({ to: "/" });
+      toast("Задание успешно сохранено!");
     } catch (error) {
       toast("Ошибка при сохранении задания");
     }

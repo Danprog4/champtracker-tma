@@ -8,16 +8,15 @@ import {
 export const useOnBoarding = () => {
   const queryClient = useQueryClient();
 
-  // Fetch user onboarding status
   const { data: onBoarding } = useSuspenseQuery({
-    queryKey: ["onBoarding"],
+    queryKey: [getUserOnBoarding.name],
     queryFn: getUserOnBoarding,
   });
 
   const mutation = useMutation({
     mutationFn: (newStatus: boolean) => updateOnBoarding(newStatus),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["onBoarding"] });
+    onSuccess: (data) => {
+      queryClient.setQueryData([getUserOnBoarding.name], data);
     },
   });
 

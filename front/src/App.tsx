@@ -9,9 +9,7 @@ function App() {
 
   return (
     <div className="relative h-screen overflow-y-scroll rounded-lg bg-black text-white shadow-lg">
-      <Suspense fallback={<FullPageSpinner />}>
-        <Outlet />
-      </Suspense>
+      <Outlet />
       <Toaster position="top-center" />
     </div>
   );
