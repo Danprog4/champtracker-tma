@@ -51,8 +51,6 @@ export default function StartModal({
     );
   };
 
-  console.log(tempDate);
-
   return (
     <StartModalView
       isOpen={isOpen}

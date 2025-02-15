@@ -116,3 +116,27 @@ export const getGlobalDayIndex = (
 ): number => {
   return taskDates.indexOf(date);
 };
+
+export const getNextAvailableDay = (challenge: Challenge): Dayjs | null => {
+  // Only process challenges with fewTimesAWeek regularity
+  if (challenge.regularity !== "fewTimesAWeek" || !challenge.daysOfWeek) {
+    return null;
+  }
+
+  const today = dayjs().startOf("day");
+  let nextDate = today;
+
+  // Look through the next 7 days to find the next available day
+  for (let i = 0; i < 7; i++) {
+    const checkDate = today.add(i, "day");
+    // In JavaScript, Sunday is 0, but in our data Sunday is 7
+    let dayOfWeek = checkDate.day();
+
+    if (challenge.daysOfWeek.includes(dayOfWeek)) {
+      nextDate = checkDate;
+      break;
+    }
+  }
+
+  return nextDate;
+};

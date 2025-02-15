@@ -1,13 +1,12 @@
 import Slider from "@/components/ChallengesPage/Slider/Slider";
 import React from "react";
-import { Link, useNavigate, useRouter } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import BackImg from "../../assets/images/back-svgrepo-com (2).svg";
 import { CreateTaskButton } from "../../components/ui/TaskButton";
 import { useChallenges } from "@/hooks/useChallenges";
 import { useOnBoarding } from "@/hooks/useOnBoarding";
 
 const Challenges: React.FC = () => {
-  const router = useRouter();
   const { challenges } = useChallenges();
   const { isOnBoarding } = useOnBoarding();
   const navigate = useNavigate();

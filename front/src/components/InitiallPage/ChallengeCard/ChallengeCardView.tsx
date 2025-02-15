@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { DateInfo } from "../DateInfo";
 import CheckImg from "../../../assets/images/icons8-галочка.svg";
+import { Dayjs } from "dayjs";
 
 type ChallengeCardUIProps = {
   title: string;
@@ -20,6 +21,8 @@ type ChallengeCardUIProps = {
   onCheckDay: () => void;
   challengeId: string;
   Days: string[];
+  nextAvailableDay: Dayjs | null;
+  formattedNextAvailableDay: string;
 };
 
 export const ChallengeCardUI = ({
@@ -40,7 +43,10 @@ export const ChallengeCardUI = ({
   challengeId,
   Days,
   formattedTodayDate,
+  nextAvailableDay,
+  formattedNextAvailableDay,
 }: ChallengeCardUIProps) => {
+  console.log(nextAvailableDay, "nextAvailableDay");
   return (
     <Link
       to={`/challenge/$taskId`}
@@ -66,32 +72,30 @@ export const ChallengeCardUI = ({
             </div>
           </div>
         </div>
-        {!isDayAvailable && !startDateIsAfterToday && (
-          <div className="text-lg font-bold text-black mt-6 pr-4">
-            {daysOfWeek &&
-              daysOfWeek.map((dayIndex) => Days[dayIndex]).join("/")}
-          </div>
-        )}
       </div>
-      {shouldRenderCircle && (
-        <div
-          className="relative flex aspect-square h-[16vh] items-center justify-center gap-2 rounded-full bg-black"
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            onCheckDay();
-          }}>
-          <div className="text-md font-extrabold text-white">
-            {isDayChecked ? (
-              <img src={CheckImg} alt="check_image" className="w-[30px]" />
-            ) : startDateIsAfterToday ? (
-              <DateInfo label="НАЧАЛО" date={formattedStartDate} />
-            ) : (
-              <span>ГОТОВО</span>
-            )}
-          </div>
+
+      <div
+        className="relative flex aspect-square h-[16vh] items-center justify-center gap-2 rounded-full bg-black"
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onCheckDay();
+        }}>
+        <div className="text-md font-extrabold text-white flex justify-center items-center">
+          {isDayChecked ? (
+            <img src={CheckImg} alt="check_image" className="w-[30px]" />
+          ) : startDateIsAfterToday ? (
+            <DateInfo label="НАЧАЛО" date={formattedStartDate} />
+          ) : isDayAvailable ? (
+            <span>ГОТОВО</span>
+          ) : (
+            <DateInfo
+              label="СЛЕДУЮЩИЙ ДЕНЬ"
+              date={formattedNextAvailableDay || ""}
+            />
+          )}
         </div>
-      )}
+      </div>
     </Link>
   );
 };

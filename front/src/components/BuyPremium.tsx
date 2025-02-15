@@ -60,8 +60,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                 <Button
                   onClick={handleBuyPremium}
                   disabled={isBuyingPending}
-                  className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90"
-                >
+                  className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90">
                   {isBuyingPending ? (
                     <span>Buying...</span>
                   ) : (

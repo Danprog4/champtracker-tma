@@ -1,7 +1,7 @@
 "use client";
 import { Calendar } from "@/components/ui/calendar";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Months } from "@/configs/Months.config";
+import { Months } from "@/configs/months.config";
 import dayjs, { Dayjs } from "dayjs";
 import { Drawer } from "vaul";
 

@@ -1,6 +1,10 @@
 import { useChallenges } from "@/hooks/useChallenges";
-import { calculateDaysSinceStart, getGlobalDayIndex } from "@/lib/dateUtils";
-import { Months } from "@/configs/Months.config";
+import {
+  calculateDaysSinceStart,
+  getGlobalDayIndex,
+  getNextAvailableDay,
+} from "@/lib/dateUtils";
+import { Months } from "@/configs/months.config";
 import { Challenge } from "@back-types";
 import dayjs from "dayjs";
 import { ChallengeCardUI } from "./ChallengeCardView";
@@ -31,6 +35,7 @@ export const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
     dayjs(date).isSame(dayjs(), "day")
   );
   const formattedStartDate = `${startDate.date()} ${Months[startDate.month()]}`;
+
   const formattedTodayDate = `${dayjs().date()} ${Months[dayjs().month()]}`;
   const isDayAvailable = taskDates.some((date) =>
     dayjs(date).startOf("day").isSame(dayjs().startOf("day"))
@@ -47,6 +52,10 @@ export const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
     Math.floor(daysSinceStart / 7) === 0 ? 1 : Math.ceil(daysSinceStart / 7);
   const Days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
   const maxDaysSinceStart = Math.max(0, daysSinceStart);
+  const nextAvailableDay = getNextAvailableDay(challenge);
+  const formattedNextAvailableDay = nextAvailableDay
+    ? `${nextAvailableDay.date()} ${Months[nextAvailableDay.month()]}`
+    : "";
 
   const handleCheckDay = () => {
     checkDay(id.toString(), globalDayIndex);
@@ -71,6 +80,8 @@ export const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
       onCheckDay={handleCheckDay}
       challengeId={id.toString()}
       Days={Days}
+      nextAvailableDay={nextAvailableDay}
+      formattedNextAvailableDay={formattedNextAvailableDay}
     />
   );
 };

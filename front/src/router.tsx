@@ -32,11 +32,8 @@ import UpdatePageContainer from "./pages/UpdatePage/UpdatePage";
 import { CarouselDApiDemo } from "./pages/CarouselPage/CarouselPage";
 import { useOnBoarding } from "./hooks/useOnBoarding";
 import { useChallenges } from "./hooks/useChallenges";
-import { useEffect } from "react";
 import YourChallengesPage from "./pages/YourChallenges/YourChallengesPage";
 import { FullPageSpinner } from "./components/shared/FullPageSpinner";
-
-// I don't have fucking idea how make it good (not govno code)
 
 const rootRoute = createRootRoute({
   component: App,
