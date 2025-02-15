@@ -1,5 +1,5 @@
 import { Challenge } from "@back-types";
-import ChallengeCard from "./ChallengeCard";
+import { ChallengeCard } from "./ChallengeCard/ChallengeCard";
 import dayjs from "dayjs";
 
 type ChallengeListProps = {

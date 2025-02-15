@@ -14,9 +14,7 @@ const YourChallengesPage = () => {
   return (
     <div className="flex h-screen flex-col">
       <Header />
-
       <ChallengeList challenges={challenges} />
-
       {!isPremium ? (
         <BuyPremium>
           <Button
