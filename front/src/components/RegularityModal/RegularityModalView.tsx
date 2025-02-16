@@ -27,7 +27,10 @@ export default function RegularityModalView({
   handleClose,
 }: RegularityModalViewProps) {
   return (
-    <Drawer.Root open={isOpen} onOpenChange={setIsOpen} onClose={handleClose}>
+    <Drawer.Root
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      onClose={handleSaveChanges}>
       <Drawer.Trigger className="flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px]">
         <span>Регулярность</span>
         <span className="text-gray-400">

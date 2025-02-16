@@ -4,7 +4,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import { on, openInvoice } from '@telegram-apps/sdk';
+import { on } from '@telegram-apps/sdk';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 
@@ -12,7 +12,7 @@ export const usePremium = () => {
   const queryClient = useQueryClient();
 
   const { data: premium } = useSuspenseQuery({
-    queryKey: ['hiu'],
+    queryKey: [getPremium.name],
     queryFn: getPremium,
   });
 
@@ -52,5 +52,5 @@ export const usePremium = () => {
     mutate();
   };
 
-  return { handleBuyPremium, isBuyingPending, isPremium: premium.premium };
+  return { handleBuyPremium, isBuyingPending, isPremium: premium.premium.premium, isPremiumUntil: premium.premium.premiumUntil };
 };

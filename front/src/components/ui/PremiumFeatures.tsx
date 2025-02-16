@@ -2,9 +2,13 @@ import { ReactNode } from "@tanstack/react-router";
 import { Drawer } from "vaul";
 import { Button } from "./button";
 import { useState } from "react";
+import { usePremium } from "@/hooks/usePremium";
+import dayjs from "dayjs";
 
 export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isPremiumUntil } = usePremium();
+  const formattedPremiumUntil = dayjs(isPremiumUntil).format("DD.MM.YYYY");
 
   return (
     <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -17,7 +21,9 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
             <div className="mx-auto max-w-md">
               <Drawer.Title className=" text-3xl font-medium text-white flex flex-col">
                 <span>Ваш премиум</span>
-                <span className="text-sm mb-6">Действует до</span>
+                <span className="text-sm mb-6">
+                  Действует до {formattedPremiumUntil}
+                </span>
               </Drawer.Title>
               <div className="space-y-4">
                 <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">

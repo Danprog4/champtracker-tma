@@ -94,6 +94,9 @@ const DurationModal: React.FC<DurPropsSmart> = ({
     if (!isLong && finalDuration > 0) {
       setDuration(finalDuration);
       setIsOpen(false);
+    } else {
+      setDuration(regularity === "everyday" ? 30 : 84);
+      setIsOpen(false);
     }
   };
 

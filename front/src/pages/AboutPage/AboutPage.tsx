@@ -11,7 +11,7 @@ import { TelegramStar } from "@/components/shared/TelegramStar";
 
 const AboutPage: React.FC = () => {
   const { isPremium } = usePremium();
-
+  console.log(isPremium, "isPremium");
   return (
     <div className="flex min-h-screen flex-col">
       <header className="fixed flex w-full items-center justify-start bg-black pl-[13px] pt-8">

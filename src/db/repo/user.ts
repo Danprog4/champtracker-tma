@@ -29,11 +29,13 @@ export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
   return users[0];
 };
 
-export const getPremium = async (id: number): Promise<boolean> => {
+export const getPremium = async (id: number): Promise<{ premium: boolean, premiumUntil: string | null }> => {
   const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
-
-  return Boolean(users[0].premiumUntil);
+  console.log(users[0].premiumUntil, "users[0].premiumUntil");
+  return { premium: Boolean(users[0].premiumUntil), premiumUntil: users[0].premiumUntil };
+  
 };
+
 
 export const updatePremium = async (id: number, premiumUntil: string) => {
   await db

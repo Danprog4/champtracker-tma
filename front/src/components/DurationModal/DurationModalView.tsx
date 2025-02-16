@@ -45,7 +45,7 @@ const DurationModalView: React.FC<DurProps> = ({
   isEveryday,
 }) => {
   return (
-    <Drawer.Root onClose={handleClose} onOpenChange={setIsOpen} open={isOpen}>
+    <Drawer.Root onClose={handleSave} onOpenChange={setIsOpen} open={isOpen}>
       <Drawer.Trigger className="mt-2 flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px]">
         <span>Длительность</span>
         <span className="text-gray-400">{`${Math.floor(

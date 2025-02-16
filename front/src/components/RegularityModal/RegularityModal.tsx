@@ -63,18 +63,20 @@ export default function RegularityModal({
   };
 
   const handleSaveChanges = () => {
-    if (
-      tempRegularity !== regularity ||
-      tempDaysOfWeek.length !== daysOfWeek.length ||
-      tempDaysOfWeek.length !== outputDays.length
-    ) {
-      setRegularity(tempRegularity);
-      setDaysOfWeek(tempDaysOfWeek);
-      setOutputDays(tempOutputDays);
-    }
-    setIsOpen(false);
+    const finalRegularity =
+      tempDaysOfWeek.length === 0 && tempRegularity !== "everyday"
+        ? "everyday"
+        : tempRegularity;
+
+    setRegularity(finalRegularity);
+    setTempRegularity(finalRegularity);
+    setDaysOfWeek(tempDaysOfWeek);
+    setOutputDays(tempOutputDays);
   };
 
+  console.log(tempDaysOfWeek.length, "tempDaysOfWeek.length");
+  console.log(regularity, "regularity");
+  console.log(tempRegularity, "tempRegularity");
   return (
     <RegularityModalView
       isOpen={isOpen}

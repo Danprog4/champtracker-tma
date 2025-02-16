@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch } from "../ui/switch";
+import { toast } from "sonner";
 
 type NotificationsProps = {
   notifications: string;
@@ -24,7 +25,9 @@ const Notifications: React.FC<NotificationsProps> = ({
           <span>Включить уведомления</span>
           <Switch
             checked={isNotifications}
-            onChange={() => setIsNotifications(!isNotifications)}
+            onClick={() => {
+              toast.error("К сожалению, уведомления пока не доступны");
+            }}
           />
         </div>
         {isNotifications && (

@@ -28,7 +28,6 @@ app.get('/getPremium', async (c) => {
   return c.json({ premium });
 });
 
-
 app.get('/getOnBoarding', async (c) => {
   const user = await getValidatedUser(c.req);
 

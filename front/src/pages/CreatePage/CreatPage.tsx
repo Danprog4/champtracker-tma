@@ -43,14 +43,14 @@ const CreateSmart: React.FC = () => {
 
   const handleSave = async () => {
     if (!title || title === "НАЗВАНИЕ ЗАДАНИЯ") {
-      toast("Напишите название задания");
+      toast.error("Напишите название задания");
       return;
     }
 
     const startDate = date ? dayjs(date) : dayjs();
 
     if (startDate.startOf("day") < dayjs().startOf("day")) {
-      toast("Напишите возможное время");
+      toast.error("Напишите возможное время");
       return;
     }
 
@@ -72,9 +72,9 @@ const CreateSmart: React.FC = () => {
         challengeStartAt: dayjs(startDate).toISOString(),
       });
       navigate({ to: "/" });
-      toast("Задание успешно сохранено!");
+      toast.success("Задание успешно сохранено!");
     } catch (error) {
-      toast("Ошибка при сохранении задания");
+      toast.error("Ошибка при сохранении задания");
     }
   };
 

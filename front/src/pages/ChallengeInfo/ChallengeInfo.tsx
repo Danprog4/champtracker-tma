@@ -19,7 +19,7 @@ const ChallengeInfoContainer: React.FC = () => {
   const { checkDay } = useChallenges();
 
   if (!challenge) {
-    toast("Задача не найдена");
+    toast.error("Задача не найдена");
     return null;
   }
 

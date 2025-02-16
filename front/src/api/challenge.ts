@@ -54,9 +54,9 @@ export const getPremium = async () => {
       'x-init-data': initDataRaw,
     },
   });
-
   return response.data;
 };
+
 
 export const getChallenges = async () => {
   const { initDataRaw } = retrieveLaunchParams();

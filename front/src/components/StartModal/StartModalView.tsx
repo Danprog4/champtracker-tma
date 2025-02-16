@@ -85,8 +85,7 @@ export default function StartModalView({
                   className="flex max-h-[40px] w-[90vw] justify-between rounded-t-none bg-gray-700 p-[10px]">
                   <span>Своя дата</span>
                   {isValidDate(tempDate) &&
-                    !dayjs(tempDate).isSame(today, "day") &&
-                    !dayjs(tempDate).isSame(today.add(1, "day"), "day") && (
+                    !dayjs(tempDate).isSame(today, "day") && (
                       <span>{`${
                         tempDate?.getDate() <= 9
                           ? "0" + tempDate?.getDate()
