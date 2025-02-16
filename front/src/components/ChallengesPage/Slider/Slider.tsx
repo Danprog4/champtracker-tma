@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { categories } from "@/configs/cards.config";
-import { usePremium } from "@/hooks/usePremium";
 import DumpSlider from "./SliderView";
 
 const SmartSlider: React.FC = () => {
@@ -26,6 +25,7 @@ const SmartSlider: React.FC = () => {
       categories={categories}
       currentSlide={currentSlide}
       onScroll={handleScroll}
+      sliderRefs={sliderRefs}
     />
   );
 };

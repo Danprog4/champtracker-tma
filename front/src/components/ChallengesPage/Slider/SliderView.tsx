@@ -19,12 +19,14 @@ interface DumpSliderProps {
   categories: Category[];
   currentSlide: { [key: number]: number };
   onScroll: (categoryIndex: number) => void;
+  sliderRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
 }
 
 const DumpSlider: React.FC<DumpSliderProps> = ({
   categories,
   currentSlide,
   onScroll,
+  sliderRefs,
 }) => (
   <div className="flex flex-col">
     {categories.map((category, categoryIndex) => (
@@ -36,6 +38,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
           </div>
         </div>
         <div
+          ref={(el) => (sliderRefs.current[categoryIndex] = el)}
           onScroll={() => onScroll(categoryIndex)}
           className="flex snap-x snap-mandatory space-x-4 overflow-auto scroll-smooth">
           {category.items.map((card, cardIndex) => (
