@@ -55,7 +55,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
 }) => {
   return (
     <div className="flex h-full flex-col">
-      <div className={`${color} h-[20vh] pb-5`}>
+      <div className={`${color} h-[23%] pb-5`}>
         <div className="relative mb-2 mt-8 flex w-full">
           <Link
             to={`/challenge/$taskId`}

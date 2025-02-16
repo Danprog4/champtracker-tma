@@ -52,11 +52,7 @@ export function CarouselDApiDemo() {
           {current !== count ? (
             <CarouselNext className="bg-yellow-400 w-[250px] h-[30px]" />
           ) : (
-            <Link
-              to="/new"
-              onClick={() => {
-                updateOnBoarding(true);
-              }}>
+            <Link to="/new">
               <CarouselNext className="bg-yellow-400 w-[250px] h-[30px]" />
             </Link>
           )}

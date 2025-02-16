@@ -84,14 +84,13 @@ export default function StartModalView({
                   value="Own date"
                   className="flex max-h-[40px] w-[90vw] justify-between rounded-t-none bg-gray-700 p-[10px]">
                   <span>Своя дата</span>
-                  {isValidDate(tempDate) &&
-                    !dayjs(tempDate).isSame(today, "day") && (
-                      <span>{`${
-                        tempDate?.getDate() <= 9
-                          ? "0" + tempDate?.getDate()
-                          : tempDate?.getDate()
-                      } ${Months[monthNumber]}`}</span>
-                    )}
+                  {isValidDate(tempDate) && (
+                    <span>{`${
+                      tempDate?.getDate() <= 9
+                        ? "0" + tempDate?.getDate()
+                        : tempDate?.getDate()
+                    } ${Months[monthNumber]}`}</span>
+                  )}
                 </RadioGroupItem>
               </RadioGroup>
               {tempStartTime === "Own date" && (
@@ -107,7 +106,7 @@ export default function StartModalView({
                     }
                   }}
                   disabled={isDisabledFunc}
-                  className="mt-2 flex w-[90vw] items-center justify-center rounded-md border bg-gray-700"
+                  className="mt-2 flex w-[90vw] items-center justify-center rounded-md bg-gray-700"
                 />
               )}
             </div>
