@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "@tanstack/react-router";
 import { categories } from "@/configs/cards.config";
-import CrossImg from "../../assets/images/—Pngtree—vector cross icon_4254623.png";
+import { CrossIcon } from "@/icons/Cross";
 
 const ChallengeView: React.FC = () => {
   const { id } = useParams({ from: "/card/$id" });
@@ -20,12 +20,10 @@ const ChallengeView: React.FC = () => {
           alt={card?.title}
           className={`${category?.color} h-[450px] w-full object-cover rounded-b-3xl`}
         />
-        <Link to="/new" className="fixed right-0 top-0 z-10 pr-[16px] pt-6">
-          <img
-            src={CrossImg}
-            alt="cross"
-            className="h-[35px] w-[35px] rounded-full"
-          />
+        <Link
+          to="/new"
+          className="fixed right-0 top-0 z-10 pr-[16px] pt-6 text-black">
+          <CrossIcon />
         </Link>
         <div className="absolute inset-0 flex flex-col pl-[14px] pt-10 text-start">
           <span className="text-sm text-black">Задание</span>

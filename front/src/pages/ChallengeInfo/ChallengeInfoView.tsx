@@ -171,14 +171,6 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
           </div>
         </div>
       )}
-
-      <div className="flex items-center justify-center pl-0 font-extrabold">
-        <Link
-          to={`/`}
-          className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-500 p-5">
-          <div>ПРОДОЛЖИТЬ</div>
-        </Link>
-      </div>
     </div>
   );
 };

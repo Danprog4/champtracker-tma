@@ -16,7 +16,7 @@ const ColorsSchema: React.FC<ColorsProps> = ({ color, setColor }) => {
         {Colors.map((classColor: string) => (
           <div
             key={classColor}
-            className={`h-[78px] w-[78px] cursor-pointer rounded-full ${classColor} ${
+            className={`cursor-pointer w-full aspect-square rounded-full ${classColor} ${
               color === classColor ? "border-4 border-white" : ""
             }`}
             onClick={() => setColor(classColor)}></div>

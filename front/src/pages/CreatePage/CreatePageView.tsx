@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import DurationModal from "@/components/DurationModal/DurationModal";
 import RegularityModal from "@/components/RegularityModal/RegularityModal";
 import StartModal from "@/components/StartModal/StartModal";
-import CrossImg from "../../assets/images/Krestiksvgpng.ru_.svg";
+import { CrossIcon } from "@/icons/Cross";
 import { Dayjs } from "dayjs";
 import { BuyPremium } from "@/components/BuyPremium";
 import { TelegramStar } from "@/components/shared/TelegramStar";
@@ -63,8 +63,10 @@ const CreateDump: React.FC<CreateDumpProps> = ({
     <div className="flex h-screen flex-col">
       <div className={`${color} h-[23%]`}>
         <div className="relative mb-2 mt-8 flex w-full">
-          <Link to={getNavigationPath()} className="absolute inset-0">
-            <img src={CrossImg} alt="cross" className="m-2 h-10 w-10" />
+          <Link
+            to={getNavigationPath()}
+            className="absolute inset-0 text-black ml-2 mt-[15.5px]">
+            <CrossIcon />
           </Link>
           <span className="mt-[15.5px] w-full text-center text-black">
             Новое задание

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { DateInfo } from "../DateInfo";
-import CheckImg from "../../../assets/images/icons8-галочка.svg";
 import { Dayjs } from "dayjs";
+import { Check } from "@/icons/Check";
 
 type ChallengeCardUIProps = {
   title: string;
@@ -51,24 +51,22 @@ export const ChallengeCardUI = ({
     <Link
       to={`/challenge/$taskId`}
       params={{ taskId: challengeId }}
-      className={`${color} flex h-[16vh] w-[90vw] items-center justify-between rounded-lg pr-0 p-3 ${isLast ? "mb-28" : ""}`}>
-      <div className="flex justify-between items-end w-full">
-        <div className="flex flex-col">
-          <span className="text-lg font-extrabold text-black">{title}</span>
-          <div className="mt-5 flex">
-            <span className="text-5xl font-extrabold text-black">
-              {regularity === "everyday" && daysSinceStart !== 0
-                ? daysSinceStart
-                : daysSinceStart !== 0 && weeks}
-            </span>
-            <div className="ml-1 mt-3 flex-col text-sm font-medium text-black">
-              <div className="mb-[-7px]">{formattedTodayDate}</div>
-              <div>
-                {daysSinceStart !== 0 && "/"}
-                {regularity === "everyday"
-                  ? `${duration} дн.`
-                  : `${duration / 7} нед.`}
-              </div>
+      className={`${color} flex h-[16vh] w-[90vw]  justify-between rounded-lg pr-0 pl-4 ${isLast ? "mb-28" : ""}`}>
+      <div className="flex flex-col justify-between pt-4 pb-5">
+        <span className="leading-6 text-black font-druk text-sm">{title}</span>
+        <div className="flex">
+          <span className="font-extrabold font-druk text-4xl text-stroke-1 text-transparent">
+            {regularity === "everyday" && daysSinceStart !== 0
+              ? daysSinceStart
+              : daysSinceStart !== 0 && weeks}
+          </span>
+          <div className="flex-col flex-end text-xs font-medium text-black mt-2.5 ml-1.5  ">
+            <div className="mb-[-5px]">{formattedTodayDate}.</div>
+            <div>
+              {daysSinceStart !== 0 && "/ "}
+              {regularity === "everyday"
+                ? `${duration} дн.`
+                : `${duration / 7} нед.`}
             </div>
           </div>
         </div>
@@ -81,13 +79,13 @@ export const ChallengeCardUI = ({
           event.stopPropagation();
           onCheckDay();
         }}>
-        <div className="text-md font-extrabold text-white flex justify-center items-center">
+        <div className="text-md font-extrabold  text-white flex justify-center items-center">
           {isDayChecked ? (
-            <img src={CheckImg} alt="check_image" className="w-[30px]" />
+            <Check />
           ) : startDateIsAfterToday ? (
             <DateInfo label="НАЧАЛО" date={formattedStartDate} />
           ) : isDayAvailable ? (
-            <span>ГОТОВО</span>
+            <span className="font-druk text-xs">ГОТОВО</span>
           ) : (
             <DateInfo
               label="СЛЕДУЮЩИЙ ДЕНЬ"

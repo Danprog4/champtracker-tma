@@ -1,10 +1,10 @@
 import Slider from "@/components/ChallengesPage/Slider/Slider";
 import React from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import BackImg from "../../assets/images/back-svgrepo-com (2).svg";
 import { CreateTaskButton } from "../../components/ui/TaskButton";
 import { useChallenges } from "@/hooks/useChallenges";
 import { useOnBoarding } from "@/hooks/useOnBoarding";
+import { BackIcon } from "@/icons/Back";
 
 const Challenges: React.FC = () => {
   const { challenges } = useChallenges();
@@ -25,11 +25,7 @@ const Challenges: React.FC = () => {
               navigate({ to: "/" });
             }
           }}>
-          <img
-            src={BackImg}
-            className="h-[30px] w-[30px] object-contain"
-            alt="Back"
-          />
+          <BackIcon />
         </button>
       </div>
 
