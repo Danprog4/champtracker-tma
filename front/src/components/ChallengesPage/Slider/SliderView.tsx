@@ -30,9 +30,9 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
 }) => (
   <div className="flex flex-col">
     {categories.map((category, categoryIndex) => (
-      <div key={categoryIndex} className="mb-8 pl-5">
-        <div className="flex justify-between pr-5">
-          <div className="mb-4">{category.title}</div>
+      <div key={categoryIndex} className="mb-8 pl-3">
+        <div className="flex justify-between pr-3">
+          <div className="mb-5">{category.title}</div>
           <div className="text-gray-400">
             {currentSlide[categoryIndex] || 1}/{category.items.length}
           </div>
@@ -55,7 +55,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
                 alt={card.title}
                 className="-z-50 h-[250px] w-[250px] object-contain"
               />
-              <div className="text-outline absolute inset-0 p-3 text-start text-[24px] font-bold leading-7 text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
+              <div className="text-outline font-druk absolute inset-0 p-3 text-start text-lg font-bold leading-7 text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
                 {card.title}
               </div>
             </Link>

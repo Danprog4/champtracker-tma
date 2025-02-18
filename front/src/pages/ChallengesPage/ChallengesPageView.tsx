@@ -12,7 +12,7 @@ const Challenges: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className="relative flex flex-col items-start">
-      <div className="fixed z-10 flex w-[100vw] justify-between bg-black pb-2 pl-[16px] pr-5 pt-10">
+      <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[11vh] p-3 pt-14 top-0">
         <button
           onClick={() => {
             if (!isOnBoarding) {
@@ -29,10 +29,12 @@ const Challenges: React.FC = () => {
         </button>
       </div>
 
-      <div className="mt-20 flex flex-col px-5">
-        <h1 className="mb-3 mt-2 text-4xl font-extrabold">НОВОЕ ЗАДАНИЕ</h1>
-        <p className="mb-8 text-start text-sm text-gray-400">
-          Выбери одно из десяти заданий <br /> или создай свое
+      <div className="mt-[106px] flex flex-col px-3">
+        <h1 className="mb-2 text-2xl font-extrabold font-druk ">
+          НОВОЕ ЗАДАНИЕ
+        </h1>
+        <p className="mb-12 text-start text-sm text-gray-400">
+          Выберите одно из 10 готовых заданий <br /> или создайте свое
         </p>
       </div>
 

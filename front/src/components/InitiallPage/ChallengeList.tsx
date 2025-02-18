@@ -12,7 +12,7 @@ const ChallengeList = ({ challenges }: ChallengeListProps) => {
   });
 
   return (
-    <div className="mt-24 flex flex-col items-center justify-center gap-2">
+    <div className="mt-28 flex flex-col items-center justify-center gap-2">
       {sortedChallenges.map((challenge, index) => (
         <ChallengeCard
           key={challenge.id}

@@ -80,6 +80,10 @@ export default {
       fontFamily: {
         druk: ["Druk", "sans-serif"],
       },
+      boxShadow: {
+        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)", // Кастомная тень
+        "4xl": "0 45px 80px -20px rgba(0, 0, 0, 0.4)", // Еще больше
+      },
     },
   },
   plugins: [

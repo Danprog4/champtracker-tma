@@ -3,7 +3,7 @@ import ChallengeList from "@/components/InitiallPage/ChallengeList";
 import Header from "@/components/InitiallPage/Header";
 import { TelegramStar } from "@/components/shared/TelegramStar";
 import { Button } from "@/components/ui/button";
-import PremiumFeatures from "@/components/ui/PremiumFeatures";
+import { PremiumFeatures } from "@/components/ui/PremiumFeatures";
 import { useChallenges } from "@/hooks/useChallenges";
 import { usePremium } from "@/hooks/usePremium";
 

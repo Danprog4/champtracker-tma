@@ -4,7 +4,7 @@ import { PlusIcon } from "@/icons/Plus";
 
 const Header = () => {
   return (
-    <div className="fixed z-10 flex w-full justify-between bg-black pb-2 pl-5 pr-5 pt-10">
+    <div className="fixed z-10 flex w-full justify-between h-[11vh] bg-black p-3 pt-14">
       <Link to="/about">
         <BarsIcon />
       </Link>

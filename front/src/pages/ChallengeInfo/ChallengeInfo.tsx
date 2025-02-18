@@ -31,7 +31,7 @@ const ChallengeInfoContainer: React.FC = () => {
       ? challenge.duration
       : Math.ceil(challenge.duration / 7);
   const displayRegularity =
-    challenge.regularity === "everyday" ? "ДН." : "НЕД.";
+    challenge.regularity === "everyday" ? "ДНЕЙ" : "НЕДЕЛЬ";
 
   const taskData = {
     challenge,

@@ -51,9 +51,9 @@ export const ChallengeCardUI = ({
     <Link
       to={`/challenge/$taskId`}
       params={{ taskId: challengeId }}
-      className={`${color} flex h-[16vh] w-[90vw]  justify-between rounded-lg pr-0 pl-4 ${isLast ? "mb-28" : ""}`}>
-      <div className="flex flex-col justify-between pt-4 pb-5">
-        <span className="leading-6 text-black font-druk text-sm">{title}</span>
+      className={`${color} flex h-[16vh] w-[95vw] justify-between rounded-lg pr-0 pl-4 ${isLast ? "mb-28" : ""}`}>
+      <div className="flex flex-col justify-between pt-4 pb-4">
+        <span className="leading-6 text-black font-druk text-md">{title}</span>
         <div className="flex">
           <span className="font-extrabold font-druk text-4xl text-stroke-1 text-transparent">
             {regularity === "everyday" && daysSinceStart !== 0
