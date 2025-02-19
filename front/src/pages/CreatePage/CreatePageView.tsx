@@ -60,21 +60,17 @@ const CreateDump: React.FC<CreateDumpProps> = ({
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
 
   return (
-    <div className="flex h-screen flex-col">
-      <div className={`${color} h-[23%]`}>
-        <div className="relative mb-2 mt-8 flex w-full">
-          <Link
-            to={getNavigationPath()}
-            className="absolute inset-0 text-black ml-2 mt-[15.5px]">
-            <CrossIcon />
-          </Link>
-          <span className="mt-[15.5px] w-full text-center text-black">
-            Новое задание
-          </span>
-        </div>
+    <div className="flex h-full flex-col mb-12 ">
+      <div className={`fixed top-0 p-2 pr-3 pt-14 flex w-full ${color}`}>
+        <Link to={getNavigationPath()} className="absolute text-black ">
+          <CrossIcon />
+        </Link>
+        <span className="w-full text-center text-black">Новое задание</span>
+      </div>
+      <div className={`${color} min-h-[20vh] pb-2 pt-20`}>
         <Title title={title} setTitle={setTitle} />
       </div>
-      <div className="mt-2 flex flex-col pl-5 pt-4 text-start">
+      <div className="mt-3 flex flex-col pl-3 pt-4 text-start">
         <span className="mb-2 text-gray-300">Условия</span>
       </div>
       <div className="flex flex-col items-center justify-center">
@@ -99,11 +95,11 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         setNotifications={setNotifications}
       />
       <ColorsSchema color={color} setColor={setColor} />
-      <div className="flex items-center justify-center pl-0 font-extrabold">
+      <div className="flex items-center justify-center pl-0 font-extrabold mb-10">
         {isPremium || challenges.length < 1 ? (
           <button
             onClick={handleSave}
-            className={`fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5 ${
+            className={`fixed bottom-7 shadow-xl shadow-black z-0 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg bg-pink-500 p-5 ${
               title.length === 0 ? "bg-gray-600" : ""
             }`}>
             СОХРАНИТЬ

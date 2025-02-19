@@ -18,49 +18,56 @@ const ChallengeView: React.FC = () => {
         <img
           src={card?.imageUrl}
           alt={card?.title}
-          className={`${category?.color} h-[450px] w-full object-cover rounded-b-3xl`}
+          className={`${category?.color} h-[65vh] w-full object-cover rounded-b-3xl`}
         />
         <Link
           to="/new"
-          className="fixed right-0 top-0 z-10 pr-[16px] pt-6 text-black">
+          className="fixed right-0 top-0 pt-4 p-3 z-10 text-black">
           <CrossIcon />
         </Link>
-        <div className="absolute inset-0 flex flex-col pl-[14px] pt-10 text-start">
+        <div className="absolute inset-0 flex flex-col p-3 pt-14  text-start">
           <span className="text-sm text-black">Задание</span>
-          <span className="text-2xl font-bold text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
+          <span className="text-lg font-bold font-druk text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
             {card?.title}
           </span>
         </div>
-        <div className="absolute bottom-0 left-0 flex pb-4 pl-[14px]">
+        <div className="absolute bottom-3 flex pl-3">
           {card?.duration?.map((dur) => (
-            <div className="flex h-[70px] w-[70px] flex-col items-center justify-center rounded-full bg-black bg-cover">
+            <div className="flex w-[18.77vw] flex-col aspect-square items-center justify-center rounded-full bg-black bg-cover">
               <div className="text-center">
-                <div className="text-[20px] font-extrabold">{dur}</div>
-                <div className="mb-1 mt-[-5px] text-[10px] font-light">
+                <div className="font-druk text-lg">{dur}</div>
+                <div className="mb-1 mt-[-5px] text-[10px] font-medium">
                   ДНЕЙ
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="absolute bottom-0 right-0 p-2">
-          <div className="m-2 flex h-[70px] w-[70px] flex-col items-center justify-center rounded-full bg-black bg-cover">
-            <div className="text-start text-[10px] font-light">
-              КАЖДЫЙ <br></br> ДЕНЬ
+        <div className="absolute bottom-0 right-0 p-3">
+          <div className="flex w-[18.77vw] flex-col aspect-square items-center justify-center rounded-full bg-black bg-cover">
+            <div className=" text-[10px] text-start font-medium">
+              ЕЖЕ <br /> ДНЕВ <br /> ВНО
             </div>
           </div>
         </div>
       </div>
-      <div className="p-2">
-        <p className="mb-7 mt-4 text-start text-lg text-gray-300">
+      <div className="p-3">
+        <p className="mb-14 mt-5 text-start text-lg text-gray-300 leading-6">
           {card?.desc}
         </p>
         <div className="text-start">
-          <span className="text-2xl font-bold">СОВЕТЫ И ПОДСКАЗКИ</span>
-          {card?.hints?.map((hint) => (
-            <div className="mt-3 flex gap-2 text-lg font-light text-gray-300">
-              <span className="inline-block font-bold text-white">-</span>
-              <p>{hint}</p>
+          <span className="text-lg font-druk font-bold leading-6">
+            ПОДСКАЗКИ <br /> И СОВЕТЫ
+          </span>
+          {card?.hints?.map((hint, index) => (
+            <div className="mt-5 flex gap-3 text-lg font-light text-gray-300">
+              <span className="font-bold text-white">
+                <div className="w-5 border border-gray-300 mt-3"></div>
+              </span>
+              <p
+                className={`${index + 1 === card.hints?.length && "mb-5"} leading-6`}>
+                {hint}
+              </p>
             </div>
           ))}
         </div>
@@ -71,7 +78,7 @@ const ChallengeView: React.FC = () => {
           params={{
             id: card!.id.toString(),
           }}
-          className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-pink-600 p-5">
+          className="fixed bottom-7 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg bg-pink-500 p-5">
           <div className="">ПРОДОЛЖИТЬ</div>
         </Link>
       </div>

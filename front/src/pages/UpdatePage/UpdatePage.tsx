@@ -18,7 +18,7 @@ const UpdatePage: React.FC = () => {
   const [isNotifications, setIsNotifications] = useState(false);
   const [notifications, setNotifications] = useState("");
   const [color, setColor] = useState(task.color);
-  const [title, setTitle] = useState(task.title || "CHALLENGE NAME");
+  const [title, setTitle] = useState(task.title);
   const [regularity, setRegularity] = useState(task.regularity);
   const [duration, setDuration] = useState(task.duration);
   const startedDate = dayjs(task.challengeStartAt);

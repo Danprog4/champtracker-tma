@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import RegularityModalView from "./RegularityModalView";
+import { is } from "drizzle-orm";
 
 interface RegProps {
   regularity: "everyday" | "fewTimesAWeek";
@@ -72,6 +73,10 @@ export default function RegularityModal({
     setTempRegularity(finalRegularity);
     setDaysOfWeek(tempDaysOfWeek);
     setOutputDays(tempOutputDays);
+    if (setDuration) {
+      setDuration(finalRegularity === "everyday" ? 30 : 84);
+    }
+    setIsOpen(!isOpen);
   };
 
   console.log(tempDaysOfWeek.length, "tempDaysOfWeek.length");

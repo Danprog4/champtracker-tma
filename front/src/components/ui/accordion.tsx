@@ -34,8 +34,7 @@ const AccordionTrigger = React.forwardRef<
         "transition-colors duration-300", // Смена цвета текста на черный при открытии
         className
       )}
-      {...props}
-    >
+      {...props}>
       {children}
       <ChevronDown className="h-4 w-4 shrink-0 text-neutral-500 transition-transform duration-200 dark:text-neutral-400" />
     </AccordionPrimitive.Trigger>
@@ -50,8 +49,7 @@ const AccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     className="overflow-hidden text-sm text-black transition-opacity duration-300 data-[state=closed]:opacity-0 data-[state=open]:opacity-100"
-    {...props}
-  >
+    {...props}>
     <div className={cn("rounded-b-3xl bg-white p-2 pb-4 pt-0", className)}>
       {children}
     </div>

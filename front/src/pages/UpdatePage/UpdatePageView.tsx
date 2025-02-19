@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
-import CrossImg from "../../assets/images/Krestiksvgpng.ru_.svg";
 import RegularityModal from "@/components/RegularityModal/RegularityModal";
 import DurationModal from "@/components/DurationModal/DurationModal";
 import StartModal from "@/components/StartModal/StartModal";
-import { cn } from "@/lib/utils";
-import { Alert } from "@/components/ui/alert";
 import Notifications from "@/components/Notifications/Notifications";
 import Title from "@/components/Tittle/Tittle";
 import ColorsSchema from "@/components/Colors/ColorsSchema";
-
+import { CrossIcon } from "@/icons/Cross";
+import { DrawerAlert } from "@/components/ui/alert";
 type UpdatePageProps = {
   task: any;
   color: string;
@@ -54,70 +52,76 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
   deleteChallengeMutation,
 }) => {
   return (
-    <div className="flex h-full flex-col">
-      <div className={`${color} h-[23%] pb-5`}>
-        <div className="relative mb-2 mt-8 flex w-full">
+    <div className="flex h-full flex-col mb-28">
+      <div className="flex flex-col w-full relative">
+        <div className={`fixed top-0 p-2 pr-3 pt-14 flex w-full ${color}`}>
           <Link
             to={`/challenge/$taskId`}
             params={{
               taskId: task.id.toString(),
             }}
-            className="absolute inset-0">
-            <img src={CrossImg} alt="cross" className="m-2 h-10 w-10" />
+            className="absolute text-black">
+            <CrossIcon />
           </Link>
-          <span className="mt-[15.5px] w-full text-center text-black">
+          <span className=" w-full text-center font-medium text-black">
             Редактировать
           </span>
         </div>
-        <Title title={title} setTitle={setTitle} />
+        <div className={`${color} min-h-[20vh] pt-20 pb-2`}>
+          <Title title={title} setTitle={setTitle} />
+        </div>
       </div>
-      <div className="mt-2 flex flex-col pl-5 pt-4 text-start">
-        <span className="mb-2 text-gray-300">Условия</span>
-      </div>
-      <div className="flex flex-col items-center justify-center">
-        <RegularityModal
-          {...{
-            setDuration,
-            regularity,
-            setRegularity,
-            daysOfWeek,
-            setDaysOfWeek,
-          }}
+      <div className="flex flex-col mt-7">
+        <div className=" flex flex-col pl-3  text-start">
+          <span className="mb-2 text-gray-300">Условия</span>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <RegularityModal
+            {...{
+              setDuration,
+              regularity,
+              setRegularity,
+              daysOfWeek,
+              setDaysOfWeek,
+            }}
+          />
+          <DurationModal
+            {...{ duration: Number(duration), setDuration, regularity }}
+          />
+          <StartModal
+            disabled={true}
+            startedDate={startedDate.format("DD.MM.YYYY")}
+          />
+        </div>
+        <Notifications
+          notifications={notifications}
+          isNotifications={isNotifications}
+          setIsNotifications={setIsNotifications}
+          setNotifications={setNotifications}
         />
-        <DurationModal
-          {...{ duration: Number(duration), setDuration, regularity }}
-        />
-        <StartModal
-          disabled={true}
-          startedDate={startedDate.format("DD.MM.YYYY")}
-        />
-      </div>
-      <Notifications
-        notifications={notifications}
-        isNotifications={isNotifications}
-        setIsNotifications={setIsNotifications}
-        setNotifications={setNotifications}
-      />
+        <ColorsSchema color={color} setColor={setColor} />
 
-      <ColorsSchema color={color} setColor={setColor} />
-      <div className="flex items-center justify-center pb-24">
-        <Alert
-          bgColor={"bg-red-500"}
-          desc={`После нажатия кнопки продолжить вы навсегда удалите задание без возможности к восстановлению`}
-          question={"Вы действительно хотите удалить ваше задание?"}
-          title={"УДАЛИТЬ ЗАДАНИЕ"}
-          handleFunc={() => {
-            deleteChallengeMutation(task.id);
-          }}
-        />
+        <div className="flex items-center justify-center pb-24">
+          <DrawerAlert
+            bgColor={"bg-red-500"}
+            desc={`После нажатия кнопки продолжить вы навсегда удалите задание без возможности к восстановлению`}
+            question={
+              "Вы уверены, что хотите удалить это задание? Весь прогресс будет утерян."
+            }
+            title={"УДАЛИТЬ ЗАДАНИЕ"}
+            handleFunc={() => {
+              deleteChallengeMutation(task.id);
+            }}
+          />
+        </div>
       </div>
-      <div className="flex items-center justify-center pl-0 font-extrabold">
+
+      <div className="flex items-center justify-center pl-0 font-extrabold mb-10">
         <button
           onClick={handleSave}
-          className={cn(
-            "fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-gray-600 p-5",
-            checkIfChanged && "bg-pink-600"
-          )}
+          className={`fixed bottom-7 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg ${
+            checkIfChanged ? "bg-pink-500" : "bg-gray-600"
+          } p-5`}
           disabled={!checkIfChanged}>
           СОХРАНИТЬ
         </button>

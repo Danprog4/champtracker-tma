@@ -51,12 +51,12 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
               <div className="font-druk text-lg font-extrabold">
                 {displayDuration}
               </div>
-              <div className="mb-1 mt-[-5px] text-[10px] font-light">
+              <div className="mb-1 mt-[-5px] text-[10px] font-medium">
                 {displayRegularity}
               </div>
             </div>
             <div className="relative flex aspect-square flex-col w-[18.77vw]  items-center justify-center rounded-full bg-pink-500">
-              <div className=" text-[10px] text-start font-light">
+              <div className=" text-[10px] text-start font-medium">
                 {challenge.regularity === "everyday" ? (
                   <div>
                     ЕЖЕ

@@ -31,7 +31,7 @@ export default function RegularityModalView({
       open={isOpen}
       onOpenChange={setIsOpen}
       onClose={handleSaveChanges}>
-      <Drawer.Trigger className="flex w-[90vw] justify-between rounded-md bg-gray-700 p-[10px]">
+      <Drawer.Trigger className="flex w-[94vw] h-[45px] items-center justify-between rounded-md bg-gray-800 p-[10px]">
         <span>Регулярность</span>
         <span className="text-gray-400">
           {tempRegularity === "fewTimesAWeek"
@@ -43,7 +43,7 @@ export default function RegularityModalView({
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
         <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-gray-100 outline-none">
           <div className="h-full bg-black">
-            <div className="mb-4 flex h-[13vw] items-center justify-center bg-gray-700 text-white">
+            <div className="mb-4 flex h-[13vw] items-center justify-center bg-gray-800 text-white">
               Регулярность
             </div>
             <div className="flex flex-col items-center justify-center text-gray-300">
@@ -52,17 +52,17 @@ export default function RegularityModalView({
                 onValueChange={handleChangeRegularity}>
                 <RadioGroupItem
                   value="everyday"
-                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-700 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-800 p-[10px]">
                   Каждый день
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="fewTimesAWeek"
-                  className="max-h-[40px] w-[90vw] rounded-t-none bg-gray-700 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-t-none bg-gray-800 p-[10px]">
                   Несколько раз в неделю
                 </RadioGroupItem>
               </RadioGroup>
               {tempRegularity === "fewTimesAWeek" && (
-                <div className="text- mt-2 flex flex-col items-start text-start">
+                <div className="mt-2 flex flex-col items-start text-start">
                   {[
                     "Понедельник",
                     "Вторник",
@@ -76,7 +76,7 @@ export default function RegularityModalView({
                     return (
                       <div
                         key={day}
-                        className="flex h-[40px] w-[90vw] items-center border-b-2 border-gray-600 bg-gray-700 p-[10px] text-sm font-medium">
+                        className="flex h-[40px] w-[90vw] items-center border-b-2 border-gray-600 bg-gray-800 p-[10px] text-sm font-medium">
                         <div
                           className={cn(
                             "text-gray-300",
@@ -100,7 +100,7 @@ export default function RegularityModalView({
             <div
               className="flex items-center justify-center pl-0 font-extrabold"
               onClick={handleSaveChanges}>
-              <div className="fixed bottom-[10px] flex h-[45px] w-[95vw] items-center justify-center rounded-lg bg-yellow-300 p-5">
+              <div className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5">
                 <span
                   className={`${
                     tempDaysOfWeek.length === 0 &&

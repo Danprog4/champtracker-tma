@@ -9,10 +9,10 @@ type ColorsProps = {
 const ColorsSchema: React.FC<ColorsProps> = ({ color, setColor }) => {
   return (
     <>
-      <div className="mt-2 flex flex-col pl-5 pt-4 text-start">
-        <span className="mb-2 text-gray-300">Цвет</span>
+      <div className="mt-3 flex flex-col pl-3 pt-4 text-start">
+        <span className="mb-2 text-gray-300">Цветовая тема</span>
       </div>
-      <div className="mb-10 grid grid-cols-5 gap-0">
+      <div className="mb-20 grid grid-cols-5 gap-0">
         {Colors.map((classColor: string) => (
           <div
             key={classColor}
