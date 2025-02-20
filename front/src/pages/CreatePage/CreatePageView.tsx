@@ -11,7 +11,7 @@ import { Challenge } from "@back-types";
 import Notifications from "@/components/Notifications/Notifications";
 import Title from "@/components/Tittle/Tittle";
 import ColorsSchema from "@/components/Colors/ColorsSchema";
-
+import { Colors } from "@/configs/bgColors.config";
 interface CreateDumpProps {
   card: any;
   title: string;
@@ -58,7 +58,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
   challenges,
 }) => {
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
-
+  console.log(Colors[color], color);
   return (
     <div className="flex h-full flex-col mb-12 ">
       <div className={`fixed top-0 p-2 pr-3 pt-14 flex w-full ${color}`}>
@@ -67,7 +67,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         </Link>
         <span className="w-full text-center text-black">Новое задание</span>
       </div>
-      <div className={`${color} min-h-[20vh] pb-2 pt-20`}>
+      <div className={`${color} min-h-[18vh] pb-2 pt-20`}>
         <Title title={title} setTitle={setTitle} />
       </div>
       <div className="mt-3 flex flex-col pl-3 pt-4 text-start">
@@ -99,7 +99,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         {isPremium || challenges.length < 1 ? (
           <button
             onClick={handleSave}
-            className={`fixed bottom-7 shadow-xl shadow-black z-0 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg bg-pink-500 p-5 ${
+            className={`fixed bottom-7 ${Colors[color]} shadow-xl shadow-black z-0 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg  p-5 ${
               title.length === 0 ? "bg-gray-600" : ""
             }`}>
             СОХРАНИТЬ

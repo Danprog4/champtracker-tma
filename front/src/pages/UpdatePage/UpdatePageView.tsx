@@ -8,6 +8,7 @@ import Title from "@/components/Tittle/Tittle";
 import ColorsSchema from "@/components/Colors/ColorsSchema";
 import { CrossIcon } from "@/icons/Cross";
 import { DrawerAlert } from "@/components/ui/alert";
+import { Colors } from "@/configs/bgColors.config";
 type UpdatePageProps = {
   task: any;
   color: string;
@@ -67,7 +68,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
             Редактировать
           </span>
         </div>
-        <div className={`${color} min-h-[20vh] pt-20 pb-2`}>
+        <div className={`${color} min-h-[18vh] pt-20 pb-2`}>
           <Title title={title} setTitle={setTitle} />
         </div>
       </div>
@@ -119,8 +120,8 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
       <div className="flex items-center justify-center pl-0 font-extrabold mb-10">
         <button
           onClick={handleSave}
-          className={`fixed bottom-7 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg ${
-            checkIfChanged ? "bg-pink-500" : "bg-gray-600"
+          className={`fixed bottom-7 shadow-xl  shadow-black z-20 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg ${
+            checkIfChanged ? Colors[color] : "bg-gray-600"
           } p-5`}
           disabled={!checkIfChanged}>
           СОХРАНИТЬ

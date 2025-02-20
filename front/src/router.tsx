@@ -39,11 +39,13 @@ const rootRoute = createRootRoute({
   component: App,
   notFoundComponent: () => (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-gradient-to-r ">
-      <div className="mb-4 text-3xl font-bold ">Page not found</div>
+      <div className="mb-4 text-3xl font-bold font-druk text-center">
+        Страница не найдена{" "}
+      </div>
       <Link
         to="/"
-        className="rounded-lg bg-white px-6 py-2 font-medium text-gray-800 shadow-md transition-all hover:bg-gray-100 hover:shadow-lg">
-        Go to home
+        className="rounded-lg font-druk bg-white px-6 py-2 font-medium text-gray-800 shadow-md transition-all hover:bg-gray-100 hover:shadow-lg">
+        На главную
       </Link>
     </div>
   ),
@@ -146,7 +148,9 @@ const routeTree = rootRoute.addChildren([
 ]);
 
 // Create the router
-export const router = createRouter({ routeTree });
+export const router = createRouter({
+  routeTree,
+});
 
 // Register your router for maximum type safety
 declare module "@tanstack/react-router" {

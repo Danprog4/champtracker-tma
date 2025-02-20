@@ -5,7 +5,9 @@ import { dayBeforeToday, formatDate } from "@/lib/dateUtils";
 import dayjs from "dayjs";
 import { BackIcon } from "@/icons/Back";
 import { SettingsIcon } from "@/icons/Settings";
-
+import { Colors } from "@/configs/bgColors.config";
+import { CrossIcon } from "@/icons/Cross";
+import { Check } from "@/icons/Check";
 type ChallengeInfoDisplayProps = {
   challenge: Challenge;
   today: string;
@@ -47,7 +49,8 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
             {challenge.title}
           </div>
           <div className="flex flex-col">
-            <div className="relative flex flex-col aspect-square w-[18.77vw] items-center justify-center rounded-full bg-pink-500">
+            <div
+              className={`relative flex flex-col aspect-square w-[18.77vw] items-center justify-center rounded-full ${Colors[challenge.color]}`}>
               <div className="font-druk text-lg font-extrabold">
                 {displayDuration}
               </div>
@@ -55,7 +58,8 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                 {displayRegularity}
               </div>
             </div>
-            <div className="relative flex aspect-square flex-col w-[18.77vw]  items-center justify-center rounded-full bg-pink-500">
+            <div
+              className={`relative flex aspect-square flex-col w-[18.77vw] items-center justify-center rounded-full ${Colors[challenge.color]}`}>
               <div className=" text-[10px] text-start font-medium">
                 {challenge.regularity === "everyday" ? (
                   <div>
@@ -64,7 +68,10 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                     <br /> ВНО
                   </div>
                 ) : (
-                  `${challenge.daysOfWeek?.length} РАЗ В НЕДЕЛЮ`
+                  <div>
+                    {challenge.daysOfWeek?.length} РАЗА В <br />
+                    НЕДЕЛЮ
+                  </div>
                 )}
               </div>
             </div>
@@ -87,7 +94,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                     checkDay(challenge.id.toString(), index);
                   }}
                   key={day}
-                  className={`aspect-square bg-yellow-500 rounded-full font-druk text-sm font-bold text-black`}>
+                  className={`aspect-square ${Colors[challenge.color]} rounded-full font-druk text-sm font-bold text-black`}>
                   <span>{index + 1}</span>
                 </button>
               ) : hasFailed ? (
@@ -96,8 +103,8 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                     checkDay(challenge.id.toString(), index);
                   }}
                   key={day}
-                  className={`aspect-square bg-red-500 rounded-full  font-druk text-sm font-bold text-black`}>
-                  <span>{index + 1}</span>
+                  className={`aspect-square flex items-center justify-center bg-gray-400 rounded-full  font-druk text-sm font-bold text-black`}>
+                  <CrossIcon />
                 </button>
               ) : hasChecked ? (
                 <button
@@ -105,8 +112,8 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                     checkDay(challenge.id.toString(), index);
                   }}
                   key={day}
-                  className={`aspect-square bg-green-500 rounded-full font-druk text-sm font-bold text-black`}>
-                  <span>{index + 1}</span>
+                  className={`aspect-square text-white flex items-center justify-center bg-black rounded-full font-druk text-sm font-bold`}>
+                  <Check />
                 </button>
               ) : (
                 <button
@@ -135,7 +142,6 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                   <div className="grid grid-cols-5 gap-0">
                     {weekGroup.days.map((day: string, indexDay: number) => {
                       const globalDayIndex = previousDaysCount + indexDay;
-
                       const hasChecked =
                         challenge.userCheckedDates &&
                         challenge.userCheckedDates.includes(day);
@@ -143,18 +149,41 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                         formatDate(new Date(day)) === today && !hasChecked;
                       const hasFailed =
                         !isToday && !hasChecked && dayBeforeToday(day);
-                      console.log(globalDayIndex, "globalDayIndex");
-                      return (
+
+                      return isToday ? (
                         <button
                           onClick={() =>
                             checkDay(challenge.id.toString(), globalDayIndex)
                           }
                           key={day}
-                          className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
-                            isToday && "bg-yellow-500"
-                          } ${hasFailed && "bg-red-500"} ${
-                            hasChecked && "bg-green-500"
-                          }`}>
+                          className={`aspect-square ${Colors[challenge.color]} rounded-full font-druk text-sm font-bold text-black`}>
+                          <span>{globalDayIndex + 1}</span>
+                        </button>
+                      ) : hasFailed ? (
+                        <button
+                          onClick={() =>
+                            checkDay(challenge.id.toString(), globalDayIndex)
+                          }
+                          key={day}
+                          className={`aspect-square flex items-center justify-center bg-gray-400 rounded-full font-druk text-sm font-bold text-black`}>
+                          <CrossIcon />
+                        </button>
+                      ) : hasChecked ? (
+                        <button
+                          onClick={() =>
+                            checkDay(challenge.id.toString(), globalDayIndex)
+                          }
+                          key={day}
+                          className={`aspect-square text-white flex items-center justify-center bg-black rounded-full font-druk text-sm font-bold`}>
+                          <Check />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            checkDay(challenge.id.toString(), globalDayIndex)
+                          }
+                          key={day}
+                          className={`aspect-square rounded-full border border-black font-druk text-sm font-bold text-black`}>
                           <span>{globalDayIndex + 1}</span>
                         </button>
                       );

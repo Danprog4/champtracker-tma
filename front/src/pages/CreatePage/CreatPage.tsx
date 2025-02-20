@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import CreateDump from "./CreatePageView";
 import { FullPageSpinner } from "@/components/shared/FullPageSpinner";
 import { usePremium } from "@/hooks/usePremium";
+import { Colors } from "@/configs/bgColors.config";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -27,7 +28,7 @@ const CreateSmart: React.FC = () => {
   const [title, setTitle] = useState(card?.title || "");
   const [isNotifications, setIsNotifications] = useState(false);
   const [notifications, setNotifications] = useState("");
-  const [color, setColor] = useState(category?.color || "bg-pink-300");
+  const [color, setColor] = useState(category?.color || Object.keys(Colors)[0]);
   const [regularity, setRegularity] = useState<"everyday" | "fewTimesAWeek">(
     "everyday"
   );
