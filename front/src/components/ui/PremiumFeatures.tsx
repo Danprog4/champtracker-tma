@@ -16,11 +16,11 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
         <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 mt-24 flex flex-col rounded-t-[10px]">
-          <div className="flex-1 rounded-t-[10px] bg-zinc-900 p-4">
+          <div className="flex-1 rounded-t-[10px] bg-zinc-900 p-4 pb-7">
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-zinc-600" />
             <div className="mx-auto max-w-md">
-              <Drawer.Title className=" text-3xl font-medium text-white flex flex-col">
-                <span>Ваш премиум</span>
+              <Drawer.Title className="font-medium text-white flex flex-col">
+                <span className="font-druk text-2xl">Ваш премиум</span>
                 <span className="text-sm mb-6">
                   Действует до {formattedPremiumUntil}
                 </span>
@@ -31,12 +31,12 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                     Без ограничений
                   </h3>
                   <p className="text-sm text-zinc-400">
-                    Создавай и участвуй в любом количестве вызовов
+                    Создавай и выполняй любое количество заданий
                   </p>
                 </div>
                 <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
                   <h3 className="mb-2 font-medium text-white">
-                    Подробные статистики
+                    Подробная статистика (в разработке)
                   </h3>
                   <p className="text-sm text-zinc-400">
                     Получай подробные отчеты о своем прогрессе и достижениях
@@ -44,10 +44,10 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                 </div>
                 <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
                   <h3 className="mb-2 font-medium text-white">
-                    Приоритетная поддержка
+                    Токены за задания (в разработке)
                   </h3>
                   <p className="text-sm text-zinc-400">
-                    Получай быстрые ответы от нашей поддержки
+                    Получай токены за пройденные дни и обменивай их на премиум
                   </p>
                 </div>
                 <Button
