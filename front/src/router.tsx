@@ -34,6 +34,7 @@ import { useOnBoarding } from "./hooks/useOnBoarding";
 import { useChallenges } from "./hooks/useChallenges";
 import YourChallengesPage from "./pages/YourChallenges/YourChallengesPage";
 import { FullPageSpinner } from "./components/shared/FullPageSpinner";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 const rootRoute = createRootRoute({
   component: App,
@@ -132,6 +133,12 @@ const carouselPage = createRoute({
   component: CarouselDApiDemo,
 });
 
+const profileRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/profile",
+  component: ProfilePage,
+});
+
 // Build the route tree by adding children on the root route
 const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -145,6 +152,7 @@ const routeTree = rootRoute.addChildren([
   updateRoute,
   carouselPage,
   initiallRoute,
+  profileRoute,
 ]);
 
 // Create the router

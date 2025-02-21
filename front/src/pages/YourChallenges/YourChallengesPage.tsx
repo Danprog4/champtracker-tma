@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PremiumFeatures } from "@/components/ui/PremiumFeatures";
 import { useChallenges } from "@/hooks/useChallenges";
 import { usePremium } from "@/hooks/usePremium";
+import { Navbar } from "./Navbar";
 
 const YourChallengesPage = () => {
   const { challenges } = useChallenges();
@@ -31,6 +32,7 @@ const YourChallengesPage = () => {
           </div>
         </PremiumFeatures>
       )}
+      <Navbar />
     </div>
   );
 };

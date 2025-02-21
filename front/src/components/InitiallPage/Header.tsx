@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { BarsIcon } from "@/icons/Bars";
-import { PlusIcon } from "@/icons/Plus";
+import PremiumFeatures from "../ui/PremiumFeatures";
+import TokenIcon from "@/icons/TokenIcon";
 
 const Header = () => {
   return (
@@ -8,9 +9,16 @@ const Header = () => {
       <Link to="/about">
         <BarsIcon />
       </Link>
-      <Link to="/new">
-        <PlusIcon />
-      </Link>
+      <div className="flex items-center gap-2">
+        <div className="flex font-druk text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-1 px-2 font-medium hover:opacity-90">
+          <PremiumFeatures>
+            <div className="flex items-center gap-1">
+              <span>100</span>
+              <TokenIcon />
+            </div>
+          </PremiumFeatures>
+        </div>
+      </div>
     </div>
   );
 };

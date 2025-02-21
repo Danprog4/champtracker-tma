@@ -51,7 +51,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                   </p>
                 </div>
                 <Button
-                  className="w-full h-10 rounded-lg bg-gradient-to-r from-yellow-600 to-red-900 text-lg font-medium text-white flex items-center justify-center"
+                  className="w-full h-10 rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 text-lg font-medium text-white flex items-center justify-center"
                   onClick={() => setIsOpen(false)}>
                   <span>Закрыть</span>
                 </Button>

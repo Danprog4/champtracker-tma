@@ -1,7 +1,7 @@
-import { User, usersTable } from '../schema';
-import { db } from '..';
-import { eq } from 'drizzle-orm';
-import { User as TelegramUser } from '@telegram-apps/init-data-node';
+import { User, usersTable } from "../schema";
+import { db } from "..";
+import { eq } from "drizzle-orm";
+import { User as TelegramUser } from "@telegram-apps/init-data-node";
 
 export const getUser = async (id: number): Promise<User | null> => {
   const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
@@ -12,7 +12,7 @@ export const getUser = async (id: number): Promise<User | null> => {
 export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
   const name =
     telegramUser.first_name +
-    (telegramUser.last_name ? ` ${telegramUser.last_name}` : '');
+    (telegramUser.last_name ? ` ${telegramUser.last_name}` : "");
 
   const users = await db
     .insert(usersTable)
@@ -21,7 +21,7 @@ export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
       name: name,
       username: telegramUser.username || null,
       isPremium: telegramUser.is_premium || false,
-      language: telegramUser.language_code || 'en',
+      language: telegramUser.language_code || "en",
       photoUrl: telegramUser.photo_url || null,
     })
     .returning();
@@ -29,13 +29,16 @@ export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
   return users[0];
 };
 
-export const getPremium = async (id: number): Promise<{ premium: boolean, premiumUntil: string | null }> => {
+export const getPremium = async (
+  id: number
+): Promise<{ premium: boolean; premiumUntil: string | null }> => {
   const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
   console.log(users[0].premiumUntil, "users[0].premiumUntil");
-  return { premium: Boolean(users[0].premiumUntil), premiumUntil: users[0].premiumUntil };
-  
+  return {
+    premium: Boolean(users[0].premiumUntil),
+    premiumUntil: users[0].premiumUntil,
+  };
 };
-
 
 export const updatePremium = async (id: number, premiumUntil: string) => {
   await db
@@ -48,7 +51,7 @@ export const getOnBoarding = async (id: number): Promise<boolean> => {
   const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
 
   return Boolean(users[0].onBoarding);
-}
+};
 
 export const updateOnBoarding = async (id: number, onBoarding: boolean) => {
   const users = await db
@@ -57,5 +60,5 @@ export const updateOnBoarding = async (id: number, onBoarding: boolean) => {
     .where(eq(usersTable.id, id))
     .returning({ onBoarding: usersTable.onBoarding });
 
-    return users[0].onBoarding;
+  return users[0].onBoarding;
 };
