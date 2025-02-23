@@ -15,7 +15,7 @@ export const ProfilePage = () => {
   const { user } = useUser();
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-min-full flex flex-col">
       <div className="flex items-center justify-center">
         <div className="fixed z-10  flex w-[100vw] justify-between bg-black h-[11vh] p-3 pt-14 top-0">
           <Link to="/">
@@ -132,7 +132,7 @@ export const ProfilePage = () => {
           ))}
         </div>
       </div>
-      <div className="text-xs pr-3 text-gray-400 leading-4 pl-3 pt-3">
+      <div className="text-xs pr-3 text-gray-400 leading-4 pl-3 pt-3 mb-20">
         Получай токены за свои достижения и повышай свой уровень в таблице
         лидеров. Будь лучше всех!
       </div>

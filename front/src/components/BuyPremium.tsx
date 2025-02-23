@@ -91,7 +91,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                     {isBuyingPending ? (
                       <span>Покупка...</span>
                     ) : (
-                      <span>Купить за 300 токентов</span>
+                      <span>Купить за 300 токенов</span>
                     )}
                   </Button>
                 )}

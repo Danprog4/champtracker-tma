@@ -4,6 +4,10 @@ import PremiumFeatures from "../ui/PremiumFeatures";
 import TokenIcon from "@/icons/TokenIcon";
 import { useTokens } from "@/hooks/useTokens";
 import { useUser } from "@/hooks/useUser";
+import { isPremium } from "@/lib/challengeUtills";
+import { BuyPremium } from "../BuyPremium";
+import { Button } from "react-day-picker";
+import { TelegramStar } from "../shared/TelegramStar";
 
 const Header = () => {
   const { user } = useUser();
@@ -14,13 +18,22 @@ const Header = () => {
         <BarsIcon />
       </Link>
       <div className="flex items-center gap-2">
-        <div className="flex font-druk text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-1 px-2 font-medium hover:opacity-90">
-          <PremiumFeatures>
-            <div className="flex items-center gap-1">
-              <span>{user.tokens}</span>
-              <TokenIcon />
-            </div>
-          </PremiumFeatures>
+        <div className="flex text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-1 px-2 font-medium hover:opacity-90">
+          {isPremium(user) ? (
+            <PremiumFeatures>
+              <div className="flex items-center gap-1 font-druk">
+                <span>{user.tokens}</span>
+                <TokenIcon />
+              </div>
+            </PremiumFeatures>
+          ) : (
+            <BuyPremium>
+              <div className="flex font-druk text-xs">
+                <span>Премиум</span>
+                <TelegramStar />
+              </div>
+            </BuyPremium>
+          )}
         </div>
       </div>
     </div>
