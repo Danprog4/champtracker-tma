@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useTokens } from "@/hooks/useTokens";
 import dayjs from "dayjs";
 import { useUser } from "@/hooks/useUser";
+import { toast } from "sonner";
 
 interface BuyPremiumProps {
   children: ReactNode;
@@ -22,13 +23,13 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
   } = usePremium();
 
   const [isForTokens, setIsForTokens] = useState(false);
-
+  const { user } = useUser();
   return (
     <Drawer.Root>
       <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 mt-24 flex flex-col rounded-t-[10px]">
+        <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 mt-24 flex flex-col rounded-t-[10px] z-50">
           <div className="flex-1 rounded-t-[10px] bg-zinc-900 p-4 pb-7">
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-zinc-600" />
             <div className="mx-auto max-w-md">
@@ -41,7 +42,17 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                     Без ограничений
                   </h3>
                   <p className="text-sm text-zinc-400">
-                    Создавай и выполняй любое количество заданий
+                    Создавай и выполняй любое количество своих или готовых
+                    заданий
+                  </p>
+                </div>
+                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
+                  <h3 className="mb-2 font-medium text-white">
+                    Токены за задания
+                  </h3>
+                  <p className="text-sm text-zinc-400">
+                    Получай токены за пройденные дни и продлевай за них свой
+                    премиум
                   </p>
                 </div>
                 <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
@@ -50,14 +61,6 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                   </h3>
                   <p className="text-sm text-zinc-400">
                     Получай подробные отчеты о своем прогрессе и достижениях
-                  </p>
-                </div>
-                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
-                  <h3 className="mb-2 font-medium text-white">
-                    Токены за задания (в разработке)
-                  </h3>
-                  <p className="text-sm text-zinc-400">
-                    Получай токены за пройденные дни и обменивай их на премиум
                   </p>
                 </div>
 
@@ -83,9 +86,13 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                   </Button>
                 ) : (
                   <Button
-                    onClick={() =>
-                      updatePremium(dayjs().add(1, "month").toISOString())
-                    }
+                    onClick={() => {
+                      if (user.tokens < 300) {
+                        toast.error("У вас недостаточно токенов");
+                      } else {
+                        updatePremium(dayjs().add(1, "month").toISOString());
+                      }
+                    }}
                     disabled={isUpdatingPremium}
                     className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90">
                     {isBuyingPending ? (

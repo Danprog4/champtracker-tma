@@ -35,10 +35,29 @@ export default function StartModal({
   }, [tempStartTime]);
 
   const handleSave = () => {
-    if (setDate && tempDate) {
-      setDate(dayjs(tempDate));
+    if (!setDate || !tempDate) {
+      setStartDate(tempStartTime);
+      setIsOpen(false);
+      return;
     }
-    setStartDate(tempStartTime);
+
+    const today = dayjs().startOf("day").startOf("day");
+    const tomorrow = today.add(1, "day").startOf("day");
+    const selectedDate = dayjs(tempDate);
+
+    if (tempStartTime === "Own date") {
+      if (selectedDate.startOf("day").isSame(today, "day")) {
+        setStartDate("Now");
+        setTempStartTime("Now");
+      } else if (selectedDate.startOf("day").isSame(tomorrow, "day")) {
+        setStartDate("Tomorrow");
+        setTempStartTime("Tomorrow");
+      }
+    } else {
+      setStartDate(tempStartTime);
+    }
+
+    setDate(selectedDate);
     setIsOpen(false);
   };
 
@@ -50,7 +69,8 @@ export default function StartModal({
       date.getFullYear() <= today.getFullYear()
     );
   };
-
+  console.log(tempStartTime);
+  console.log(startDate);
   return (
     <StartModalView
       isOpen={isOpen}

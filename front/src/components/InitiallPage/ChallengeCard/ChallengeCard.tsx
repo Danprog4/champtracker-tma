@@ -11,10 +11,21 @@ import { ChallengeCardUI } from "./ChallengeCardView";
 
 type ChallengeCardProps = {
   challenge: Challenge;
-  isLast: boolean;
+  index: number;
+  isLastNonExpired?: boolean;
+  isLastExpired?: boolean;
+  isExpired: boolean;
+  isPremium?: boolean;
 };
 
-export const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
+export const ChallengeCard = ({
+  challenge,
+  isLastNonExpired,
+  isLastExpired,
+  isExpired,
+  isPremium,
+  index,
+}: ChallengeCardProps) => {
   const {
     id,
     title,
@@ -63,9 +74,11 @@ export const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
 
   return (
     <ChallengeCardUI
+      index={index}
       title={title}
       color={color}
-      isLast={isLast}
+      isLastNonExpired={isLastNonExpired}
+      isLastExpired={isLastExpired}
       daysSinceStart={maxDaysSinceStart}
       weeks={weeks}
       formattedStartDate={formattedStartDate}
@@ -82,6 +95,8 @@ export const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
       Days={Days}
       nextAvailableDay={nextAvailableDay}
       formattedNextAvailableDay={formattedNextAvailableDay}
+      isExpired={isExpired}
+      isPremium={isPremium}
     />
   );
 };

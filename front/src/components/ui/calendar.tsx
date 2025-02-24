@@ -42,13 +42,12 @@ function Calendar({
             : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
-          buttonVariants({ variant: "ghost" }),
-          "h-8 w-8 p-0 font-normal aria-selected:opacity-100 bg-gray-700 dark:bg-neutral-800 dark:text-neutral-200"
+          "h-8 w-8 p-0 font-normal aria-selected:opacity-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected:
-          "bg-neutral-900 text-neutral-50 hover:bg-neutral-900 hover:text-neutral-50 focus:bg-neutral-900 focus:text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50 dark:hover:text-neutral-900 dark:focus:bg-neutral-50 dark:focus:text-neutral-900",
+          "bg-yellow-400 text-white hover:bg-yellow-400 hover:text-white focus:bg-yellow-500 focus:text-white dark:bg-yellow-500 dark:text-white dark:hover:bg-yellow-500",
 
         day_outside:
           "day-outside invisible text-neutral-500 aria-selected:bg-neutral-100/50 aria-selected:text-neutral-500 dark:text-neutral-400 dark:aria-selected:bg-neutral-800/50 dark:aria-selected:text-neutral-400",

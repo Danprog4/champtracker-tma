@@ -2,11 +2,13 @@ import { Link } from "@tanstack/react-router";
 import { DateInfo } from "../DateInfo";
 import { Dayjs } from "dayjs";
 import { Check } from "@/icons/Check";
+import { toast, Toaster } from "sonner";
 
 type ChallengeCardUIProps = {
   title: string;
   color: string;
-  isLast: boolean;
+  isLastNonExpired?: boolean;
+  isLastExpired?: boolean;
   daysSinceStart: number;
   weeks: number;
   formattedStartDate: string;
@@ -23,12 +25,16 @@ type ChallengeCardUIProps = {
   Days: string[];
   nextAvailableDay: Dayjs | null;
   formattedNextAvailableDay: string;
+  isExpired: boolean;
+  isPremium?: boolean;
+  index: number;
 };
 
 export const ChallengeCardUI = ({
   title,
   color,
-  isLast,
+  isLastNonExpired,
+  isLastExpired,
   daysSinceStart,
   weeks,
   formattedStartDate,
@@ -45,13 +51,23 @@ export const ChallengeCardUI = ({
   formattedTodayDate,
   nextAvailableDay,
   formattedNextAvailableDay,
+  isExpired,
+  isPremium,
+  index,
 }: ChallengeCardUIProps) => {
-  console.log(nextAvailableDay, "nextAvailableDay");
   return (
     <Link
+      onClick={() => {
+        if (!isPremium && index !== 0) {
+          toast.error(
+            "К сожалению, ваш премиум закончился. Пожалуйста, продлите его для прохождения этого задания"
+          );
+        }
+      }}
       to={`/challenge/$taskId`}
+      disabled={isExpired || (!isPremium && index !== 0)}
       params={{ taskId: challengeId }}
-      className={`${color} flex h-[16vh] w-[95vw] justify-between rounded-lg pr-0 pl-4 ${isLast ? "mb-28" : ""}`}>
+      className={`${color} flex h-[16vh] w-[95vw] justify-between rounded-lg pr-0 pl-4 ${isLastNonExpired ? "mb-8" : ""} ${isExpired || (!isPremium && index !== 0) ? "opacity-50" : ""} `}>
       <div className="flex flex-col justify-between pt-4 pb-4">
         <span className="leading-6 text-black font-druk text-md">{title}</span>
         <div className="flex">
@@ -80,12 +96,14 @@ export const ChallengeCardUI = ({
           onCheckDay();
         }}>
         <div className="text-md font-extrabold  text-white flex justify-center items-center">
-          {isDayChecked ? (
+          {isDayChecked && !isExpired ? (
             <Check />
-          ) : startDateIsAfterToday ? (
+          ) : startDateIsAfterToday && !isExpired ? (
             <DateInfo label="НАЧАЛО" date={formattedStartDate} />
-          ) : isDayAvailable ? (
+          ) : isDayAvailable && !isExpired ? (
             <span className="font-druk text-xs">ГОТОВО</span>
+          ) : isExpired ? (
+            <span className="font-druk text-xs">ПРОЙДЕНО</span>
           ) : (
             <DateInfo
               label="СЛЕДУЮЩИЙ ДЕНЬ"

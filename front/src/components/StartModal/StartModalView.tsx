@@ -73,7 +73,7 @@ export default function StartModalView({
                 <RadioGroupItem
                   value="Now"
                   className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-800 p-[10px]">
-                  Сейчас
+                  Сегодня
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="Tomorrow"
@@ -84,7 +84,7 @@ export default function StartModalView({
                   value="Own date"
                   className="flex max-h-[40px] w-[90vw] justify-between rounded-t-none bg-gray-800 p-[10px]">
                   <span>Своя дата</span>
-                  {isValidDate(tempDate) && (
+                  {isValidDate(tempDate) && tempStartTime === "Own date" && (
                     <span>{`${
                       tempDate?.getDate() <= 9
                         ? "0" + tempDate?.getDate()

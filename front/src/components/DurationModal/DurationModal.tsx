@@ -40,15 +40,6 @@ const DurationModal: React.FC<DurPropsSmart> = ({
     [regularity, card]
   );
 
-  useEffect(() => {
-    const isPreset = presetDurations.includes(duration);
-    setTempDuration(duration);
-    setInputDuration(
-      isPreset ? "" : String(duration / (regularity === "everyday" ? 1 : 7))
-    );
-    setIsCustomDuration(!isPreset);
-  }, [duration, presetDurations]);
-
   const isButtonDisabled = (): boolean => {
     return (isCustomDuration && inputDuration.length === 0) || isLong;
   };
@@ -97,8 +88,20 @@ const DurationModal: React.FC<DurPropsSmart> = ({
     } else {
       setDuration(regularity === "everyday" ? 30 : 84);
       setIsOpen(false);
+      setIsCustomDuration(false);
+      setInputDuration("");
+      setIsLong(false);
+      setTempDuration(regularity === "everyday" ? 30 : 84);
     }
   };
+  console.log(
+    isCustomDuration
+      ? Number(inputDuration) * (regularity === "everyday" ? 1 : 7)
+      : tempDuration,
+    "finalDuration"
+  );
+
+  console.log(duration, "duration");
 
   const handleClose = () => {
     setTempDuration(duration);
