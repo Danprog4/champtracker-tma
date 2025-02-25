@@ -6,7 +6,7 @@ import { useTokens } from "@/hooks/useTokens";
 import { useUser } from "@/hooks/useUser";
 import { isPremium } from "@/lib/challengeUtills";
 import { BuyPremium } from "../BuyPremium";
-import { Button } from "react-day-picker";
+import { Button } from "../ui/button";
 import { TelegramStar } from "../shared/TelegramStar";
 
 const Header = () => {
@@ -18,23 +18,25 @@ const Header = () => {
         <BarsIcon />
       </Link>
       <div className="flex items-center gap-2">
-        <div className="flex text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-1 px-2 font-medium hover:opacity-90">
-          {isPremium(user) ? (
-            <PremiumFeatures>
+        {isPremium(user) ? (
+          <PremiumFeatures>
+            <div className="flex text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-1 px-2 font-medium hover:opacity-90">
               <div className="flex items-center gap-1 font-druk">
                 <span>{user.tokens}</span>
                 <TokenIcon />
               </div>
-            </PremiumFeatures>
-          ) : (
-            <BuyPremium>
-              <div className="flex font-druk text-xs">
-                <span>Премиум</span>
-                <TelegramStar />
-              </div>
-            </BuyPremium>
-          )}
-        </div>
+            </div>
+          </PremiumFeatures>
+        ) : (
+          <BuyPremium>
+            <Button
+              variant="ghost"
+              className="font-druk text-[10px] items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  font-medium text-black hover:opacity-90">
+              <span>ПРЕМИУМ</span>
+              <TelegramStar />
+            </Button>
+          </BuyPremium>
+        )}
       </div>
     </div>
   );

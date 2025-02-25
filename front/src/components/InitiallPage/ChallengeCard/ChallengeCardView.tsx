@@ -65,7 +65,7 @@ export const ChallengeCardUI = ({
         }
       }}
       to={`/challenge/$taskId`}
-      disabled={isExpired || (!isPremium && index !== 0)}
+      disabled={!isPremium && index !== 0}
       params={{ taskId: challengeId }}
       className={`${color} flex h-[16vh] w-[95vw] justify-between rounded-lg pr-0 pl-4 ${isLastNonExpired ? "mb-8" : ""} ${isExpired || (!isPremium && index !== 0) ? "opacity-50" : ""} `}>
       <div className="flex flex-col justify-between pt-4 pb-4">
@@ -76,7 +76,7 @@ export const ChallengeCardUI = ({
               ? daysSinceStart
               : daysSinceStart !== 0 && weeks}
           </span>
-          <div className="flex-col flex-end text-xs font-medium text-black mt-2.5 ml-1.5  ">
+          <div className="flex-col flex-end text-xs font-medium text-black mt-2.5 ml-2  ">
             <div className="mb-[-5px]">{formattedTodayDate}.</div>
             <div>
               {daysSinceStart !== 0 && "/ "}

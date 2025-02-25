@@ -13,17 +13,17 @@ import { Button } from "@/components/ui/button";
 import { TelegramStar } from "@/components/shared/TelegramStar";
 import { useUser } from "@/hooks/useUser";
 import { isPremium } from "@/lib/challengeUtills";
+import PremiumFeatures from "@/components/ui/PremiumFeatures";
 
 const HintsAndTipsPage: React.FC = () => {
   const { user } = useUser();
   return (
     <div className="flex h-screen flex-col bg-yellow-400">
-      <div className="fixed z-10 flex w-[100vw] text-black justify-between bg-yellow-400  pl-3 pr-3 pt-14 ">
+      <div className="fixed z-1 flex w-[100vw] text-black justify-between bg-yellow-400  pl-3 pr-3 pt-14 ">
         <Link to="/about" className="">
           <BackIcon />
         </Link>
       </div>
-
       <div className="mb-8 mt-[100px] pl-3">
         <span className="text-2xl leading-6 font-extrabold text-black font-druk">
           ПОДСКАЗКИ <br /> И СОВЕТЫ
@@ -47,15 +47,17 @@ const HintsAndTipsPage: React.FC = () => {
         <BuyPremium>
           <Button
             variant="ghost"
-            className="fixed left-3 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-orange-400 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
+            className="fixed left-3 font-druk text-[10px] bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-black hover:opacity-90">
+            <span>ПРЕМИУМ</span>
             <TelegramStar />
-            <span>Premium</span>
           </Button>
         </BuyPremium>
       ) : (
-        <div className="fixed flex flex-nowrap left-3 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-orange-400 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
-          У вас есть премиум!
-        </div>
+        <PremiumFeatures>
+          <div className="fixed flex font-druk text-xs flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-black hover:opacity-90">
+            Ваш премиум
+          </div>
+        </PremiumFeatures>
       )}
     </div>
   );

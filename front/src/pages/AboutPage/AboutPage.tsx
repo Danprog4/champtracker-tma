@@ -9,6 +9,7 @@ import { TelegramStar } from "@/components/shared/TelegramStar";
 import { CrossIcon } from "@/icons/Cross";
 import { useUser } from "@/hooks/useUser";
 import { isPremium } from "@/lib/challengeUtills";
+import PremiumFeatures from "@/components/ui/PremiumFeatures";
 const AboutPage: React.FC = () => {
   const { user } = useUser();
 
@@ -30,15 +31,17 @@ const AboutPage: React.FC = () => {
         <BuyPremium>
           <Button
             variant="ghost"
-            className="fixed left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
+            className="fixed left-3 font-druk text-[10px] bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-black hover:opacity-90">
+            <span>ПРЕМИУМ</span>
             <TelegramStar />
-            <span>Премиум</span>
           </Button>
         </BuyPremium>
       ) : (
-        <div className="fixed flex font-druk text-xs flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-black hover:opacity-90">
-          Ваш премиум
-        </div>
+        <PremiumFeatures>
+          <div className="fixed flex font-druk text-xs flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-black hover:opacity-90">
+            Ваш премиум
+          </div>
+        </PremiumFeatures>
       )}
       <div className="flex font-druk">
         <a
