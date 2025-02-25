@@ -2,8 +2,6 @@ import { Challenge } from "@back-types";
 import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { useUser } from "@/hooks/useUser";
-import { usePremium } from "@/hooks/usePremium";
 
 // Подключаем плагины
 dayjs.extend(utc);
@@ -143,14 +141,10 @@ export const getNextAvailableDay = (challenge: Challenge): Dayjs | null => {
   return nextDate;
 };
 
-export const isDateUpdate = (
-  lastActiveDate: string | null,
-  isPremium: boolean
-): boolean => {
+export const isDateUpdate = (lastActiveDate: string | null): boolean => {
   if (!lastActiveDate) return true;
 
   const isDateUpdate =
-    isPremium &&
     dayjs(lastActiveDate).startOf("day").isBefore(dayjs().startOf("day")) &&
     !dayjs(lastActiveDate).isSame(dayjs().startOf("day"));
 

@@ -74,3 +74,10 @@ export const updateOnBoarding = async (id: number, onBoarding: boolean) => {
 
   return users[0].onBoarding;
 };
+
+export const updateCompletedChallengesCount = async (id: number, count: number) => {
+  await db
+    .update(usersTable)
+    .set({ completedChallengesCount: count })
+    .where(eq(usersTable.id, id));
+};

@@ -69,7 +69,6 @@ export const usePremium = () => {
   return {
     handleBuyPremium,
     isBuyingPending,
-    isPremium: premium.premium.premium,
     isPremiumUntil: premium.premium.premiumUntil,
     updatePremium: updatePremiumFunc,
     isUpdatingPremium,

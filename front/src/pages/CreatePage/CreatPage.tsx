@@ -9,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import CreateDump from "./CreatePageView";
 import { FullPageSpinner } from "@/components/shared/FullPageSpinner";
-import { usePremium } from "@/hooks/usePremium";
 import { Colors } from "@/configs/bgColors.config";
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -35,7 +34,6 @@ const CreateSmart: React.FC = () => {
   const [duration, setDuration] = useState(regularity === "everyday" ? 30 : 84);
   const [date, setDate] = useState<Dayjs | undefined>(undefined);
   const [daysOfWeek, setDaysOfWeek] = useState<number[]>([]);
-  const { isPremium } = usePremium();
   const { challenges } = useChallenges();
 
   useEffect(() => {
@@ -101,7 +99,6 @@ const CreateSmart: React.FC = () => {
         daysOfWeek={daysOfWeek}
         setDaysOfWeek={setDaysOfWeek}
         handleSave={handleSave}
-        isPremium={isPremium}
         challenges={challenges}
       />
     </>

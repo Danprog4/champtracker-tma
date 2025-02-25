@@ -12,6 +12,8 @@ import Notifications from "@/components/Notifications/Notifications";
 import Title from "@/components/Tittle/Tittle";
 import ColorsSchema from "@/components/Colors/ColorsSchema";
 import { Colors } from "@/configs/bgColors.config";
+import { useUser } from "@/hooks/useUser";
+import { isPremium } from "@/lib/challengeUtills";
 interface CreateDumpProps {
   card: any;
   title: string;
@@ -31,7 +33,6 @@ interface CreateDumpProps {
   daysOfWeek: number[];
   setDaysOfWeek: (value: number[]) => void;
   handleSave: () => void;
-  isPremium: boolean;
   challenges: Challenge[];
 }
 
@@ -54,9 +55,9 @@ const CreateDump: React.FC<CreateDumpProps> = ({
   daysOfWeek,
   setDaysOfWeek,
   handleSave,
-  isPremium,
   challenges,
 }) => {
+  const { user } = useUser();
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
   console.log(Colors[color], color);
   return (
@@ -96,7 +97,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
       />
       <ColorsSchema color={color} setColor={setColor} />
       <div className="flex items-center justify-center pl-0 font-extrabold mb-10">
-        {isPremium || challenges.length < 1 ? (
+        {isPremium(user) || challenges.length < 1 ? (
           <button
             onClick={handleSave}
             className={`fixed bottom-7 ${Colors[color]} shadow-xl shadow-black z-0 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg  p-5 ${

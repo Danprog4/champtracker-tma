@@ -11,10 +11,11 @@ import { BackIcon } from "@/icons/Back";
 import { BuyPremium } from "@/components/BuyPremium";
 import { Button } from "@/components/ui/button";
 import { TelegramStar } from "@/components/shared/TelegramStar";
-import { usePremium } from "@/hooks/usePremium";
+import { useUser } from "@/hooks/useUser";
+import { isPremium } from "@/lib/challengeUtills";
 
 const HintsAndTipsPage: React.FC = () => {
-  const { isPremium } = usePremium();
+  const { user } = useUser();
   return (
     <div className="flex h-screen flex-col bg-yellow-400">
       <div className="fixed z-10 flex w-[100vw] text-black justify-between bg-yellow-400  pl-3 pr-3 pt-14 ">
@@ -42,7 +43,7 @@ const HintsAndTipsPage: React.FC = () => {
           ))}
         </Accordion>
       </div>
-      {!isPremium ? (
+      {!isPremium(user) ? (
         <BuyPremium>
           <Button
             variant="ghost"

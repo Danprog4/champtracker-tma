@@ -5,20 +5,33 @@ import { TelegramStar } from "@/components/shared/TelegramStar";
 import { Button } from "@/components/ui/button";
 import { PremiumFeatures } from "@/components/ui/PremiumFeatures";
 import { useChallenges } from "@/hooks/useChallenges";
-import { usePremium } from "@/hooks/usePremium";
 import { Navbar } from "./Navbar";
 import { Modal } from "@/components/Modal";
+import { useUser } from "@/hooks/useUser";
+import { isPremium } from "@/lib/challengeUtills";
+import dayjs from "dayjs";
+import { isDateUpdate } from "@/lib/dateUtils";
 
 const YourChallengesPage = () => {
   const { challenges } = useChallenges();
-  const { isPremium } = usePremium();
+  const { user } = useUser();
+
+  console.log(
+    dayjs(user.lastActiveDate)
+      .startOf("day")
+      .isBefore(dayjs().startOf("day")) &&
+      !dayjs(user.lastActiveDate).isSame(dayjs().startOf("day")),
+    "user.lastActiveDate"
+  );
+
+  console.log(isDateUpdate(user.lastActiveDate), "isDateUpdate");
 
   return (
     <div className="flex h-screen flex-col">
       <Header />
       <Modal />
       <ChallengeList challenges={challenges} />
-      {!isPremium ? (
+      {!isPremium(user) ? (
         <BuyPremium>
           <Button
             variant="ghost"

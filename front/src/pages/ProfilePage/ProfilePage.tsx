@@ -2,24 +2,17 @@ import { BuyPremium } from "@/components/BuyPremium";
 import { TelegramStar } from "@/components/shared/TelegramStar";
 import PremiumFeatures from "@/components/ui/PremiumFeatures";
 import { useChallenges } from "@/hooks/useChallenges";
-import { useLastActiveDate } from "@/hooks/useLastActiveDate";
 import { usePremium } from "@/hooks/usePremium";
 import { useTokens } from "@/hooks/useTokens";
 import { useUser } from "@/hooks/useUser";
 import { BackIcon } from "@/icons/Back";
 import TokenIcon from "@/icons/TokenIcon";
-import { completedChallengesCount } from "@/lib/challengeUtills";
+import { isPremium } from "@/lib/challengeUtills";
 import { Link } from "@tanstack/react-router";
 import dayjs from "dayjs";
-import { useEffect } from "react";
-import { toast } from "sonner";
 
 export const ProfilePage = () => {
-  const { challenges } = useChallenges();
-  const { isPremium } = usePremium();
   const { user } = useUser();
-  const { updateTokens } = useTokens();
-  const completedChallenges = completedChallengesCount(challenges);
 
   return (
     <div className="h-full flex flex-col">
@@ -34,7 +27,7 @@ export const ProfilePage = () => {
         <div className="text-start text-2xl font-druk mt-24 flex items-end gap-2">
           <div className="flex gap-1">
             <div>{user.name}</div>
-            {isPremium && (
+            {isPremium(user) && (
               <div className="pt-[5px]">
                 <TelegramStar />
               </div>
@@ -43,10 +36,10 @@ export const ProfilePage = () => {
         </div>
         <div>
           <div className="text-white text-sm ">
-            Выполненных заданий: {completedChallenges}
+            Выполненных заданий: {user.completedChallengesCount}
           </div>
           <div className="text-white text-sm ">
-            {isPremium ? (
+            {isPremium(user) ? (
               <>Премиум до {dayjs(user.premiumUntil).format("DD.MM.YYYY")}</>
             ) : (
               <>Премиум: нет</>
@@ -67,7 +60,7 @@ export const ProfilePage = () => {
               <div className="pr-3">{`${index === Array.from({ length: 5 }).length - 1 ? "100." : `${index + 1}.`}`}</div>
               <div className="flex items-center">
                 {index === Array.from({ length: 5 }).length - 1 ? (
-                  isPremium ? (
+                  isPremium(user) ? (
                     <div className="flex items-center gap-1">
                       {user.username}
                       <div className="pb-[4px]">
@@ -106,17 +99,17 @@ export const ProfilePage = () => {
             {
               title: "Первые шаги",
               description: "Выполнить первое задание",
-              completed: completedChallenges > 0,
+              completed: user.completedChallengesCount > 0,
             },
             {
               title: "Активист",
               description: "Выполнить 10 заданий",
-              completed: completedChallenges >= 10,
+              completed: user.completedChallengesCount >= 10,
             },
             {
               title: "Коллекционер",
               description: "Собрать 1000 токенов",
-              completed: false,
+              completed: user.tokens >= 1000,
             },
             {
               title: "Чемпион",
@@ -143,7 +136,7 @@ export const ProfilePage = () => {
         Получай токены за свои достижения и повышай свой уровень в таблице
         лидеров. Будь лучше всех!
       </div>
-      {!isPremium ? (
+      {!isPremium(user) ? (
         <BuyPremium>
           <button
             className={`fixed font-druk text-xs text-black hover:opacity-90 bottom-7 ml-3 flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5       }`}>

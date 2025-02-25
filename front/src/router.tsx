@@ -3,23 +3,8 @@ import {
   createRoute,
   createRouter,
   Link,
-  useNavigate,
 } from "@tanstack/react-router";
 import { Navigate } from "@tanstack/react-router";
-// const App = lazy(() => import("./App"));
-// const YourChallengesPage = lazy(
-//   () => import("./pages/YourChallenges/YourChallengesPage")
-// );
-// const Challenges = lazy(
-//   () => import("./pages/ChallengesPage/ChallengesPageView")
-// );
-// const Challenge = lazy(() => import("./pages/Challenge/ChallengeView"));
-// const CreateSmart = lazy(() => import("./pages/CreatePage./CreatPage"));
-// const AboutPage = lazy(() => import("./pages/AboutPage/AboutPage"));
-// const HintsAndTipsPage = lazy(() => import("./pages/HintsPage/HintsPage"));
-// const ChallengeInfo = lazy(() => import("./pages/ChallengeInfo/ChallengeInfo"));
-// const UpdatePageContainer = lazy(() => import("./pages/UpdatePage/UpdatePage"));
-// const InitiallPage = lazy(() => import("./pages/InitiallPage/InitiallPage"));
 import App from "./App";
 import InitiallPage from "./pages/InitiallPage/InitiallPage";
 import Challenges from "./pages/ChallengesPage/ChallengesPageView";

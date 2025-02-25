@@ -1,17 +1,17 @@
 import React from "react";
-import CrossImg from "../../assets/images/—Pngtree—vector cross icon_4254623.png";
 import GitHubLogo from "../../assets/images/GitHub-Logo.wine.svg";
 import TelegramLogo from "../../assets/images/telegram-svgrepo-com (3).svg";
 import CopyRightLogo from "../../assets/images/5a369c1a2cfcd0.4577110515135283461843.png";
 import { Link } from "@tanstack/react-router";
 import { BuyPremium } from "@/components/BuyPremium";
-import { usePremium } from "@/hooks/usePremium";
 import { Button } from "@/components/ui/button";
 import { TelegramStar } from "@/components/shared/TelegramStar";
 import { CrossIcon } from "@/icons/Cross";
+import { useUser } from "@/hooks/useUser";
+import { isPremium } from "@/lib/challengeUtills";
 const AboutPage: React.FC = () => {
-  const { isPremium } = usePremium();
-  console.log(isPremium, "isPremium");
+  const { user } = useUser();
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="fixed flex w-full items-center justify-start bg-black pl-3 pt-14">
@@ -26,18 +26,18 @@ const AboutPage: React.FC = () => {
           ПОДСКАЗКИ <br></br> И СОВЕТЫ
         </span>
       </Link>
-      {!isPremium ? (
+      {!isPremium(user) ? (
         <BuyPremium>
           <Button
             variant="ghost"
-            className="fixed left-3 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
+            className="fixed left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
             <TelegramStar />
-            <span>Premium</span>
+            <span>Премиум</span>
           </Button>
         </BuyPremium>
       ) : (
-        <div className="fixed flex flex-nowrap left-3 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
-          У вас есть премиум!
+        <div className="fixed flex font-druk text-xs flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-black hover:opacity-90">
+          Ваш премиум
         </div>
       )}
       <div className="flex font-druk">
@@ -72,7 +72,7 @@ const AboutPage: React.FC = () => {
       >
         <span>ЯЗЫК</span>
       </div> */}
-      <footer className="mb-12 pr-3 mt-auto flex justify-between pl-3 ">
+      <footer className="mb-14 pr-3 mt-auto flex justify-between pl-3 ">
         <div className="text-lg font-bold font-druk">ChampTracker</div>
         <div className="flex flex-col items-end font-thin">
           <img

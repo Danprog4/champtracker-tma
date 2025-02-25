@@ -7,6 +7,7 @@ import { Switch } from "./ui/switch";
 import { useState } from "react";
 import { useTokens } from "@/hooks/useTokens";
 import dayjs from "dayjs";
+import { useUser } from "@/hooks/useUser";
 
 interface BuyPremiumProps {
   children: ReactNode;

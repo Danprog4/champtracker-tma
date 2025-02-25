@@ -35,6 +35,22 @@ export const getUserOnBoarding = async () => {
   return response.data;
 };
 
+export const updateCompletedChallengesCount = async (count: number) => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.put(
+    `${API_URL}/updateCompletedChallengesCount`,
+    { count },
+    {
+      headers: {
+        "x-init-data": initDataRaw,
+      },
+    }
+  );
+
+  return response.data;
+};
+
 export const updateOnBoarding = async (onBoarding: boolean) => {
   const { initDataRaw } = retrieveLaunchParams();
 

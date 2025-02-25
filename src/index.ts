@@ -9,6 +9,7 @@ import {
   getPremium,
   getUser,
   updateChallenge,
+  updateCompletedChallengesCount,
   updateLastActiveDate,
   updateOnBoarding,
   updatePremium,
@@ -27,6 +28,16 @@ app.get("/getUser", async (c) => {
   const user = await getValidatedUser(c.req);
 
   return c.json({ user });
+});
+
+app.put("/updateCompletedChallengesCount", async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  const body = await c.req.json<{ count: number }>();
+
+  await updateCompletedChallengesCount(user.id, body.count);
+
+  return c.json({ count: user.completedChallengesCount });
 });
 
 app.put("/updateLastActiveDate", async (c) => {

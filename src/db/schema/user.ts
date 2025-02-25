@@ -32,6 +32,7 @@ export const usersTable = pgTable("users", {
     withTimezone: true,
     mode: "string",
   }),
+  completedChallengesCount: integer("completed_challenges_count").notNull().default(0),
 });
 
 export type User = InferSelectModel<typeof usersTable>;

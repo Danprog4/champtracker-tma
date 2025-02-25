@@ -31,7 +31,16 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                     Без ограничений
                   </h3>
                   <p className="text-sm text-zinc-400">
-                    Создавай и выполняй любое количество заданий
+                    Создавай и выполняй любое количество своих или готовых
+                    заданий
+                  </p>
+                </div>
+                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
+                  <h3 className="mb-2 font-medium text-white">
+                    Токены за задания
+                  </h3>
+                  <p className="text-sm text-zinc-400">
+                    Получай токены за пройденные дни и обменивай их на премиум
                   </p>
                 </div>
                 <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
@@ -42,14 +51,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                     Получай подробные отчеты о своем прогрессе и достижениях
                   </p>
                 </div>
-                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
-                  <h3 className="mb-2 font-medium text-white">
-                    Токены за задания (в разработке)
-                  </h3>
-                  <p className="text-sm text-zinc-400">
-                    Получай токены за пройденные дни и обменивай их на премиум
-                  </p>
-                </div>
+
                 <Button
                   className="w-full h-10 rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 text-lg font-medium text-white flex items-center justify-center"
                   onClick={() => setIsOpen(false)}>

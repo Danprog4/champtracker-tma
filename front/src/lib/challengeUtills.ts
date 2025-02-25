@@ -1,13 +1,9 @@
-import { Challenge } from "@back-types";
+import { User } from "@back-types";
 import dayjs from "dayjs";
 
-export const completedChallengesCount = (challenges: Challenge[]) => {
-  return challenges.filter((challenge) => {
-    const lastTaskDate = dayjs(
-      challenge.taskDates[challenge.taskDates.length - 1]
-    ).startOf("day");
-    const today = dayjs().startOf("day");
-
-    return lastTaskDate <= today;
-  }).length;
+export const isPremium = (user: User) => {
+  return (
+    user.premiumUntil &&
+    !dayjs(user.premiumUntil).startOf("day").isBefore(dayjs().startOf("day"))
+  );
 };

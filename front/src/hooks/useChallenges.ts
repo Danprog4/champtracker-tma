@@ -3,6 +3,7 @@ import {
   deleteChallenge,
   getChallenges,
   updateChallenge,
+  updateCompletedChallengesCount,
 } from "@/api/challenge";
 import { dayBeforeToday, isDateUpdate } from "@/lib/dateUtils";
 import { Challenge, UpdateChallenge } from "@back-types";
@@ -15,8 +16,9 @@ import { useNavigate } from "@tanstack/react-router";
 import { useLastActiveDate } from "./useLastActiveDate";
 import { useUser } from "./useUser";
 import { useTokens } from "./useTokens";
-import { usePremium } from "./usePremium";
 import { toast } from "sonner";
+import dayjs from "dayjs";
+import { isPremium } from "@/lib/challengeUtills";
 
 export const useChallenges = () => {
   const queryClient = useQueryClient();
@@ -24,7 +26,6 @@ export const useChallenges = () => {
   const { updateLastActiveDate } = useLastActiveDate();
   const { user } = useUser();
   const { updateTokens } = useTokens();
-  const { isPremium } = usePremium();
 
   const { data: challenges } = useSuspenseQuery<Challenge[]>({
     queryKey: [getChallenges.name],
@@ -104,7 +105,7 @@ export const useChallenges = () => {
       ? task.userCheckedDates?.filter(
           (checkedDate) => checkedDate !== targetDate
         ) || []
-      : isDateUpdate(user.lastActiveDate, isPremium)
+      : isDateUpdate(user.lastActiveDate) && isPremium(user)
         ? (() => {
             updateLastActiveDate();
             updateTokens(user.tokens + 10);
@@ -112,6 +113,23 @@ export const useChallenges = () => {
             return [...(task.userCheckedDates || []), targetDate];
           })()
         : [...(task.userCheckedDates || []), targetDate];
+
+    // Check if challenge is completed
+    const isChallengeCompleted =
+      task.userCheckedDates?.length === task.taskDates.length;
+
+    if (isChallengeCompleted && isPremium(user)) {
+      if (user.completedChallengesCount === 0) {
+        updateCompletedChallengesCount(1);
+        updateTokens(user.tokens + 10);
+        toast.success("Вы успешно выполнили задание и получили 10 токенов");
+      } else if (user.completedChallengesCount === 9) {
+        updateCompletedChallengesCount(10);
+        updateTokens(user.tokens + 100);
+        toast.success("Вы успешно выполнили 10 заданий и получили 100 токенов");
+      }
+    }
+
     // Добавляем дату в список
 
     // Локальное состояние для хранения обновленных дней
