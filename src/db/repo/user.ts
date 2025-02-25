@@ -2,11 +2,23 @@ import { User, usersTable } from "../schema";
 import { db } from "..";
 import { eq } from "drizzle-orm";
 import { User as TelegramUser } from "@telegram-apps/init-data-node";
+import dayjs from "dayjs";
 
 export const getUser = async (id: number): Promise<User | null> => {
   const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
 
   return users[0] || null;
+};
+
+export const updateLastActiveDate = async (id: number) => {
+  await db
+    .update(usersTable)
+    .set({ lastActiveDate: dayjs().toISOString() })
+    .where(eq(usersTable.id, id));
+};
+
+export const updateTokens = async (id: number, tokens: number) => {
+  await db.update(usersTable).set({ tokens }).where(eq(usersTable.id, id));
 };
 
 export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
@@ -33,7 +45,7 @@ export const getPremium = async (
   id: number
 ): Promise<{ premium: boolean; premiumUntil: string | null }> => {
   const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
-  console.log(users[0].premiumUntil, "users[0].premiumUntil");
+
   return {
     premium: Boolean(users[0].premiumUntil),
     premiumUntil: users[0].premiumUntil,

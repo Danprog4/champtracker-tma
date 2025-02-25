@@ -2,26 +2,24 @@ import { BuyPremium } from "@/components/BuyPremium";
 import { TelegramStar } from "@/components/shared/TelegramStar";
 import PremiumFeatures from "@/components/ui/PremiumFeatures";
 import { useChallenges } from "@/hooks/useChallenges";
+import { useLastActiveDate } from "@/hooks/useLastActiveDate";
 import { usePremium } from "@/hooks/usePremium";
+import { useTokens } from "@/hooks/useTokens";
 import { useUser } from "@/hooks/useUser";
 import { BackIcon } from "@/icons/Back";
 import TokenIcon from "@/icons/TokenIcon";
+import { completedChallengesCount } from "@/lib/challengeUtills";
 import { Link } from "@tanstack/react-router";
 import dayjs from "dayjs";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export const ProfilePage = () => {
   const { challenges } = useChallenges();
   const { isPremium } = usePremium();
   const { user } = useUser();
-
-  const completedChallengesCount = challenges.filter((challenge) => {
-    const lastTaskDate = dayjs(
-      challenge.taskDates[challenge.taskDates.length - 1]
-    ).startOf("day");
-    const today = dayjs().startOf("day");
-
-    return lastTaskDate <= today;
-  }).length;
+  const { updateTokens } = useTokens();
+  const completedChallenges = completedChallengesCount(challenges);
 
   return (
     <div className="h-full flex flex-col">
@@ -45,14 +43,18 @@ export const ProfilePage = () => {
         </div>
         <div>
           <div className="text-white text-sm ">
-            Выполненных заданий: {completedChallengesCount}
+            Выполненных заданий: {completedChallenges}
           </div>
           <div className="text-white text-sm ">
-            С нами с {dayjs(user.createdAt).format("DD.MM.YYYY")}
+            {isPremium ? (
+              <>Премиум до {dayjs(user.premiumUntil).format("DD.MM.YYYY")}</>
+            ) : (
+              <>Премиум: нет</>
+            )}
           </div>
         </div>
       </div>
-      <div className="flex flex-col p-3 pt-3 ml-3 mr-3 border border-b-2 border-gray-600 bg-gray-900 rounded-lg">
+      <div className="flex flex-col p-3 pt-3 ml-3 mr-3 border-2 border-gray-600 bg-gray-900 rounded-lg">
         <div className="text-white text-sm font-druk pb-3">Таблица лидеров</div>
         {Array.from({ length: 5 }).map((_, index) => (
           <div
@@ -67,7 +69,7 @@ export const ProfilePage = () => {
                 {index === Array.from({ length: 5 }).length - 1 ? (
                   isPremium ? (
                     <div className="flex items-center gap-1">
-                      {user.name}
+                      {user.username}
                       <div className="pb-[4px]">
                         <TelegramStar />
                       </div>
@@ -82,26 +84,34 @@ export const ProfilePage = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              100 <TokenIcon />
+              {index === Array.from({ length: 5 }).length - 1 ? (
+                <div className="flex items-center gap-1">
+                  {user.tokens} <TokenIcon />
+                </div>
+              ) : (
+                <div className="flex items-center gap-1">
+                  <span>100</span> <TokenIcon />
+                </div>
+              )}
             </div>
           </div>
         ))}
       </div>
 
       {/* New Achievements Section */}
-      <div className="flex flex-col p-3 mt-4 ml-3 mr-3 border border-gray-600 rounded-lg bg-gray-900">
+      <div className="flex flex-col p-3 mt-4 ml-3 mr-3 border-2 border-gray-600 rounded-lg bg-gray-900">
         <div className="text-white text-sm font-druk pb-3">Мои Достижения</div>
         <div className="grid grid-cols-2 gap-3">
           {[
             {
               title: "Первые шаги",
               description: "Выполнить первое задание",
-              completed: completedChallengesCount > 0,
+              completed: completedChallenges > 0,
             },
             {
               title: "Активист",
               description: "Выполнить 10 заданий",
-              completed: completedChallengesCount >= 10,
+              completed: completedChallenges >= 10,
             },
             {
               title: "Коллекционер",

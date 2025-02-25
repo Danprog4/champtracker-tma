@@ -3,13 +3,24 @@ import { Drawer } from "vaul";
 import { TelegramStar } from "./shared/TelegramStar";
 import { usePremium } from "@/hooks/usePremium";
 import { ReactNode } from "@tanstack/react-router";
+import { Switch } from "./ui/switch";
+import { useState } from "react";
+import { useTokens } from "@/hooks/useTokens";
+import dayjs from "dayjs";
 
 interface BuyPremiumProps {
   children: ReactNode;
 }
 
 export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
-  const { handleBuyPremium, isBuyingPending } = usePremium();
+  const {
+    handleBuyPremium,
+    isBuyingPending,
+    updatePremium,
+    isUpdatingPremium,
+  } = usePremium();
+
+  const [isForTokens, setIsForTokens] = useState(false);
 
   return (
     <Drawer.Root>
@@ -48,18 +59,41 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                     Получай токены за пройденные дни и обменивай их на премиум
                   </p>
                 </div>
-                <Button
-                  onClick={handleBuyPremium}
-                  disabled={isBuyingPending}
-                  className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90">
-                  {isBuyingPending ? (
-                    <span>Покупка...</span>
-                  ) : (
-                    <div className="flex justify-center items-center gap-1">
-                      <span>Купить за 10</span> <TelegramStar />
-                    </div>
-                  )}
-                </Button>
+
+                <div className="flex items-center gap-2 text-white w-[94vw] bg-zinc-800 rounded-lg p-2">
+                  <Switch
+                    checked={isForTokens}
+                    onCheckedChange={() => setIsForTokens(!isForTokens)}
+                  />
+                  <span>Купить за токены</span>
+                </div>
+                {!isForTokens ? (
+                  <Button
+                    onClick={handleBuyPremium}
+                    disabled={isBuyingPending}
+                    className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90">
+                    {isBuyingPending ? (
+                      <span>Покупка...</span>
+                    ) : (
+                      <div className="flex justify-center items-center gap-1">
+                        <span>Купить за 10</span> <TelegramStar />
+                      </div>
+                    )}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() =>
+                      updatePremium(dayjs().add(1, "month").toISOString())
+                    }
+                    disabled={isUpdatingPremium}
+                    className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90">
+                    {isBuyingPending ? (
+                      <span>Покупка...</span>
+                    ) : (
+                      <span>Купить за 300 токентов</span>
+                    )}
+                  </Button>
+                )}
               </div>
             </div>
           </div>

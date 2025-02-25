@@ -1,27 +1,41 @@
-import { createInvoice, getPremium } from '@/api/challenge';
+import { createInvoice, getPremium, updatePremium } from "@/api/challenge";
 import {
   useMutation,
   useQueryClient,
   useSuspenseQuery,
-} from '@tanstack/react-query';
-import { on } from '@telegram-apps/sdk';
-import { useEffect } from 'react';
-import { toast } from 'sonner';
+} from "@tanstack/react-query";
+import { on } from "@telegram-apps/sdk";
+import { useEffect } from "react";
+import { toast } from "sonner";
+import { useUser } from "./useUser";
+import { useTokens } from "./useTokens";
 
 export const usePremium = () => {
   const queryClient = useQueryClient();
+  const { user } = useUser();
+  const { updateTokens } = useTokens();
 
   const { data: premium } = useSuspenseQuery({
     queryKey: [getPremium.name],
     queryFn: getPremium,
   });
 
+  const { mutate: updatePremiumFunc, isPending: isUpdatingPremium } =
+    useMutation({
+      mutationFn: (premiumUntil: string) => updatePremium(premiumUntil),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [getPremium.name] });
+        updateTokens(user.tokens - 300);
+        toast.success("Вы успешно получили премиум");
+      },
+    });
+
   const {
     mutate,
     isPending: isBuyingPending,
     data,
   } = useMutation({
-    mutationKey: ['buy-stories'],
+    mutationKey: ["buy-stories"],
     mutationFn: () => {
       return createInvoice();
     },
@@ -30,20 +44,20 @@ export const usePremium = () => {
   useEffect(() => {
     if (!data) return;
 
-    console.log('openInvoice()', data.invoiceUrl);
+    console.log("openInvoice()", data.invoiceUrl);
 
     // @ts-ignore
     window.Telegram.WebApp.openInvoice(data.invoiceUrl);
 
-    on('invoice_closed', (payment: { slug: string; status: string }) => {
-      if (payment.status === 'paid') {
-        toast.success('Payment successful', { id: 'payment-successful' });
+    on("invoice_closed", (payment: { slug: string; status: string }) => {
+      if (payment.status === "paid") {
+        toast.success("Payment successful", { id: "payment-successful" });
         queryClient.invalidateQueries({ queryKey: [getPremium.name] });
       } else if (
-        payment.status === 'cancelled' ||
-        payment.status === 'failed'
+        payment.status === "cancelled" ||
+        payment.status === "failed"
       ) {
-        toast.error('Payment failed', { id: 'payment-failed' });
+        toast.error("Payment failed", { id: "payment-failed" });
       }
     });
   }, [data, queryClient]);
@@ -52,5 +66,12 @@ export const usePremium = () => {
     mutate();
   };
 
-  return { handleBuyPremium, isBuyingPending, isPremium: premium.premium.premium, isPremiumUntil: premium.premium.premiumUntil };
+  return {
+    handleBuyPremium,
+    isBuyingPending,
+    isPremium: premium.premium.premium,
+    isPremiumUntil: premium.premium.premiumUntil,
+    updatePremium: updatePremiumFunc,
+    isUpdatingPremium,
+  };
 };

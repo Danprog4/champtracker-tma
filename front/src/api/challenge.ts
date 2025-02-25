@@ -51,6 +51,24 @@ export const updateOnBoarding = async (onBoarding: boolean) => {
   return response.data as boolean;
 };
 
+export const updatePremium = async (premiumUntil: string) => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.put(
+    `${API_URL}/updatePremium`,
+    {
+      premiumUntil,
+    },
+    {
+      headers: {
+        "x-init-data": initDataRaw,
+      },
+    }
+  );
+
+  return response.data;
+};
+
 export const getPremium = async () => {
   const { initDataRaw } = retrieveLaunchParams();
 
@@ -71,6 +89,38 @@ export const getUser = async () => {
     },
   });
   console.log("getUser api", response.data);
+
+  return response.data;
+};
+
+export const updateLastActiveDate = async () => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.put(
+    `${API_URL}/updateLastActiveDate`,
+    {},
+    {
+      headers: {
+        "x-init-data": initDataRaw,
+      },
+    }
+  );
+
+  return response.data;
+};
+
+export const updateTokens = async (tokens: number) => {
+  const { initDataRaw } = retrieveLaunchParams();
+
+  const response = await axios.put(
+    `${API_URL}/updateTokens`,
+    { tokens },
+    {
+      headers: {
+        "x-init-data": initDataRaw,
+      },
+    }
+  );
 
   return response.data;
 };

@@ -43,7 +43,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
           <SettingsIcon />
         </Link>
       </div>
-      <div className={`${challenge.color} pb-20 p-3 mt-9`}>
+      <div className={`${challenge.color} pb-20 p-3 mt-9 min-h-screen`}>
         <div className="flex justify-between mt-16 ">
           <div className="max-w-[70vw] text-xl leading-6 font-extrabold text-black font-druk mt-5">
             {challenge.title}

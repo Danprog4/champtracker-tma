@@ -7,6 +7,7 @@ import { PremiumFeatures } from "@/components/ui/PremiumFeatures";
 import { useChallenges } from "@/hooks/useChallenges";
 import { usePremium } from "@/hooks/usePremium";
 import { Navbar } from "./Navbar";
+import { Modal } from "@/components/Modal";
 
 const YourChallengesPage = () => {
   const { challenges } = useChallenges();
@@ -15,6 +16,7 @@ const YourChallengesPage = () => {
   return (
     <div className="flex h-screen flex-col">
       <Header />
+      <Modal />
       <ChallengeList challenges={challenges} />
       {!isPremium ? (
         <BuyPremium>

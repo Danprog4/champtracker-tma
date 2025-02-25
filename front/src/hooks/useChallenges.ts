@@ -3,19 +3,28 @@ import {
   deleteChallenge,
   getChallenges,
   updateChallenge,
-} from '@/api/challenge';
-import { dayBeforeToday } from '@/lib/dateUtils';
-import { Challenge, UpdateChallenge } from '@back-types';
+} from "@/api/challenge";
+import { dayBeforeToday, isDateUpdate } from "@/lib/dateUtils";
+import { Challenge, UpdateChallenge } from "@back-types";
 import {
   useMutation,
   useQueryClient,
   useSuspenseQuery,
-} from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
+} from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+import { useLastActiveDate } from "./useLastActiveDate";
+import { useUser } from "./useUser";
+import { useTokens } from "./useTokens";
+import { usePremium } from "./usePremium";
+import { toast } from "sonner";
 
 export const useChallenges = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { updateLastActiveDate } = useLastActiveDate();
+  const { user } = useUser();
+  const { updateTokens } = useTokens();
+  const { isPremium } = usePremium();
 
   const { data: challenges } = useSuspenseQuery<Challenge[]>({
     queryKey: [getChallenges.name],
@@ -25,9 +34,13 @@ export const useChallenges = () => {
   const { mutateAsync: createChallenge, isPending: isCreateChallengePending } =
     useMutation({
       mutationFn: createNewChallenge,
-      onSuccess: (data) => {queryClient.setQueryData([getChallenges.name], (old: Challenge[] = []) => {
-        return [...old, data]
-      })
+      onSuccess: (data) => {
+        queryClient.setQueryData(
+          [getChallenges.name],
+          (old: Challenge[] = []) => {
+            return [...old, data];
+          }
+        );
       },
     });
 
@@ -42,9 +55,9 @@ export const useChallenges = () => {
         [getChallenges.name],
         (old: Challenge[] = []) => {
           return old.map((ch) =>
-            ch.id === updatedChallenge.id ? updatedChallenge : ch,
+            ch.id === updatedChallenge.id ? updatedChallenge : ch
           );
-        },
+        }
       );
     },
   });
@@ -59,15 +72,15 @@ export const useChallenges = () => {
         [getChallenges.name],
         (old: Challenge[] = []) => {
           return old.filter((ch) => ch.id !== deletedChallenge.id);
-        },
+        }
       );
-      navigate({ to: '/' });
+      navigate({ to: "/" });
     },
   });
 
   const checkDay = (
     taskId: string,
-    dayCount: number, // dayCount is now the second argument
+    dayCount: number // dayCount is now the second argument
   ) => {
     // Найдем нужное задание
     const task = challenges?.find((task) => task.id === Number(taskId));
@@ -89,10 +102,17 @@ export const useChallenges = () => {
     // Обновляем состояние дней
     const updatedCheckedDays = isDateChecked
       ? task.userCheckedDates?.filter(
-          (checkedDate) => checkedDate !== targetDate,
-        ) || [] // Убираем дату из списка
-      : [...(task.userCheckedDates || []), targetDate]; 
-     // Добавляем дату в список
+          (checkedDate) => checkedDate !== targetDate
+        ) || []
+      : isDateUpdate(user.lastActiveDate, isPremium)
+        ? (() => {
+            updateLastActiveDate();
+            updateTokens(user.tokens + 10);
+            toast.success("Вы успешно получили 10 токенов");
+            return [...(task.userCheckedDates || []), targetDate];
+          })()
+        : [...(task.userCheckedDates || []), targetDate];
+    // Добавляем дату в список
 
     // Локальное состояние для хранения обновленных дней
     const updatedTask = {

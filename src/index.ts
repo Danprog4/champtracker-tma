@@ -9,7 +9,10 @@ import {
   getPremium,
   getUser,
   updateChallenge,
+  updateLastActiveDate,
   updateOnBoarding,
+  updatePremium,
+  updateTokens,
 } from "./db/repo";
 import { UpdateChallenge } from "./db/schema";
 import { CreateChallengeReq } from "./types";
@@ -26,10 +29,38 @@ app.get("/getUser", async (c) => {
   return c.json({ user });
 });
 
+app.put("/updateLastActiveDate", async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  await updateLastActiveDate(user.id);
+
+  return c.json({ lastActiveDate: user.lastActiveDate });
+});
+
+app.put("/updateTokens", async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  const body = await c.req.json<{ tokens: number }>();
+
+  await updateTokens(user.id, body.tokens);
+
+  return c.json({ tokens: user.tokens });
+});
+
 app.get("/getPremium", async (c) => {
   const user = await getValidatedUser(c.req);
 
   const premium = await getPremium(user.id);
+
+  return c.json({ premium });
+});
+
+app.put("/updatePremium", async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  const body = await c.req.json<{ premiumUntil: string }>();
+
+  const premium = await updatePremium(user.id, body.premiumUntil);
 
   return c.json({ premium });
 });
