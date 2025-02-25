@@ -1,3 +1,5 @@
+import { useUser } from "@/hooks/useUser";
+import { isDateUpdate } from "@/lib/dateUtils";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
@@ -9,7 +11,7 @@ interface ActiveStore {
 export const useActiveStore = create<ActiveStore>()(
   persist(
     (set) => ({
-      active: false, // Начальное значение по умолчанию
+      active: true,
       setActive: (active) => set({ active }),
     }),
     {

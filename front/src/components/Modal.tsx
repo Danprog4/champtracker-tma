@@ -1,12 +1,14 @@
 import { useUser } from "@/hooks/useUser";
 import { isDateUpdate } from "@/lib/dateUtils";
 import { useActiveStore } from "@/stores/activeStore";
+import { useEffect, useMemo } from "react";
 
 export const Modal = () => {
   const { active, setActive } = useActiveStore();
   const { user } = useUser();
+  const isAvailableDate = isDateUpdate(user.lastActiveDate, user.isPremium);
 
-  if (!active) return null;
+  if (!active || !isAvailableDate) return null;
 
   return (
     <div className="fixed inset-0 text-black bg-black bg-opacity-50 flex items-center justify-center">
@@ -17,7 +19,7 @@ export const Modal = () => {
         </p>
         <button
           onClick={() => {
-            setActive(false); // Закрываем модалку
+            setActive(false);
           }}
           className="bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 font-druk text-xs text-white px-4 py-2 rounded hover:bg-red-600 transition">
           Продолжить
