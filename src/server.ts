@@ -17,12 +17,16 @@ import {
 } from "./db/repo";
 import { UpdateChallenge } from "./db/schema";
 import { CreateChallengeReq } from "./types";
-import dayjs = require("dayjs");
+import dayjs from "dayjs";
 import { handleCreateInvoice } from "./create-invoice";
 
 const app = new Hono().basePath("/api");
 
 app.use("*", cors());
+
+app.get("/health", (c) => {
+  return c.json({ status: "ok" });
+});
 
 app.get("/getUser", async (c) => {
   const user = await getValidatedUser(c.req);

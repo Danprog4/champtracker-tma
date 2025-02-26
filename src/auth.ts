@@ -1,22 +1,22 @@
-import { validate, parse } from '@telegram-apps/init-data-node';
-import { createUser, getUser } from './db/repo/user';
-import { User } from './db/schema';
-import { HonoRequest } from 'hono';
+import { validate, parse } from "@telegram-apps/init-data-node/web";
+import { createUser, getUser } from "./db/repo/user";
+import { User } from "./db/schema";
+import { HonoRequest } from "hono";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
 if (!BOT_TOKEN) {
-  throw new Error('telegram bot token is not found');
+  throw new Error("telegram bot token is not found");
 }
 
 export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
   // берем init daty из хедера
-  const initData = req.header('x-init-data');
+  const initData = req.header("x-init-data");
 
-  console.log('getValidatedUser() initdata', initData);
+  console.log("getValidatedUser() initdata", initData);
 
   if (!initData) {
-    throw new Error('no x-init-data');
+    throw new Error("no x-init-data");
   }
 
   // check if user is not a scammer and came from our telegram bot, good!
@@ -31,7 +31,7 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
 
   // if no user (такого не будет), но проверку добавили
   if (!telegramUser) {
-    throw new Error('User is not found in initData');
+    throw new Error("User is not found in initData");
   }
 
   // берем user-а из диби (возможно его там нет, если он НОВИЧОК)
