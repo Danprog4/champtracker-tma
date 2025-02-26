@@ -1,7 +1,6 @@
 import { Bot } from "grammy";
 import { updatePremium } from "./db/repo";
-import dayjs = require("dayjs");
-import { kebab } from "postgres";
+import dayjs from "dayjs";
 
 const main = async () => {
   const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
