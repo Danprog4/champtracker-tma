@@ -2,8 +2,6 @@ import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import app from "@/server";
 
-export const runtime = "edge";
-
 export const OPTIONS = handle(app);
 export const DELETE = handle(app);
 export const GET = handle(app);
