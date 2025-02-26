@@ -20,7 +20,7 @@ import { CreateChallengeReq } from "./types";
 import dayjs = require("dayjs");
 import { handleCreateInvoice } from "./create-invoice";
 
-const app = new Hono();
+const app = new Hono().basePath("/api");
 
 app.use("*", cors());
 
