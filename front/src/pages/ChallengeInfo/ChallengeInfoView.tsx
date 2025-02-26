@@ -30,7 +30,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
   return (
     <div className={`flex min-h-screen flex-col`}>
       <div
-        className={`fixed items-center z-10 flex w-full justify-between h-[11vh] ${challenge.color} text-black p-3 pt-14`}>
+        className={`fixed items-center z-10 flex w-full justify-between h-[12vh] ${challenge.color} text-black p-3 pt-14`}>
         <Link to={"/"}>
           <BackIcon />
         </Link>

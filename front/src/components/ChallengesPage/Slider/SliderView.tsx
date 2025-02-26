@@ -31,9 +31,9 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
   <div className="flex flex-col">
     {categories.map((category, categoryIndex) => (
       <div key={categoryIndex} className="mb-8 pl-3">
-        <div className="flex justify-between pr-3">
-          <div className="mb-5">{category.title}</div>
-          <div className="text-gray-400">
+        <div className="flex justify-between pr-3 items-start mb-3">
+          <div className="">{category.title}</div>
+          <div className="text-gray-400 text-sm mt-1">
             {currentSlide[categoryIndex] || 1}/{category.items.length}
           </div>
         </div>

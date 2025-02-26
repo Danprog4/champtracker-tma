@@ -29,12 +29,12 @@ const AboutPage: React.FC = () => {
       </Link>
       {!isPremium(user) ? (
         <BuyPremium>
-          <Button
-            variant="ghost"
-            className="fixed left-3 font-druk text-[10px] bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-black hover:opacity-90">
-            <span>ПРЕМИУМ</span>
-            <TelegramStar />
-          </Button>
+          <div className="fixed flex font-druk text-sm flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full   bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  py-2 px-4  font-medium text-black hover:opacity-90">
+            <div className="flex items-center gap-1 font-druk text-[10px]">
+              ПРЕМИУМ
+              <TelegramStar />
+            </div>
+          </div>
         </BuyPremium>
       ) : (
         <PremiumFeatures>
@@ -68,13 +68,13 @@ const AboutPage: React.FC = () => {
         </a>
       </div>
       {/* <div
-        onClick={() =>
-          toast("К сожалению, сейчас доступен только русский язык")
-        }
-        className="mb-10 flex h-[8vh] w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl font-extrabold text-black"
-      >
-        <span>ЯЗЫК</span>
-      </div> */}
+          onClick={() =>
+            toast("К сожалению, сейчас доступен только русский язык")
+          }
+          className="mb-10 flex h-[8vh] w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl font-extrabold text-black"
+        >
+          <span>ЯЗЫК</span>
+        </div> */}
       <footer className="mb-14 pr-3 mt-auto flex justify-between pl-3 ">
         <div className="text-lg font-bold font-druk">ChampTracker</div>
         <div className="flex flex-col items-end font-thin">
