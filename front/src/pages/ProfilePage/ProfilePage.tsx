@@ -17,7 +17,7 @@ export const ProfilePage = () => {
   return (
     <div className="h-min-full flex flex-col">
       <div className="flex items-center justify-center">
-        <div className="fixed z-10  flex w-[100vw] justify-between bg-black h-[11vh] p-3 pt-14 top-0">
+        <div className="fixed z-10  flex w-[100vw] justify-between bg-black h-[12vh] p-3 pt-14 top-0">
           <Link to="/">
             <BackIcon />
           </Link>

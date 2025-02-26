@@ -59,9 +59,9 @@ const CreateDump: React.FC<CreateDumpProps> = ({
 }) => {
   const { user } = useUser();
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
-  console.log(Colors[color], color);
+
   return (
-    <div className="flex h-full flex-col mb-12 ">
+    <div className="flex min-h-screen flex-col mb-12">
       <div className={`fixed top-0 p-2 pr-3 pt-14 flex w-full ${color}`}>
         <Link to={getNavigationPath()} className="absolute text-black ">
           <CrossIcon />

@@ -13,7 +13,7 @@ const ChallengeView: React.FC = () => {
     .find((item) => item.id === Number(id));
 
   return (
-    <div className="mb-20 flex w-full flex-col">
+    <div className="mb-20 flex w-full flex-col pb-24">
       <div className="relative rounded-b-3xl w-full">
         <img
           src={card?.imageUrl}

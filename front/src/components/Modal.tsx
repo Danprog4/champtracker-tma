@@ -30,9 +30,9 @@ export const Modal = () => {
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] max-w-[300px]"
             />
           </div>
-          <div className="w-full max-w-md px-4 z-10">
+          <div className="w-full max-w-md px-4 z-10 mb-[-64px]">
             <h2 className="text-2xl font-semibold pb-2 text-center font-druk">
-              Приветствую!
+              Добро пожаловать!
             </h2>
             <p className="text-sm text-center mb-6">
               Отмечай день хотя бы в одном твоем задании и получай ежедневные

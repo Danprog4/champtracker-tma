@@ -27,7 +27,7 @@ const YourChallengesPage = () => {
   console.log(isDateUpdate(user.lastActiveDate), "isDateUpdate");
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex min-h-screen flex-col pb-12">
       <Header />
       <Modal />
       <ChallengeList challenges={challenges} />
@@ -35,7 +35,7 @@ const YourChallengesPage = () => {
         <BuyPremium>
           <Button
             variant="ghost"
-            className="fixed left-4 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium text-white hover:opacity-90">
+            className="fixed left-4 bottom-4 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-druk text-sm text-white hover:opacity-90">
             <TelegramStar />
             <span>Премиум</span>
           </Button>
