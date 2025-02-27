@@ -157,7 +157,7 @@ app.delete("/deleteChallenge/:id", async (c) => {
 // Create a single handler that will handle all HTTP methods
 const handler = handle(app);
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 // Export the handler for each HTTP method
 export const GET = handler;
