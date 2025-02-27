@@ -1,7 +1,5 @@
 import React from "react";
-import GitHubLogo from "../../assets/images/GitHub-Logo.wine.svg";
-import TelegramLogo from "../../assets/images/telegram-svgrepo-com (3).svg";
-import CopyRightLogo from "../../assets/images/5a369c1a2cfcd0.4577110515135283461843.png";
+import Image from "next/image";
 import { Link } from "@tanstack/react-router";
 import { BuyPremium } from "@/components/BuyPremium";
 import { Button } from "@/components/ui/button";
@@ -10,6 +8,7 @@ import { CrossIcon } from "@/icons/Cross";
 import { useUser } from "@/hooks/useUser";
 import { isPremium } from "@/lib/challengeUtills";
 import PremiumFeatures from "@/components/ui/PremiumFeatures";
+
 const AboutPage: React.FC = () => {
   const { user } = useUser();
 
@@ -49,7 +48,13 @@ const AboutPage: React.FC = () => {
           href="https://github.com/Danprog4/Challenge-Up"
           target="_blank"
           rel="noopener noreferrer">
-          <img className="h-[55px] w-[55px]" src={GitHubLogo} alt="GitHub" />
+          <Image
+            className="h-[55px] w-[55px]"
+            src="/images/GitHub-Logo.wine.svg"
+            alt="GitHub"
+            width={55}
+            height={55}
+          />
           <span className="font-bold text-sm text-black">Danprog4</span>
         </a>
         <a
@@ -57,10 +62,12 @@ const AboutPage: React.FC = () => {
           href="https://t.me/danikpavlovski"
           target="_blank"
           rel="noopener noreferrer">
-          <img
+          <Image
             className="h-[58px] w-[58px]"
-            src={TelegramLogo}
+            src="/images/telegram-svgrepo-com (3).svg"
             alt="Telegram"
+            width={58}
+            height={58}
           />
           <span className="font-bold text-black mb-1 text-sm">
             @danikpavlovski
@@ -78,10 +85,12 @@ const AboutPage: React.FC = () => {
       <footer className="mb-14 pr-3 mt-auto flex justify-between pl-3 ">
         <div className="text-lg font-bold font-druk">ChampTracker</div>
         <div className="flex flex-col items-end font-thin">
-          <img
-            src={CopyRightLogo}
+          <Image
+            src="/images/5a369c1a2cfcd0.4577110515135283461843.png"
             alt="CopyRight"
             className="h-[25px] w-[25px]"
+            width={25}
+            height={25}
           />
           <span className="font-druk text-xs">2025</span>
         </div>

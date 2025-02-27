@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -8,9 +9,30 @@ import {
 } from "@/components/ui/carousel";
 import { Link } from "@tanstack/react-router";
 import { updateOnBoarding } from "@/api/challenge";
-import mainImg from "@/assets/images/main.png";
-import infoImg from "@/assets/images/info.png";
-import raitingImg from "@/assets/images/raiting.png";
+
+const slides = [
+  {
+    title: "Достигай целей вместе с нами",
+    description:
+      "Создавай задания, отслеживай прогресс и развивайся каждый день. Мы поможем тебе стать лучшей версией себя.",
+    bgColor: "bg-red-400",
+    image: "/images/main.png",
+  },
+  {
+    title: "Формируй полезные привычки",
+    description:
+      "Перестать откладывать все на потом. Регулярно выполняй задания, получай награды и превращай желаемые действия в устойчивые привычки.",
+    bgColor: "bg-purple-400",
+    image: "/images/info.png",
+  },
+  {
+    title: "Соревнуйся и побеждай",
+    description:
+      "Участвуй в рейтинге игроков, получай премиум токены за достижения и обменивай их на ценные призы. Будь лучшим!",
+    bgColor: "bg-blue-400",
+    image: "/images/raiting.png",
+  },
+];
 
 export function CarouselDApiDemo() {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -30,30 +52,6 @@ export function CarouselDApiDemo() {
     });
   }, [api]);
 
-  const slides = [
-    {
-      title: "Достигай целей вместе с нами",
-      description:
-        "Создавай задания, отслеживай прогресс и развивайся каждый день. Мы поможем тебе стать лучшей версией себя.",
-      bgColor: "bg-red-400",
-      image: mainImg,
-    },
-    {
-      title: "Формируй полезные привычки",
-      description:
-        "Перестать откладывать все на потом. Регулярно выполняй задания, получай награды и превращай желаемые действия в устойчивые привычки.",
-      bgColor: "bg-purple-400",
-      image: infoImg,
-    },
-    {
-      title: "Соревнуйся и побеждай",
-      description:
-        "Участвуй в рейтинге игроков, получай премиум токены за достижения и обменивай их на ценные призы. Будь лучшим!",
-      bgColor: "bg-blue-400",
-      image: raitingImg,
-    },
-  ];
-
   return (
     <div>
       <Carousel
@@ -66,9 +64,11 @@ export function CarouselDApiDemo() {
             <CarouselItem key={index}>
               <div
                 className={`flex w-screen items-center flex-col justify-end bottom-28 p-0 h-screen  relative text-white`}>
-                <img
+                <Image
                   src={slide.image}
                   alt={slide.title}
+                  width={300}
+                  height={300}
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] max-w-[300px]"
                 />
                 <span className="text-2xl font-semibold pb-2  text-center font-druk">

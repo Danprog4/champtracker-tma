@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import { isPremium } from "@/lib/challengeUtills";
 import { isDateUpdate } from "@/lib/dateUtils";
@@ -10,7 +11,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import infoImg from "@/assets/images/info.png";
 
 export const Modal = () => {
   const { active, setActive } = useActiveStore();
@@ -24,9 +24,11 @@ export const Modal = () => {
       <div className="fixed inset-0 z-50 bg-red-400 flex items-center justify-center h-screen w-screen">
         <div className="flex w-full h-full items-center flex-col justify-end bottom-28 p-0 relative text-white">
           <div className="absolute inset-0 flex items-center justify-center">
-            <img
-              src={infoImg}
+            <Image
+              src="/images/info.png"
               alt="info"
+              width={300}
+              height={300}
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] max-w-[300px]"
             />
           </div>

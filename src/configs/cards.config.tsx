@@ -1,13 +1,13 @@
-import ReadingImg from "../assets/images/081e0160-dffa-11ef-bf7c-02Reading42ac140003.jpg";
-import PianoImg from "../assets/images/3becdfd0-dffa-11ef-ba28-02Piano42ac140003.jpg";
-import GymImg from "../assets/images/10703a90-e085-11ef-8b9f-0242ac140003.jpg";
-import StretchingImg from "../assets/images/321ca710-e0a5-11ef-88e0-0242ac140003.jpg";
-import RunningImg from "../assets/images/4c61daa0-dffe-11ef-9334-0242aRunningc140003.jpg";
-import CookingImg from "../assets/images/9cbf1c80-dffb-11ef-9e4d-02Cooking42ac140003.jpg";
-import DrawingImg from "../assets/images/2db2be70-dffc-11ef-861b-0242ac140Drawing003.jpg";
-import SleepImg from "../assets/images/f4da4770-dffc-11ef-923b-0242acSleeping140003.jpg";
-import BicycleImg from "../assets/images/Bicycledffd-11ef-8e41-0242ac140003.jpg";
-import BlogImg from "../assets/images/Blogc140003.jpg";
+import ReadingImg from "../../public/images/081e0160-dffa-11ef-bf7c-02Reading42ac140003.jpg";
+import PianoImg from "../../public/images/3becdfd0-dffa-11ef-ba28-02Piano42ac140003.jpg";
+import GymImg from "../../public/images/10703a90-e085-11ef-8b9f-0242ac140003.jpg";
+import StretchingImg from "../../public/images/321ca710-e0a5-11ef-88e0-0242ac140003.jpg";
+import RunningImg from "../../public/images/4c61daa0-dffe-11ef-9334-0242aRunningc140003.jpg";
+import CookingImg from "../../public/images/9cbf1c80-dffb-11ef-9e4d-02Cooking42ac140003.jpg";
+import DrawingImg from "../../public/images/2db2be70-dffc-11ef-861b-0242ac140Drawing003.jpg";
+import SleepImg from "../../public/images/f4da4770-dffc-11ef-923b-0242acSleeping140003.jpg";
+import BicycleImg from "../../public/images/Bicycledffd-11ef-8e41-0242ac140003.jpg";
+import BlogImg from "../../public/images/Blogc140003.jpg";
 
 interface Card {
   id: number;
@@ -31,7 +31,7 @@ export const categories: Category[] = [
       {
         id: 1,
         title: "ИЗУЧАТЬ ИНОСТРАННЫЙ ЯЗЫК",
-        imageUrl: ReadingImg,
+        imageUrl: "/images/081e0160-dffa-11ef-bf7c-02Reading42ac140003.jpg",
         hints: [
           "Начинай с 5-10 минут в день, повторяя базовые слова и фразы.",
           "Используй приложения или карточки для запоминания слов.",
@@ -45,7 +45,7 @@ export const categories: Category[] = [
       {
         id: 2,
         title: "РИСОВАТЬ КАЖДЫЙ ДЕНЬ",
-        imageUrl: DrawingImg,
+        imageUrl: "/images/2db2be70-dffc-11ef-861b-0242ac140Drawing003.jpg",
         hints: [
           "Рисуй хотя бы 5 минут в день, даже простые наброски.",
           "Экспериментируй с разными материалами: карандаши, краски, маркеры.",
@@ -65,7 +65,7 @@ export const categories: Category[] = [
       {
         id: 3,
         title: "ЛЕЧЬ СПАТЬ ДО ПОЛУНОЧИ",
-        imageUrl: SleepImg,
+        imageUrl: "/images/f4da4770-dffc-11ef-923b-0242acSleeping140003.jpg",
         hints: [
           "Создай ритуал перед сном: выключи гаджеты, почитай книгу.",
           "Ложись спать в одно и то же время, чтобы организм привык.",
@@ -79,7 +79,7 @@ export const categories: Category[] = [
       {
         id: 4,
         title: "БЕЗ АЛКОГОЛЯ",
-        imageUrl: StretchingImg,
+        imageUrl: "/images/321ca710-e0a5-11ef-88e0-0242ac140003.jpg",
         hints: [
           "Замени алкоголь водой, травяным чаем или свежими соками.",
           "Найди альтернативные способы расслабления: прогулки, медитация.",
@@ -93,7 +93,7 @@ export const categories: Category[] = [
       {
         id: 5,
         title: "ЕЖЕДНЕВНАЯ РАСТЯЖКА",
-        imageUrl: StretchingImg,
+        imageUrl: "/images/321ca710-e0a5-11ef-88e0-0242ac140003.jpg",
         hints: [
           "Начни с легких упражнений, добавляя по 1-2 движения каждый день.",
           "Дыши глубоко и медленно, чтобы снять напряжение в мышцах.",
@@ -113,7 +113,7 @@ export const categories: Category[] = [
       {
         id: 6,
         title: "ЧИТАТЬ КАЖДЫЙ ДЕНЬ",
-        imageUrl: ReadingImg,
+        imageUrl: "/images/081e0160-dffa-11ef-bf7c-02Reading42ac140003.jpg",
         hints: [
           "Ставь цель читать хотя бы 5-10 страниц в день.",
           "Выбирай книги, которые вдохновляют или учат чему-то новому.",
@@ -127,7 +127,7 @@ export const categories: Category[] = [
       {
         id: 7,
         title: "КУЛИНАРНЫЙ МАРАФОН",
-        imageUrl: CookingImg,
+        imageUrl: "/images/9cbf1c80-dffb-11ef-9e4d-02Cooking42ac140003.jpg",
         hints: [
           "Попробуй готовить по одному новому рецепту в неделю.",
           "Используй свежие ингредиенты для насыщенного вкуса.",
@@ -147,7 +147,7 @@ export const categories: Category[] = [
       {
         id: 8,
         title: "МЕДИТИРОВАТЬ КАЖДЫЙ ДЕНЬ",
-        imageUrl: BlogImg,
+        imageUrl: "/images/Blogc140003.jpg",
         hints: [
           "Начинай с 5 минут медитации, постепенно увеличивая время.",
           "Выбирай тихое место без отвлекающих факторов.",
@@ -161,7 +161,7 @@ export const categories: Category[] = [
       {
         id: 9,
         title: "ПРОСЛЕДИТЬ ЗА РАСХОДАМИ",
-        imageUrl: SleepImg,
+        imageUrl: "/images/f4da4770-dffc-11ef-923b-0242acSleeping140003.jpg",
         hints: [
           "Веди бюджет в приложении или записывай расходы вручную.",
           "Ставь ежемесячные лимиты для разных категорий трат.",
@@ -175,7 +175,7 @@ export const categories: Category[] = [
       {
         id: 10,
         title: "ПОДВОДИТЬ ИТОГИ ДНЯ",
-        imageUrl: PianoImg,
+        imageUrl: "/images/3becdfd0-dffa-11ef-ba28-02Piano42ac140003.jpg",
         hints: [
           "Вечером выделяй 5-10 минут на размышления о дне.",
           "Записывай достижения, даже небольшие, в дневник или приложение.",
