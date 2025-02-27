@@ -242,7 +242,7 @@ const CarouselNext = React.forwardRef<
       {canScrollNext ? (
         <ArrowRight className="h-4 w-4" />
       ) : (
-        <span className="font-bold ">Начать</span>
+        <span className=" ">Начать</span>
       )}
     </Button>
   );

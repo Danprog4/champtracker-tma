@@ -124,7 +124,7 @@ export const ProfilePage = () => {
                   ? "border-yellow-400 bg-gray-800"
                   : "border-gray-600 bg-gray-900"
               }`}>
-              <div className="text-sm font-bold mb-1">{achievement.title}</div>
+              <div className="text-sm  mb-1">{achievement.title}</div>
               <div className="text-xs text-gray-400">
                 {achievement.description}
               </div>

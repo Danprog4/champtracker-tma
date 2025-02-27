@@ -55,7 +55,7 @@ const AboutPage: React.FC = () => {
             width={55}
             height={55}
           />
-          <span className="font-bold text-sm text-black">Danprog4</span>
+          <span className=" text-sm text-black">Danprog4</span>
         </a>
         <a
           className="flex h-[50vw] w-[50vw] flex-col items-center justify-center  bg-orange-400"
@@ -69,9 +69,7 @@ const AboutPage: React.FC = () => {
             width={58}
             height={58}
           />
-          <span className="font-bold text-black mb-1 text-sm">
-            @danikpavlovski
-          </span>
+          <span className=" text-black mb-1 text-sm">@danikpavlovski</span>
         </a>
       </div>
       {/* <div
@@ -83,7 +81,7 @@ const AboutPage: React.FC = () => {
           <span>ЯЗЫК</span>
         </div> */}
       <footer className="mb-14 pr-3 mt-auto flex justify-between pl-3 ">
-        <div className="text-lg font-bold font-druk">ChampTracker</div>
+        <div className="text-lg  font-druk">ChampTracker</div>
         <div className="flex flex-col items-end font-thin">
           <Image
             src="/images/5a369c1a2cfcd0.4577110515135283461843.png"

@@ -29,7 +29,7 @@ export const DrawerAlert = ({
       <DrawerTrigger>
         <button
           className={`flex h-[45px] w-[94vw] items-center justify-center rounded-md ${bgColor} p-[10px]`}>
-          <span className="text-xs font-druk font-bold">{title}</span>
+          <span className="text-xs font-druk ">{title}</span>
         </button>
       </DrawerTrigger>
       <DrawerContent className="bg-gray-800 border-none">

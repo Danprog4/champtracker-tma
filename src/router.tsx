@@ -25,7 +25,7 @@ const rootRoute = createRootRoute({
   component: App,
   notFoundComponent: () => (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-gradient-to-r ">
-      <div className="mb-4 text-3xl font-bold font-druk text-center">
+      <div className="mb-4 text-3xl  font-druk text-center">
         Страница не найдена{" "}
       </div>
       <Link

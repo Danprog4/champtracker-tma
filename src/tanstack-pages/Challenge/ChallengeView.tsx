@@ -27,7 +27,7 @@ const ChallengeView: React.FC = () => {
         </Link>
         <div className="absolute inset-0 flex flex-col p-3 pt-14  text-start">
           <span className="text-sm text-black">Задание</span>
-          <span className="text-lg font-bold font-druk text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
+          <span className="text-lg  font-druk text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
             {card?.title}
           </span>
         </div>
@@ -56,12 +56,12 @@ const ChallengeView: React.FC = () => {
           {card?.desc}
         </p>
         <div className="text-start">
-          <span className="text-lg font-druk font-bold leading-6">
+          <span className="text-lg font-druk  leading-6">
             ПОДСКАЗКИ <br /> И СОВЕТЫ
           </span>
           {card?.hints?.map((hint, index) => (
             <div className="mt-5 flex gap-3 text-lg font-light text-gray-300">
-              <span className="font-bold text-white">
+              <span className=" text-white">
                 <div className="w-5 border border-gray-300 mt-3"></div>
               </span>
               <p
