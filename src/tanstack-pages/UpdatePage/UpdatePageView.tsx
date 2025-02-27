@@ -117,7 +117,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-center pl-0 font-extrabold mb-10">
+      <div className="flex items-center justify-center pl-0  mb-10">
         <button
           onClick={handleSave}
           className={`fixed bottom-7 shadow-xl  shadow-black z-20 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg ${

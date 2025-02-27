@@ -96,7 +96,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         setNotifications={setNotifications}
       />
       <ColorsSchema color={color} setColor={setColor} />
-      <div className="flex items-center justify-center pl-0 font-extrabold mb-10">
+      <div className="flex items-center justify-center pl-0  mb-10">
         {isPremium(user) || challenges.length < 1 ? (
           <button
             onClick={handleSave}

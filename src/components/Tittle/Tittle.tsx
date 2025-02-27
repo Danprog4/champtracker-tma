@@ -24,7 +24,7 @@ const Title: React.FC<TitleProps> = ({ title, setTitle }) => {
       </span>
       <div
         className={cn(
-          "mr-[5%] mt-2 text-2xl font-extrabold uppercase",
+          "mr-[5%] mt-2 text-2xl  uppercase",
           title === "НАЗВАНИЕ ЗАДАНИЯ" && "opacity-[0.3]"
         )}>
         <textarea

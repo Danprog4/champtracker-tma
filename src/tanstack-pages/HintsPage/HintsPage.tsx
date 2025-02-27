@@ -25,7 +25,7 @@ const HintsAndTipsPage: React.FC = () => {
         </Link>
       </div>
       <div className="mb-8 mt-[100px] pl-3">
-        <span className="text-2xl leading-6 font-extrabold text-black font-druk">
+        <span className="text-2xl leading-6  text-black font-druk">
           ПОДСКАЗКИ <br /> И СОВЕТЫ
         </span>
       </div>

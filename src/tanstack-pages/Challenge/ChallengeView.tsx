@@ -72,7 +72,7 @@ const ChallengeView: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-center pl-0 font-extrabold">
+      <div className="flex items-center justify-center pl-0 ">
         <Link
           to={"/card/$id/create"}
           params={{

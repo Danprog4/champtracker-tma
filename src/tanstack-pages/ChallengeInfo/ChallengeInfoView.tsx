@@ -45,15 +45,13 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
       </div>
       <div className={`${challenge.color} pb-20 p-3 mt-9 min-h-screen`}>
         <div className="flex justify-between mt-16 ">
-          <div className="max-w-[70vw] text-xl leading-6 font-extrabold text-black font-druk mt-5">
+          <div className="max-w-[70vw] text-xl leading-6  text-black font-druk mt-5">
             {challenge.title}
           </div>
           <div className="flex flex-col">
             <div
               className={`relative flex flex-col aspect-square w-[18.77vw] items-center justify-center rounded-full ${Colors[challenge.color]}`}>
-              <div className="font-druk text-lg font-extrabold">
-                {displayDuration}
-              </div>
+              <div className="font-druk text-lg ">{displayDuration}</div>
               <div className="mb-1 mt-[-5px] text-[10px] font-medium">
                 {displayRegularity}
               </div>
@@ -201,7 +199,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
               <div className="mb-1 border border-black"></div>
               <div className="flex justify-between text-black">
                 <div className="text-xs font-light">НАЧАЛО ЗАДАНИЯ</div>
-                <div className="text-3xl font-extrabold">
+                <div className="text-3xl ">
                   {dayjs(challenge.challengeStartAt).format("DD.MM.YYYY")}
                 </div>
               </div>
@@ -216,7 +214,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
               <div className="border border-black"></div>
               <div className="flex justify-between items-center text-black">
                 <div className="text-[10px] font-light">ПРОШЛО ДНЕЙ</div>
-                <div className="text-xl font-extrabold font-druk ">
+                <div className="text-xl  font-druk ">
                   {Math.max(0, calculateDaysSinceStart)}
                 </div>
               </div>
@@ -225,7 +223,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
               <div className="border border-black"></div>
               <div className="flex justify-between items-center text-black">
                 <div className="text-[10px] font-light">УСПЕШНЫХ ДНЕЙ</div>
-                <div className="text-xl font-extrabold font-druk">
+                <div className="text-xl  font-druk">
                   {challenge.userCheckedDates
                     ? challenge.userCheckedDates.length
                     : 0}

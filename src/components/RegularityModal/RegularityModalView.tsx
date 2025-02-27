@@ -98,7 +98,7 @@ export default function RegularityModalView({
               )}
             </div>
             <div
-              className="flex items-center justify-center pl-0 font-extrabold"
+              className="flex items-center justify-center pl-0 "
               onClick={handleSaveChanges}>
               <div className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5">
                 <span

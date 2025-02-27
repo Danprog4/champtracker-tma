@@ -22,7 +22,7 @@ const AboutPage: React.FC = () => {
       <Link
         to="/hints"
         className="mt-28 flex h-[33vh] w-[100vw] items-center justify-center rounded-full bg-yellow-400">
-        <span className="text-center font-druk text-xl font-extrabold text-black leading-6">
+        <span className="text-center font-druk text-xl  text-black leading-6">
           ПОДСКАЗКИ <br></br> И СОВЕТЫ
         </span>
       </Link>
@@ -78,7 +78,7 @@ const AboutPage: React.FC = () => {
           onClick={() =>
             toast("К сожалению, сейчас доступен только русский язык")
           }
-          className="mb-10 flex h-[8vh] w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl font-extrabold text-black"
+          className="mb-10 flex h-[8vh] w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl  text-black"
         >
           <span>ЯЗЫК</span>
         </div> */}

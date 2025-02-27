@@ -106,7 +106,7 @@ const DurationModalView: React.FC<DurProps> = ({
               )}
             </div>
 
-            <div className="flex items-center justify-center pl-0 font-extrabold">
+            <div className="flex items-center justify-center pl-0 ">
               <button
                 className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5"
                 onClick={handleSave}>
