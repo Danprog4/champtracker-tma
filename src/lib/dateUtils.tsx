@@ -1,4 +1,4 @@
-import { Challenge } from "@back-types";
+import { Challenge } from "@/types";
 import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";

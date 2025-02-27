@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
-import { Challenge } from "@back-types";
+import { Challenge } from "@/types";
 import { dayBeforeToday, formatDate } from "@/lib/dateUtils";
 import dayjs from "dayjs";
 import { BackIcon } from "@/icons/Back";

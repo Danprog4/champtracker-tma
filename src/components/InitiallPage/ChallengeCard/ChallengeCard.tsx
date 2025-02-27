@@ -5,7 +5,7 @@ import {
   getNextAvailableDay,
 } from "@/lib/dateUtils";
 import { Months } from "@/configs/months.config";
-import { Challenge } from "@back-types";
+import { Challenge } from "@/types";
 import dayjs from "dayjs";
 import { ChallengeCardUI } from "./ChallengeCardView";
 

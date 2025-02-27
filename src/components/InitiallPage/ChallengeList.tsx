@@ -1,4 +1,4 @@
-import { Challenge } from "@back-types";
+import { Challenge } from "@/types";
 import { ChallengeCard } from "./ChallengeCard/ChallengeCard";
 import dayjs from "dayjs";
 import { expiredChallenges, isPremium } from "@/lib/challengeUtills";

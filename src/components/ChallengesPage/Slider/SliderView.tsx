@@ -38,7 +38,11 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
           </div>
         </div>
         <div
-          ref={(el) => (sliderRefs.current[categoryIndex] = el)}
+          ref={(el) => {
+            if (el) {
+              sliderRefs.current[categoryIndex] = el;
+            }
+          }}
           onScroll={() => onScroll(categoryIndex)}
           className="flex snap-x snap-mandatory space-x-4 overflow-auto scroll-smooth">
           {category.items.map((card, cardIndex) => (

@@ -1,4 +1,4 @@
-import { Challenge, User } from "@back-types";
+import { Challenge, User } from "@/types";
 import dayjs from "dayjs";
 
 export const isPremium = (user: User): boolean => {

@@ -7,7 +7,7 @@ import { CrossIcon } from "@/icons/Cross";
 import { Dayjs } from "dayjs";
 import { BuyPremium } from "@/components/BuyPremium";
 import { TelegramStar } from "@/components/shared/TelegramStar";
-import { Challenge } from "@back-types";
+import { Challenge } from "@/types";
 import Notifications from "@/components/Notifications/Notifications";
 import Title from "@/components/Tittle/Tittle";
 import ColorsSchema from "@/components/Colors/ColorsSchema";

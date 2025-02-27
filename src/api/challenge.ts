@@ -1,9 +1,4 @@
-import {
-  Challenge,
-  CreateChallengeReq,
-  UpdateChallenge,
-  User,
-} from "@back-types";
+import { Challenge, CreateChallengeReq, UpdateChallenge, User } from "../types";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
 import axios from "axios";
 

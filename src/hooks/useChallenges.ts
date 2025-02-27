@@ -6,7 +6,7 @@ import {
   updateCompletedChallengesCount,
 } from "@/api/challenge";
 import { dayBeforeToday, isDateUpdate } from "@/lib/dateUtils";
-import { Challenge, UpdateChallenge } from "@back-types";
+import { Challenge, UpdateChallenge } from "@/types";
 import {
   useMutation,
   useQueryClient,

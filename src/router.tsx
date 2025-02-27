@@ -6,20 +6,20 @@ import {
 } from "@tanstack/react-router";
 import { Navigate } from "@tanstack/react-router";
 import App from "./App";
-import InitiallPage from "./pages/InitiallPage/InitiallPage";
-import Challenges from "./pages/ChallengesPage/ChallengesPageView";
-import Challenge from "./pages/Challenge/ChallengeView";
-import CreateSmart from "./pages/CreatePage/CreatPage";
-import AboutPage from "./pages/AboutPage/AboutPage";
-import HintsAndTipsPage from "./pages/HintsPage/HintsPage";
-import ChallengeInfo from "./pages/ChallengeInfo/ChallengeInfo";
-import UpdatePageContainer from "./pages/UpdatePage/UpdatePage";
-import { CarouselDApiDemo } from "./pages/CarouselPage/CarouselPage";
+import InitiallPage from "./tanstack-pages/InitiallPage/InitiallPage";
+import Challenges from "./tanstack-pages/ChallengesPage/ChallengesPageView";
+import Challenge from "./tanstack-pages/Challenge/ChallengeView";
+import CreateSmart from "./tanstack-pages/CreatePage/CreatPage";
+import AboutPage from "./tanstack-pages/AboutPage/AboutPage";
+import HintsAndTipsPage from "./tanstack-pages/HintsPage/HintsPage";
+import ChallengeInfo from "./tanstack-pages/ChallengeInfo/ChallengeInfo";
+import UpdatePageContainer from "./tanstack-pages/UpdatePage/UpdatePage";
+import { CarouselDApiDemo } from "./tanstack-pages/CarouselPage/CarouselPage";
 import { useOnBoarding } from "./hooks/useOnBoarding";
 import { useChallenges } from "./hooks/useChallenges";
-import YourChallengesPage from "./pages/YourChallenges/YourChallengesPage";
+import YourChallengesPage from "./tanstack-pages/YourChallenges/YourChallengesPage";
 import { FullPageSpinner } from "./components/shared/FullPageSpinner";
-import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { ProfilePage } from "./tanstack-pages/ProfilePage/ProfilePage";
 
 const rootRoute = createRootRoute({
   component: App,

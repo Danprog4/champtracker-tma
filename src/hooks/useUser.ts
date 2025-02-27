@@ -1,5 +1,5 @@
 import { getUser } from "@/api/challenge";
-import { User } from "@back-types";
+import { User } from "@/types";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 export const useUser = () => {
