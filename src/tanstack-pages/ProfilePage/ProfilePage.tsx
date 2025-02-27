@@ -15,7 +15,7 @@ export const ProfilePage = () => {
   const { user } = useUser();
 
   return (
-    <div className="h-min-full flex flex-col">
+    <div className="h-min-full flex flex-col relative">
       <div className="flex items-center justify-center">
         <div className="fixed z-10  flex w-[100vw] justify-between bg-black h-[12vh] p-3 pt-14 top-0">
           <Link to="/">
@@ -146,7 +146,7 @@ export const ProfilePage = () => {
         </BuyPremium>
       ) : (
         <PremiumFeatures>
-          <div className="fixed text-black font-druk text-xs flex flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium hover:opacity-90">
+          <div className=" absolute text-black font-druk text-xs flex flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium hover:opacity-90">
             Ваш премиум
           </div>
         </PremiumFeatures>
