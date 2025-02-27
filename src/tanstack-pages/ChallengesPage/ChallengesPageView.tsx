@@ -47,12 +47,12 @@ const Challenges: React.FC = () => {
       {isPremium(user) ? (
         <Link
           to="/card/create"
-          className="flex w-full items-center justify-center pl-0 font-extrabold">
+          className="flex w-full items-center justify-center pl-0 ">
           <CreateTaskButton />
         </Link>
       ) : (
         <BuyPremium>
-          <div className="flex w-full items-center justify-center pl-0 font-extrabold">
+          <div className="flex w-full items-center justify-center pl-0 ">
             <CreateTaskButton />
           </div>
         </BuyPremium>
