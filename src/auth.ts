@@ -37,6 +37,8 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
   // берем user-а из диби (возможно его там нет, если он НОВИЧОК)
   let user = await getUser(telegramUser.id);
 
+  console.log("getValidatedUser() user", user);
+
   // если он НОВИЧОК, то создаем его в диби и записываем в переменную user
   if (!user) {
     user = await createUser(telegramUser);
