@@ -85,7 +85,7 @@ app.get("/getOnBoarding", async (c) => {
 
   const onBoarding = await getOnBoarding(user.id);
 
-  return c.json({ onBoarding });
+  return c.json(onBoarding);
 });
 
 app.put("/updateOnBoarding", async (c) => {

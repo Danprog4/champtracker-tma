@@ -21,7 +21,7 @@ export const useOnBoarding = () => {
   });
 
   return {
-    isOnBoarding: onBoarding?.onBoarding,
+    isOnBoarding: onBoarding,
     updateOnBoarding: mutation.mutate,
     isUpdating: mutation.isPending,
   };

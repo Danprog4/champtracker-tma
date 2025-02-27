@@ -4,6 +4,7 @@ import {
   getChallenges,
   updateChallenge,
   updateCompletedChallengesCount,
+  getUserOnBoarding,
 } from "@/api/challenge";
 import { dayBeforeToday, isDateUpdate } from "@/lib/dateUtils";
 import { Challenge, UpdateChallenge } from "@/types";
@@ -60,6 +61,7 @@ export const useChallenges = () => {
           );
         }
       );
+      queryClient.setQueryData([getUserOnBoarding.name], true);
     },
   });
 
