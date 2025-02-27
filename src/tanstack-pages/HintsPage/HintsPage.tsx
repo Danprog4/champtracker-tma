@@ -33,10 +33,10 @@ const HintsAndTipsPage: React.FC = () => {
         <Accordion type="single" collapsible className="space-y-1">
           {accordionData.map((item) => (
             <AccordionItem value={`item ${item.id}`} key={item.id}>
-              <AccordionTrigger className="font-mediom">
+              <AccordionTrigger className="font-medium px-3">
                 {item.answer}
               </AccordionTrigger>
-              <AccordionContent className="font-light ">
+              <AccordionContent className="font-medium px-3">
                 {item.question}
               </AccordionContent>
             </AccordionItem>
