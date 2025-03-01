@@ -13,7 +13,7 @@ const Header = () => {
   const { user } = useUser();
 
   return (
-    <div className="fixed z-10 flex w-full justify-between items-center bg-black  p-3 h-[6vh]">
+    <div className="fixed z-10 flex w-full justify-between items-center bg-black  p-3 h-[8vh]">
       <Link to="/about">
         <BarsIcon />
       </Link>

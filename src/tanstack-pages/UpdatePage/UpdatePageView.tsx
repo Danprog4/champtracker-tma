@@ -56,7 +56,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
     <div className="flex h-full flex-col mb-28">
       <div className="flex flex-col w-full relative">
         <div
-          className={`fixed top-0 h-[6vh] items-center pl-3 flex w-full ${color}`}>
+          className={`fixed top-0 h-[8vh] items-center pl-3 flex w-full ${color}`}>
           <Link
             to={`/challenge/$taskId`}
             params={{

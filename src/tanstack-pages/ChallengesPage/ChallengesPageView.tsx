@@ -16,7 +16,7 @@ const Challenges: React.FC = () => {
   const { user } = useUser();
   return (
     <div className="relative flex flex-col items-start">
-      <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[6vh] items-center pl-3 top-0">
+      <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[8vh] items-center pl-3 top-0">
         <button
           onClick={() => {
             if (!isOnBoarding) {
@@ -33,7 +33,7 @@ const Challenges: React.FC = () => {
         </button>
       </div>
 
-      <div className="mt-16 flex flex-col px-3">
+      <div className="mt-20 flex flex-col px-3">
         <h1 className="mb-2 text-2xl  font-druk ">НОВОЕ ЗАДАНИЕ</h1>
         <p className="mb-12 text-start text-sm text-gray-400">
           Выберите одно из 10 готовых заданий <br /> или создайте свое

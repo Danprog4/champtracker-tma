@@ -16,15 +16,15 @@ export const ProfilePage = () => {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="flex items-center justify-center">
-        <div className="fixed z-10  flex w-[100vw] justify-between bg-black h-[12vh] p-3 pt-14 top-0">
+      <div className="flex items-center justify-center ">
+        <div className="fixed z-10  flex w-[100vw] justify-between items-center bg-black h-[8vh] p-3 top-0">
           <Link to="/">
             <BackIcon />
           </Link>
         </div>
       </div>
-      <div className="flex flex-col items-start justify-center p-3 gap-2">
-        <div className="text-start text-2xl font-druk mt-24 flex items-end gap-2">
+      <div className="flex flex-col items-start justify-center p-3 gap-2  mt-[7vh]">
+        <div className="text-start text-2xl font-druk  flex items-end gap-2">
           <div className="flex gap-1">
             <div>{user.name}</div>
             {isPremium(user) && (
