@@ -55,7 +55,8 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
   return (
     <div className="flex h-full flex-col mb-28">
       <div className="flex flex-col w-full relative">
-        <div className={`fixed top-0 h-[5vh] pt-4 pl-3 flex w-full ${color}`}>
+        <div
+          className={`fixed top-0 h-[6vh] items-center pl-3 flex w-full ${color}`}>
           <Link
             to={`/challenge/$taskId`}
             params={{
@@ -68,7 +69,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
             Редактировать
           </span>
         </div>
-        <div className={`${color} min-h-[18vh] pt-10 pb-1`}>
+        <div className={`${color} min-h-[14vh] pt-10 pb-2`}>
           <Title title={title} setTitle={setTitle} />
         </div>
       </div>

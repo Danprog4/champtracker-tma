@@ -19,12 +19,12 @@ const HintsAndTipsPage: React.FC = () => {
   const { user } = useUser();
   return (
     <div className="flex h-screen flex-col bg-yellow-400">
-      <div className="fixed z-1 flex w-[100vw] text-black justify-between bg-yellow-400  h-[5vh] pt-4 pl-3">
+      <div className="fixed z-1 flex w-[100vw] text-black justify-between bg-yellow-400 items-center h-[6vh] pl-3 ">
         <Link to="/about" className="">
           <BackIcon />
         </Link>
       </div>
-      <div className="mb-8 mt-20 pl-3">
+      <div className="mb-8 mt-16 pl-3">
         <span className="text-2xl leading-6  text-black font-druk">
           ПОДСКАЗКИ <br /> И СОВЕТЫ
         </span>

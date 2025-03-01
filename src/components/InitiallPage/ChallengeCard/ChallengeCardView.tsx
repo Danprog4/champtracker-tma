@@ -67,7 +67,7 @@ export const ChallengeCardUI = ({
       to={`/challenge/$taskId`}
       disabled={!isPremium && index !== 0}
       params={{ taskId: challengeId }}
-      className={`${color} flex h-[16vh] w-[95vw] justify-between rounded-lg pr-0 pl-4 ${isLastNonExpired ? "mb-8" : ""} ${isExpired || (!isPremium && index !== 0) ? "opacity-50" : ""} `}>
+      className={`${color} flex min-h-[16vh] w-[95vw] justify-between rounded-lg pr-0 pl-4 ${isLastNonExpired ? "mb-8" : ""} ${isExpired || (!isPremium && index !== 0) ? "opacity-50" : ""} `}>
       <div className="flex flex-col justify-between pt-4 pb-4">
         <span className="leading-6 text-black font-druk text-md">{title}</span>
         <div className="flex">

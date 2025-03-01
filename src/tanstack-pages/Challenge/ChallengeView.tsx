@@ -14,18 +14,16 @@ const ChallengeView: React.FC = () => {
 
   return (
     <div className="mb-20 flex w-full flex-col pb-24">
-      <div className="relative rounded-b-3xl w-full">
+      <div className="relative rounded-b-3xl w-full flex items-center">
         <img
           src={card?.imageUrl}
           alt={card?.title}
           className={`${category?.color} h-[65vh] w-full object-cover rounded-b-3xl`}
         />
-        <Link
-          to="/new"
-          className="fixed right-0 top-0 pt-4 p-3 z-10 text-black">
+        <Link to="/new" className="fixed right-0 top-0 p-3 z-10 text-black">
           <CrossIcon />
         </Link>
-        <div className="absolute inset-0 flex flex-col p-3 pt-14  text-start">
+        <div className="absolute inset-0 flex flex-col p-3 pt-10  text-start">
           <span className="text-sm text-black">Задание</span>
           <span className="text-lg  font-druk text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
             {card?.title}
