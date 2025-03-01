@@ -89,7 +89,7 @@ export const ChallengeCardUI = ({
       </div>
 
       <div
-        className="relative flex aspect-square h-[16vh] items-center justify-center gap-2 rounded-full bg-black"
+        className="relative flex aspect-square min-h-[16vh] items-center justify-center gap-2 rounded-full bg-black"
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
