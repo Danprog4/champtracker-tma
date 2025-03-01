@@ -33,7 +33,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
           <div className="flex-1 rounded-t-[10px] bg-zinc-900 p-4 pb-7">
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-zinc-600" />
             <div className="mx-auto max-w-md">
-              <Drawer.Title className="mb-6 text-3xl font-medium text-white">
+              <Drawer.Title className="mb-6 font-druk text-2xl font-medium text-white">
                 Купить премиум
               </Drawer.Title>
               <div className="space-y-4">
@@ -75,7 +75,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                   <Button
                     onClick={handleBuyPremium}
                     disabled={isBuyingPending}
-                    className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90">
+                    className="mt-6 w-full font-semibold rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg  text-white hover:opacity-90">
                     {isBuyingPending ? (
                       <span>Покупка...</span>
                     ) : (
@@ -94,7 +94,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                       }
                     }}
                     disabled={isUpdatingPremium}
-                    className="mt-6 w-full rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-medium text-white hover:opacity-90">
+                    className="mt-6 w-full  rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-semibold text-white hover:opacity-90">
                     {isBuyingPending ? (
                       <span>Покупка...</span>
                     ) : (

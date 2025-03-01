@@ -42,19 +42,11 @@ const Challenges: React.FC = () => {
 
       <Slider />
 
-      {isPremium(user) ? (
-        <Link
-          to="/card/create"
-          className="flex w-full items-center justify-center pl-0 ">
-          <CreateTaskButton />
-        </Link>
-      ) : (
-        <BuyPremium>
-          <div className="flex w-full items-center justify-center pl-0 ">
-            <CreateTaskButton />
-          </div>
-        </BuyPremium>
-      )}
+      <Link
+        to="/card/create"
+        className="flex w-full items-center justify-center pl-0 ">
+        <CreateTaskButton />
+      </Link>
     </div>
   );
 };

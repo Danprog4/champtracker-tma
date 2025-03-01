@@ -116,7 +116,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
               className={`fixed hover:opacity-90 bottom-7 flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5 ${
                 title.length === 0 ? "bg-gray-600" : ""
               }`}>
-              <span>ПРЕМИУМ</span>
+              <span className="font-semibold text-lg">ПРЕМИУМ</span>
               <TelegramStar className="-translate-y-0.5" />
             </button>
           </BuyPremium>

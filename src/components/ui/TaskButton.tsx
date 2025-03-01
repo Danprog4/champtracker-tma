@@ -13,7 +13,7 @@ export const CreateTaskButton = () => {
       onClick={() => {
         updateOnBoarding(true);
       }}>
-      {isPremium(user) ? <PlusIcon /> : <Lock />}
+      <PlusIcon />
       <span className="text-[10px] text-black font-druk">
         СОЗДАТЬ СВОЕ ЗАДАНИЕ
       </span>
