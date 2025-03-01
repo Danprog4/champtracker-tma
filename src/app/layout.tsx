@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased bg-black bg-cover h-screen overscroll-behavior-none`}>
+        className={`antialiased bg-black bg-cover h-screen overscroll-behavior-none overscroll-contain`}>
         <Script
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
