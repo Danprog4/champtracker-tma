@@ -100,6 +100,7 @@ const CreateSmart: React.FC = () => {
         setDaysOfWeek={setDaysOfWeek}
         handleSave={handleSave}
         challenges={challenges}
+        isCreateChallengePending={isCreateChallengePending}
       />
     </>
   );

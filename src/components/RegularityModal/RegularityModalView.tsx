@@ -13,6 +13,7 @@ interface RegularityModalViewProps {
   handleToggleDay: (day: number, dayName: string) => void;
   handleSaveChanges: () => void;
   handleClose: () => void;
+  isDisabled: boolean;
 }
 
 export default function RegularityModalView({
@@ -25,6 +26,7 @@ export default function RegularityModalView({
   handleToggleDay,
   handleSaveChanges,
   handleClose,
+  isDisabled,
 }: RegularityModalViewProps) {
   return (
     <Drawer.Root
@@ -99,20 +101,16 @@ export default function RegularityModalView({
                 </div>
               )}
             </div>
-            <div
+            <button
               className="flex items-center justify-center pl-0 "
-              onClick={handleSaveChanges}>
+              onClick={handleSaveChanges}
+              disabled={isDisabled}>
               <div className="fixed bottom-7 z-50  flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5">
-                <span
-                  className={`${
-                    tempDaysOfWeek.length === 0 &&
-                    tempRegularity !== "everyday" &&
-                    "text-gray-500"
-                  }`}>
+                <span className={`${isDisabled && "text-gray-500"}`}>
                   ГОТОВО
                 </span>
               </div>
-            </div>
+            </button>
           </div>
         </Drawer.Content>
       </Drawer.Portal>

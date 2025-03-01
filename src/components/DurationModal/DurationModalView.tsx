@@ -23,7 +23,7 @@ export interface DurProps {
   handleDurationChange: (value: string) => void;
   handleSave: () => void;
   handleClose: () => void;
-  isButtonDisabled: () => boolean;
+  isButtonDisabled: boolean;
   handleRadioChange: (value: string) => void;
   isEveryday: boolean;
 }
@@ -109,11 +109,10 @@ const DurationModalView: React.FC<DurProps> = ({
             <div className="flex items-center justify-center pl-0 ">
               <button
                 className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5"
-                onClick={handleSave}>
+                onClick={handleSave}
+                disabled={isButtonDisabled}>
                 <span
-                  className={
-                    isButtonDisabled() ? "text-gray-500" : "text-black"
-                  }>
+                  className={isButtonDisabled ? "text-gray-500" : "text-black"}>
                   ГОТОВО
                 </span>
               </button>

@@ -40,9 +40,8 @@ const DurationModal: React.FC<DurPropsSmart> = ({
     [regularity, card]
   );
 
-  const isButtonDisabled = (): boolean => {
-    return (isCustomDuration && inputDuration.length === 0) || isLong;
-  };
+  const isButtonDisabled =
+    (isCustomDuration && inputDuration.length === 0) || isLong;
 
   const isEveryday = regularity === "everyday";
 

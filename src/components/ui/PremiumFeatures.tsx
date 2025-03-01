@@ -24,7 +24,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-zinc-600" />
             <div className="mx-auto max-w-md">
               <Drawer.Title className="font-medium text-white flex flex-col">
-                <span className="font-druk text-2xl">Ваш премиум</span>
+                <span className="font-druk text-3xl">Ваш премиум</span>
                 <span className="text-sm mb-6">
                   Действует до {formattedPremiumUntil}
                 </span>
@@ -57,7 +57,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                 </div>
 
                 <Button
-                  className="w-full font-druk text-xs text-white h-10 rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  font-medium  flex items-center justify-center"
+                  className="w-full font-druk text-md text-white h-10 rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  font-medium  flex items-center justify-center"
                   onClick={() => setIsOpen(false)}>
                   <span>Закрыть</span>
                 </Button>

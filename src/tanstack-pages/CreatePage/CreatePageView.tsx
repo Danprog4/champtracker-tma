@@ -34,6 +34,7 @@ interface CreateDumpProps {
   setDaysOfWeek: (value: number[]) => void;
   handleSave: () => void;
   challenges: Challenge[];
+  isCreateChallengePending: boolean;
 }
 
 const CreateDump: React.FC<CreateDumpProps> = ({
@@ -56,6 +57,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
   setDaysOfWeek,
   handleSave,
   challenges,
+  isCreateChallengePending,
 }) => {
   const { user } = useUser();
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
@@ -97,7 +99,9 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         setNotifications={setNotifications}
       />
       <ColorsSchema color={color} setColor={setColor} />
-      <div className="flex items-center justify-center pl-0  mb-10">
+      <button
+        className="flex items-center justify-center pl-0  mb-10"
+        disabled={isCreateChallengePending}>
         {isPremium(user) || challenges.length < 1 ? (
           <button
             onClick={handleSave}
@@ -117,7 +121,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
             </button>
           </BuyPremium>
         )}
-      </div>
+      </button>
     </div>
   );
 };

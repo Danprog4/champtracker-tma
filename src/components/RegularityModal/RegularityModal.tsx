@@ -79,6 +79,9 @@ export default function RegularityModal({
     setIsOpen(!isOpen);
   };
 
+  const isDisabled =
+    tempDaysOfWeek.length === 0 && tempRegularity !== "everyday";
+
   console.log(tempDaysOfWeek.length, "tempDaysOfWeek.length");
   console.log(regularity, "regularity");
   console.log(tempRegularity, "tempRegularity");
@@ -93,6 +96,7 @@ export default function RegularityModal({
       handleToggleDay={handleToggleDay}
       handleSaveChanges={handleSaveChanges}
       handleClose={handleClose}
+      isDisabled={isDisabled}
     />
   );
 }
