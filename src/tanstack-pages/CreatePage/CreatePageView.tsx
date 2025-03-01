@@ -62,7 +62,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
 
   return (
     <div className="flex min-h-screen flex-col mb-12">
-      <div className={`fixed top-0 p-2 pr-3 pt-14 flex w-full ${color}`}>
+      <div className={`fixed top-0  h-[5vh]  pt-4 pl-3 flex w-full ${color}`}>
         <Link to={getNavigationPath()} className="absolute text-black ">
           <CrossIcon />
         </Link>

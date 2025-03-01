@@ -33,7 +33,7 @@ const ChallengeList = ({ challenges }: ChallengeListProps) => {
     }));
   console.log(nonExpiredChallenges);
   return (
-    <div className="mt-28 flex flex-col items-center justify-center gap-2 pb-28">
+    <div className="mt-20 flex flex-col items-center justify-center gap-2 pb-28">
       {nonExpiredChallenges.map((challenge, index) => (
         <ChallengeCard
           key={challenge.id}

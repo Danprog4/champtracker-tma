@@ -13,14 +13,14 @@ const Header = () => {
   const { user } = useUser();
 
   return (
-    <div className="fixed z-10 flex w-full justify-between h-[12vh] bg-black p-3 pt-14">
+    <div className="fixed z-10 flex w-full justify-between items-center h-[5vh] bg-black pt-7 p-3">
       <Link to="/about">
         <BarsIcon />
       </Link>
       <div className="flex items-center gap-2">
         {isPremium(user) ? (
           <PremiumFeatures>
-            <div className="flex text-sm items-center gap-2 -translate-y-1.5 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-1 px-2 font-medium hover:opacity-90">
+            <div className="flex text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-2 font-medium hover:opacity-90">
               <div className="flex items-center gap-1 font-druk">
                 <span>{user.tokens}</span>
                 <TokenIcon />
@@ -29,7 +29,7 @@ const Header = () => {
           </PremiumFeatures>
         ) : (
           <BuyPremium>
-            <div className="flex text-sm  -translate-y-2 items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 font-medium hover:opacity-90">
+            <div className="flex text-sm  items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 font-medium hover:opacity-90">
               <div className="flex items-center gap-1 font-druk text-[10px]">
                 <span>ПРЕМИУМ</span>
                 <TelegramStar />

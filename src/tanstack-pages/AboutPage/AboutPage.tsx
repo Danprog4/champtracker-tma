@@ -14,14 +14,14 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="fixed flex w-full items-center justify-start bg-black pl-3 pt-14">
+      <header className="fixed flex w-full items-center justify-start bg-black h-[5vh] pt-4 pl-3">
         <Link to="/">
           <CrossIcon />
         </Link>
       </header>
       <Link
         to="/hints"
-        className="mt-28 flex h-[33vh] w-[100vw] items-center justify-center rounded-full bg-yellow-400">
+        className="mt-20 flex h-[33vh] w-[100vw] items-center justify-center rounded-full bg-yellow-400">
         <span className="text-center font-druk text-xl  text-black leading-6">
           ПОДСКАЗКИ <br></br> И СОВЕТЫ
         </span>

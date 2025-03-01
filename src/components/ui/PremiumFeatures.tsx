@@ -11,11 +11,15 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
   const formattedPremiumUntil = dayjs(isPremiumUntil).format("DD.MM.YYYY");
 
   return (
-    <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
+    <Drawer.Root
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      noBodyStyles={true}
+      dismissible={false}>
       <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 mt-24 flex flex-col rounded-t-[10px]">
+        <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 mt-24 flex flex-col rounded-t-[10px]">
           <div className="flex-1 rounded-t-[10px] bg-zinc-900 p-4 pb-7">
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-zinc-600" />
             <div className="mx-auto max-w-md">
@@ -53,7 +57,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                 </div>
 
                 <Button
-                  className="w-full font-druk text-sm text-white h-10 rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  font-medium  flex items-center justify-center"
+                  className="w-full font-druk text-xs text-white h-10 rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  font-medium  flex items-center justify-center"
                   onClick={() => setIsOpen(false)}>
                   <span>Закрыть</span>
                 </Button>

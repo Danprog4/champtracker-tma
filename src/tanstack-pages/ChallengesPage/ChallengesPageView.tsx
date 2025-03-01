@@ -16,7 +16,7 @@ const Challenges: React.FC = () => {
   const { user } = useUser();
   return (
     <div className="relative flex flex-col items-start">
-      <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[12vh] p-3 pt-14 top-0">
+      <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[5vh] pt-4 pl-3 top-0">
         <button
           onClick={() => {
             if (!isOnBoarding) {
