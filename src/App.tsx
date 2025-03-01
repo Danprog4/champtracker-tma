@@ -6,9 +6,11 @@ function App() {
   usePrefetchQueries();
 
   return (
-    <div className="min-h-screen max-h-screen overflow-auto antialiased bg-black overscroll-contain">
+    <div className="min-h-screen max-h-screen overflow-auto antialiased bg-black overscroll-contain text-white">
       <Outlet />
-      <Toaster position="top-center" />
+      <Toaster position="top-center" theme="dark" />
     </div>
   );
 }
+
+export default App;
