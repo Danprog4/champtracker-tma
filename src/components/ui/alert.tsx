@@ -45,7 +45,7 @@ export const DrawerAlert = ({
             УДАЛИТЬ
           </button>
           <DrawerClose asChild>
-            <button className="bg-gray-500 text-white px-4 py-2 rounded-md h-[45px]">
+            <button className="bg-gray-500 text-white px-4 py-2 rounded-md h-[45px] mb-5">
               ОТМЕНИТЬ
             </button>
           </DrawerClose>
