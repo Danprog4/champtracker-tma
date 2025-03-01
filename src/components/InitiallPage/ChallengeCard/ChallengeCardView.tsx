@@ -67,9 +67,11 @@ export const ChallengeCardUI = ({
       to={`/challenge/$taskId`}
       disabled={!isPremium && index !== 0}
       params={{ taskId: challengeId }}
-      className={`${color} flex w-[95vw] h-[20vh] justify-between rounded-lg pr-0 pl-4 ${isLastNonExpired ? "mb-8" : ""} ${isExpired || (!isPremium && index !== 0) ? "opacity-50" : ""}`}>
+      className={`${color} flex w-[94vw]   justify-between rounded-lg pr-0 pl-4 ${isLastNonExpired ? "mb-8" : ""} ${isExpired || (!isPremium && index !== 0) ? "opacity-50" : ""}`}>
       <div className="flex flex-col justify-between pt-4 pb-4">
-        <span className="leading-6 text-black font-druk text-md">{title}</span>
+        <span className="leading-6 text-black font-druk text-sm max-w-[50px]">
+          {title}
+        </span>
         <div className="flex">
           <span className="font-druk text-4xl text-stroke-1 text-transparent">
             {regularity === "everyday" && daysSinceStart !== 0
@@ -89,7 +91,7 @@ export const ChallengeCardUI = ({
       </div>
 
       <div
-        className="relative flex w-[20vh] h-[20vh] items-center justify-center gap-2 rounded-full bg-black shrink-0"
+        className="relative flex w-[43%]  aspect-square items-center justify-center gap-2 rounded-full bg-black shrink-0"
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
