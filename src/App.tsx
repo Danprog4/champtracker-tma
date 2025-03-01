@@ -6,7 +6,7 @@ function App() {
   usePrefetchQueries();
 
   return (
-    <div className="relative h-screen rounded-lg bg-black text-white shadow-lg">
+    <div className="relative h-screen rounded-lg bg-black bg-cover text-white shadow-lg ">
       <Outlet />
       <Toaster position="top-center" />
     </div>
