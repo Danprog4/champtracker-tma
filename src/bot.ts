@@ -21,7 +21,9 @@ const main = async () => {
   });
 
   bot.command("start", async (ctx) => {
-    await ctx.reply("Hello! Track your fucking challenges!");
+    await ctx.reply(
+      "Привет! Начинай прокачивать свою дисциплину и выполнять задания прямо сейчас!"
+    );
   });
 
   bot.on("pre_checkout_query", async (ctx) => {
