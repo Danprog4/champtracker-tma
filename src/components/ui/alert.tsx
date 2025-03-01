@@ -25,7 +25,7 @@ export const DrawerAlert = ({
   bgColor,
 }: DrawerAlertProps) => {
   return (
-    <Drawer>
+    <Drawer noBodyStyles={true}>
       <DrawerTrigger>
         <button
           className={`flex h-[45px] w-[94vw] items-center justify-center rounded-md ${bgColor} p-[10px]`}>
