@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="relative h-screen rounded-lg bg-black bg-cover text-white shadow-lg ">
       <Outlet />
-      <Toaster position="top-center" />
+      <Toaster position="top-center" theme="dark" />
     </div>
   );
 }

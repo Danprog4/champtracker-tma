@@ -116,9 +116,11 @@ export const useChallenges = () => {
           })()
         : [...(task.userCheckedDates || []), targetDate];
 
-    // Check if challenge is completed
+    // Check if challenge is completed using the updatedCheckedDays
     const isChallengeCompleted =
-      task.userCheckedDates?.length === task.taskDates.length;
+      updatedCheckedDays.length === task.taskDates.length;
+
+    console.log(updatedCheckedDays, task.taskDates, isChallengeCompleted, "d");
 
     if (isChallengeCompleted && isPremium(user)) {
       if (user.completedChallengesCount === 0) {

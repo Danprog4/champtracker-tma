@@ -146,7 +146,7 @@ export const ProfilePage = () => {
         </BuyPremium>
       ) : (
         <PremiumFeatures>
-          <div className="fixed text-black font-druk text-xs flex flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2 font-medium hover:opacity-90">
+          <div className="fixed flex font-druk text-sm flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 px-4 py-2  text-black hover:opacity-90">
             Ваш премиум
           </div>
         </PremiumFeatures>
