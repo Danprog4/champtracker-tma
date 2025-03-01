@@ -32,7 +32,7 @@ export default function RegularityModalView({
       onOpenChange={setIsOpen}
       onClose={handleSaveChanges}
       noBodyStyles={true}
-      shouldScaleBackground={false}>
+      dismissible={false}>
       <Drawer.Trigger className="flex w-[94vw] h-[45px] items-center justify-between rounded-md bg-gray-800 p-[10px]">
         <span>Регулярность</span>
         <span className="text-gray-400">
@@ -102,7 +102,7 @@ export default function RegularityModalView({
             <div
               className="flex items-center justify-center pl-0 "
               onClick={handleSaveChanges}>
-              <div className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5">
+              <div className="fixed bottom-7 z-50  flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5">
                 <span
                   className={`${
                     tempDaysOfWeek.length === 0 &&

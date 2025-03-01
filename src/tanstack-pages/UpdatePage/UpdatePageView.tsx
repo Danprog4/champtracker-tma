@@ -120,7 +120,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
       <div className="flex items-center justify-center pl-0  mb-10">
         <button
           onClick={handleSave}
-          className={`fixed bottom-7 shadow-xl  shadow-black z-20 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg ${
+          className={`fixed bottom-7 shadow-xl  shadow-black  flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg ${
             checkIfChanged ? Colors[color] : "bg-gray-600"
           } p-5`}
           disabled={!checkIfChanged}>
