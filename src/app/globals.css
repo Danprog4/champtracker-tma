@@ -83,7 +83,7 @@ body {
   body {
     @apply bg-background text-foreground;
   }
-}
+
 
 @font-face {
   font-family: "Druk";
@@ -93,9 +93,33 @@ body {
   font-display: swap;
 }
 
-html,
-body {
-  width: 100%;
+html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
-  overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
+  min-height: 100%;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+body {
+  overflow-y: auto; /* Прокрутка по необходимости */
+  -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+  background-color: #000; /* Черный фон по умолчанию */
+  color: #fff; /* Белый текст по умолчанию */
+}
+
+.scroll-container {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.touch-none {
+  touch-action: none;
+}
+
+/* Для просроченных элементов */
+.expired {
+  opacity: 0.5;
+  pointer-events: none;
+  touch-action: none;
 }
