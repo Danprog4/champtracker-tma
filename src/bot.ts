@@ -124,7 +124,7 @@ const main = async () => {
   console.log(`Server running on port ${PORT}`);
 
   // Настраиваем вебхук автоматически при запуске
-  const webhookUrl = `https://yourdomain.com${webhookPath}`; // Замени на свой домен
+  const webhookUrl = `https://champtracker-backend.vercel.app${webhookPath}`; // Замени на свой домен
   try {
     await bot.api.setWebhook(webhookUrl);
     console.log(`Webhook set to ${webhookUrl}`);
