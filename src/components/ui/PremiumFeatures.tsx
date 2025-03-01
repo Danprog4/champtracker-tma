@@ -11,7 +11,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
   const formattedPremiumUntil = dayjs(isPremiumUntil).format("DD.MM.YYYY");
 
   return (
-    <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
+    <Drawer.Root open={isOpen} onOpenChange={setIsOpen} noBodyStyles={true}>
       <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
