@@ -69,7 +69,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
             Редактировать
           </span>
         </div>
-        <div className={`${color} min-h-[14vh] pt-10 pb-2`}>
+        <div className={`${color} min-h-[14vh] pt-12 pb-2`}>
           <Title title={title} setTitle={setTitle} />
         </div>
       </div>

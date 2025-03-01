@@ -111,13 +111,14 @@ export default function StartModalView({
                 />
               )}
             </div>
-            <div
+            <button
               className="flex items-center justify-center pl-0 "
-              onClick={handleSave}>
+              onClick={handleSave}
+              disabled={disabled}>
               <div className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5">
                 <span>ГОТОВО</span>
               </div>
-            </div>
+            </button>
           </div>
         </Drawer.Content>
       </Drawer.Portal>

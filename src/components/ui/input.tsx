@@ -36,8 +36,7 @@ export function NumericInput({
       className={cn(
         "flex h-10 items-baseline gap-1",
         !amountValue && "items-end *:text-[20px]"
-      )}
-    >
+      )}>
       <input
         type="text"
         inputMode="decimal"
@@ -51,8 +50,7 @@ export function NumericInput({
         className={cn(
           "max-w-[60vw] text-[20px] font-semibold opacity-0",
           !amountValue && "self-end text-[20px] text-white/65"
-        )}
-      >
+        )}>
         {amountValue || placeholder}
       </div>
       {amountValue && (

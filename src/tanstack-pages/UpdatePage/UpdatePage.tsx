@@ -35,7 +35,8 @@ const UpdatePage: React.FC = () => {
       duration !== task.duration ||
       title !== task.title ||
       regularity !== task.regularity ||
-      JSON.stringify(daysOfWeek) !== JSON.stringify(task.daysOfWeek)
+      (daysOfWeek &&
+        daysOfWeek.some((day, index) => day !== task.daysOfWeek?.[index]))
     );
   }, [color, duration, title, regularity, daysOfWeek, task]);
 

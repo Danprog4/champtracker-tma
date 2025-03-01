@@ -68,19 +68,15 @@ const DurationModalView: React.FC<DurProps> = ({
                     key={index}
                     value={String(dur)}
                     className={cn(
-                      "border-b-1 max-h-[40px] w-[90vw] rounded-b-none border border-gray-600 bg-gray-800 p-[10px]",
-                      index + 1 === presetDurations.length &&
-                        "border-b-none rounded-b-none rounded-t-none",
-                      index !== 0 &&
-                        index + 1 !== presetDurations.length &&
-                        "rounded-none"
+                      " max-h-[40px] w-[90vw] border-b-2  border-gray-600 bg-gray-800 p-[10px] rounded-none",
+                      index === 0 && "rounded-t"
                     )}>
                     {isEveryday ? `${dur} дней` : `${dur / 7} недель`}
                   </RadioGroupItem>
                 ))}
                 <RadioGroupItem
                   value="Own duration"
-                  className="max-h-[40px] w-[90vw] rounded-t-none border border-gray-600 bg-gray-800 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-t-none  border-gray-600 bg-gray-800 p-[10px]">
                   Своя длительность
                 </RadioGroupItem>
               </RadioGroup>
