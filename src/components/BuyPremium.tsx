@@ -94,7 +94,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                       }
                     }}
                     disabled={isUpdatingPremium}
-                    className="w-full shadow-xl shadow-black z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
+                    className="w-full shadow-xl shadow-black font-normal z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
                     {isBuyingPending ? (
                       <span>Покупка...</span>
                     ) : (
