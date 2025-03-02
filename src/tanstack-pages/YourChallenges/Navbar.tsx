@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export const Navbar = () => {
   return (
-    <footer className="w-[100vw] bottom-0 fixed h-20 bg-black flex justify-between items-center pb-7 px-8 ">
+    <footer className="w-[100vw] bottom-0 fixed h-20 bg-black flex justify-between pb-7 px-8 ">
       <div
         className="flex flex-col items-center group"
         onClick={() =>

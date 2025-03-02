@@ -18,7 +18,7 @@ const Title: React.FC<TitleProps> = ({ title, setTitle }) => {
 
   return (
     <div className="flex flex-col pl-3 text-start text-black">
-      <span className="mt-4 text-sm mr-[5%] flex justify-between">
+      <span className="mt-8 text-sm mr-[5%] flex justify-between">
         Название
         {title !== "" && <span>{title.length}/28</span>}
       </span>
