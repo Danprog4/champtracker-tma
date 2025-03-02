@@ -45,7 +45,7 @@ const AboutPage: React.FC = () => {
       <div className="flex font-druk">
         <a
           className="flex h-[50vw] w-[50vw] flex-col  items-center justify-center rounded-3xl bg-blue-300"
-          href="https://github.com/Danprog4/Challenge-Up"
+          href="https://github.com/Danprog4"
           target="_blank"
           rel="noopener noreferrer">
           <Image

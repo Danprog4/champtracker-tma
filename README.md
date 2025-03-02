@@ -13,17 +13,23 @@
 ## 🛠️ Tech Stack
 
 - **Frontend**: Next.js, React 19, TanStack Router, TailwindCSS
-- **State Management**: Zustand, TanStack Query
+- **Backend**: Hono API server with REST endpoints
+- **State Management**: Zustand, TanStack Query (React Query)
+- **UI Components**: Radix UI, Lucide React icons, Embla Carousel
 - **Database**: PostgreSQL with Drizzle ORM
-- **Authentication**: Telegram Auth
+- **Authentication**: Telegram Auth via @telegram-apps/sdk
 - **Payments**: Telegram Payments API
+- **Bot Framework**: Grammy (Telegram Bot SDK)
+- **Date Handling**: date-fns, dayjs
 - **Deployment**: Vercel
+- **Development**: TypeScript, ESLint, Vite
 
 ## 📋 Prerequisites
 
 - Node.js (v18+)
 - PostgreSQL
 - Telegram Bot Token (for bot functionality)
+- Bun runtime (recommended)
 
 ## 🔧 Installation
 
@@ -91,9 +97,14 @@ champtracker/
 │   ├── api/                # API endpoints
 │   │   └── schema/         # Database schema definitions
 │   ├── components/         # React components
+│   │   └── ui/             # Reusable UI components
+│   ├── server.ts           # Hono server implementation
+│   ├── bot.ts              # Telegram bot implementation
 │   ├── db/                 # Database models and repositories
 │   │   ├── repo/           # Database operations
-│   └── stores/             # Zustand stores
+│   ├── hooks/              # Custom React hooks
+│   ├── stores/             # Zustand stores
+│   └── lib/                # Utility functions and shared libraries
 ├── public/                 # Static assets
 ├── drizzle/                # Drizzle migrations
 └── supabase/               # Supabase configuration
