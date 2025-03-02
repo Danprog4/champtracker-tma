@@ -24,8 +24,10 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
 
   const [isForTokens, setIsForTokens] = useState(false);
   const { user } = useUser();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Drawer.Root>
+    <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
       <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -73,7 +75,9 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                 </div>
                 {!isForTokens ? (
                   <Button
-                    onClick={handleBuyPremium}
+                    onClick={() => {
+                      handleBuyPremium(() => setIsOpen(false));
+                    }}
                     disabled={isBuyingPending}
                     className="w-full shadow-xl font-normal shadow-black z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
                     {isBuyingPending ? (
@@ -91,6 +95,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                         toast.error("У вас недостаточно токенов");
                       } else {
                         updatePremium(dayjs().add(1, "month").toISOString());
+                        setIsOpen(false); // Close drawer on success
                       }
                     }}
                     disabled={isUpdatingPremium}
