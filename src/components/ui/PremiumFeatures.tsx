@@ -53,7 +53,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                 </div>
 
                 <Button
-                  className="fixed bottom-7 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] font-druk font-normal text-lg items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5"
+                  className="fixed bottom-7 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] font-druk font-normal text-xs items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5"
                   onClick={() => setIsOpen(false)}>
                   <span>ЗАКРЫТЬ</span>
                 </Button>
