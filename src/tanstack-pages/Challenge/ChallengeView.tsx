@@ -50,7 +50,7 @@ const ChallengeView: React.FC = () => {
         </div>
       </div>
       <div className="p-3">
-        <p className="mb-10 mt-5 text-start text-lg text-zinc-300 leading-6">
+        <p className="mb-10 mt-5 text-start text-lg text-neutral-300 leading-6">
           {card?.desc}
         </p>
         <div className="text-start">
@@ -58,9 +58,9 @@ const ChallengeView: React.FC = () => {
             ПОДСКАЗКИ <br /> И СОВЕТЫ
           </span>
           {card?.hints?.map((hint, index) => (
-            <div className="mt-5 flex gap-3 text-lg font-light text-zinc-300">
+            <div className="mt-5 flex gap-3 text-lg font-light text-neutral-300">
               <span className=" text-white">
-                <div className="w-5 border border-zinc-300 mt-3"></div>
+                <div className="w-5 border border-neutral-300 mt-3"></div>
               </span>
               <p
                 className={`${index + 1 === card.hints?.length && "mb-5"} leading-6`}>

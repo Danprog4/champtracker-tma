@@ -75,7 +75,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
       </div>
       <div className="flex flex-col mt-7">
         <div className=" flex flex-col pl-3  text-start">
-          <span className="mb-2 text-zinc-300">Условия</span>
+          <span className="mb-2 text-neutral-300">Условия</span>
         </div>
         <div className="flex flex-col items-center justify-center">
           <RegularityModal
@@ -122,7 +122,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
         <button
           onClick={handleSave}
           className={`fixed bottom-7 shadow-xl  shadow-black  flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg ${
-            checkIfChanged ? Colors[color] : "bg-zinc-600"
+            checkIfChanged ? Colors[color] : "bg-neutral-600"
           } p-5`}
           disabled={!checkIfChanged}>
           СОХРАНИТЬ

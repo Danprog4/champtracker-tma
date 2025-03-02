@@ -32,7 +32,7 @@ export const DrawerAlert = ({
           <span className="text-xs font-druk ">{title}</span>
         </button>
       </DrawerTrigger>
-      <DrawerContent className="bg-zinc-800 border-none">
+      <DrawerContent className="bg-neutral-800 border-none">
         <DrawerHeader>
           <DrawerTitle className="text-white text-start font-light">
             {question}
@@ -45,7 +45,7 @@ export const DrawerAlert = ({
             УДАЛИТЬ
           </button>
           <DrawerClose asChild>
-            <button className="bg-zinc-500 text-white px-4 py-2 rounded-md h-[45px] mb-5">
+            <button className="bg-neutral-500 text-white px-4 py-2 rounded-md h-[45px] mb-5">
               ОТМЕНИТЬ
             </button>
           </DrawerClose>

@@ -16,8 +16,8 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
         <Drawer.Content className="fixed bottom-0  left-0 pt-4 right-0 mt-24 flex flex-col rounded-t-[10px]">
-          <div className="flex-1 rounded-t-[10px] bg-zinc-900 p-4 pb-7">
-            <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-zinc-600" />
+          <div className="flex-1 rounded-t-[10px] bg-neutral-900 p-4 pb-7">
+            <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-neutral-600" />
             <div className="mx-auto max-w-md">
               <Drawer.Title className=" text-white flex flex-col">
                 <span className="font-druk text-2xl">Ваш премиум</span>
@@ -26,28 +26,28 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                 </span>
               </Drawer.Title>
               <div className="space-y-4 mb-16">
-                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
+                <div className="rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900 p-4">
                   <h3 className="mb-2 font-medium text-white">
                     Без ограничений
                   </h3>
-                  <p className="text-sm text-zinc-400">
+                  <p className="text-sm text-neutral-400">
                     Создавай и выполняй любое количество своих или готовых
                     заданий
                   </p>
                 </div>
-                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
+                <div className="rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900 p-4">
                   <h3 className="mb-2 font-medium text-white">
                     Токены за задания
                   </h3>
-                  <p className="text-sm text-zinc-400">
+                  <p className="text-sm text-neutral-400">
                     Получай токены за пройденные дни и обменивай их на премиум
                   </p>
                 </div>
-                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4 ">
+                <div className="rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900 p-4 ">
                   <h3 className="mb-2 font-medium text-white">
                     Подробная статистика (в разработке)
                   </h3>
-                  <p className="text-sm text-zinc-400">
+                  <p className="text-sm text-neutral-400">
                     Получай подробные отчеты о своем прогрессе и достижениях
                   </p>
                 </div>

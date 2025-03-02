@@ -33,9 +33,9 @@ export default function RegularityModalView({
       open={isOpen}
       onOpenChange={setIsOpen}
       onClose={handleSaveChanges}>
-      <Drawer.Trigger className="flex w-[94vw] h-[45px] items-center justify-between rounded-md bg-zinc-800 p-[10px]">
+      <Drawer.Trigger className="flex w-[94vw] h-[45px] items-center justify-between rounded-md bg-neutral-800 p-[10px]">
         <span>Регулярность</span>
-        <span className="text-zinc-400">
+        <span className="text-neutral-400">
           {tempRegularity === "fewTimesAWeek"
             ? `${tempDaysOfWeek.length} раз в неделю >`
             : `Каждый день >`}
@@ -43,28 +43,28 @@ export default function RegularityModalView({
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-zinc-100 outline-none">
+        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-neutral-100 outline-none">
           <div className="h-full bg-black">
-            <div className="mb-4 flex h-[13vw] items-center justify-center bg-zinc-800 text-white">
+            <div className="mb-4 flex h-[13vw] items-center justify-center bg-neutral-800 text-white">
               Регулярность
             </div>
-            <div className="flex flex-col items-center justify-center text-zinc-300">
+            <div className="flex flex-col items-center justify-center text-neutral-300">
               <RadioGroup
                 defaultValue={tempRegularity}
                 onValueChange={handleChangeRegularity}>
                 <RadioGroupItem
                   value="everyday"
-                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-zinc-600 bg-zinc-800 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-b-none border-b border-neutral-600 bg-neutral-800 p-[10px]">
                   Каждый день
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="fewTimesAWeek"
-                  className="max-h-[40px] w-[90vw] rounded-t-none bg-zinc-800 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-t-none bg-neutral-800 p-[10px]">
                   Несколько раз в неделю
                 </RadioGroupItem>
               </RadioGroup>
               {tempRegularity === "fewTimesAWeek" && (
-                <div className="mt-2 flex flex-col items-start text-start">
+                <div className="mt-2 flex flex-col items-start text-start divide-y divide-neutral-600">
                   {[
                     "Понедельник",
                     "Вторник",
@@ -78,10 +78,10 @@ export default function RegularityModalView({
                     return (
                       <div
                         key={day}
-                        className="flex h-[40px] w-[90vw] items-center border-b-2 border-zinc-600 bg-zinc-800 p-[10px] text-sm font-medium">
+                        className="flex h-[40px] w-[90vw] items-center  border-neutral-600 bg-neutral-800 p-[10px] text-sm font-medium">
                         <div
                           className={cn(
-                            "text-zinc-300",
+                            "text-neutral-300",
                             tempDaysOfWeek.includes(day) && "text-yellow-500"
                           )}
                           onClick={() => handleToggleDay(day, dayName)}>
@@ -104,7 +104,8 @@ export default function RegularityModalView({
                 className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5"
                 onClick={handleSaveChanges}
                 disabled={isDisabled}>
-                <span className={isDisabled ? "text-zinc-500" : "text-black"}>
+                <span
+                  className={isDisabled ? "text-neutral-500" : "text-black"}>
                   ГОТОВО
                 </span>
               </button>

@@ -30,7 +30,7 @@ const Title: React.FC<TitleProps> = ({ title, setTitle }) => {
         <textarea
           ref={textareaRef}
           rows={1}
-          className="w-full font-druk text-lg border-none bg-transparent text-black placeholder:text-zinc-500 focus:outline-none resize-none overflow-hidden"
+          className="w-full font-druk text-lg border-none bg-transparent text-black placeholder:text-neutral-500 focus:outline-none resize-none overflow-hidden"
           value={title}
           onChange={(e) => {
             const inputValue = e.target.value.toUpperCase();

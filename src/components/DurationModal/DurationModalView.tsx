@@ -46,20 +46,20 @@ const DurationModalView: React.FC<DurProps> = ({
 }) => {
   return (
     <Drawer.Root onClose={handleSave} onOpenChange={setIsOpen} open={isOpen}>
-      <Drawer.Trigger className="mt-2 flex w-[94vw] h-[45px] items-center justify-between rounded-md bg-zinc-800 p-[10px]">
+      <Drawer.Trigger className="mt-2 flex w-[94vw] h-[45px] items-center justify-between rounded-md bg-neutral-800 p-[10px]">
         <span>Длительность</span>
-        <span className="text-zinc-400">{`${Math.floor(
+        <span className="text-neutral-400">{`${Math.floor(
           Number(inputDuration) || duration / (isEveryday ? 1 : 7)
         )} ${isEveryday ? "дней" : "недель"} >`}</span>
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-zinc-100 outline-none">
+        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-neutral-100 outline-none">
           <div className="h-full bg-black">
-            <div className="mb-4 flex h-[13vw] items-center justify-center bg-zinc-800 text-white">
+            <div className="mb-4 flex h-[13vw] items-center justify-center bg-neutral-800 text-white">
               Длительность
             </div>
-            <div className="flex flex-col items-center justify-center text-zinc-300">
+            <div className="flex flex-col items-center justify-center text-neutral-300">
               <RadioGroup
                 value={isCustomDuration ? "Own duration" : String(tempDuration)}
                 onValueChange={handleRadioChange}>
@@ -68,7 +68,7 @@ const DurationModalView: React.FC<DurProps> = ({
                     key={index}
                     value={String(dur)}
                     className={cn(
-                      " max-h-[40px] w-[90vw] border-b-2  border-zinc-600 bg-zinc-800 p-[10px] rounded-none",
+                      " max-h-[40px] w-[90vw] border-b  border-neutral-600 bg-neutral-800 p-[10px] rounded-none",
                       index === 0 && "rounded-t"
                     )}>
                     {isEveryday ? `${dur} дней` : `${dur / 7} недель`}
@@ -76,7 +76,7 @@ const DurationModalView: React.FC<DurProps> = ({
                 ))}
                 <RadioGroupItem
                   value="Own duration"
-                  className="max-h-[40px] w-[90vw] rounded-t-none  border-zinc-600 bg-zinc-800 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-t-none  border-neutral-600 bg-neutral-800 p-[10px]">
                   Своя длительность
                 </RadioGroupItem>
               </RadioGroup>
@@ -84,7 +84,7 @@ const DurationModalView: React.FC<DurProps> = ({
               {isCustomDuration && (
                 <div
                   className={cn(
-                    "mt-2 flex w-[90vw] flex-col items-start justify-center rounded-md border-2 border-zinc-600 bg-zinc-800 text-start text-sm font-medium text-white",
+                    "mt-2 flex w-[90vw] flex-col items-start justify-center rounded-md border border-neutral-600 bg-neutral-800 text-start text-sm font-medium text-white",
                     isLong ? "h-[60px]" : "h-[40px]"
                   )}>
                   <NumericInput
@@ -108,7 +108,9 @@ const DurationModalView: React.FC<DurProps> = ({
                 onClick={handleSave}
                 disabled={isButtonDisabled}>
                 <span
-                  className={isButtonDisabled ? "text-zinc-500" : "text-black"}>
+                  className={
+                    isButtonDisabled ? "text-neutral-500" : "text-black"
+                  }>
                   ГОТОВО
                 </span>
               </button>

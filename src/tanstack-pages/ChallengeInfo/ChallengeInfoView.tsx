@@ -101,7 +101,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                     checkDay(challenge.id.toString(), index);
                   }}
                   key={day}
-                  className={`aspect-square flex items-center justify-center bg-zinc-400 rounded-full  font-druk text-sm  text-black`}>
+                  className={`aspect-square flex items-center justify-center bg-neutral-400 rounded-full  font-druk text-sm  text-black`}>
                   <CrossIcon />
                 </button>
               ) : hasChecked ? (
@@ -163,7 +163,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                             checkDay(challenge.id.toString(), globalDayIndex)
                           }
                           key={day}
-                          className={`aspect-square flex items-center justify-center bg-zinc-400 rounded-full font-druk text-sm  text-black`}>
+                          className={`aspect-square flex items-center justify-center bg-neutral-400 rounded-full font-druk text-sm  text-black`}>
                           <CrossIcon />
                         </button>
                       ) : hasChecked ? (
