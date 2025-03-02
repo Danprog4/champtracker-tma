@@ -16,9 +16,9 @@ export const usePrefetchQueries = () => {
       queryFn: getChallenges,
     });
 
-    // queryClient.prefetchQuery({
-    //   queryKey: [getPremium.name],
-    //   queryFn: getPremium,
-    // });
+    queryClient.prefetchQuery({
+      queryKey: [getPremium.name],
+      queryFn: getPremium,
+    });
   }, [queryClient]);
 };
