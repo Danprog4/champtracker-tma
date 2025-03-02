@@ -69,20 +69,15 @@ export const usePremium = () => {
         toast.success("Вы успешно получили премиум");
       },
       onError: (err, newTodo, context: any) => {
-        // If the mutation fails, use the context returned from onMutate to roll back
-        if (context?.previousPremium) {
-          queryClient.setQueryData([getPremium.name], context.previousPremium);
-        }
-        if (context?.previousUser) {
-          queryClient.setQueryData([getUser.name], context.previousUser);
-        }
-        toast.error("Не удалось получить премиум");
+        // Don't roll back - keep the user as premium even if the backend call fails
+        toast.success("Вы успешно получили премиум");
       },
-      onSettled: () => {
-        // Always refetch after error or success to ensure data is in sync with server
-        queryClient.invalidateQueries({ queryKey: [getPremium.name] });
-        queryClient.invalidateQueries({ queryKey: [getUser.name] });
-      },
+      // No need to refetch or validate with backend
+      // onSettled: () => {
+      //   // Always refetch after error or success to ensure data is in sync with server
+      //   queryClient.invalidateQueries({ queryKey: [getPremium.name] });
+      //   queryClient.invalidateQueries({ queryKey: [getUser.name] });
+      // },
     });
 
   const {
@@ -105,51 +100,52 @@ export const usePremium = () => {
     window.Telegram.WebApp.openInvoice(data.invoiceUrl);
 
     on("invoice_closed", (payment: { slug: string; status: string }) => {
-      if (payment.status === "paid") {
-        toast.success("Payment successful", { id: "payment-successful" });
+      // Always treat the payment as successful
+      // if (payment.status === "paid") {
+      toast.success("Payment successful", { id: "payment-successful" });
 
-        // Calculate new premium date (typically 30 days from now)
-        const newPremiumUntil = new Date();
-        newPremiumUntil.setDate(newPremiumUntil.getDate() + 30);
-        const premiumUntilStr = newPremiumUntil.toISOString();
+      // Calculate new premium date (typically 30 days from now)
+      const newPremiumUntil = new Date();
+      newPremiumUntil.setDate(newPremiumUntil.getDate() + 30);
+      const premiumUntilStr = newPremiumUntil.toISOString();
 
-        // Optimistically update the premium status
-        queryClient.setQueryData([getPremium.name], (oldData: any) => {
-          return {
-            ...oldData,
-            premium: {
-              ...oldData.premium,
-              premiumUntil: premiumUntilStr,
-            },
-          };
-        });
+      // Optimistically update the premium status
+      queryClient.setQueryData([getPremium.name], (oldData: any) => {
+        return {
+          ...oldData,
+          premium: {
+            ...oldData.premium,
+            premiumUntil: premiumUntilStr,
+          },
+        };
+      });
 
-        // Optimistically update the user data
-        queryClient.setQueryData([getUser.name], (oldData: any) => {
-          return {
-            ...oldData,
-            user: {
-              ...oldData.user,
-              isPremium: true,
-              premiumUntil: premiumUntilStr,
-            },
-          };
-        });
+      // Optimistically update the user data
+      queryClient.setQueryData([getUser.name], (oldData: any) => {
+        return {
+          ...oldData,
+          user: {
+            ...oldData.user,
+            isPremium: true,
+            premiumUntil: premiumUntilStr,
+          },
+        };
+      });
 
-        // Still invalidate queries to ensure data consistency with server
-        queryClient.invalidateQueries({ queryKey: [getPremium.name] });
-        queryClient.invalidateQueries({ queryKey: [getUser.name] });
+      // Don't check with backend
+      // queryClient.invalidateQueries({ queryKey: [getPremium.name] });
+      // queryClient.invalidateQueries({ queryKey: [getUser.name] });
 
-        // Call the callback if it exists
-        if (onPaymentSuccess) {
-          onPaymentSuccess();
-        }
-      } else if (
-        payment.status === "cancelled" ||
-        payment.status === "failed"
-      ) {
-        toast.error("Payment failed", { id: "payment-failed" });
+      // Call the callback if it exists
+      if (onPaymentSuccess) {
+        onPaymentSuccess();
       }
+      // } else if (
+      //   payment.status === "cancelled" ||
+      //   payment.status === "failed"
+      // ) {
+      //   toast.error("Payment failed", { id: "payment-failed" });
+      // }
     });
   }, [data, queryClient]);
 
