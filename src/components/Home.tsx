@@ -26,6 +26,11 @@ export function Home() {
     }
 
     init();
+
+    // Expand the Telegram WebApp to full screen after initialization
+    if (typeof window !== "undefined" && window.Telegram?.WebApp?.expand) {
+      window.Telegram.WebApp.expand();
+    }
   }, []);
 
   return (

@@ -57,7 +57,7 @@ export const categories: Category[] = [
         duration: [15, 30],
       },
     ],
-    color: "bg-[#fbf8f6]",
+    color: "bg-[#37bed5]",
   },
   {
     title: "Здоровье",
@@ -105,7 +105,7 @@ export const categories: Category[] = [
         duration: [15, 30],
       },
     ],
-    color: "bg-[#fbf8f6]",
+    color: "bg-[#45cf95]",
   },
   {
     title: "Стиль жизни",
@@ -139,7 +139,7 @@ export const categories: Category[] = [
         duration: [15, 30, 90],
       },
     ],
-    color: "bg-[#fbf8f6]",
+    color: "bg-[#f5806a]",
   },
   {
     title: "Осознанность",
@@ -187,6 +187,6 @@ export const categories: Category[] = [
         duration: [15, 30],
       },
     ],
-    color: "bg-[#fbf8f6]",
+    color: "bg-[#ed9aab]",
   },
 ];

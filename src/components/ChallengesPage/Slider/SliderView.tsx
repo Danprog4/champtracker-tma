@@ -53,7 +53,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
               to="/card/$id"
               params={{ id: String(card.id) }}
               key={cardIndex}
-              className={`relative flex-shrink-0 bg-cover ${category.color} rounded-lg`}>
+              className={`relative flex-shrink-0 bg-cover rounded-lg`}>
               <img
                 src={card.imageUrl}
                 alt={card.title}

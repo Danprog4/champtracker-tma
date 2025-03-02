@@ -14,13 +14,19 @@ declare global {
     Telegram: {
       WebApp: {
         enableClosingConfirmation: () => void;
+        expand: () => void;
         // Add other Telegram WebApp properties you might use here
       };
     };
   }
 }
 
+// Enable closing confirmation
 window.Telegram.WebApp.enableClosingConfirmation();
+
+// Expand to full screen
+window.Telegram.WebApp.expand();
+
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
