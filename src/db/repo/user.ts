@@ -26,19 +26,44 @@ export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
     telegramUser.first_name +
     (telegramUser.last_name ? ` ${telegramUser.last_name}` : "");
 
-  const users = await db
-    .insert(usersTable)
-    .values({
-      id: telegramUser.id,
-      name: name,
-      username: telegramUser.username || null,
-      isPremium: telegramUser.is_premium || false,
-      language: telegramUser.language_code || "en",
-      photoUrl: telegramUser.photo_url || null,
-    })
-    .returning();
+  try {
+    // Use upsert pattern (insert if not exists, do nothing if exists)
+    const users = await db
+      .insert(usersTable)
+      .values({
+        id: telegramUser.id,
+        name: name,
+        username: telegramUser.username || null,
+        isPremium: telegramUser.is_premium || false,
+        language: telegramUser.language_code || "en",
+        photoUrl: telegramUser.photo_url || null,
+      })
+      .onConflictDoNothing({ target: usersTable.id })
+      .returning();
 
-  return users[0];
+    // If insert succeeded, return the inserted user
+    if (users.length > 0) {
+      return users[0];
+    }
+
+    // If no user was inserted (because it already existed), fetch and return the existing user
+    const existingUser = await getUser(telegramUser.id);
+    if (!existingUser) {
+      throw new Error("Failed to create or retrieve user");
+    }
+
+    return existingUser;
+  } catch (error) {
+    console.error("Error in createUser:", error);
+
+    // As a fallback, try to fetch the user if they might already exist
+    const existingUser = await getUser(telegramUser.id);
+    if (!existingUser) {
+      throw error; // Re-throw if user still doesn't exist
+    }
+
+    return existingUser;
+  }
 };
 
 export const getPremium = async (
@@ -75,7 +100,10 @@ export const updateOnBoarding = async (id: number, onBoarding: boolean) => {
   return users[0].onBoarding;
 };
 
-export const updateCompletedChallengesCount = async (id: number, count: number) => {
+export const updateCompletedChallengesCount = async (
+  id: number,
+  count: number
+) => {
   await db
     .update(usersTable)
     .set({ completedChallengesCount: count })

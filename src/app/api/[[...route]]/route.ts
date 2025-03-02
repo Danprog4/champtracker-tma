@@ -77,18 +77,38 @@ app.get("/health", (c) => {
 // New login endpoint
 app.post("/login", async (c) => {
   try {
-    const user = await getValidatedUser(c.req);
-    const token = createToken(user);
+    // Get initData from header
+    const initData = c.req.header("x-init-data");
+    if (!initData) {
+      return c.json({ error: "No init data provided" }, 400);
+    }
 
-    return c.json({
-      token,
-      user,
-    });
+    try {
+      // Try to get or create user
+      const user = await getValidatedUser(c.req);
+      const token = createToken(user);
+
+      return c.json({
+        token,
+        user,
+      });
+    } catch (userError) {
+      console.error("User validation error:", userError);
+      return c.json(
+        {
+          error:
+            userError instanceof Error
+              ? userError.message
+              : "User validation failed",
+        },
+        401
+      );
+    }
   } catch (error: unknown) {
     console.error("Login error:", error);
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error";
-    return c.json({ error: `Authentication failed: ${errorMessage}` }, 401);
+    return c.json({ error: `Authentication failed: ${errorMessage}` }, 500);
   }
 });
 

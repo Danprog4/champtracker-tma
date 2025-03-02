@@ -75,30 +75,56 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
     throw new Error("no x-init-data");
   }
 
-  // check if user is not a scammer and came from our telegram bot, good!
-  validate(initData, BOT_TOKEN, {
-    expiresIn: 0,
-  });
+  try {
+    // check if user is not a scammer and came from our telegram bot, good!
+    validate(initData, BOT_TOKEN, {
+      expiresIn: 0,
+    });
 
-  // parsing from fucking string to normal good js object, good!
-  const parsedInitData = parse(initData);
+    // parsing from fucking string to normal good js object, good!
+    const parsedInitData = parse(initData);
 
-  const telegramUser = parsedInitData.user;
+    const telegramUser = parsedInitData.user;
 
-  // if no user (такого не будет), но проверку добавили
-  if (!telegramUser) {
-    throw new Error("User is not found in initData");
+    // if no user (такого не будет), но проверку добавили
+    if (!telegramUser) {
+      throw new Error("User is not found in initData");
+    }
+
+    try {
+      // берем user-а из диби (возможно его там нет, если он НОВИЧОК)
+      let user = await getUser(telegramUser.id);
+
+      console.log("getValidatedUser() user", user);
+
+      // если он НОВИЧОК, то создаем его в диби и записываем в переменную user
+      if (!user) {
+        try {
+          user = await createUser(telegramUser);
+        } catch (createError) {
+          console.error(
+            "Error creating user, trying to fetch again:",
+            createError
+          );
+          // Try fetching one more time in case it was created by another concurrent request
+          user = await getUser(telegramUser.id);
+          if (!user) {
+            throw new Error("Failed to create or retrieve user");
+          }
+        }
+      }
+
+      return user;
+    } catch (dbError) {
+      console.error("Database error during user validation:", dbError);
+      throw new Error(
+        `Database error: ${dbError instanceof Error ? dbError.message : "Unknown error"}`
+      );
+    }
+  } catch (validationError) {
+    console.error("Init data validation error:", validationError);
+    throw new Error(
+      `Authentication failed: ${validationError instanceof Error ? validationError.message : "Unknown error"}`
+    );
   }
-
-  // берем user-а из диби (возможно его там нет, если он НОВИЧОК)
-  let user = await getUser(telegramUser.id);
-
-  console.log("getValidatedUser() user", user);
-
-  // если он НОВИЧОК, то создаем его в диби и записываем в переменную user
-  if (!user) {
-    user = await createUser(telegramUser);
-  }
-
-  return user;
 };
