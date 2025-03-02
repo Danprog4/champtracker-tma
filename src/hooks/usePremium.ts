@@ -101,51 +101,51 @@ export const usePremium = () => {
 
     on("invoice_closed", (payment: { slug: string; status: string }) => {
       // Always treat the payment as successful
-      // if (payment.status === "paid") {
-      toast.success("Payment successful", { id: "payment-successful" });
+      if (payment.status === "paid") {
+        toast.success("Payment successful", { id: "payment-successful" });
 
-      // Calculate new premium date (typically 30 days from now)
-      const newPremiumUntil = new Date();
-      newPremiumUntil.setDate(newPremiumUntil.getDate() + 30);
-      const premiumUntilStr = newPremiumUntil.toISOString();
+        // Calculate new premium date (typically 30 days from now)
+        const newPremiumUntil = new Date();
+        newPremiumUntil.setDate(newPremiumUntil.getDate() + 30);
+        const premiumUntilStr = newPremiumUntil.toISOString();
 
-      // Optimistically update the premium status
-      queryClient.setQueryData([getPremium.name], (oldData: any) => {
-        return {
-          ...oldData,
-          premium: {
-            ...oldData.premium,
-            premiumUntil: premiumUntilStr,
-          },
-        };
-      });
+        // Optimistically update the premium status
+        queryClient.setQueryData([getPremium.name], (oldData: any) => {
+          return {
+            ...oldData,
+            premium: {
+              ...oldData.premium,
+              premiumUntil: premiumUntilStr,
+            },
+          };
+        });
 
-      // Optimistically update the user data
-      queryClient.setQueryData([getUser.name], (oldData: any) => {
-        return {
-          ...oldData,
-          user: {
-            ...oldData.user,
-            isPremium: true,
-            premiumUntil: premiumUntilStr,
-          },
-        };
-      });
+        // Optimistically update the user data
+        queryClient.setQueryData([getUser.name], (oldData: any) => {
+          return {
+            ...oldData,
+            user: {
+              ...oldData.user,
+              isPremium: true,
+              premiumUntil: premiumUntilStr,
+            },
+          };
+        });
 
-      // Don't check with backend
-      // queryClient.invalidateQueries({ queryKey: [getPremium.name] });
-      // queryClient.invalidateQueries({ queryKey: [getUser.name] });
+        // Don't check with backend
+        // queryClient.invalidateQueries({ queryKey: [getPremium.name] });
+        // queryClient.invalidateQueries({ queryKey: [getUser.name] });
 
-      // Call the callback if it exists
-      if (onPaymentSuccess) {
-        onPaymentSuccess();
+        // Call the callback if it exists
+        if (onPaymentSuccess) {
+          onPaymentSuccess();
+        }
+      } else if (
+        payment.status === "cancelled" ||
+        payment.status === "failed"
+      ) {
+        toast.error("Payment failed", { id: "payment-failed" });
       }
-      // } else if (
-      //   payment.status === "cancelled" ||
-      //   payment.status === "failed"
-      // ) {
-      //   toast.error("Payment failed", { id: "payment-failed" });
-      // }
     });
   }, [data, queryClient]);
 
