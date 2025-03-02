@@ -31,7 +31,7 @@ const rootRoute = createRootRoute({
       </div>
       <Link
         to="/"
-        className="rounded-lg font-druk bg-white px-6 py-2 font-medium text-gray-800 shadow-md transition-all hover:bg-gray-100 hover:shadow-lg">
+        className="rounded-lg font-druk bg-white px-6 py-2 font-medium text-zinc-800 shadow-md transition-all hover:bg-zinc-100 hover:shadow-lg">
         На главную
       </Link>
     </div>

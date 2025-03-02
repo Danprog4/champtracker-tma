@@ -75,7 +75,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         <Title title={title} setTitle={setTitle} />
       </div>
       <div className="mt-3 flex flex-col pl-3 pt-4 text-start">
-        <span className="mb-2 text-gray-300">Условия</span>
+        <span className="mb-2 text-zinc-300">Условия</span>
       </div>
       <div className="flex flex-col items-center justify-center">
         <RegularityModal
@@ -106,7 +106,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
           <button
             onClick={handleSave}
             className={`fixed bottom-7 ${Colors[color]} shadow-xl shadow-black z-0 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg  p-5 ${
-              title.length === 0 ? "bg-gray-600" : ""
+              title.length === 0 ? "bg-zinc-600" : ""
             }`}>
             СОХРАНИТЬ
           </button>
@@ -114,7 +114,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
           <BuyPremium>
             <button
               className={`fixed hover:opacity-90 bottom-7 font-normal text-xs font-druk flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5 ${
-                title.length === 0 ? "bg-gray-600" : ""
+                title.length === 0 ? "bg-zinc-600" : ""
               }`}>
               <span className="">ПРЕМИУМ</span>
               <TelegramStar />

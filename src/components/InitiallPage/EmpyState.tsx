@@ -13,7 +13,7 @@ const EmptyState = () => {
           </div>
         </div>
       </Link>
-      <div className="absolute bottom-4 text-nowrap p-2 text-center text-sm text-gray-400">
+      <div className="absolute bottom-4 text-nowrap p-2 text-center text-sm text-zinc-400">
         <div>
           У тебя пока нету никаких заданий. Выбери новое <br />
           из списка доступных или создай свое

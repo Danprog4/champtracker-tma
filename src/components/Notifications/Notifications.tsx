@@ -18,10 +18,10 @@ const Notifications: React.FC<NotificationsProps> = ({
   return (
     <>
       <div className="mt-3 flex  flex-col pl-3 pt-4 text-start">
-        <span className="mb-2 text-gray-300">Уведомления</span>
+        <span className="mb-2 text-zinc-300">Уведомления</span>
       </div>
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="flex h-[45px] w-[94vw] items-center justify-between rounded-md bg-gray-800 p-[10px]">
+        <div className="flex h-[45px] w-[94vw] items-center justify-between rounded-md bg-zinc-800 p-[10px]">
           <span>Включить уведомления</span>
           <Switch
             checked={isNotifications}
@@ -31,11 +31,11 @@ const Notifications: React.FC<NotificationsProps> = ({
           />
         </div>
         {isNotifications && (
-          <div className="flex h-[60px] w-[90vw] flex-col justify-center rounded-md bg-gray-800 p-[10px]">
+          <div className="flex h-[60px] w-[90vw] flex-col justify-center rounded-md bg-zinc-800 p-[10px]">
             <span>Текст для уведомления</span>
             <input
               value={notifications}
-              className="border-none bg-transparent text-gray-300 placeholder:text-gray-500 focus:outline-none"
+              className="border-none bg-transparent text-zinc-300 placeholder:text-zinc-500 focus:outline-none"
               placeholder="Мотивируй себя"
               onChange={(e) => {
                 const inputValue = e.target.value;

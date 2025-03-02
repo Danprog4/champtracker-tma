@@ -10,7 +10,7 @@ const ColorsSchema: React.FC<ColorsProps> = ({ color, setColor }) => {
   return (
     <>
       <div className="mt-3 flex flex-col pl-3 pt-4 text-start">
-        <span className="mb-2 text-gray-300">Цветовая тема</span>
+        <span className="mb-2 text-zinc-300">Цветовая тема</span>
       </div>
       <div className="mb-4 grid grid-cols-5 gap-0">
         {Object.keys(Colors).map((classColor: string) => (

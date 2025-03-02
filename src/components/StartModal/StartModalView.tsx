@@ -43,12 +43,12 @@ export default function StartModalView({
   return (
     <Drawer.Root open={isOpen} onOpenChange={onOpenChange}>
       <Drawer.Trigger
-        className={`mt-2 flex w-[94vw] justify-between h-[45px] items-center rounded-md bg-gray-800 p-[10px] ${
+        className={`mt-2 flex w-[94vw] justify-between h-[45px] items-center rounded-md bg-zinc-800 p-[10px] ${
           disabled && "text-op"
         }`}
         disabled={disabled}>
-        <span className={disabled ? "text-gray-400" : ""}>Старт</span>
-        <span className="text-gray-400">
+        <span className={disabled ? "text-zinc-400" : ""}>Старт</span>
+        <span className="text-zinc-400">
           {startedDate ||
             (tempStartTime === "Now" && "Сейчас >") ||
             (tempStartTime === "Tomorrow" && "Завтра >") ||
@@ -62,28 +62,28 @@ export default function StartModalView({
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-gray-100 outline-none">
+        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-zinc-100 outline-none">
           <div className="h-full bg-black">
-            <div className="mb-4 flex h-[13vw] items-center justify-center bg-gray-800 text-white">
+            <div className="mb-4 flex h-[13vw] items-center justify-center bg-zinc-800 text-white">
               Старт
             </div>
-            <div className="flex flex-col items-center justify-center text-gray-300">
+            <div className="flex flex-col items-center justify-center text-zinc-300">
               <RadioGroup
                 value={tempStartTime}
                 onValueChange={setTempStartTime}>
                 <RadioGroupItem
                   value="Now"
-                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-gray-600 bg-gray-800 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-b-none border-b-2 border-zinc-600 bg-zinc-800 p-[10px]">
                   Сегодня
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="Tomorrow"
-                  className="max-h-[40px] w-[90vw] rounded-none border-b-2 border-gray-600 bg-gray-800 p-[10px]">
+                  className="max-h-[40px] w-[90vw] rounded-none border-b-2 border-zinc-600 bg-zinc-800 p-[10px]">
                   Завтра
                 </RadioGroupItem>
                 <RadioGroupItem
                   value="Own date"
-                  className="flex max-h-[40px] w-[90vw] justify-between rounded-t-none bg-gray-800 p-[10px]">
+                  className="flex max-h-[40px] w-[90vw] justify-between rounded-t-none bg-zinc-800 p-[10px]">
                   <span>Своя дата</span>
                   {isValidDate(tempDate) && tempStartTime === "Own date" && (
                     <span>{`${
@@ -107,7 +107,7 @@ export default function StartModalView({
                     }
                   }}
                   disabled={isDisabledFunc}
-                  className="mt-2 flex w-[90vw] items-center justify-center rounded-md bg-gray-800"
+                  className="mt-2 flex w-[90vw] items-center justify-center rounded-md bg-zinc-800"
                 />
               )}
             </div>

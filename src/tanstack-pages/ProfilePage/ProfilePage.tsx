@@ -47,12 +47,12 @@ export const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col p-3 pt-3 ml-3 mr-3 border-2 border-gray-600 bg-gray-800 rounded-lg">
+      <div className="flex flex-col p-3 pt-3 ml-3 mr-3 border-2 border-zinc-600 bg-zinc-800 rounded-lg">
         <div className="text-white text-sm font-druk pb-3">Таблица лидеров</div>
         {Array.from({ length: 5 }).map((_, index) => (
           <div
             key={index}
-            className={`flex justify-between items-center border-gray-600 border p-2 ${
+            className={`flex justify-between items-center border-zinc-600 border p-2 ${
               index === Array.from({ length: 5 }).length - 1 &&
               "mt-3 border-yellow-300"
             }`}>
@@ -92,7 +92,7 @@ export const ProfilePage = () => {
       </div>
 
       {/* New Achievements Section */}
-      <div className="flex flex-col p-3 mt-4 ml-3 mr-3 border-2 border-gray-600 rounded-lg bg-gray-800">
+      <div className="flex flex-col p-3 mt-4 ml-3 mr-3 border-2 border-zinc-600 rounded-lg bg-zinc-800">
         <div className="text-white text-sm font-druk pb-3">Мои Достижения</div>
         <div className="grid grid-cols-2 gap-3">
           {[
@@ -121,18 +121,18 @@ export const ProfilePage = () => {
               key={index}
               className={`p-3 border rounded-lg ${
                 achievement.completed
-                  ? "border-yellow-400 bg-gray-800"
-                  : "border-gray-600 bg-gray-900"
+                  ? "border-yellow-400 bg-zinc-800"
+                  : "border-zinc-600 bg-zinc-900"
               }`}>
               <div className="text-sm  mb-1">{achievement.title}</div>
-              <div className="text-xs text-gray-400">
+              <div className="text-xs text-zinc-400">
                 {achievement.description}
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="text-xs pr-3 text-gray-400 leading-4 pl-3 pt-3 pb-20">
+      <div className="text-xs pr-3 text-zinc-400 leading-4 pl-3 pt-3 pb-20">
         Получай токены за свои достижения и повышай свой уровень в таблице
         лидеров. Будь лучше всех!
       </div>
