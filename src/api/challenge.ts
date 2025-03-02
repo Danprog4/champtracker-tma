@@ -8,14 +8,23 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const createInvoice = async () => {
   const { initDataRaw } = retrieveLaunchParams();
-
-  const response = await axios.get(`${API_URL}/createInvoice`, {
-    headers: {
-      "x-init-data": initDataRaw,
-    },
+  console.log("[Premium][Client] Creating invoice", {
+    initDataRawLength: initDataRaw?.length,
   });
 
-  return response.data;
+  try {
+    const response = await axios.get(`${API_URL}/createInvoice`, {
+      headers: {
+        "x-init-data": initDataRaw,
+      },
+    });
+    console.log("[Premium][Client] Invoice created successfully");
+
+    return response.data;
+  } catch (error) {
+    console.error("[Premium][Client] Error creating invoice", { error });
+    throw error;
+  }
 };
 
 export const getUserOnBoarding = async () => {

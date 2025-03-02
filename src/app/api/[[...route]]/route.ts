@@ -99,11 +99,24 @@ app.put("/updateOnBoarding", async (c) => {
 });
 
 app.get("/createInvoice", async (c) => {
-  const user = await getValidatedUser(c.req);
+  try {
+    const user = await getValidatedUser(c.req);
+    console.log("[Premium][API] Received createInvoice request", {
+      userId: user.id,
+    });
 
-  const invoice = await handleCreateInvoice(user.id);
+    const invoice = await handleCreateInvoice(user.id);
+    console.log("[Premium][API] Invoice created successfully", {
+      userId: user.id,
+    });
 
-  return c.json({ invoiceUrl: invoice.invoiceUrl });
+    return c.json({ invoiceUrl: invoice.invoiceUrl });
+  } catch (error) {
+    console.error("[Premium][API] Error processing createInvoice request", {
+      error,
+    });
+    throw error;
+  }
 });
 
 app.get("/getChallenges", async (c) => {

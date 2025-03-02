@@ -30,4 +30,8 @@ bot.on("pre_checkout_query", async (ctx) => {
   return ctx.answerPreCheckoutQuery(true);
 });
 
-export default webhookCallback(bot, "next-js");
+export default process.env.NODE_ENV === "development"
+  ? bot
+  : webhookCallback(bot, "next-js");
+
+export const botInstanceTest = bot;
