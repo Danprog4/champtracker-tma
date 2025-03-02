@@ -6,7 +6,7 @@ const EmptyState = () => {
       <Link to="/new">
         <div className="absolute left-1/2 top-1/2 flex aspect-square w-[100vw] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-yellow-400">
           <div className="relative text-center">
-            <div className="mb-11 text-3xl font-druk text-black">
+            <div className=" text-3xl font-druk text-black">
               СОЗДАТЬ НОВОЕ <br />
               ЗАДАНИЕ
             </div>
