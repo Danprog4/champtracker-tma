@@ -101,8 +101,20 @@ body {
   min-height: 100%;
   overflow-x: hidden;
   overscroll-behavior: none;
-  overflow-y: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  transform: none !important;
+  transform-style: flat !important;
+}
+
+@media screen and (orientation: portrait), screen and (orientation: landscape) {
+  html,
+  body,
+  #__next,
+  main {
+    transform: none !important;
+    perspective: none !important;
+  }
 }
 
 .scroll-container {
