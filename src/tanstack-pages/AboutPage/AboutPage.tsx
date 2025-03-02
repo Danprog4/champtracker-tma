@@ -25,7 +25,18 @@ const AboutPage: React.FC = () => {
         <span className="text-center font-druk text-xl  text-black leading-6">
           ПОДСКАЗКИ <br></br> И СОВЕТЫ
         </span>
-      </Link>
+      </Link>{" "}
+      <div className="p-4 rounded-3xl bg-green-400">
+        <h2 className="font-druk text-xl mb-2 text-center text-black leading-6">
+          О ПРИЛОЖЕНИИ
+        </h2>
+        <p className="text-sm text-center text-black">
+          ChampTracker помогает улучшить вашу дисциплину, следить за вашими
+          привычками, помогать формировать новые, и все это в одном приложении.
+          Анализируйте свои результаты, получайте токены за выполненные дни и
+          становитесь лучше с каждым днем!
+        </p>
+      </div>
       {!isPremium(user) ? (
         <BuyPremium>
           <div className="fixed flex font-druk text-sm flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full   bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  py-2 px-4  text-black hover:opacity-90">
@@ -80,8 +91,11 @@ const AboutPage: React.FC = () => {
         >
           <span>ЯЗЫК</span>
         </div> */}
-      <footer className="mb-14 pr-3 mt-auto flex justify-between pl-3 ">
-        <div className="text-lg  font-druk">ChampTracker</div>
+      <footer className="mb-[72px] pr-3 mt-auto flex justify-between pl-3 ">
+        <div className="flex flex-col">
+          <div className="text-lg font-druk">ChampTracker</div>
+          <div className="text-xs font-semibold">Версия Beta 1.0.0</div>
+        </div>
         <div className="flex flex-col items-end font-thin">
           <Image
             src="/images/5a369c1a2cfcd0.4577110515135283461843.png"

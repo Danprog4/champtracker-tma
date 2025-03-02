@@ -103,7 +103,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
         />
         <ColorsSchema color={color} setColor={setColor} />
 
-        <div className="flex items-center justify-center pb-24">
+        <div className="flex items-center justify-center ">
           <DrawerAlert
             bgColor={"bg-red-500"}
             desc={`После нажатия кнопки продолжить вы навсегда удалите задание без возможности к восстановлению`}

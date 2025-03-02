@@ -47,7 +47,7 @@ export const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col p-3 pt-3 ml-3 mr-3 border-2 border-gray-600 bg-gray-900 rounded-lg">
+      <div className="flex flex-col p-3 pt-3 ml-3 mr-3 border-2 border-gray-600 bg-gray-800 rounded-lg">
         <div className="text-white text-sm font-druk pb-3">Таблица лидеров</div>
         {Array.from({ length: 5 }).map((_, index) => (
           <div
@@ -92,7 +92,7 @@ export const ProfilePage = () => {
       </div>
 
       {/* New Achievements Section */}
-      <div className="flex flex-col p-3 mt-4 ml-3 mr-3 border-2 border-gray-600 rounded-lg bg-gray-900">
+      <div className="flex flex-col p-3 mt-4 ml-3 mr-3 border-2 border-gray-600 rounded-lg bg-gray-800">
         <div className="text-white text-sm font-druk pb-3">Мои Достижения</div>
         <div className="grid grid-cols-2 gap-3">
           {[

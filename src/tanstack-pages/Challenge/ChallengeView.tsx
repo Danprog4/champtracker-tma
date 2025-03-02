@@ -50,7 +50,7 @@ const ChallengeView: React.FC = () => {
         </div>
       </div>
       <div className="p-3">
-        <p className="mb-14 mt-5 text-start text-lg text-gray-300 leading-6">
+        <p className="mb-10 mt-5 text-start text-lg text-gray-300 leading-6">
           {card?.desc}
         </p>
         <div className="text-start">
