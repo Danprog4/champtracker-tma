@@ -71,7 +71,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         </Link>
         <span className="w-full text-center text-black">Новое задание</span>
       </div>
-      <div className={`${color} min-h-[14vh] pb-2 pt-12`}>
+      <div className={`${color} min-h-[14vh] pb-2 pt-10`}>
         <Title title={title} setTitle={setTitle} />
       </div>
       <div className="mt-3 flex flex-col pl-3 pt-4 text-start">
