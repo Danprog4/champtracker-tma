@@ -139,7 +139,7 @@ export const ProfilePage = () => {
       {!isPremium(user) ? (
         <BuyPremium>
           <button
-            className={`fixed font-druk text-xs text-black hover:opacity-90 bottom-7 ml-3 flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5       }`}>
+            className={`fixed font-druk text-sm text-white hover:opacity-90 bottom-7 ml-3 flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5       }`}>
             <span>Разблокируй новые функции</span>
             <TelegramStar className="pb-[1px]" />
           </button>

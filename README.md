@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ChampTracker
 
-## Getting Started
+@ChampTracker in Telgram is a modern habit-tracking and challenge management application that helps users build discipline and track their progress through customizable challenges.
 
-First, run the development server:
+## 🚀 Features
+
+- **Challenge Creation**: Create personalized challenges with custom titles, durations, and colors
+- **Flexible Scheduling**: Set challenges to occur daily or on specific days of the week
+- **Progress Tracking**: Track your daily progress and visualize your achievements
+- **Premium Features**: Unlock unlimited challenges, earn tokens, and access detailed statistics
+- **Telegram Integration**: Seamless integration with Telegram for authentication and payments
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js, React 19, TanStack Router, TailwindCSS
+- **State Management**: Zustand, TanStack Query
+- **Database**: PostgreSQL with Drizzle ORM
+- **Authentication**: Telegram Auth
+- **Payments**: Telegram Payments API
+- **Deployment**: Vercel
+
+## 📋 Prerequisites
+
+- Node.js (v18+)
+- PostgreSQL
+- Telegram Bot Token (for bot functionality)
+
+## 🔧 Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/champtracker.git
+   cd champtracker
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory with the following variables:
+
+   ```
+   DATABASE_URL=postgresql://username:password@localhost:5432/champtracker
+   TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+   ```
+
+4. Set up the database:
+
+   ```bash
+   npm run db:push
+   # or
+   bun run db:push
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   bun run dev
+   ```
+
+## 📊 Database Management
+
+- **Push Schema Changes**: `npm run db:push`
+- **Generate Migrations**: `npm run db:generate`
+- **Apply Migrations**: `npm run db:migrate`
+- **Open Drizzle Studio**: `npm run db:studio`
+- **Recreate Database**: `npm run db:recreate`
+
+## 🤖 Bot Development
+
+To run the Telegram bot in development mode:
 
 ```bash
-npm run dev
+npm run bot
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun run bot
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏗️ Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+champtracker/
+├── src/                    # Source code
+│   ├── api/                # API endpoints
+│   │   └── schema/         # Database schema definitions
+│   ├── components/         # React components
+│   ├── db/                 # Database models and repositories
+│   │   ├── repo/           # Database operations
+│   └── stores/             # Zustand stores
+├── public/                 # Static assets
+├── drizzle/                # Drizzle migrations
+└── supabase/               # Supabase configuration
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💎 Premium Features
 
-## Learn More
+- **Unlimited Challenges**: Create and track as many challenges as you want
+- **Token System**: Earn tokens for completed challenges to extend your premium subscription
+- **Detailed Statistics**: Get insights into your progress and achievements (coming soon)
 
-To learn more about Next.js, take a look at the following resources:
+## 🔄 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application is configured for deployment on Vercel. Simply connect your GitHub repository to Vercel and deploy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📱 Mobile Support
 
-## Deploy on Vercel
+ChampTracker is designed to be fully responsive and works well on mobile devices, with special optimization for the Telegram Mini App environment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Contact
+
+For any questions or support, please contact me in Telegram: @danikpavlovski or in Gmail: champtracker3@gmail.com.
+
+---
+
+Happy tracking! 🏆
