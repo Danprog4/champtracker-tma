@@ -5,15 +5,19 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { on } from "@telegram-apps/sdk";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { toast } from "sonner";
 import { useUser } from "./useUser";
 import { useTokens } from "./useTokens";
+import { getUser } from "@/db/repo";
 
 export const usePremium = () => {
   const queryClient = useQueryClient();
   const { user } = useUser();
   const { updateTokens } = useTokens();
+
+  // Function to be called when payment is successful
+  let onPaymentSuccess: (() => void) | null = null;
 
   const { data: premium } = useSuspenseQuery({
     queryKey: [getPremium.name],
@@ -53,6 +57,12 @@ export const usePremium = () => {
       if (payment.status === "paid") {
         toast.success("Payment successful", { id: "payment-successful" });
         queryClient.invalidateQueries({ queryKey: [getPremium.name] });
+        queryClient.invalidateQueries({ queryKey: [getUser.name] });
+
+        // Call the callback if it exists
+        if (onPaymentSuccess) {
+          onPaymentSuccess();
+        }
       } else if (
         payment.status === "cancelled" ||
         payment.status === "failed"
@@ -62,9 +72,14 @@ export const usePremium = () => {
     });
   }, [data, queryClient]);
 
-  const handleBuyPremium = () => {
-    mutate();
-  };
+  const handleBuyPremium = useCallback(
+    (callback?: () => void) => {
+      // Save the callback to be called when payment is successful
+      onPaymentSuccess = callback || null;
+      mutate();
+    },
+    [mutate]
+  );
 
   return {
     handleBuyPremium,
