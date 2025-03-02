@@ -28,4 +28,6 @@ bot.on("pre_checkout_query", async (ctx) => {
   return ctx.answerPreCheckoutQuery(true);
 });
 
-export default webhookCallback(bot, "next-js");
+const handler = webhookCallback(bot, "next-js");
+
+export { handler as GET, handler as POST };
