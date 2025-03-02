@@ -26,53 +26,8 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
   const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
 
-  // Log when component is opened
-  const handleOpenChange = (open: boolean) => {
-    console.log("[Premium][UI] BuyPremium dialog", {
-      action: open ? "opened" : "closed",
-      userId: user.id,
-    });
-    setIsOpen(open);
-  };
-
-  // Log when payment method is switched
-  const handlePaymentMethodChange = (useTokens: boolean) => {
-    console.log("[Premium][UI] Payment method changed", {
-      method: useTokens ? "tokens" : "telegram_stars",
-      userId: user.id,
-    });
-    setIsForTokens(useTokens);
-  };
-
-  // Log when purchase button is clicked
-  const handlePurchaseClick = () => {
-    console.log("[Premium][UI] Purchase button clicked", {
-      method: isForTokens ? "tokens" : "telegram_stars",
-      userId: user.id,
-    });
-
-    if (isForTokens) {
-      if (user.tokens < 300) {
-        console.log("[Premium][UI] Insufficient tokens", {
-          userId: user.id,
-          tokens: user.tokens,
-        });
-        toast.error("У вас недостаточно токенов");
-      } else {
-        console.log("[Premium][UI] Processing token purchase", {
-          userId: user.id,
-          tokensToSpend: 300,
-        });
-        updatePremium(dayjs().add(1, "month").toISOString());
-        setIsOpen(false); // Close drawer on success
-      }
-    } else {
-      handleBuyPremium(() => setIsOpen(false));
-    }
-  };
-
   return (
-    <Drawer.Root open={isOpen} onOpenChange={handleOpenChange}>
+    <Drawer.Root open={isOpen} onOpenChange={setIsOpen}>
       <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -114,13 +69,15 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                 <div className="flex items-center font-normal gap-2 text-white rounded-lg p-2 mb-16 bg-zinc-800">
                   <Switch
                     checked={isForTokens}
-                    onCheckedChange={handlePaymentMethodChange}
+                    onCheckedChange={() => setIsForTokens(!isForTokens)}
                   />
                   <span>Купить за токены</span>
                 </div>
                 {!isForTokens ? (
                   <Button
-                    onClick={handlePurchaseClick}
+                    onClick={() => {
+                      handleBuyPremium(() => setIsOpen(false));
+                    }}
                     disabled={isBuyingPending}
                     className="w-full shadow-xl font-normal shadow-black z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
                     {isBuyingPending ? (
@@ -133,7 +90,14 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                   </Button>
                 ) : (
                   <Button
-                    onClick={handlePurchaseClick}
+                    onClick={() => {
+                      if (user.tokens < 300) {
+                        toast.error("У вас недостаточно токенов");
+                      } else {
+                        updatePremium(dayjs().add(1, "month").toISOString());
+                        setIsOpen(false); // Close drawer on success
+                      }
+                    }}
                     disabled={isUpdatingPremium}
                     className="w-full shadow-xl shadow-black font-normal z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
                     {isBuyingPending ? (

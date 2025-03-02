@@ -26,23 +26,62 @@ export const usePremium = () => {
 
   const { mutate: updatePremiumFunc, isPending: isUpdatingPremium } =
     useMutation({
-      mutationFn: (premiumUntil: string) => {
-        console.log("[Premium] Updating premium with tokens", {
-          userId: user.id,
-          currentTokens: user.tokens,
-          premiumUntil,
+      mutationFn: (premiumUntil: string) => updatePremium(premiumUntil),
+      onMutate: async (premiumUntil: string) => {
+        // Cancel any outgoing refetches
+        await queryClient.cancelQueries({ queryKey: [getPremium.name] });
+        await queryClient.cancelQueries({ queryKey: [getUser.name] });
+
+        // Snapshot the previous values
+        const previousPremium = queryClient.getQueryData([getPremium.name]);
+        const previousUser = queryClient.getQueryData([getUser.name]);
+
+        // Optimistically update premium status
+        queryClient.setQueryData([getPremium.name], (oldData: any) => {
+          return {
+            ...oldData,
+            premium: {
+              ...oldData.premium,
+              premiumUntil,
+            },
+          };
         });
-        return updatePremium(premiumUntil);
+
+        // Optimistically update user data
+        queryClient.setQueryData([getUser.name], (oldData: any) => {
+          return {
+            ...oldData,
+            user: {
+              ...oldData.user,
+              isPremium: true,
+              premiumUntil,
+            },
+          };
+        });
+
+        // Optimistically update tokens (assuming 300 is the cost)
+        updateTokens(user.tokens - 300);
+
+        // Return a context object with the snapshotted values
+        return { previousPremium, previousUser };
       },
       onSuccess: () => {
-        console.log("[Premium] Premium updated successfully with tokens", {
-          userId: user.id,
-          tokensSpent: 300,
-          remainingTokens: user.tokens - 300,
-        });
-        queryClient.invalidateQueries({ queryKey: [getPremium.name] });
-        updateTokens(user.tokens - 300);
         toast.success("Вы успешно получили премиум");
+      },
+      onError: (err, newTodo, context: any) => {
+        // If the mutation fails, use the context returned from onMutate to roll back
+        if (context?.previousPremium) {
+          queryClient.setQueryData([getPremium.name], context.previousPremium);
+        }
+        if (context?.previousUser) {
+          queryClient.setQueryData([getUser.name], context.previousUser);
+        }
+        toast.error("Не удалось получить премиум");
+      },
+      onSettled: () => {
+        // Always refetch after error or success to ensure data is in sync with server
+        queryClient.invalidateQueries({ queryKey: [getPremium.name] });
+        queryClient.invalidateQueries({ queryKey: [getUser.name] });
       },
     });
 
@@ -53,79 +92,74 @@ export const usePremium = () => {
   } = useMutation({
     mutationKey: ["buy-stories"],
     mutationFn: () => {
-      console.log("[Premium] Initiating Telegram Stars invoice creation", {
-        userId: user.id,
-      });
       return createInvoice();
-    },
-    onSuccess: (data) => {
-      console.log("[Premium] Invoice created successfully", {
-        userId: user.id,
-        invoiceUrl: data.invoiceUrl,
-      });
-    },
-    onError: (error) => {
-      console.error("[Premium] Error creating invoice", {
-        userId: user.id,
-        error: error,
-      });
     },
   });
 
   useEffect(() => {
     if (!data) return;
 
-    console.log("[Premium] Opening invoice in Telegram", {
-      userId: user.id,
-      invoiceUrl: data.invoiceUrl,
-    });
+    console.log("openInvoice()", data.invoiceUrl);
 
     // @ts-ignore
     window.Telegram.WebApp.openInvoice(data.invoiceUrl);
 
     on("invoice_closed", (payment: { slug: string; status: string }) => {
-      console.log("[Premium] Invoice closed", {
-        userId: user.id,
-        paymentStatus: payment.status,
-        paymentSlug: payment.slug,
-      });
-
       if (payment.status === "paid") {
-        console.log("[Premium] Payment successful", {
-          userId: user.id,
-          paymentSlug: payment.slug,
-        });
         toast.success("Payment successful", { id: "payment-successful" });
+
+        // Calculate new premium date (typically 30 days from now)
+        const newPremiumUntil = new Date();
+        newPremiumUntil.setDate(newPremiumUntil.getDate() + 30);
+        const premiumUntilStr = newPremiumUntil.toISOString();
+
+        // Optimistically update the premium status
+        queryClient.setQueryData([getPremium.name], (oldData: any) => {
+          return {
+            ...oldData,
+            premium: {
+              ...oldData.premium,
+              premiumUntil: premiumUntilStr,
+            },
+          };
+        });
+
+        // Optimistically update the user data
+        queryClient.setQueryData([getUser.name], (oldData: any) => {
+          return {
+            ...oldData,
+            user: {
+              ...oldData.user,
+              isPremium: true,
+              premiumUntil: premiumUntilStr,
+            },
+          };
+        });
+
+        // Still invalidate queries to ensure data consistency with server
         queryClient.invalidateQueries({ queryKey: [getPremium.name] });
         queryClient.invalidateQueries({ queryKey: [getUser.name] });
 
         // Call the callback if it exists
         if (onPaymentSuccess) {
-          console.log("[Premium] Executing success callback");
           onPaymentSuccess();
         }
       } else if (
         payment.status === "cancelled" ||
         payment.status === "failed"
       ) {
-        console.log("[Premium] Payment failed or cancelled", {
-          userId: user.id,
-          paymentStatus: payment.status,
-          paymentSlug: payment.slug,
-        });
         toast.error("Payment failed", { id: "payment-failed" });
       }
     });
-  }, [data, queryClient, user.id]);
+  }, [data, queryClient]);
 
   const handleBuyPremium = useCallback(
     (callback?: () => void) => {
-      console.log("[Premium] Buy premium initiated", { userId: user.id });
       // Save the callback to be called when payment is successful
       onPaymentSuccess = callback || null;
       mutate();
     },
-    [mutate, user.id]
+    [mutate]
   );
 
   return {
