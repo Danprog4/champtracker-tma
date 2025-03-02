@@ -59,6 +59,7 @@
     "@tanstack/router-devtools": "^1.99.13",
     "@tanstack/router-plugin": "^1.99.14",
     "@types/bun": "^1.2.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/pg": "^8.11.11",
     "@types/react": "^19",

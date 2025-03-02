@@ -2,44 +2,77 @@ import { validate, parse } from "@telegram-apps/init-data-node/web";
 import { createUser, getUser } from "./db/repo/user";
 import { User } from "./db/schema";
 import { HonoRequest } from "hono";
-import { Context } from "hono";
 import jwt from "jsonwebtoken";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key"; // It's better to set this in environment variables
-const JWT_EXPIRES_IN = "7d"; // Token valid for 7 days
+const JWT_SECRET = process.env.JWT_SECRET || "champtracker-jwt-secret";
+const JWT_EXPIRES_IN = "7d"; // Token expiration time
 
 if (!BOT_TOKEN) {
   throw new Error("telegram bot token is not found");
 }
 
-export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
-  // First check if JWT token exists
+// Create JWT token for a user
+export const createToken = (user: User): string => {
+  return jwt.sign({ id: user.id }, JWT_SECRET, {
+    expiresIn: JWT_EXPIRES_IN,
+  });
+};
+
+// Verify JWT token and return user id
+export const verifyToken = (token: string): { id: number } | null => {
+  try {
+    return jwt.verify(token, JWT_SECRET) as { id: number };
+  } catch (error) {
+    return null;
+  }
+};
+
+// Get user from JWT token
+export const getUserFromToken = async (token: string): Promise<User | null> => {
+  const payload = verifyToken(token);
+  if (!payload) return null;
+
+  return await getUser(payload.id);
+};
+
+// Middleware to validate JWT token
+export const validateJwtMiddleware = async (
+  req: HonoRequest
+): Promise<User> => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
-  if (token) {
-    try {
-      const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
-      const user = await getUser(decoded.userId);
+  if (!token) {
+    throw new Error("No authorization token provided");
+  }
 
-      if (!user) {
-        throw new Error("User not found with the provided token");
-      }
+  const user = await getUserFromToken(token);
 
+  if (!user) {
+    throw new Error("Invalid or expired token");
+  }
+
+  return user;
+};
+
+export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
+  // Try JWT first if Authorization header is present
+  const authHeader = req.header("Authorization");
+  if (authHeader?.startsWith("Bearer ")) {
+    const token = authHeader.replace("Bearer ", "");
+    const user = await getUserFromToken(token);
+    if (user) {
       return user;
-    } catch (error) {
-      console.error("JWT verification failed:", error);
-      // If token verification fails, fallback to initData
     }
   }
 
-  // Fallback to initData validation
+  // Fall back to init data validation if no valid JWT
   const initData = req.header("x-init-data");
 
   console.log("getValidatedUser() initdata", initData);
 
   if (!initData) {
-    throw new Error("No authorization: neither token nor x-init-data provided");
+    throw new Error("no x-init-data");
   }
 
   // check if user is not a scammer and came from our telegram bot, good!
@@ -68,31 +101,4 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
   }
 
   return user;
-};
-
-// Generate JWT token
-export const generateToken = (userId: number): string => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-};
-
-// JWT auth middleware for Hono
-export const jwtAuthMiddleware = async (
-  c: Context,
-  next: () => Promise<void>
-) => {
-  try {
-    const user = await getValidatedUser(c.req);
-
-    // If user was authenticated via initData, generate a token and set it in the response
-    const token = generateToken(user.id);
-    c.header("Authorization", `Bearer ${token}`);
-
-    // Add user to the context for later use
-    c.set("user", user as any);
-
-    await next();
-  } catch (error) {
-    console.error("Auth error:", error);
-    return c.json({ error: "Authentication failed" }, 401);
-  }
 };

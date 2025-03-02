@@ -1,8 +1,13 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
+import { Context, Next } from "hono";
 
 import { cors } from "hono/cors";
-import { getValidatedUser, jwtAuthMiddleware } from "../../../auth";
+import {
+  createToken,
+  getValidatedUser,
+  validateJwtMiddleware,
+} from "../../../auth";
 import {
   createChallenge,
   deleteChallenge,
@@ -17,41 +22,85 @@ import {
   updatePremium,
   updateTokens,
 } from "../../../db/repo";
-import { UpdateChallenge, User } from "../../../db/schema";
+import { UpdateChallenge } from "../../../db/schema";
 import { CreateChallengeReq } from "../../../types";
 import dayjs from "dayjs";
 import { handleCreateInvoice } from "../../../create-invoice";
 
-// Extend Hono with user type
-type Variables = {
-  user: User;
-};
-
-const app = new Hono<{ Variables: Variables }>().basePath("/api");
+const app = new Hono().basePath("/api");
 
 app.use("*", cors());
 
-// Add health check route without auth
+// Middleware that checks if JWT token is valid
+const authMiddleware = async (c: Context, next: Next) => {
+  try {
+    // Skip auth check for login and health endpoints
+    if (c.req.path === "/login" || c.req.path === "/health") {
+      return await next();
+    }
+
+    // Check if Authorization header exists
+    const authHeader = c.req.header("Authorization");
+
+    // If no token is provided but initData is, allow the request to proceed to getValidatedUser
+    if (!authHeader && c.req.header("x-init-data")) {
+      return await next();
+    }
+
+    // If token is provided, validate it
+    if (authHeader?.startsWith("Bearer ")) {
+      try {
+        await validateJwtMiddleware(c.req);
+        return await next();
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error";
+        return c.json({ error: `Unauthorized: ${errorMessage}` }, 401);
+      }
+    }
+
+    return c.json({ error: "Unauthorized: No authentication provided" }, 401);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return c.json({ error: `Unauthorized: ${errorMessage}` }, 401);
+  }
+};
+
+// Apply auth middleware to all routes
+app.use("*", authMiddleware);
+
 app.get("/health", (c) => {
   return c.json({ status: "ok" });
 });
 
-// Apply JWT auth middleware to all routes except /health
-app.use("*", async (c, next) => {
-  if (c.req.path === "/health") {
-    return next();
+// New login endpoint
+app.post("/login", async (c) => {
+  try {
+    const user = await getValidatedUser(c.req);
+    const token = createToken(user);
+
+    return c.json({
+      token,
+      user,
+    });
+  } catch (error: unknown) {
+    console.error("Login error:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return c.json({ error: `Authentication failed: ${errorMessage}` }, 401);
   }
-  return jwtAuthMiddleware(c, next);
 });
 
 app.get("/getUser", async (c) => {
-  // The user is already available in the context thanks to the middleware
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
+
   return c.json({ user });
 });
 
 app.put("/updateCompletedChallengesCount", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
+
   const body = await c.req.json<{ count: number }>();
 
   await updateCompletedChallengesCount(user.id, body.count);
@@ -60,7 +109,7 @@ app.put("/updateCompletedChallengesCount", async (c) => {
 });
 
 app.put("/updateLastActiveDate", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   await updateLastActiveDate(user.id);
 
@@ -68,7 +117,7 @@ app.put("/updateLastActiveDate", async (c) => {
 });
 
 app.put("/updateTokens", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   const body = await c.req.json<{ tokens: number }>();
 
@@ -78,7 +127,7 @@ app.put("/updateTokens", async (c) => {
 });
 
 app.get("/getPremium", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   const premium = await getPremium(user.id);
 
@@ -86,7 +135,7 @@ app.get("/getPremium", async (c) => {
 });
 
 app.put("/updatePremium", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   const body = await c.req.json<{ premiumUntil: string }>();
 
@@ -96,7 +145,7 @@ app.put("/updatePremium", async (c) => {
 });
 
 app.get("/getOnBoarding", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   const onBoarding = await getOnBoarding(user.id);
 
@@ -104,7 +153,7 @@ app.get("/getOnBoarding", async (c) => {
 });
 
 app.put("/updateOnBoarding", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   const status = await updateOnBoarding(user.id, true);
 
@@ -112,7 +161,7 @@ app.put("/updateOnBoarding", async (c) => {
 });
 
 app.get("/createInvoice", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   const invoice = await handleCreateInvoice(user.id);
 
@@ -120,7 +169,7 @@ app.get("/createInvoice", async (c) => {
 });
 
 app.get("/getChallenges", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
 
   const challenges = await getChallenges(user.id);
 
@@ -128,7 +177,7 @@ app.get("/getChallenges", async (c) => {
 });
 
 app.post("/createChallenge", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
   const body = await c.req.json<CreateChallengeReq>();
 
   const challenge = await createChallenge({
@@ -140,7 +189,7 @@ app.post("/createChallenge", async (c) => {
 });
 
 app.put("/updateChallenge/:id", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
   const id = Number(c.req.param("id"));
 
   const body = await c.req.json<UpdateChallenge>();
@@ -155,7 +204,7 @@ app.put("/updateChallenge/:id", async (c) => {
 });
 
 app.delete("/deleteChallenge/:id", async (c) => {
-  const user = c.get("user");
+  const user = await getValidatedUser(c.req);
   const id = Number(c.req.param("id"));
 
   const deletedChallenge = await deleteChallenge(id, user.id);
