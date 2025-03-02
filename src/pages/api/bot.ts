@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
 const inlineKeyboard = new InlineKeyboard().webApp(
   "Прокачай дисциплину!",
-  "https://t.me/ChampTracker_bot/app"
+  "t.me/ChampTracker_bot/app"
 );
 
 bot.on("message:successful_payment", async (ctx) => {
