@@ -113,10 +113,10 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         ) : (
           <BuyPremium>
             <button
-              className={`fixed hover:opacity-90 bottom-7 flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5 ${
+              className={`fixed hover:opacity-90 bottom-7 font-normal text-xs font-druk flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5 ${
                 title.length === 0 ? "bg-gray-600" : ""
               }`}>
-              <span className="font-semibold text-lg font-druk">ПРЕМИУМ</span>
+              <span className="">ПРЕМИУМ</span>
               <TelegramStar />
             </button>
           </BuyPremium>

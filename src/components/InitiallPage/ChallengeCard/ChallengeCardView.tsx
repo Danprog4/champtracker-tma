@@ -69,9 +69,7 @@ export const ChallengeCardUI = ({
       params={{ taskId: challengeId }}
       className={`${color} flex w-[94vw]   justify-between rounded-lg pr-0 pl-4 ${isLastNonExpired ? "mb-8" : ""} ${isExpired || (!isPremium && index !== 0) ? "opacity-50" : ""}`}>
       <div className="flex flex-col justify-between pt-4 pb-4">
-        <span className="leading-6 text-black font-druk text-sm max-w-[50px]">
-          {title}
-        </span>
+        <span className="leading-6 text-black font-druk text-sm ">{title}</span>
         <div className="flex">
           <span className="font-druk text-4xl text-stroke-1 text-transparent">
             {regularity === "everyday" && daysSinceStart !== 0
