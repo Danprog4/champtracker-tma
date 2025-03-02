@@ -101,7 +101,11 @@ body {
   min-height: 100%;
   overflow-x: hidden;
   overscroll-behavior: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .scroll-container {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
