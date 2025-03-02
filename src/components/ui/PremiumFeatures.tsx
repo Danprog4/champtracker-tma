@@ -25,7 +25,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                   Действует до {formattedPremiumUntil}
                 </span>
               </Drawer.Title>
-              <div className="space-y-4">
+              <div className="space-y-4 mb-16">
                 <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
                   <h3 className="mb-2 font-medium text-white">
                     Без ограничений
@@ -43,7 +43,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                     Получай токены за пройденные дни и обменивай их на премиум
                   </p>
                 </div>
-                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4">
+                <div className="rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 p-4 ">
                   <h3 className="mb-2 font-medium text-white">
                     Подробная статистика (в разработке)
                   </h3>
@@ -53,7 +53,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                 </div>
 
                 <Button
-                  className="w-full font-druk text-lg text-white h-10 rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500   flex items-center justify-center"
+                  className="fixed bottom-7 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] font-druk text-xs items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5"
                   onClick={() => setIsOpen(false)}>
                   <span>ЗАКРЫТЬ</span>
                 </Button>

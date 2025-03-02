@@ -64,18 +64,18 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-white w-[94vw] bg-zinc-800 rounded-lg p-2">
+                <div className="flex items-center gap-2 text-white rounded-lg p-2 mb-16 bg-zinc-800">
                   <Switch
                     checked={isForTokens}
                     onCheckedChange={() => setIsForTokens(!isForTokens)}
                   />
-                  <span>Купить за токены</span>
+                  <span className="">Купить за токены</span>
                 </div>
                 {!isForTokens ? (
                   <Button
                     onClick={handleBuyPremium}
                     disabled={isBuyingPending}
-                    className="mt-6 w-full font-semibold rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg  text-white hover:opacity-90">
+                    className="w-full shadow-xl shadow-black z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
                     {isBuyingPending ? (
                       <span>Покупка...</span>
                     ) : (
@@ -94,7 +94,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                       }
                     }}
                     disabled={isUpdatingPremium}
-                    className="mt-6 w-full  rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-orange-600 py-6 text-lg font-semibold text-white hover:opacity-90">
+                    className="w-full shadow-xl shadow-black z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
                     {isBuyingPending ? (
                       <span>Покупка...</span>
                     ) : (
