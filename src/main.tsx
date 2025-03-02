@@ -6,6 +6,7 @@ import { RouterProvider } from "@tanstack/react-router";
 import { router } from "./router";
 import { AuthProvider } from "./hooks/useAuthState";
 import { UnifiedLoadingState } from "./router";
+import axios from "axios";
 
 // Create a query client with default options for Suspense
 const queryClient = new QueryClient({
@@ -15,6 +16,14 @@ const queryClient = new QueryClient({
       // @ts-ignore
       suspense: true,
       refetchOnWindowFocus: false,
+      retry: (failureCount, error) => {
+        // Don't retry on 401 errors as they will be handled by our axios interceptor
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+          return false;
+        }
+        // Default retry behavior for other errors (3 times)
+        return failureCount < 3;
+      },
     },
   },
 });

@@ -13,6 +13,7 @@ type AuthState = {
   isAuthenticated: boolean;
   authError: string | null;
   isLoading: boolean;
+  reset: () => void;
 };
 
 // Create context
@@ -21,56 +22,71 @@ const AuthContext = createContext<AuthState>({
   isAuthenticated: false,
   authError: null,
   isLoading: true,
+  reset: () => {},
 });
 
 // Create provider component
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [authState, setAuthState] = useState<AuthState>({
+  const [authState, setAuthState] = useState<Omit<AuthState, "reset">>({
     isAuthReady: false,
     isAuthenticated: false,
     authError: null,
     isLoading: true,
   });
 
-  useEffect(() => {
-    const initAuth = async () => {
-      try {
-        // Check if already authenticated
-        if (getToken()) {
-          setAuthState({
-            isAuthReady: true,
-            isAuthenticated: true,
-            authError: null,
-            isLoading: false,
-          });
-          return;
-        }
+  // Function to initialize or reset authentication
+  const initAuth = async () => {
+    try {
+      setAuthState((prev) => ({ ...prev, isLoading: true, authError: null }));
 
-        // Login if not authenticated
-        await login();
-
+      // Check if already authenticated
+      if (getToken()) {
         setAuthState({
           isAuthReady: true,
           isAuthenticated: true,
           authError: null,
           isLoading: false,
         });
-      } catch (error) {
-        console.error("Authentication error:", error);
-        setAuthState({
-          isAuthReady: true,
-          isAuthenticated: false,
-          authError: error instanceof Error ? error.message : "Unknown error",
-          isLoading: false,
-        });
+        return;
       }
-    };
 
+      // Login if not authenticated
+      await login();
+
+      setAuthState({
+        isAuthReady: true,
+        isAuthenticated: true,
+        authError: null,
+        isLoading: false,
+      });
+    } catch (error) {
+      console.error("Authentication error:", error);
+      setAuthState({
+        isAuthReady: true,
+        isAuthenticated: false,
+        authError: error instanceof Error ? error.message : "Unknown error",
+        isLoading: false,
+      });
+    }
+  };
+
+  // Reset function to re-initialize authentication
+  const reset = () => {
+    initAuth();
+  };
+
+  useEffect(() => {
     initAuth();
   }, []);
 
+  // Combine state with reset method
+  const contextValue: AuthState = {
+    ...authState,
+    reset,
+  };
+
   return (
-    <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
