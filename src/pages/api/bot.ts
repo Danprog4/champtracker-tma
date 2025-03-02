@@ -3,6 +3,7 @@ import { updatePremium } from "@/db/repo";
 import dayjs from "dayjs";
 import { de } from "date-fns/locale";
 
+export const runtime = "nodejs";
 const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
 
 bot.on("message:successful_payment", async (ctx) => {
