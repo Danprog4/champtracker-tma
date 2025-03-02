@@ -28,6 +28,4 @@ bot.on("pre_checkout_query", async (ctx) => {
   return ctx.answerPreCheckoutQuery(true);
 });
 
-const handler = webhookCallback(bot, "https");
-
-export { handler as GET, handler as POST };
+export default webhookCallback(bot, "next-js");
