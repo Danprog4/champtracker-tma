@@ -20,9 +20,23 @@ import { useChallenges } from "./hooks/useChallenges";
 import YourChallengesPage from "./tanstack-pages/YourChallenges/YourChallengesPage";
 import { FullPageSpinner } from "./components/shared/FullPageSpinner";
 import { ProfilePage } from "./tanstack-pages/ProfilePage/ProfilePage";
+import { useAuthState } from "./hooks/useAuthState";
+
+// Create a unified loading state component
+export const UnifiedLoadingState = () => {
+  return (
+    <div className="flex h-screen w-full items-center justify-center">
+      <div className="text-center">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p className="mt-4 text-lg">Loading...</p>
+      </div>
+    </div>
+  );
+};
 
 const rootRoute = createRootRoute({
   component: App,
+  pendingComponent: UnifiedLoadingState, // Use the unified loading component for all routes
 
   notFoundComponent: () => (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-gradient-to-r ">
@@ -41,7 +55,7 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  pendingComponent: FullPageSpinner,
+  pendingComponent: UnifiedLoadingState, // Use the same loading component
   component: () => {
     const { challenges } = useChallenges();
     const { isOnBoarding } = useOnBoarding();
@@ -58,6 +72,7 @@ const indexRoute = createRoute({
 const newRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "new",
+  pendingComponent: UnifiedLoadingState,
   component: Challenges,
 });
 

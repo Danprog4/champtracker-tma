@@ -4,8 +4,20 @@ import { mockTelegramEnv, init } from "@telegram-apps/sdk";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "@tanstack/react-router";
 import { router } from "./router";
+import { AuthProvider } from "./hooks/useAuthState";
+import { UnifiedLoadingState } from "./router";
 
-const queryClient = new QueryClient();
+// Create a query client with default options for Suspense
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // TypeScript doesn't know about suspense option but it's valid
+      // @ts-ignore
+      suspense: true,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 // delete this if you using real telegram bot, not the localhost
 // Add type declaration for Telegram WebApp
@@ -27,10 +39,18 @@ window.Telegram.WebApp.enableClosingConfirmation();
 // Expand to full screen
 window.Telegram.WebApp.expand();
 
+// All components can now access auth state
 export const App = () => {
+  // Initialize when this component mounts
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </AuthProvider>
   );
 };
