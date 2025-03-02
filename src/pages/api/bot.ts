@@ -1,6 +1,7 @@
 import { Bot, webhookCallback } from "grammy";
 import { updatePremium } from "@/db/repo";
 import dayjs from "dayjs";
+import { de } from "date-fns/locale";
 
 const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
 
@@ -28,6 +29,4 @@ bot.on("pre_checkout_query", async (ctx) => {
   return ctx.answerPreCheckoutQuery(true);
 });
 
-const handler = webhookCallback(bot, "next-js");
-
-export { handler as GET, handler as POST };
+export default webhookCallback(bot, "next-js");
