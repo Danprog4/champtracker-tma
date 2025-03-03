@@ -31,7 +31,7 @@ const ChallengeList = ({ challenges }: ChallengeListProps) => {
       ...challenge,
       isExpired: false,
     }));
-
+  console.log(nonExpiredChallenges);
   return (
     <div className="mt-28 flex flex-col items-center justify-center gap-2 pb-28">
       {nonExpiredChallenges.map((challenge, index) => (

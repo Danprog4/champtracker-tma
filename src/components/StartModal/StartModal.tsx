@@ -69,8 +69,7 @@ export default function StartModal({
       date.getFullYear() <= today.getFullYear()
     );
   };
-  console.log(tempStartTime);
-  console.log(startDate);
+
   return (
     <StartModalView
       isOpen={isOpen}

@@ -140,13 +140,13 @@ export const getNextAvailableDay = (challenge: Challenge): Dayjs | null => {
 
   return nextDate;
 };
-
 export const isDateUpdate = (lastActiveDate: string | null): boolean => {
   if (!lastActiveDate) return true;
 
-  const isDateUpdate =
-    dayjs(lastActiveDate).startOf("day").isBefore(dayjs().startOf("day")) &&
-    !dayjs(lastActiveDate).isSame(dayjs().startOf("day"));
+  const lastActive = formatDateWithTimezone(
+    dayjs(lastActiveDate).startOf("day")
+  );
+  const today = formatDateWithTimezone(dayjs().startOf("day"));
 
-  return isDateUpdate;
+  return dayjs(lastActive).isBefore(today) && !dayjs(lastActive).isSame(today);
 };

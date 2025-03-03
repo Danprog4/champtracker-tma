@@ -38,6 +38,7 @@ export default function StartModalView({
   const isValidDate = (date: any): date is Date => {
     return date instanceof Date && !isNaN(date.getTime());
   };
+  console.log(startedDate, "startedDate2");
 
   return (
     <Drawer.Root open={isOpen} onOpenChange={onOpenChange}>

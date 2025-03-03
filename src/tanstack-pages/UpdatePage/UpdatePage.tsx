@@ -66,6 +66,8 @@ const UpdatePage: React.FC = () => {
     navigate({ to: "/" });
   };
 
+  console.log(startedDate, "startedDate5");
+
   return (
     <UpdatePageView
       task={task}
