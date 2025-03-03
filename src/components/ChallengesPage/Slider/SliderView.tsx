@@ -54,18 +54,27 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
               to="/card/$id"
               params={{ id: String(card.id) }}
               key={cardIndex}
-              className={`relative flex-shrink-0 bg-cover rounded-lg`}
-              style={{ transform: "translate3d(0,0,0)" }}>
+              className={`relative flex-shrink-0 bg-cover rounded-lg will-change-transform`}
+              style={{
+                transform: "translate3d(0,0,0)",
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
+              }}>
               <Image
                 src={card.imageUrl}
                 alt={card.title}
-                className="-z-50 h-[250px] w-[250px] object-contain"
+                className=" h-[250px] w-[250px] object-contain will-change-transform"
                 loading="eager"
                 priority={cardIndex < 4}
                 width={250}
                 height={250}
+                style={{
+                  transform: "translateZ(0)",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                }}
               />
-              <div className="text-outline font-druk absolute inset-0 p-3 text-start text-lg  leading-7 text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
+              <div className="text-outline font-druk absolute inset-0 p-3 text-start text-lg leading-7 text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
                 {card.title}
               </div>
             </Link>
