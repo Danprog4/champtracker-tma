@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { categories } from "@/configs/cards.config";
 import DumpSlider from "./SliderView";
 
 const SmartSlider: React.FC = () => {
-  const [currentSlides, setCurrentSlides] = useState<{ [key: number]: number }>(
-    Object.fromEntries(categories.map((_, i) => [i, 0]))
+  const [currentSlide, setCurrentSlide] = useState<{ [key: number]: number }>(
+    {}
   );
+  const sliderRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const handleSlideChange = (categoryIndex: number, slideIndex: number) => {
-    setCurrentSlides((prev) => ({
+  const handleScroll = (categoryIndex: number) => {
+    const slider = sliderRefs.current[categoryIndex];
+    if (!slider) return;
+    const cardWidth = 250 + 16; // card width + margin
+    const scrollPosition = slider.scrollLeft;
+    const currentIndex = Math.round(scrollPosition / cardWidth) + 1;
+    setCurrentSlide((prev) => ({
       ...prev,
-      [categoryIndex]: slideIndex,
+      [categoryIndex]: currentIndex,
     }));
   };
 
   return (
     <DumpSlider
       categories={categories}
-      currentSlides={currentSlides}
-      onSlideChange={handleSlideChange}
+      currentSlide={currentSlide}
+      onScroll={handleScroll}
+      sliderRefs={sliderRefs}
     />
   );
 };
