@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState } from "react";
 import { categories } from "@/configs/cards.config";
 import DumpSlider from "./SliderView";
 
@@ -8,22 +8,17 @@ const SmartSlider: React.FC = () => {
   );
   const sliderRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const handleScroll = useCallback((categoryIndex: number) => {
+  const handleScroll = (categoryIndex: number) => {
     const slider = sliderRefs.current[categoryIndex];
     if (!slider) return;
-
-    const cardWidth = 250 + 16; // card width + gap
+    const cardWidth = 250 + 16; // card width + margin
     const scrollPosition = slider.scrollLeft;
-    const currentIndex = Math.floor(scrollPosition / cardWidth) + 1;
-
+    const currentIndex = Math.round(scrollPosition / cardWidth) + 1;
     setCurrentSlide((prev) => ({
       ...prev,
-      [categoryIndex]: Math.min(
-        currentIndex,
-        categories[categoryIndex]?.items.length || 1
-      ),
+      [categoryIndex]: currentIndex,
     }));
-  }, []);
+  };
 
   return (
     <DumpSlider

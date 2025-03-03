@@ -21,7 +21,7 @@ import YourChallengesPage from "./tanstack-pages/YourChallenges/YourChallengesPa
 import { FullPageSpinner } from "./components/shared/FullPageSpinner";
 import { ProfilePage } from "./tanstack-pages/ProfilePage/ProfilePage";
 import { useAuthState } from "./hooks/useAuthState";
-
+import Slider from "./components/ChallengesPage/Slider/Slider";
 // Create a unified loading state component
 export const UnifiedLoadingState = () => {
   return (
@@ -74,6 +74,12 @@ const newRoute = createRoute({
   path: "new",
   pendingComponent: UnifiedLoadingState,
   component: Challenges,
+});
+
+const testSliderRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "test-slider",
+  component: Slider,
 });
 
 const initiallRoute = createRoute({
@@ -154,6 +160,7 @@ const routeTree = rootRoute.addChildren([
   carouselPage,
   initiallRoute,
   profileRoute,
+  testSliderRoute,
 ]);
 
 // Create the router
