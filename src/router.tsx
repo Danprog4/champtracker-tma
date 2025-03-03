@@ -27,8 +27,8 @@ export const UnifiedLoadingState = () => {
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="text-center">
-        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-        <p className="mt-4 text-lg">Loading...</p>
+        <div className="w-16 h-16 border-4 font-druk border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p className="mt-4 text-lg">Загрузка...</p>
       </div>
     </div>
   );
