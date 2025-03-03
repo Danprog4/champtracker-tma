@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
 import localFont from "next/font/local";
+import { categories } from "../configs/cards.config";
 
 const druk = localFont({
   src: "/fonts/Druk/Druk Wide Cyr.ttf",
@@ -19,8 +20,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Get unique image URLs to prevent duplicate preloads
+  const uniqueImageUrls = new Set<string>();
+  categories.forEach((category) => {
+    category.items.forEach((item) => {
+      uniqueImageUrls.add(item.imageUrl);
+    });
+  });
+
   return (
     <html lang="en" className={druk.variable}>
+      {/* Preload images */}
+      {Array.from(uniqueImageUrls).map((imageUrl, index) => (
+        <link
+          key={index}
+          rel="preload"
+          href={imageUrl}
+          as="image"
+          type="image/jpeg"
+        />
+      ))}
       <body
         className={`antialiased bg-black bg-cover h-screen overscroll-behavior-none`}>
         <Script
