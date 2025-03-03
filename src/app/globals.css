@@ -93,8 +93,7 @@ body {
   overflow-x: hidden;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
-  will-change: transform;
-  backface-visibility: hidden;
+  transform: none !important;
 }
 
 @media screen and (orientation: portrait), screen and (orientation: landscape) {
@@ -102,11 +101,9 @@ body {
   body,
   #__next,
   main {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    perspective: 1000;
-    -webkit-perspective: 1000;
+    transform: none !important;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
   }
 }
 

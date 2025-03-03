@@ -54,7 +54,8 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
               to="/card/$id"
               params={{ id: String(card.id) }}
               key={cardIndex}
-              className={`relative flex-shrink-0 bg-cover rounded-lg`}>
+              className={`relative flex-shrink-0 bg-cover rounded-lg`}
+              style={{ transform: "translate3d(0,0,0)" }}>
               <Image
                 src={card.imageUrl}
                 alt={card.title}
@@ -63,7 +64,6 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
                 priority={cardIndex < 4}
                 width={250}
                 height={250}
-                unoptimized={true}
               />
               <div className="text-outline font-druk absolute inset-0 p-3 text-start text-lg  leading-7 text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
                 {card.title}
