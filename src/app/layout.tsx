@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import { categories } from "../configs/cards.config";
 
 const druk = localFont({
-  src: "/fonts/Druk/Druk Wide Cyr.ttf",
+  src: "../../public/fonts/Druk/Druk Wide Cyr.ttf",
   display: "swap",
   variable: "--font-druk",
 });
