@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const JWT_SECRET = process.env.JWT_SECRET || "champtracker-jwt-secret";
-const JWT_EXPIRES_IN = "7d"; // Token expiration time
+const JWT_EXPIRES_IN = "10s"; // Token expiration time
 
 if (!BOT_TOKEN) {
   throw new Error("telegram bot token is not found");
