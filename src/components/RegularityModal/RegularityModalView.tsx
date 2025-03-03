@@ -43,7 +43,7 @@ export default function RegularityModalView({
       </Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] bg-neutral-100 outline-none">
+        <Drawer.Content className="fixed bottom-0 left-0 right-0 h-[90vh] flex flex-col pb-7 justify-between bg-black outline-none">
           <div className="h-full bg-black">
             <div className="mb-4 flex h-[13vw] items-center justify-center bg-neutral-800 text-white">
               Регулярность
@@ -99,17 +99,16 @@ export default function RegularityModalView({
                 </div>
               )}
             </div>
-            <div className="flex items-center justify-center">
-              <button
-                className="fixed bottom-7 flex h-[47px] w-[95vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300 p-5"
-                onClick={handleSaveChanges}
-                disabled={isDisabled}>
-                <span
-                  className={isDisabled ? "text-neutral-500" : "text-black"}>
-                  ГОТОВО
-                </span>
-              </button>
-            </div>
+          </div>
+          <div className="flex items-center justify-center bg-black ">
+            <button
+              className="h-[47px] w-[90vw] font-druk text-xs items-center justify-center rounded-lg bg-yellow-300"
+              onClick={handleSaveChanges}
+              disabled={isDisabled}>
+              <span className={isDisabled ? "text-neutral-500" : "text-black"}>
+                ГОТОВО
+              </span>
+            </button>
           </div>
         </Drawer.Content>
       </Drawer.Portal>

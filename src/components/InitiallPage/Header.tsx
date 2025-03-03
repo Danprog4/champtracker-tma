@@ -17,11 +17,6 @@ const Header = () => {
       <Link to="/about">
         <BarsIcon />
       </Link>
-      <Link to="/test-slider">
-        <div className="flex items-center gap-2">
-          <span>TEST</span>
-        </div>
-      </Link>
       <div className="flex items-center gap-2">
         {isPremium(user) ? (
           <PremiumFeatures>
