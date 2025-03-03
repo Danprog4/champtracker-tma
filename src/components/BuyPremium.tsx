@@ -31,7 +31,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
       <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 mt-24 flex flex-col rounded-t-[10px] z-50">
+        <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 flex flex-col rounded-t-[10px] z-50">
           <div className="flex-1 rounded-t-[10px] bg-neutral-900 p-4 pb-7">
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-neutral-600" />
             <div className="mx-auto max-w-md">
