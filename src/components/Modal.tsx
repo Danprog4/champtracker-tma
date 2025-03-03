@@ -19,7 +19,7 @@ export const Modal = () => {
 
   if (!active) return null;
 
-  if (isAvailableDate && isPremium(user))
+  if (isAvailableDate)
     return (
       <div className="fixed inset-0 z-50 bg-red-400 flex items-center justify-center h-screen w-screen">
         <div className="flex w-full h-full items-center flex-col justify-end bottom-28 p-0 relative text-white">

@@ -25,7 +25,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                   Действует до {formattedPremiumUntil}
                 </span>
               </Drawer.Title>
-              <div className="space-y-4 mb-16">
+              <div className="space-y-4">
                 <div className="rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900 p-4">
                   <h3 className="mb-2 font-medium text-white">
                     Без ограничений
@@ -53,7 +53,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
                 </div>
 
                 <Button
-                  className="fixed bottom-7 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] font-druk font-normal text-xs items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5"
+                  className="w-full shadow-xl font-normal shadow-black z-20 flex h-[45px] font-druk text-xs items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5"
                   onClick={() => setIsOpen(false)}>
                   <span>ЗАКРЫТЬ</span>
                 </Button>

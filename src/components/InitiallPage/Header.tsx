@@ -28,14 +28,22 @@ const Header = () => {
             </div>
           </PremiumFeatures>
         ) : (
-          <BuyPremium>
-            <div className="flex text-sm  items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 hover:opacity-90">
-              <div className="flex items-center gap-1 font-druk text-[10px]">
-                <span>ПРЕМИУМ</span>
-                <TelegramStar />
+          <div className="flex items-center gap-2">
+            <BuyPremium>
+              <div className="flex text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 hover:opacity-90">
+                <div className="flex items-center gap-1 font-druk text-[10px]">
+                  <span>ПРЕМИУМ</span>
+                  <TelegramStar />
+                </div>
+              </div>
+            </BuyPremium>
+            <div className="flex text-sm items-center gap-2 text-black rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-2">
+              <div className="flex items-center gap-1 font-druk">
+                <span>{user.tokens}</span>
+                <TokenIcon />
               </div>
             </div>
-          </BuyPremium>
+          </div>
         )}
       </div>
     </div>

@@ -107,11 +107,12 @@ export const useChallenges = () => {
       ? task.userCheckedDates?.filter(
           (checkedDate) => checkedDate !== targetDate
         ) || []
-      : isDateUpdate(user.lastActiveDate) && isPremium(user)
+      : isDateUpdate(user.lastActiveDate)
         ? (() => {
             updateLastActiveDate();
-            updateTokens(user.tokens + 10);
-            toast.success("Вы успешно получили 10 токенов");
+            const tokenAmount = isPremium(user) ? 10 : 5;
+            updateTokens(user.tokens + tokenAmount);
+            toast.success(`Вы успешно получили ${tokenAmount} токенов`);
             return [...(task.userCheckedDates || []), targetDate];
           })()
         : [...(task.userCheckedDates || []), targetDate];
@@ -122,7 +123,7 @@ export const useChallenges = () => {
 
     console.log(updatedCheckedDays, task.taskDates, isChallengeCompleted, "d");
 
-    if (isChallengeCompleted && isPremium(user)) {
+    if (isChallengeCompleted) {
       if (user.completedChallengesCount === 0) {
         updateCompletedChallengesCount(1);
         updateTokens(user.tokens + 10);
