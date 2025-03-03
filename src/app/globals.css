@@ -17,7 +17,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-druk), Arial, Helvetica, sans-serif;
 }
 
 @layer base {
@@ -83,14 +83,6 @@ body {
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@font-face {
-  font-family: "Druk";
-  src: url("/fonts/Druk/Druk Wide Cyr.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 html,

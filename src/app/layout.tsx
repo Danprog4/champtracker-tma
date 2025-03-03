@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import localFont from "next/font/local";
+
+const druk = localFont({
+  src: "/fonts/Druk/Druk Wide Cyr.ttf",
+  display: "swap",
+  variable: "--font-druk",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,9 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={druk.variable}>
       <body
-        className={`antialiased bg-black bg-cover h-screen overscroll-behavior-none `}>
+        className={`antialiased bg-black bg-cover h-screen overscroll-behavior-none`}>
         <Script
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
