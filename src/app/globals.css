@@ -91,9 +91,14 @@ body {
   height: 100%;
   min-height: 100%;
   overflow-x: hidden;
+  overflow-y: hidden;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
   transform: none !important;
+  transform-style: flat !important;
+  -webkit-transform-style: flat !important;
+  perspective: none !important;
+  -webkit-perspective: none !important;
 }
 
 @media screen and (orientation: portrait), screen and (orientation: landscape) {
@@ -102,8 +107,10 @@ body {
   #__next,
   main {
     transform: none !important;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
+    transform-style: flat !important;
+    -webkit-transform-style: flat !important;
+    perspective: none !important;
+    -webkit-perspective: none !important;
   }
 }
 
