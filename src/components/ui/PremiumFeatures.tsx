@@ -16,7 +16,7 @@ export const PremiumFeatures = ({ children }: { children: ReactNode }) => {
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
         <Drawer.Content className="fixed bottom-0  left-0 pt right-0  flex flex-col rounded-t-[10px] pb-7 ">
-          <div className="flex-1 rounded-t-[10px] bg-neutral-900 pl-4 pr-4 ">
+          <div className="flex-1 rounded-t-[10px] bg-neutral-900 pl-4 pr-4 pt-2">
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-neutral-600" />
             <div className="mx-auto ">
               <Drawer.Title className=" text-white flex flex-col">

@@ -31,8 +31,8 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
       <Drawer.Trigger asChild>{children}</Drawer.Trigger>
       <Drawer.Portal>
         <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-        <Drawer.Content className="fixed bottom-0 h-fit left-0 pt-4 right-0 flex flex-col rounded-t-[10px] z-50">
-          <div className="flex-1 rounded-t-[10px] bg-neutral-900 p-4 pb-7">
+        <Drawer.Content className="fixed bottom-0  left-0 pt right-0  flex flex-col rounded-t-[10px] pb-7 ">
+          <div className="flex-1 rounded-t-[10px] bg-neutral-900 pl-4 pr-4 pt-2">
             <div className="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-neutral-600" />
             <div className="mx-auto ">
               <Drawer.Title className="mb-6 font-druk text-2xl text-white">
@@ -99,7 +99,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                       }
                     }}
                     disabled={isUpdatingPremium}
-                    className="w-full shadow-xl shadow-black font-normal z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5">
+                    className="w-full shadow-xl shadow-black font-normal z-20 flex h-[45px] font-druk text-sm items-center justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500">
                     {isBuyingPending ? (
                       <span>Покупка...</span>
                     ) : (
