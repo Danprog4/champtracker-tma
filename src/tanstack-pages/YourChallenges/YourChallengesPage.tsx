@@ -37,7 +37,7 @@ const YourChallengesPage = () => {
           </div>
         </PremiumFeatures>
       )}
-      {/* <Navbar /> */}
+      <Navbar />
     </div>
   );
 };
