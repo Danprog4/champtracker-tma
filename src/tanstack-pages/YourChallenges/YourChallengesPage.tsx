@@ -17,7 +17,7 @@ const YourChallengesPage = () => {
   const { user } = useUser();
 
   return (
-    <div className="flex min-h-screen flex-col pb-12">
+    <div className="flex min-h-screen flex-col pb-12 w-screen h-screen overflow-x-hidden overflow-y-auto">
       <Header />
       <Modal />
       <ChallengeList challenges={challenges} />
