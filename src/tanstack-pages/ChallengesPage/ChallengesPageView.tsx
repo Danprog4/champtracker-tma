@@ -34,7 +34,7 @@ const Challenges: React.FC = () => {
       </div>
 
       <div className="mt-[72px] flex flex-col px-3">
-        <h1 className="mb-2 text-2xl  font-druk ">НОВОЕ ЗАДАНИЕ</h1>
+        <h1 className="mb-2 text-2xl   font-druk ">НОВОЕ ЗАДАНИЕ</h1>
         <p className="mb-12 text-start text-sm text-neutral-400">
           Выберите одно из 10 готовых заданий <br /> или создайте свое
         </p>
