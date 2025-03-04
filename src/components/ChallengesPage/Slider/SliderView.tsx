@@ -29,7 +29,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
   onScroll,
   sliderRefs,
 }) => (
-  <div className="flex flex-col w-screen overflow-x-hidden">
+  <div className="flex flex-col w-screen h-screen overflow-x-hidden overflow-y-auto">
     {categories.map((category, categoryIndex) => (
       <div key={categoryIndex} className="mb-8 pl-3">
         <div className="flex justify-between pr-3 items-start mb-3">
