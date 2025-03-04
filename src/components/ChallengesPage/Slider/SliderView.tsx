@@ -29,7 +29,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
   onScroll,
   sliderRefs,
 }) => (
-  <div className="flex flex-col">
+  <div className="flex flex-col w-screen overflow-x-hidden">
     {categories.map((category, categoryIndex) => (
       <div key={categoryIndex} className="mb-8 pl-3">
         <div className="flex justify-between pr-3 items-start mb-3">
@@ -45,7 +45,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
             }
           }}
           onScroll={() => onScroll(categoryIndex)}
-          className="flex snap-x snap-mandatory space-x-4 overflow-auto scroll-smooth">
+          className={`flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen `}>
           {category.items.map((card, cardIndex) => (
             <Link
               onClick={() => {
@@ -54,20 +54,20 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
               to="/card/$id"
               params={{ id: String(card.id) }}
               key={cardIndex}
-              className={`relative flex-shrink-0 bg-cover rounded-lg`}
-              style={{ transform: "translate3d(0,0,0)" }}>
+              className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}
+              style={{ transform: "t" }}>
+              <div className="z-50 text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
+                {card.title}
+              </div>
               <Image
                 src={card.imageUrl}
                 alt={card.title}
-                className="-z-50 h-[250px] w-[250px] object-contain"
+                className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
                 loading="eager"
                 priority={cardIndex < 4}
-                width={250}
-                height={250}
+                width={180}
+                height={180}
               />
-              <div className="text-outline font-druk absolute inset-0 p-3 text-start text-lg  leading-7 text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
-                {card.title}
-              </div>
             </Link>
           ))}
         </div>

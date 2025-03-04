@@ -46,7 +46,10 @@ export default function RootLayout({
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
         />
-        <div className="scroll-container min-h-screen">{children}</div>
+        {/* <div className="scroll min-h-screen" id="main">
+          {children}
+        </div> */}{" "}
+        {children}
       </body>
     </html>
   );

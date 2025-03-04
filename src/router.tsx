@@ -167,6 +167,7 @@ const routeTree = rootRoute.addChildren([
 export const router = createRouter({
   routeTree,
   scrollRestoration: true,
+  scrollToTopSelectors: ["#main"],
 });
 
 // Register your router for maximum type safety

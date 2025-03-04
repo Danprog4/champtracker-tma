@@ -16,16 +16,6 @@ const YourChallengesPage = () => {
   const { challenges } = useChallenges();
   const { user } = useUser();
 
-  console.log(
-    dayjs(user.lastActiveDate)
-      .startOf("day")
-      .isBefore(dayjs().startOf("day")) &&
-      !dayjs(user.lastActiveDate).isSame(dayjs().startOf("day")),
-    "user.lastActiveDate"
-  );
-
-  console.log(isDateUpdate(user.lastActiveDate), "isDateUpdate");
-
   return (
     <div className="flex min-h-screen flex-col pb-12">
       <Header />

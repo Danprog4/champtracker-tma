@@ -4,6 +4,7 @@ import { usePrefetchQueries } from "./hooks/usePrefetchQuery";
 import { useAuthState } from "./hooks/useAuthState";
 import { useAuthRetryLoading } from "./hooks/useAuthRetryLoading";
 import { UnifiedLoadingState } from "./router";
+import { useScrollRestoration } from "./hooks/useScrollRestoration";
 
 // Auth retry loading overlay component
 const AuthRetryOverlay = () => (
@@ -20,6 +21,7 @@ const AuthRetryOverlay = () => (
 
 function App() {
   usePrefetchQueries();
+  useScrollRestoration();
 
   // Access the auth state
   const { isLoading, authError } = useAuthState();
