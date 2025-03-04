@@ -84,48 +84,27 @@ body {
   }
 }
 
-html,
-body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
   height: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
-  transform: none !important;
-  transform-style: flat !important;
-  -webkit-transform-style: flat !important;
-  perspective: none !important;
-  -webkit-perspective: none !important;
+  top: 0;
+  left: 0;
 }
 
-@media screen and (orientation: portrait), screen and (orientation: landscape) {
-  html,
-  body,
-  #__next,
-  main {
-    transform: none !important;
-    transform-style: flat !important;
-    -webkit-transform-style: flat !important;
-    perspective: none !important;
-    -webkit-perspective: none !important;
-  }
-}
-
-*::-webkit-scrollbar,
-*::-webkit-scrollbar {
-  display: none !important;
-}
-
-* {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-  user-select: none;
-}
-
-.scroll-container {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overscroll-behavior: none !important;
+  margin: 0;
+  padding: 0;
 }
