@@ -16,9 +16,11 @@ const Challenges: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   return (
-    <div className="flex flex-col w-screen h-screen overflow-x-hidden overflow-y-auto">
+    <div className="flex flex-col w-screen h-screen overflow-x-hidden overflow-y-auto ">
       <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[8vh] items-center pl-3 top-0">
-        <button></button>
+        <button onClick={() => navigate({ to: "/initiall" })}>
+          <BackIcon />
+        </button>
       </div>
       <div className="mt-[72px] flex flex-col px-3">
         <h1 className="mb-2 text-2xl   font-druk ">НОВОЕ ЗАДАНИЕ</h1>
