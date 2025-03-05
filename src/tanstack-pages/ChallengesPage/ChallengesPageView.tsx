@@ -17,7 +17,7 @@ const Challenges: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   return (
-    <div className="flex flex-col items-start  overflow-x-hidden ">
+    <div className="flex flex-col w-screen h-screen overflow-x-hidden overflow-y-auto">
       <div className="fixed z-50 flex w-[100vw] justify-between bg-black h-[8vh] items-center pl-3 top-0">
         <button
           onClick={() => {
