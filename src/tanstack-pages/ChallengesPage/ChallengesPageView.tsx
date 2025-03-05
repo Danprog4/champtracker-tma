@@ -32,33 +32,32 @@ const Challenges: React.FC = () => {
             <div className="">{category.title}</div>
             <div className="text-neutral-400 text-sm mt-1"></div>
           </div>
-          <div className="flex  gap-2 pb-4 w-screen overflow-x-auto">
-            {category.items.map((card, cardIndex) => {
-              console.log(`Card ${cardIndex} image URL:`, card.imageUrl);
-              return (
-                <div
-                  key={cardIndex}
-                  className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}>
-                  <div className="text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
-                    {card.title}
-                  </div>
-                  <img
-                    src={card.imageUrl}
-                    alt={card.title}
-                    className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
-                    onError={(e) =>
-                      console.log(`Failed to load image: ${card.imageUrl}`)
-                    }
-                  />
+          <div
+            className={`flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen `}>
+            {category.items.map((card, cardIndex) => (
+              <div
+                key={cardIndex}
+                className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}
+                style={{ transform: "t" }}>
+                <div className=" text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
+                  {card.title}
                 </div>
-              );
-            })}
+                <img
+                  src={card.imageUrl}
+                  alt={card.title}
+                  className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
+                />
+              </div>
+            ))}
           </div>
         </div>
       ))}
 
-      <div className="fixed bottom-7 left-3 shadow-xl shadow-black  z-100 flex h-[45px] w-[94vw] items-center justify-between rounded-lg bg-yellow-400 p-5 text-black">
-        <span className="text-[10px] text-black font-druk z-100">
+      <Link
+        to="/"
+        className="flex w-full items-center justify-center pl-0 z-50"></Link>
+      <div className="fixed bottom-7 left-3 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] items-center justify-between rounded-lg bg-yellow-400 p-5 text-black">
+        <span className="text-[10px] text-black font-druk">
           СОЗДАТЬ СВОЕ ЗАДАНИЕ
         </span>
       </div>
