@@ -32,25 +32,27 @@ const Challenges: React.FC = () => {
             <div className="">{category.title}</div>
             <div className="text-neutral-400 text-sm mt-1"></div>
           </div>
-          <div
-            className={`flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen `}>
-            {category.items.map((card, cardIndex) => (
-              <Link
-                key={cardIndex}
-                to="/card/$id"
-                params={{ id: String(card.id) }}
-                className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}
-                style={{ transform: "t" }}>
-                <div className=" text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
-                  {card.title}
+          <div className="flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen">
+            {category.items.map((card, cardIndex) => {
+              console.log(`Card ${cardIndex} image URL:`, card.imageUrl);
+              return (
+                <div
+                  key={cardIndex}
+                  className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}>
+                  <div className="text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
+                    {card.title}
+                  </div>
+                  <img
+                    src={card.imageUrl}
+                    alt={card.title}
+                    className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
+                    onError={(e) =>
+                      console.log(`Failed to load image: ${card.imageUrl}`)
+                    }
+                  />
                 </div>
-                <img
-                  src={card.imageUrl}
-                  alt={card.title}
-                  className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
-                />
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       ))}
