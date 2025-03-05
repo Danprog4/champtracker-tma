@@ -40,7 +40,7 @@ export default function RootLayout({
           type="image/jpeg"
         />
       ))}
-      <body className={` bg-black `}>
+      <body className={`antialiased bg-black bg-cover`}>
         <Script
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
