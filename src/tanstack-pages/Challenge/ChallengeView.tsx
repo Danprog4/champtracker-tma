@@ -5,10 +5,7 @@ import { CrossIcon } from "@/icons/Cross";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration";
 const ChallengeView: React.FC = () => {
   const { id } = useParams({ from: "/card/$id" });
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    console.log("Scroll triggered for path:", location.pathname);
-  }, []);
+
   const category = categories.find((category) =>
     category.items.some((item) => item.id === Number(id))
   );
