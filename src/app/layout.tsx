@@ -3,7 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import localFont from "next/font/local";
 import { categories } from "../configs/cards.config";
-import "../scroll";
+import { scroll } from "../scroll";
 
 const druk = localFont({
   src: "../../public/fonts/Druk/Druk Wide Cyr.ttf",

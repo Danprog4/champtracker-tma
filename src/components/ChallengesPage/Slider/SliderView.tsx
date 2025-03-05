@@ -37,7 +37,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
           <div className="text-neutral-400 text-sm mt-1"></div>
         </div>
         <div
-          className={`flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen `}>
+          className={`flex snap-x snap-mandatory space-x-4 overflow-x-auto overflow-y-hidden scroll-smooth gap-2 pb-4`}>
           {category.items.map((card, cardIndex) => (
             <Link
               key={cardIndex}
