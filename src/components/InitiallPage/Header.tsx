@@ -8,6 +8,7 @@ import { isPremium } from "@/lib/challengeUtills";
 import { BuyPremium } from "../BuyPremium";
 import { Button } from "../ui/button";
 import { TelegramStar } from "../shared/TelegramStar";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 const Header = () => {
   const { user } = useUser();
@@ -16,6 +17,11 @@ const Header = () => {
     <div className="fixed z-10 flex w-full justify-between items-center bg-black  p-3 h-[8vh]">
       <Link to="/about">
         <BarsIcon />
+      </Link>
+      <Link to="/test-slider">
+        <Button>
+          <PlusIcon />
+        </Button>
       </Link>
       <div className="flex items-center gap-2">
         {isPremium(user) ? (
