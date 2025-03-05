@@ -40,8 +40,7 @@ export default function RootLayout({
           type="image/jpeg"
         />
       ))}
-      <body
-        className={`antialiased bg-black bg-cover h-screen overscroll-behavior-none`}>
+      <body className={` bg-black `}>
         <Script
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
