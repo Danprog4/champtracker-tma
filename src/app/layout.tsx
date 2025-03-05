@@ -41,12 +41,12 @@ export default function RootLayout({
           type="image/jpeg"
         />
       ))}
-      <body className={`antialiased bg-yellow-500 bg-cover`}>
+      <body>
         <Script
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
         />
-        <div className="z-[1000]">{children}</div>
+        {children}
       </body>
     </html>
   );
