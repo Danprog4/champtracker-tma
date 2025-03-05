@@ -5,10 +5,7 @@ import { CrossIcon } from "@/icons/Cross";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration";
 const ChallengeView: React.FC = () => {
   const { id } = useParams({ from: "/card/$id" });
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    console.log("Scroll triggered for path:", location.pathname);
-  }, []);
+
   const category = categories.find((category) =>
     category.items.some((item) => item.id === Number(id))
   );
@@ -17,7 +14,7 @@ const ChallengeView: React.FC = () => {
     .find((item) => item.id === Number(id));
 
   return (
-    <div className="mb-20 flex w-full flex-col pb-24 " id="main">
+    <div className="mb-20  flex w-full flex-col pb-24 " id="main">
       <div className="relative rounded-b-3xl w-full flex items-center">
         <img
           src={card?.imageUrl}
