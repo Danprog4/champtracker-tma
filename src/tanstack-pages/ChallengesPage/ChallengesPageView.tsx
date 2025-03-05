@@ -15,7 +15,7 @@ const Challenges: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   return (
-    <div className="relative flex flex-col items-start w-screen h-screen overflow-x-hidden overflow-y-auto">
+    <div className="flex min-h-screen flex-col pb-12">
       <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[8vh] items-center pl-3 top-0">
         <button
           onClick={() => {
@@ -44,7 +44,7 @@ const Challenges: React.FC = () => {
 
       <Link
         to="/card/create"
-        className="flex w-full items-center justify-center pl-0 ">
+        className="flex w-full items-center justify-center pl-0 z-50">
         <CreateTaskButton />
       </Link>
     </div>
