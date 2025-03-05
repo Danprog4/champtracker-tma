@@ -47,7 +47,8 @@ const Challenges: React.FC = () => {
           <div className="flex justify-between pr-3 items-start mb-3">
             <div className="">{category.title}</div>
           </div>
-          <div className={`flex  scroll-smooth gap-4 pb-4 w-screen `}>
+          <div
+            className={`flex  scroll-smooth gap-4 pb-4 w-screen overflow-x-auto`}>
             {category.items.map((card, cardIndex) => (
               <Link
                 to="/card/$id"
