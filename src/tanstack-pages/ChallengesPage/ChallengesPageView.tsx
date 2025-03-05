@@ -32,7 +32,7 @@ const Challenges: React.FC = () => {
             <div className="">{category.title}</div>
             <div className="text-neutral-400 text-sm mt-1"></div>
           </div>
-          <div className="flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen">
+          <div className="flex  gap-2 pb-4 w-screen overflow-x-auto">
             {category.items.map((card, cardIndex) => {
               console.log(`Card ${cardIndex} image URL:`, card.imageUrl);
               return (
