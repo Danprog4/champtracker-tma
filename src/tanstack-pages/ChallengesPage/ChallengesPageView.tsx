@@ -9,14 +9,16 @@ import { isPremium } from "@/lib/challengeUtills";
 import { toast } from "sonner";
 import { useUser } from "@/hooks/useUser";
 import { BuyPremium } from "@/components/BuyPremium";
+import { categories } from "@/configs/cards.config";
+import Image from "next/image";
 const Challenges: React.FC = () => {
   const { challenges } = useChallenges();
   const { isOnBoarding } = useOnBoarding();
   const navigate = useNavigate();
   const { user } = useUser();
   return (
-    <div className="relative flex flex-col items-start">
-      <div className="fixed z-10 flex w-[100vw] justify-between bg-black h-[8vh] items-center pl-3 top-0">
+    <div className="flex flex-col items-start  overflow-x-hidden ">
+      <div className="fixed z-50 flex w-[100vw] justify-between bg-black h-[8vh] items-center pl-3 top-0">
         <button
           onClick={() => {
             if (!isOnBoarding) {
@@ -40,11 +42,39 @@ const Challenges: React.FC = () => {
         </p>
       </div>
 
-      <Slider />
+      {categories.map((category, categoryIndex) => (
+        <div key={categoryIndex} className="mb-8 pl-3">
+          <div className="flex justify-between pr-3 items-start mb-3">
+            <div className="">{category.title}</div>
+          </div>
+          <div
+            className={`flex  scroll-smooth gap-4 pb-4 w-screen overflow-x-auto`}>
+            {category.items.map((card, cardIndex) => (
+              <Link
+                to="/card/$id"
+                params={{ id: String(card.id) }}
+                key={cardIndex}
+                className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}
+                style={{ transform: "t" }}>
+                <div className="text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
+                  {card.title}
+                </div>
+                <Image
+                  src={card.imageUrl}
+                  alt={card.title}
+                  className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
+                  loading="eager"
+                  priority={cardIndex < 4}
+                  width={180}
+                  height={180}
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      ))}
 
-      <Link
-        to="/card/create"
-        className="flex w-full items-center justify-center pl-0 ">
+      <Link to="/card/create" className="">
         <CreateTaskButton />
       </Link>
     </div>
