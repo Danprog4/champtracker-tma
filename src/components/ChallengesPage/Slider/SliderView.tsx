@@ -45,7 +45,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
             }
           }}
           onScroll={() => onScroll(categoryIndex)}
-          className={`flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen `}>
+          className={`flex space-x-4    gap-2 pb-4 w-full `}>
           {category.items.map((card, cardIndex) => (
             <Link
               onClick={() => {
@@ -54,8 +54,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
               to="/card/$id"
               params={{ id: String(card.id) }}
               key={cardIndex}
-              className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px] ]`}
-              style={{ transform: "t" }}>
+              className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}>
               <div className="z-50 text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
                 {card.title}
               </div>
