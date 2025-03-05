@@ -9,7 +9,7 @@ export const CreateTaskButton = () => {
 
   return (
     <div
-      className="fixed bottom-0 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] items-center justify-between rounded-lg bg-yellow-400 p-5 text-black"
+      className="fixed bottom-7 left-3 shadow-xl shadow-black z-20 flex h-[45px] w-[94vw] items-center justify-between rounded-lg bg-yellow-400 p-5 text-black"
       onClick={() => {
         updateOnBoarding(true);
       }}>
