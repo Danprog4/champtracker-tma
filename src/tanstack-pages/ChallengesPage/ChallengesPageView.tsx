@@ -35,8 +35,10 @@ const Challenges: React.FC = () => {
           <div
             className={`flex snap-x snap-mandatory space-x-4 overflow-auto overflow-y-hidden scroll-smooth gap-2 pb-4 w-screen `}>
             {category.items.map((card, cardIndex) => (
-              <div
+              <Link
                 key={cardIndex}
+                to="/card/$id"
+                params={{ id: String(card.id) }}
                 className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}
                 style={{ transform: "t" }}>
                 <div className=" text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
@@ -47,7 +49,7 @@ const Challenges: React.FC = () => {
                   alt={card.title}
                   className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
                 />
-              </div>
+              </Link>
             ))}
           </div>
         </div>
