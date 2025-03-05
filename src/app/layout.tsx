@@ -3,6 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import localFont from "next/font/local";
 import { categories } from "../configs/cards.config";
+import { scroll } from "../scroll";
 
 const druk = localFont({
   src: "../../public/fonts/Druk/Druk Wide Cyr.ttf",
@@ -45,10 +46,9 @@ export default function RootLayout({
           src="https://telegram.org/js/telegram-web-app.js"
           strategy="afterInteractive"
         />
-        {/* <div className="scroll min-h-screen" id="main">
+        <div className="w-full" id="main-content">
           {children}
-        </div> */}{" "}
-        {children}
+        </div>
       </body>
     </html>
   );
