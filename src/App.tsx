@@ -45,7 +45,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen max-h-screen overflow-auto antialiased bg-black  text-white">
+    <div className=" bg-black  text-white">
       <Outlet />
       <Toaster position="top-center" theme="dark" />
 
