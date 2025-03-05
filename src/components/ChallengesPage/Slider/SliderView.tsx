@@ -29,7 +29,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
   onScroll,
   sliderRefs,
 }) => (
-  <div className="flex flex-col ">
+  <div className="flex flex-col">
     {categories.map((category, categoryIndex) => (
       <div key={categoryIndex} className="mb-8 pl-3">
         <div className="flex justify-between pr-3 items-start mb-3">
@@ -54,7 +54,7 @@ const DumpSlider: React.FC<DumpSliderProps> = ({
               to="/card/$id"
               params={{ id: String(card.id) }}
               key={cardIndex}
-              className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}
+              className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px] ]`}
               style={{ transform: "t" }}>
               <div className="z-50 text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
                 {card.title}
