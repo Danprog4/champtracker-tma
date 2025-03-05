@@ -102,10 +102,8 @@ body {
 
 body {
   position: relative;
-  height: 100vh;
-  width: 100vw;
+
   overscroll-behavior: none !important;
   margin: 0;
   padding: 0;
-  overflow-y: auto;
 }
