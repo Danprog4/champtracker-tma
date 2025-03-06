@@ -101,9 +101,13 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
-  touch-action: none !important;
+  touch-action: pan-y;
   -webkit-touch-callout: none;
-  padding-bottom: 100px;
+  padding-bottom: 0;
+  min-height: 100%;
+  background-color: black;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* For any container that needs controlled scrolling */
@@ -131,3 +135,12 @@ body {
   padding: 0;
   overflow-y: auto;
 } */
+
+/* Add viewport height fix for mobile */
+@supports (-webkit-touch-callout: none) {
+  .height-fix {
+    height: 100vh; /* Fallback for browsers that do not support custom properties */
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available; /* For iOS Safari */
+  }
+}

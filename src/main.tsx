@@ -7,6 +7,10 @@ import { router } from "./router";
 import { AuthProvider } from "./hooks/useAuthState";
 import { UnifiedLoadingState } from "./router";
 import axios from "axios";
+import { fixViewportHeight } from "./scroll";
+
+// Initialize viewport height fix for mobile
+fixViewportHeight();
 
 // Create a query client with default options for Suspense
 const queryClient = new QueryClient({
