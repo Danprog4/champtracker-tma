@@ -41,7 +41,7 @@ export function Layout({ isRetrying }: LayoutProps) {
       className="bg-black text-white overflow-hidden min-h-screen height-fix flex flex-col w-full"
       style={{ minHeight: "100vh", backgroundColor: "black" }}>
       <Outlet />
-      <Toaster position="top-center" className="mt-12" theme="dark" />
+      <Toaster position="top-center" className="mt-20" theme="dark" />
 
       {/* Show retry overlay when refreshing authentication */}
       {isRetrying && <AuthRetryOverlay />}
