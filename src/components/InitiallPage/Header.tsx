@@ -14,15 +14,11 @@ const Header = () => {
   const { user } = useUser();
 
   return (
-    <div className="fixed z-10 flex w-full justify-between items-center bg-black  p-3 h-[fit] pt-24">
+    <div className="fixed z-10 flex w-full justify-between items-center bg-black  p-3 h-[fit] pt-24 pb-3">
       <Link to="/about">
         <BarsIcon />
       </Link>
-      <Link to="/test-slider">
-        <Button>
-          <PlusIcon />
-        </Button>
-      </Link>
+
       <div className="flex items-center gap-2">
         {isPremium(user) ? (
           <PremiumFeatures>

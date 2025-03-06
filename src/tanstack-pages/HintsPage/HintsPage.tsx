@@ -19,7 +19,7 @@ const HintsAndTipsPage: React.FC = () => {
   const { user } = useUser();
   return (
     <div className="flex h-screen flex-col bg-yellow-400">
-      <div className="fixed z-1 flex w-[100vw] text-black justify-between bg-yellow-400 items-center h-[fit] pt-9  pl-3 ">
+      <div className="fixed z-1 flex w-[100vw] text-black justify-between bg-yellow-400 items-center h-[fit] pt-24  pl-3 ">
         <Link to="/about" className="">
           <BackIcon />
         </Link>

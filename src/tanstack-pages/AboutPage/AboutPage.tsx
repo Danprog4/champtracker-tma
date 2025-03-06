@@ -13,30 +13,19 @@ const AboutPage: React.FC = () => {
   const { user } = useUser();
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="fixed flex w-full justify-start bg-black h-[fit] pt-9   pl-3 items-center">
+    <div className="flex flex-col overflow-x-hidden h-full ">
+      <header className="fixed flex w-full justify-start bg-black h-[fit] pt-24 pb-3  pl-3 items-center">
         <Link to="/">
           <CrossIcon />
         </Link>
       </header>
       <Link
         to="/hints"
-        className="mt-20 flex h-[33vh] w-[100vw] items-center justify-center rounded-full bg-yellow-400">
+        className=" flex w-full h-[200px] mt-40  items-center justify-center rounded-full bg-yellow-400 p-16">
         <span className="text-center font-druk text-xl  text-black leading-6">
           ПОДСКАЗКИ <br></br> И СОВЕТЫ
         </span>
       </Link>{" "}
-      <div className="p-4 rounded-3xl bg-green-400">
-        <h2 className="font-druk text-xl mb-2 text-center text-black leading-6">
-          О ПРИЛОЖЕНИИ
-        </h2>
-        <p className="text-sm text-center text-black">
-          ChampTracker помогает улучшить вашу дисциплину, следить за вашими
-          привычками, помогать формировать новые, и все это в одном приложении.
-          Анализируйте свои результаты, получайте токены за выполненные дни и
-          становитесь лучше с каждым днем!
-        </p>
-      </div>
       {!isPremium(user) ? (
         <BuyPremium>
           <div className="fixed flex font-druk text-sm flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full   bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  py-2 px-4  text-black hover:opacity-90">
@@ -83,11 +72,22 @@ const AboutPage: React.FC = () => {
           <span className=" text-black mb-1 text-sm">@danikpavlovski</span>
         </a>
       </div>
+      <div className="p-4 rounded-3xl bg-green-400 mb-3">
+        <h2 className="font-druk text-xl mb-2 text-center text-black leading-6">
+          О ПРИЛОЖЕНИИ
+        </h2>
+        <p className="text-sm text-center text-black">
+          ChampTracker помогает улучшить вашу дисциплину, следить за вашими
+          привычками, помогать формировать новые, и все это в одном приложении.
+          Анализируйте свои результаты, получайте токены за выполненные дни и
+          становитесь лучше с каждым днем!
+        </p>
+      </div>
       {/* <div
           onClick={() =>
             toast("К сожалению, сейчас доступен только русский язык")
           }
-          className="mb-10 flex h-[fit] pt-9  w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl  text-black"
+          className="mb-10 flex h-[fit] pt-24  w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl  text-black"
         >
           <span>ЯЗЫК</span>
         </div> */}

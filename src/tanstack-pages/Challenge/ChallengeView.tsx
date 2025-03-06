@@ -15,21 +15,30 @@ const ChallengeView: React.FC = () => {
 
   return (
     <div className="flex min-h-screen flex-col pb-12 overflow-y-auto h-auto">
-      <div className="relative rounded-b-3xl w-full flex items-center">
-        <img
-          src={card?.imageUrl}
-          alt={card?.title}
-          className={`${category?.color} h-[65vh] w-full object-cover rounded-b-3xl`}
+      {/* <div
+        className={`fixed z-10 flex w-full justify-end items-center  p-3 h-[fit] pt-24 pb-3 bg-${category?.color} text-black`}></div> */}
+      <div className="relative rounded-b-3xl w-full flex items-end ">
+        <div
+          className={`${category?.color} h-[68vh] w-full object-cover rounded-b-3xl`}
         />
-        <Link to="/new" className="fixed right-0 top-0 p-3 z-10 text-black">
-          <CrossIcon />
-        </Link>
-        <div className="absolute inset-0 flex flex-col p-3 pt-12  text-start">
+        <div className="absolute top-24 right-3 text-black">
+          <Link to="/new">
+            <CrossIcon />
+          </Link>
+        </div>
+        {/* 
+        <div className="absolute inset-0 flex flex-col p-3 pt-12  text-start ">
           <span className="text-sm text-black">Задание</span>
           <span className="text-lg  font-druk text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
             {card?.title}
           </span>
-        </div>
+
+        </div> */}
+        <img
+          src={card?.imageUrl}
+          alt={card?.title}
+          className="absolute w-full h-[300px] "
+        />
         <div className="absolute bottom-3 flex pl-3">
           {card?.duration?.map((dur) => (
             <div className="flex w-[18.77vw] flex-col aspect-square items-center justify-center rounded-full bg-black bg-cover">
