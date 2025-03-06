@@ -108,6 +108,7 @@ body {
   body {
     height: 100vh;
     overflow: hidden;
+    overflow-y: auto;
   }
 }
 
