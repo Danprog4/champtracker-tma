@@ -88,6 +88,16 @@ body {
   --tg-viewport-height: 100vh;
 }
 
+html,
+body {
+  overflow-y: auto;
+  width: 100%;
+  height: var(--tg-viewport-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 /* * {
 }
 html,

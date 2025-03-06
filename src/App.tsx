@@ -16,7 +16,7 @@ function App() {
   // Handle authentication error
   if (authError) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-black text-white">
+      <div className="flex items-center justify-center h-screen bg-black text-white">
         <div className="text-center">
           <p className="text-red-500">{authError}</p>
           <button
