@@ -14,7 +14,7 @@ const ChallengeView: React.FC = () => {
     .find((item) => item.id === Number(id));
 
   return (
-    <div className="mb-20  flex w-full flex-col pb-24 " id="main">
+    <div className="flex min-h-screen flex-col pb-12 overflow-y-auto h-auto">
       <div className="relative rounded-b-3xl w-full flex items-center">
         <img
           src={card?.imageUrl}
