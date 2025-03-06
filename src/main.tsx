@@ -36,6 +36,8 @@ declare global {
       WebApp: {
         enableClosingConfirmation: () => void;
         expand: () => void;
+        ready: () => void;
+
         // Add other Telegram WebApp properties you might use here
       };
     };
@@ -44,6 +46,9 @@ declare global {
 
 // Enable closing confirmation
 window.Telegram.WebApp.enableClosingConfirmation();
+
+// Inform Telegram that the WebApp is ready to be displayed
+window.Telegram.WebApp.ready();
 
 // Expand to full screen
 window.Telegram.WebApp.expand();
