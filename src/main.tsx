@@ -36,22 +36,38 @@ declare global {
       WebApp: {
         enableClosingConfirmation: () => void;
         expand: () => void;
-        ready: () => void;
+        disableVerticalSwipes: () => void;
+        requestFullscreen: () => void;
+        lockOrientation: () => void;
+        platform: string;
+        version: string;
 
         // Add other Telegram WebApp properties you might use here
       };
     };
   }
 }
+window.Telegram.WebApp.expand();
+const telegramVersion = Number(window.Telegram.WebApp.version);
+
+if (telegramVersion >= 7.7) {
+  window.Telegram.WebApp.disableVerticalSwipes();
+}
+
+const isMobile =
+  window.Telegram.WebApp.platform === "ios" ||
+  window.Telegram.WebApp.platform === "android" ||
+  window.Telegram.WebApp.platform === "android_x";
+
+if (telegramVersion >= 8 && isMobile) {
+  window.Telegram.WebApp.requestFullscreen();
+  window.Telegram.WebApp.lockOrientation();
+}
 
 // Enable closing confirmation
 window.Telegram.WebApp.enableClosingConfirmation();
 
 // Inform Telegram that the WebApp is ready to be displayed
-window.Telegram.WebApp.ready();
-
-// Expand to full screen
-window.Telegram.WebApp.expand();
 
 // All components can now access auth state
 export const App = () => {

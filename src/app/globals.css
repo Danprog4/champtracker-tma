@@ -94,24 +94,16 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  /* Prevent overscroll bounce effect */
   overscroll-behavior: none;
 }
 
 body {
-  /* Prevent horizontal scrolling */
   overflow-x: hidden;
-  /* Allow vertical scrolling for restoration */
-  overflow-y: auto;
+  overflow-y: scroll;
   position: relative;
 }
 
 /* For any container that needs controlled scrolling */
-.scroll-container {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
 
 /* * {
 }
