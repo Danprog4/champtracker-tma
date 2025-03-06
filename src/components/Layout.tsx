@@ -20,9 +20,9 @@ interface LayoutProps {
 
 export function Layout({ isRetrying }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className=" bg-black text-white overflow-hidden ">
       <Outlet />
-      <Toaster position="top-center" theme="dark" />
+      <Toaster position="top-center" className="mt-12" theme="dark" />
 
       {/* Show retry overlay when refreshing authentication */}
       {isRetrying && <AuthRetryOverlay />}

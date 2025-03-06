@@ -102,14 +102,8 @@ body {
   overflow-y: auto;
   position: relative;
   touch-action: none !important;
-}
-
-@supports (-webkit-touch-callout: none) {
-  body {
-    height: 100vh;
-    overflow: hidden;
-    overflow-y: auto;
-  }
+  -webkit-touch-callout: none;
+  padding-bottom: 100px;
 }
 
 /* For any container that needs controlled scrolling */

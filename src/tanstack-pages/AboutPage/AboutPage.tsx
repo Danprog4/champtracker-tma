@@ -14,7 +14,7 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="fixed flex w-full justify-start bg-black h-[8vh]  pl-3 items-center">
+      <header className="fixed flex w-full justify-start bg-black h-[fit] pt-9   pl-3 items-center">
         <Link to="/">
           <CrossIcon />
         </Link>
@@ -87,7 +87,7 @@ const AboutPage: React.FC = () => {
           onClick={() =>
             toast("К сожалению, сейчас доступен только русский язык")
           }
-          className="mb-10 flex h-[8vh] w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl  text-black"
+          className="mb-10 flex h-[fit] pt-9  w-[100vw] items-center justify-center rounded-full bg-green-600 text-xl  text-black"
         >
           <span>ЯЗЫК</span>
         </div> */}
