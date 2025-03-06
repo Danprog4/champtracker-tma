@@ -1,5 +1,6 @@
 import { Toaster } from "sonner";
 import { Outlet } from "@tanstack/react-router";
+import React from "react";
 
 // Auth retry loading overlay component
 const AuthRetryOverlay = () => (
@@ -19,6 +20,22 @@ interface LayoutProps {
 }
 
 export function Layout({ isRetrying }: LayoutProps) {
+  // Add useEffect to control body overflow when overlay is shown
+  React.useEffect(() => {
+    if (isRetrying) {
+      // Prevent scrolling on the body when overlay is active
+      document.body.classList.add("overflow-hidden");
+    } else {
+      // Re-enable scrolling when overlay is removed
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    // Cleanup function to ensure scrolling is re-enabled if component unmounts
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isRetrying]);
+
   return (
     <div className=" bg-black text-white overflow-hidden ">
       <Outlet />
