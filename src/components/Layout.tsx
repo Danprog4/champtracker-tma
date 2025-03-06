@@ -37,7 +37,9 @@ export function Layout({ isRetrying }: LayoutProps) {
   }, [isRetrying]);
 
   return (
-    <div className="bg-black text-white overflow-hidden min-h-screen height-fix flex flex-col">
+    <div
+      className="bg-black text-white overflow-hidden min-h-screen height-fix flex flex-col w-full"
+      style={{ minHeight: "100vh", backgroundColor: "black" }}>
       <Outlet />
       <Toaster position="top-center" className="mt-12" theme="dark" />
 
