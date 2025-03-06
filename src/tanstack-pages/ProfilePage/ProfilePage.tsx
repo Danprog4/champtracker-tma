@@ -15,7 +15,7 @@ export const ProfilePage = () => {
   const { user } = useUser();
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col  overflow-x-hidden ">
       <div className="flex items-center justify-center ">
         <div className="fixed z-10  flex w-[100vw] justify-between items-center bg-black h-[fit] pt-24  p-3 top-0">
           <Link to="/">
@@ -23,7 +23,7 @@ export const ProfilePage = () => {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col items-start justify-center p-3 gap-2  mt-[7vh]">
+      <div className="flex flex-col items-start justify-center p-3 gap-2  mt-36">
         <div className="text-start text-2xl font-druk  flex items-end gap-2">
           <div className="flex gap-1">
             <div>{user.name}</div>
