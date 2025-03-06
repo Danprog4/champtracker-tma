@@ -90,12 +90,27 @@ body {
 
 html,
 body {
-  overflow-y: auto;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  height: var(--tg-viewport-height);
-  position: fixed;
-  top: 0;
-  left: 0;
+  height: 100%;
+  /* Prevent overscroll bounce effect */
+  overscroll-behavior: none;
+}
+
+body {
+  /* Prevent horizontal scrolling */
+  overflow-x: hidden;
+  /* Allow vertical scrolling for restoration */
+  overflow-y: auto;
+  position: relative;
+}
+
+/* For any container that needs controlled scrolling */
+.scroll-container {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* * {
