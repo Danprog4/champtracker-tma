@@ -53,10 +53,10 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
   deleteChallengeMutation,
 }) => {
   return (
-    <div className="flex h-full flex-col mb-28">
+    <div className="flex h-full flex-col mb-28 overflow-x-hidden">
       <div className="flex flex-col w-full relative">
         <div
-          className={`fixed top-0 h-[fit] pt-24  items-center pl-3 flex w-full ${color}`}>
+          className={`fixed top-0 h-[fit] pt-24  pl-3 flex w-full pb-3 items-end ${color}`}>
           <Link
             to={`/challenge/$taskId`}
             params={{

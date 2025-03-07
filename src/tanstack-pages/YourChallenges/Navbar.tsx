@@ -18,7 +18,7 @@ export const Navbar = () => {
           </span>
         </button>
         <span className="text-white text-xs font-bold  group-hover:text-orange-400 transition-colors duration-200">
-          Статис
+          Статс
         </span>
       </div>
       <Link

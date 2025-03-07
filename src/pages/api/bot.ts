@@ -1,9 +1,11 @@
 import { Bot, InlineKeyboard, webhookCallback } from "grammy";
 import { updatePremium } from "@/db/repo";
 import dayjs from "dayjs";
-import { de } from "date-fns/locale";
+import { db } from "@/db";
+import { usersTable } from "@/db/schema";
 
 export const runtime = "nodejs";
+
 const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
 const inlineKeyboard = new InlineKeyboard().webApp(
   "Прокачай дисциплину!",

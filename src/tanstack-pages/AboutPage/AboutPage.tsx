@@ -14,7 +14,7 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="flex flex-col overflow-x-hidden h-full ">
-      <header className="fixed flex w-full justify-start bg-black h-[fit] pt-24 pb-3  pl-3 items-center">
+      <header className="fixed flex w-full justify-start bg-black  pt-24 pb-3 h-[fit] pl-3 items-end">
         <Link to="/">
           <CrossIcon />
         </Link>

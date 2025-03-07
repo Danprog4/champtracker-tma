@@ -55,6 +55,10 @@ export const ProfilePage = () => {
             className={`flex justify-between items-center border-neutral-600 border p-2 ${
               index === Array.from({ length: 5 }).length - 1 &&
               "mt-3 border-yellow-300"
+            } ${
+              index !== 0 && index !== Array.from({ length: 5 }).length - 1
+                ? "border-t-0"
+                : ""
             }`}>
             <div className="flex items-center">
               <div className="pr-3">{`${index === Array.from({ length: 5 }).length - 1 ? "100." : `${index + 1}.`}`}</div>
