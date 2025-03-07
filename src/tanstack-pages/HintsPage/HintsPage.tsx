@@ -18,13 +18,13 @@ import PremiumFeatures from "@/components/ui/PremiumFeatures";
 const HintsAndTipsPage: React.FC = () => {
   const { user } = useUser();
   return (
-    <div className="flex h-screen flex-col bg-yellow-400">
+    <div className="flex h-full flex-col bg-yellow-400 overflow-y-auto pb-20">
       <div className="fixed z-1 flex w-[100vw] text-black justify-between bg-yellow-400 items-center h-[fit] pt-24  pl-3 ">
         <Link to="/about" className="">
           <BackIcon />
         </Link>
       </div>
-      <div className="mb-8 mt-20 pl-3">
+      <div className="mb-8 mt-40 pl-3">
         <span className="text-2xl leading-6  text-black font-druk">
           ПОДСКАЗКИ <br /> И СОВЕТЫ
         </span>

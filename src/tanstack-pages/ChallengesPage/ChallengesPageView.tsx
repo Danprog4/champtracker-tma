@@ -11,6 +11,7 @@ import { useUser } from "@/hooks/useUser";
 import { BuyPremium } from "@/components/BuyPremium";
 import { categories } from "@/configs/cards.config";
 import Image from "next/image";
+
 const Challenges: React.FC = () => {
   const { challenges } = useChallenges();
   const { isOnBoarding } = useOnBoarding();
@@ -35,7 +36,7 @@ const Challenges: React.FC = () => {
         </button>
       </div>
 
-      <div className="mt-40 flex flex-col px-3">
+      <div className="mt-[154px] flex flex-col px-3">
         <h1 className="mb-2 text-2xl   font-druk ">НОВОЕ ЗАДАНИЕ</h1>
         <p className="mb-12 text-start text-sm text-neutral-400">
           Выберите одно из 10 готовых заданий <br /> или создайте свое
@@ -62,7 +63,7 @@ const Challenges: React.FC = () => {
                 <Image
                   src={card.imageUrl}
                   alt={card.title}
-                  className="absolute bottom-0 right-0 w-[180px] h-[180px] object-cover rounded-lg"
+                  className={`absolute bottom-0 right-0 w-[180px] h-[180px] bg-cover object-cover rounded-lg ${category.color}`}
                   loading="eager"
                   priority={cardIndex < 4}
                   width={180}
