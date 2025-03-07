@@ -33,7 +33,7 @@ export const formatDate = (dateInput: Date | string): string => {
   const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
 
   const day = date.getUTCDate();
-  const month = date.getUTCMonth() + 1;
+  const month = date.getUTCMonth();
   const year = date.getUTCFullYear();
 
   return `${year}-${month.toString().padStart(2, "0")}-${day

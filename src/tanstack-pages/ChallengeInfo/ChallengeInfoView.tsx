@@ -10,7 +10,7 @@ import { CrossIcon } from "@/icons/Cross";
 import { Check } from "@/icons/Check";
 type ChallengeInfoDisplayProps = {
   challenge: Challenge;
-  today: string;
+  today: dayjs.Dayjs;
   calculateDaysSinceStart: number;
   weeks: any[];
   displayDuration: number;
@@ -84,7 +84,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                 challenge.userCheckedDates &&
                 challenge.userCheckedDates.includes(day);
               const isToday =
-                formatDate(new Date(day)) === today && !hasChecked;
+                dayjs(day).startOf("day") === today && !hasChecked;
               const hasFailed = !isToday && !hasChecked && dayBeforeToday(day);
 
               return isToday ? (
@@ -145,7 +145,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                         challenge.userCheckedDates &&
                         challenge.userCheckedDates.includes(day);
                       const isToday =
-                        formatDate(new Date(day)) === today && !hasChecked;
+                        dayjs(day).startOf("day") === today && !hasChecked;
                       const hasFailed =
                         !isToday && !hasChecked && dayBeforeToday(day);
 

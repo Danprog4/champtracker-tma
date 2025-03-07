@@ -9,6 +9,7 @@ import {
 import { getRouteApi } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { ChallengeInfoDisplay } from "./ChallengeInfoView";
+import dayjs from "dayjs";
 
 const routeApi = getRouteApi("/challenge/$taskId");
 
@@ -24,7 +25,7 @@ const ChallengeInfoContainer: React.FC = () => {
   }
 
   const nowDate = new Date();
-  const today = formatDate(nowDate);
+  const today = dayjs(nowDate).startOf("day");
 
   const displayDuration =
     challenge.regularity === "everyday"
