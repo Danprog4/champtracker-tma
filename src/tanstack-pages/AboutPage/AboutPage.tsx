@@ -13,7 +13,7 @@ const AboutPage: React.FC = () => {
   const { user } = useUser();
 
   return (
-    <div className="flex flex-col overflow-x-hidden h-full ">
+    <div className="flex h-full flex-col pb-20 overflow-x-hidden">
       <header className="fixed flex w-full justify-start bg-black  pt-24 pb-3 h-[fit] pl-3 items-end">
         <Link to="/">
           <CrossIcon />
