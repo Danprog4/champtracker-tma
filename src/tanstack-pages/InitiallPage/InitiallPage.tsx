@@ -9,9 +9,14 @@ const InitiallPage = () => {
   console.log(isOnboarding === false, "trueornot");
   return (
     <div className="flex h-screen flex-col">
-      {isOnboarding === false && <CarouselDApiDemo />}
-      <Header />
-      <EmptyState />
+      {isOnboarding === false ? (
+        <CarouselDApiDemo />
+      ) : (
+        <>
+          <Header />
+          <EmptyState />
+        </>
+      )}
     </div>
   );
 };
