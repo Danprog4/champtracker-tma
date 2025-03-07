@@ -13,7 +13,32 @@ import dayjs from "dayjs";
 
 export const ProfilePage = () => {
   const { user } = useUser();
-
+  const fakeUsers = [
+    {
+      name: "SmitkaJS22",
+      tokens: 3420,
+    },
+    {
+      name: "BlueRaven22",
+      tokens: 1890,
+    },
+    {
+      name: "EchoStar99",
+      tokens: 1450,
+    },
+    {
+      name: "AlisaAJ_99",
+      tokens: 1230,
+    },
+    {
+      name: "SilentPeak05",
+      tokens: 930,
+    },
+    {
+      name: "ChDmitry05",
+      tokens: 710,
+    },
+  ];
   return (
     <div className="flex flex-col  overflow-x-hidden ">
       <div className="flex items-center justify-center ">
@@ -49,24 +74,21 @@ export const ProfilePage = () => {
       </div>
       <div className="flex flex-col p-3 pt-3 ml-3 mr-3 border border-neutral-600 bg-neutral-800 rounded-lg">
         <div className="text-white text-sm font-druk pb-3">Таблица лидеров</div>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {fakeUsers.map((fakeUser, index) => (
           <div
             key={index}
             className={`flex justify-between items-center border-neutral-600 border p-2 ${
-              index === Array.from({ length: 5 }).length - 1 &&
-              "mt-3 border-yellow-300"
+              index === fakeUsers.length - 1 && "mt-3 border-yellow-300"
             } ${
-              index !== 0 && index !== Array.from({ length: 5 }).length - 1
-                ? "border-t-0"
-                : ""
+              index !== 0 && index !== fakeUsers.length - 1 ? "border-t-0" : ""
             }`}>
             <div className="flex items-center">
-              <div className="pr-3">{`${index === Array.from({ length: 5 }).length - 1 ? "100." : `${index + 1}.`}`}</div>
+              <div className="pr-3">{`${index === fakeUsers.length - 1 ? "100." : `${index + 1}.`}`}</div>
               <div className="flex items-center">
-                {index === Array.from({ length: 5 }).length - 1 ? (
+                {index === fakeUsers.length - 1 ? (
                   isPremium(user) ? (
                     <div className="flex items-center gap-1">
-                      {user.username}
+                      {user.name}
                       <div className="pb-[4px]">
                         <TelegramStar />
                       </div>
@@ -75,19 +97,19 @@ export const ProfilePage = () => {
                     user.name
                   )
                 ) : (
-                  `User ${index + 1}`
+                  fakeUser.name
                 )}
               </div>
             </div>
 
             <div className="flex items-center gap-2">
-              {index === Array.from({ length: 5 }).length - 1 ? (
+              {index === fakeUsers.length - 1 ? (
                 <div className="flex items-center gap-1">
                   {user.tokens} <TokenIcon />
                 </div>
               ) : (
                 <div className="flex items-center gap-1">
-                  <span>100</span> <TokenIcon />
+                  <span>{fakeUser.tokens}</span> <TokenIcon />
                 </div>
               )}
             </div>
