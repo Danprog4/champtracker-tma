@@ -33,10 +33,6 @@ function App() {
     );
   }
 
-  if (isOnboarding === false) {
-    return <CarouselDApiDemo />;
-  }
-
   return <Layout isRetrying={isRetrying} />;
 }
 
