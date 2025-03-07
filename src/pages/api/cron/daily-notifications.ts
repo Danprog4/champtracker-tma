@@ -13,10 +13,9 @@ export default async function handler(
 ) {
   const expectedToken = process.env.CRON_SECRET;
 
-  if (expectedToken !== `Bearer ${expectedToken}`) {
+  if (authHeader !== `Bearer ${expectedToken}`) {
     return res.status(401).json({ error: "Unauthorized" });
   }
-
   try {
     // Initialize the bot
     const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
