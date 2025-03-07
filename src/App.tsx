@@ -3,10 +3,14 @@ import { useAuthState } from "./hooks/useAuthState";
 import { useAuthRetryLoading } from "./hooks/useAuthRetryLoading";
 import { useScrollRestoration } from "./hooks/useScrollRestoration";
 import { Layout } from "./components/Layout";
+import { useUser } from "./hooks/useUser";
+import { CarouselDApiDemo } from "./tanstack-pages/CarouselPage/CarouselPage";
 
 function App() {
   usePrefetchQueries();
   useScrollRestoration();
+  const { user } = useUser();
+  const isOnboarding = user.onBoarding;
 
   // Access the auth state
   const { isLoading, authError } = useAuthState();
@@ -27,6 +31,10 @@ function App() {
         </div>
       </div>
     );
+  }
+
+  if (isOnboarding === false) {
+    return <CarouselDApiDemo />;
   }
 
   return <Layout isRetrying={isRetrying} />;

@@ -22,9 +22,6 @@ const Challenges: React.FC = () => {
       <div className="fixed z-50 flex w-[100vw] justify-between bg-black h-[fit] pt-24  pb-3 items-center pl-3 top-0">
         <button
           onClick={() => {
-            if (!isOnBoarding) {
-              navigate({ to: "/welcome" });
-            }
             if (isOnBoarding && challenges.length === 0) {
               navigate({ to: "/initiall" });
             }
