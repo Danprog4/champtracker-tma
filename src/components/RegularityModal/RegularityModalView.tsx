@@ -94,7 +94,7 @@ export default function RegularityModalView({
               )}
               {tempDaysOfWeek.length > 0 && tempDaysOfWeek.length <= 6 && (
                 <div className="mt-3 w-[90vw] text-wrap text-start text-sm font-light">
-                  Задание будет повторяться в следующие <br /> дни:
+                  Задание будет повторяться в следующие <br /> дни:{" "}
                   {tempOutputDays.join(", ").toLocaleLowerCase("ru")}
                 </div>
               )}

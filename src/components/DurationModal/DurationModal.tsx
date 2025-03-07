@@ -22,6 +22,10 @@ const DurationModal: React.FC<DurPropsSmart> = ({
   const [isLong, setIsLong] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    setTempDuration(duration);
+  }, [duration, regularity]);
+
   const card = React.useMemo(
     () =>
       categories

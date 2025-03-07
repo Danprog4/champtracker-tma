@@ -68,7 +68,7 @@ const DurationModalView: React.FC<DurProps> = ({
                     key={index}
                     value={String(dur)}
                     className={cn(
-                      " max-h-[40px] w-[90vw] border-b  border-neutral-600 bg-neutral-800 p-[10px] rounded-none",
+                      "max-h-[40px] w-[90vw] border-b  border-neutral-600 bg-neutral-800 p-[10px] rounded-none",
                       index === 0 && "rounded-t"
                     )}>
                     {isEveryday ? `${dur} дней` : `${dur / 7} недель`}
