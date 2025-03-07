@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
 import { Challenge } from "@/types";
-import { dayBeforeToday, formatDate } from "@/lib/dateUtils";
+import {
+  dayBeforeToday,
+  formatDate,
+  formatDateWithTimezone,
+} from "@/lib/dateUtils";
 import dayjs from "dayjs";
 import { BackIcon } from "@/icons/Back";
 import { SettingsIcon } from "@/icons/Settings";
@@ -27,6 +31,12 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
   displayRegularity,
   checkDay,
 }) => {
+  console.log(
+    "today",
+    dayjs(challenge.taskDates[0]).startOf("day").isSame(today)
+  );
+  console.log(dayjs(challenge.taskDates[0]).startOf("day"), "taskdate");
+  console.log(today, "today");
   return (
     <div className="flex flex-col h-full w-full bg-black overflow-y-auto challenge-container">
       <div
