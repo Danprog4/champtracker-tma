@@ -16,7 +16,7 @@ export const useOnBoarding = () => {
   const mutation = useMutation({
     mutationFn: (newStatus: boolean) => updateOnBoarding(newStatus),
     onSuccess: (data) => {
-      queryClient.setQueryData([getUserOnBoarding.name], data);
+      queryClient.invalidateQueries({ queryKey: [getUserOnBoarding.name] });
     },
   });
 

@@ -14,9 +14,10 @@ import Image from "next/image";
 
 const Challenges: React.FC = () => {
   const { challenges } = useChallenges();
-  const { isOnBoarding } = useOnBoarding();
-  const navigate = useNavigate();
   const { user } = useUser();
+  const isOnBoarding = user.onBoarding;
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col items-start  overflow-x-hidden ">
       <div className="fixed z-50 flex w-[100vw] justify-between bg-black h-[fit] pt-24  pb-3 items-center pl-3 top-0">
