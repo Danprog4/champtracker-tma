@@ -22,6 +22,7 @@ import { FullPageSpinner } from "./components/shared/FullPageSpinner";
 import { ProfilePage } from "./tanstack-pages/ProfilePage/ProfilePage";
 import { useAuthState } from "./hooks/useAuthState";
 import Slider from "./components/ChallengesPage/Slider/Slider";
+import { useUser } from "./hooks/useUser";
 // Create a unified loading state component
 export const UnifiedLoadingState = () => {
   return (
@@ -58,8 +59,9 @@ const indexRoute = createRoute({
   pendingComponent: UnifiedLoadingState, // Use the same loading component
   component: () => {
     const { challenges } = useChallenges();
-    const { isOnBoarding } = useOnBoarding();
-    if (!isOnBoarding) {
+    const { user } = useUser();
+    const isOnBoarding = user.onBoarding;
+    if (isOnBoarding === false) {
       return <Navigate to="/welcome" />;
     }
     if (challenges.length === 0) {
