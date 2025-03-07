@@ -11,14 +11,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // Verify the request is authorized (you can add a secret token check here)
-  const authHeader = req.headers.authorization;
-  const expectedToken = process.env.CRON_SECRET;
-
-  if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
   try {
     // Initialize the bot
     const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
