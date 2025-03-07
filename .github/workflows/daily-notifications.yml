@@ -2,7 +2,7 @@ name: Daily Notifications
 
 on:
   schedule:
-    - cron: "0 15 * * *" # Runs at 14:00 UTC daily
+    - cron: "5 15 * * *" # Runs at 15:05 UTC daily
   workflow_dispatch: # Allows manual triggering
 
 jobs:
