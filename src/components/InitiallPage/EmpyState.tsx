@@ -2,10 +2,10 @@ import { Link } from "@tanstack/react-router";
 
 const EmptyState = () => {
   return (
-    <div className="mt-10 flex h-screen flex-col items-center justify-center">
+    <div className=" flex h-full flex-col items-center justify-center pb-20 overflow-x-hidden">
       <Link to="/new">
-        <div className="absolute left-1/2 top-1/2 flex aspect-square w-[100vw] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-yellow-400">
-          <div className="relative text-center">
+        <div className="relative mt-40 mb-3 flex aspect-square w-[100vw] items-center justify-center rounded-full bg-yellow-400">
+          <div className=" text-center">
             <div className=" text-2xl font-druk text-black">
               СОЗДАТЬ НОВОЕ <br />
               ЗАДАНИЕ
@@ -13,7 +13,7 @@ const EmptyState = () => {
           </div>
         </div>
       </Link>
-      <div className="absolute bottom-4 text-nowrap p-2 text-center text-sm text-neutral-400">
+      <div className=" text-nowrap p-2 text-center text-sm text-neutral-400">
         <div>
           У тебя пока нету никаких заданий. Выбери новое <br />
           из списка доступных или создай свое
