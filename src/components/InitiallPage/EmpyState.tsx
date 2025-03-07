@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 const EmptyState = () => {
   return (
-    <div className=" flex h-full flex-col items-center justify-center pb-20 overflow-x-hidden">
+    <div className=" flex h-full flex-col items-center justify-between pb-20 overflow-x-hidden">
       <Link to="/new">
         <div className="relative mt-40 mb-3 flex aspect-square w-[100vw] items-center justify-center rounded-full bg-yellow-400">
           <div className=" text-center">
