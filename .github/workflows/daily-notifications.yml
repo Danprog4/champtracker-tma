@@ -1,0 +1,15 @@
+name: Daily Notifications
+
+on:
+  schedule:
+    - cron: "0 15 * * *" # Runs at 14:00 UTC daily
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  trigger-notifications:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger notifications endpoint
+        run: |
+          curl -X GET https://champtracker-backend.vercel.app/api/cron/daily-notifications \
+          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
