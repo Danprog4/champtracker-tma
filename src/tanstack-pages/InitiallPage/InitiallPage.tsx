@@ -6,7 +6,6 @@ import { useUser } from "@/hooks/useUser";
 const InitiallPage = () => {
   const { user } = useUser();
   const isOnboarding = user.onBoarding;
-  console.log(isOnboarding === false, "trueornot");
   return (
     <div className="flex h-screen flex-col">
       {isOnboarding === false ? (
