@@ -94,7 +94,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                 challenge.userCheckedDates &&
                 challenge.userCheckedDates.includes(day);
               const isToday =
-                dayjs(day).startOf("day") === today && !hasChecked;
+                dayjs(day).startOf("day").isSame(today) && !hasChecked;
               const hasFailed = !isToday && !hasChecked && dayBeforeToday(day);
 
               return isToday ? (
@@ -155,7 +155,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
                         challenge.userCheckedDates &&
                         challenge.userCheckedDates.includes(day);
                       const isToday =
-                        dayjs(day).startOf("day") === today && !hasChecked;
+                        dayjs(day).startOf("day").isSame(today) && !hasChecked;
                       const hasFailed =
                         !isToday && !hasChecked && dayBeforeToday(day);
 
