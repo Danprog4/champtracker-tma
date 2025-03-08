@@ -19,7 +19,7 @@ const ChallengeView: React.FC = () => {
         className={`fixed z-10 flex w-full justify-end items-center  p-3 h-[fit] pt-24 pb-3 bg-${category?.color} text-black`}></div> */}
       <div className="relative rounded-b-3xl w-full flex items-end ">
         <div
-          className={`${category?.color} h-[75vh] w-full object-cover rounded-b-3xl`}
+          className={`${category?.color} h-[65vh] w-full object-cover rounded-b-3xl`}
         />
         <div className="absolute top-24 right-3 text-black z-[1000]">
           <Link to="/new">
@@ -34,7 +34,7 @@ const ChallengeView: React.FC = () => {
         <img
           src={card?.imageUrl}
           alt={card?.title}
-          className="absolute w-full h-[70vh] object-contain"
+          className="absolute w-full h-[60vh] object-contain"
         />
         <div className="absolute bottom-3 flex pl-3">
           {card?.duration?.map((dur) => (
