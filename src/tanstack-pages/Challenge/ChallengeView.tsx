@@ -34,7 +34,7 @@ const ChallengeView: React.FC = () => {
         <img
           src={card?.imageUrl}
           alt={card?.title}
-          className="absolute w-[100vw] h-[60vh] object-cover "
+          className="absolute w-full max-h-[60vh] object-contain"
         />
         <div className="absolute bottom-3 flex pl-3">
           {card?.duration?.map((dur) => (
