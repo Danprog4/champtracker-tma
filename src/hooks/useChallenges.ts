@@ -63,6 +63,12 @@ export const useChallenges = () => {
       );
       queryClient.setQueryData([getUserOnBoarding.name], true);
     },
+    onError: (error, { body }) => {
+      // Revert the optimistic update if the server request fails
+      toast.error("Не удалось обновить задание. Пожалуйста, попробуйте снова.");
+      // Refresh the data from server to ensure UI is in sync
+      queryClient.invalidateQueries({ queryKey: [getChallenges.name] });
+    },
   });
 
   const {
@@ -135,18 +141,23 @@ export const useChallenges = () => {
       }
     }
 
-    // Добавляем дату в список
-
-    // Локальное состояние для хранения обновленных дней
+    // Создаем обновленное задание
     const updatedTask = {
-      ...task, // копируем все свойства задачи
-      userCheckedDates: updatedCheckedDays, // обновляем только userCheckedDates
+      ...task,
+      userCheckedDates: updatedCheckedDays,
     };
+
+    // Оптимистично обновляем кэш запроса перед отправкой на сервер
+    queryClient.setQueryData([getChallenges.name], (old: Challenge[] = []) => {
+      return old.map((ch) =>
+        ch.id === updatedTask.id ? (updatedTask as Challenge) : ch
+      );
+    });
 
     // Вызов мутации для обновления на сервере
     updateChallengeMutation({
       id: task.id,
-      body: updatedTask, // Отправляем обновленную задачу
+      body: updatedTask,
     });
   };
 
