@@ -3,6 +3,7 @@ import { createUser, getUser } from "./db/repo/user";
 import { User } from "./db/schema";
 import { HonoRequest } from "hono";
 import jwt from "jsonwebtoken";
+import { MOCK_USER_ID, getMockUser } from "./utils/mockData";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const JWT_SECRET = process.env.JWT_SECRET || "champtracker-jwt-secret";
@@ -76,7 +77,84 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
   }
 
   try {
-    // check if user is not a scammer and came from our telegram bot, good!
+    // Check if this is our development test user with ID 123456789
+    if (
+      process.env.NODE_ENV === "development" &&
+      initData.includes(`id%22%3A${MOCK_USER_ID}`)
+    ) {
+      console.log("Development test user detected - bypassing validation");
+
+      // Mock user for development
+      const testUser = getMockUser();
+
+      // Check if we have this user in the database
+      let user = await getUser(testUser.id);
+
+      // Create the test user if it doesn't exist
+      if (!user) {
+        try {
+          user = await createUser(testUser);
+        } catch (createError) {
+          console.error("Error creating test user:", createError);
+          user = await getUser(testUser.id);
+          if (!user) {
+            throw new Error("Failed to create or retrieve test user");
+          }
+        }
+      }
+
+      return user;
+    }
+
+    // Special handling for development environment with mock data
+    if (
+      process.env.NODE_ENV === "development" &&
+      initData.includes("MOCK_INIT_DATA")
+    ) {
+      console.log(
+        "Development mode detected with mock data, bypassing Telegram validation"
+      );
+
+      // Try to parse the mock data directly
+      try {
+        const parsedQueryString = new URLSearchParams(initData);
+        const userParamString = parsedQueryString.get("user");
+
+        if (userParamString) {
+          // Parse the user JSON from the URLSearchParams
+          const telegramUser = JSON.parse(decodeURIComponent(userParamString));
+
+          console.log("Mock telegramUser:", telegramUser);
+
+          // Check if we have a user in the database
+          let user = await getUser(telegramUser.id);
+
+          // Create user if not exists
+          if (!user) {
+            try {
+              user = await createUser(telegramUser);
+            } catch (createError) {
+              console.error("Error creating mock user:", createError);
+              user = await getUser(telegramUser.id);
+              if (!user) {
+                throw new Error("Failed to create or retrieve mock user");
+              }
+            }
+          }
+
+          return user;
+        } else {
+          throw new Error("No user parameter in mock init data");
+        }
+      } catch (parseError) {
+        console.error("Error parsing mock data:", parseError);
+        throw new Error(
+          `Failed to parse mock data: ${parseError instanceof Error ? parseError.message : "Unknown error"}`
+        );
+      }
+    }
+
+    // Regular validation for production or non-mock data
     validate(initData, BOT_TOKEN, {
       expiresIn: 0,
     });

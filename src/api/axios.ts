@@ -6,6 +6,7 @@ import axios, {
 } from "axios";
 import { getToken, login, removeToken } from "./auth";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
+import { getMockInitData } from "../utils/mockData";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -69,13 +70,30 @@ api.interceptors.request.use(
     }
     // If no token, add initData as fallback
     else if (config.headers && !config.headers["x-init-data"]) {
+      let initDataRaw;
+
       try {
-        const { initDataRaw } = retrieveLaunchParams();
-        if (initDataRaw) {
-          config.headers["x-init-data"] = initDataRaw;
-        }
+        const params = retrieveLaunchParams();
+        initDataRaw = params.initDataRaw;
       } catch (error) {
-        console.error("Error retrieving launch params:", error);
+        console.warn("Error retrieving launch params:", error);
+
+        // In development, use mock data from environment
+        if (process.env.NODE_ENV === "development") {
+          initDataRaw = getMockInitData();
+        }
+      }
+
+      // In development mode, provide a fallback mock data if nothing is available
+      if (!initDataRaw && process.env.NODE_ENV === "development") {
+        console.info(
+          "No init data found in interceptor, using default mock data"
+        );
+        initDataRaw = getMockInitData();
+      }
+
+      if (initDataRaw) {
+        config.headers["x-init-data"] = initDataRaw;
       }
     }
 
