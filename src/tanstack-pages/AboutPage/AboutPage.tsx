@@ -21,7 +21,7 @@ const AboutPage: React.FC = () => {
       </header>
       <Link
         to="/hints"
-        className=" flex w-full h-[200px] mt-40  items-center justify-center rounded-full bg-yellow-400 p-16">
+        className=" flex w-full h-[200px] mt-40  items-center justify-center rounded-full bg-yellow-400 p-32">
         <span className="text-center font-druk text-xl  text-black leading-6">
           ПОДСКАЗКИ <br></br> И СОВЕТЫ
         </span>
