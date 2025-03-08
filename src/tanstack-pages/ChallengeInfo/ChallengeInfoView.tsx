@@ -204,13 +204,12 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
           </div>
         )}
         {calculateDaysSinceStart < 0 &&
-          dayjs(challenge.challengeStartAt).startOf("day").toISOString() !==
-            dayjs().startOf("day").toISOString() && (
+          !dayjs(challenge.challengeStartAt).startOf("day").isSame(today) && (
             <div className="mb-5">
               <div className="mb-1 border border-black"></div>
               <div className="flex justify-between text-black">
                 <div className="text-xs font-light">НАЧАЛО ЗАДАНИЯ</div>
-                <div className="text-3xl ">
+                <div className="text-2xl font-druk">
                   {dayjs(challenge.challengeStartAt).format("DD.MM.YYYY")}
                 </div>
               </div>
@@ -218,8 +217,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
           )}
 
         {(calculateDaysSinceStart > 0 ||
-          dayjs(challenge.challengeStartAt).startOf("day").toISOString() ===
-            dayjs().startOf("day").toISOString()) && (
+          dayjs(challenge.challengeStartAt).startOf("day").isSame(today)) && (
           <div>
             <div className="mb-5">
               <div className="border border-black"></div>
