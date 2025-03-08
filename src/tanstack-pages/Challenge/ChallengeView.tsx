@@ -19,25 +19,22 @@ const ChallengeView: React.FC = () => {
         className={`fixed z-10 flex w-full justify-end items-center  p-3 h-[fit] pt-24 pb-3 bg-${category?.color} text-black`}></div> */}
       <div className="relative rounded-b-3xl w-full flex items-end ">
         <div
-          className={`${category?.color} h-[68vh] w-full object-cover rounded-b-3xl`}
+          className={`${category?.color} h-[75vh] w-full object-cover rounded-b-3xl`}
         />
-        <div className="absolute top-24 right-3 text-black">
+        <div className="absolute top-24 right-3 text-black z-[1000]">
           <Link to="/new">
             <CrossIcon />
           </Link>
         </div>
-        {/* 
-        <div className="absolute inset-0 flex flex-col p-3 pt-12  text-start ">
-          <span className="text-sm text-black">Задание</span>
-          <span className="text-lg  font-druk text-black [text-shadow:_2px_2px_0_rgb(255_255_255),_-2px_-2px_0_rgb(255_255_255),_2px_-2px_0_rgb(255_255_255),_-2px_2px_0_rgb(255_255_255)]">
-            {card?.title}
-          </span>
 
-        </div> */}
+        <div className="absolute inset-0 flex flex-col p-3 pt-24  text-start ">
+          <span className="text-sm font-medium text-white">Задание</span>
+          <span className="text-lg  font-druk text-black ">{card?.title}</span>
+        </div>
         <img
           src={card?.imageUrl}
           alt={card?.title}
-          className="absolute w-full h-[300px] "
+          className="absolute w-[100vw] h-[60vh] "
         />
         <div className="absolute bottom-3 flex pl-3">
           {card?.duration?.map((dur) => (

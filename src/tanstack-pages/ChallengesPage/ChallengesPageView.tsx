@@ -19,7 +19,7 @@ const Challenges: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-start  overflow-x-hidden ">
+    <div className="flex flex-col items-start  overflow-x-hidden pb-20 ">
       <div className="fixed z-50 flex w-[100vw] justify-between bg-black h-[fit] pt-24  pb-3 items-center pl-3 top-0">
         <button
           onClick={() => {
@@ -47,7 +47,7 @@ const Challenges: React.FC = () => {
             <div className="">{category.title}</div>
           </div>
           <div
-            className={`flex  scroll-smooth gap-4 pb-4 w-screen overflow-x-auto`}>
+            className={`flex scroll-smooth gap-4 pb-4 w-screen overflow-x-auto`}>
             {category.items.map((card, cardIndex) => (
               <Link
                 to="/card/$id"
@@ -55,17 +55,17 @@ const Challenges: React.FC = () => {
                 key={cardIndex}
                 className={`relative flex-shrink-0 bg-cover ${category.color} h-[250px] w-[250px]`}
                 style={{ transform: "t" }}>
-                <div className="text-outline font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
+                <div className="text-outline z-10 font-druk absolute inset-x-0 top-0 p-3 text-start text-lg leading-7 text-black">
                   {card.title}
                 </div>
                 <Image
                   src={card.imageUrl}
                   alt={card.title}
-                  className={`absolute bottom-0 right-0 w-[180px] h-[180px] bg-cover object-cover rounded-lg ${category.color}`}
+                  className={`absolute bottom-0 right-0 w-[200px] h-[200px] bg-cover object-cover rounded-lg ${category.color} ${card.id === 3 && "h-[170px]"}`}
                   loading="eager"
                   priority={cardIndex < 4}
-                  width={180}
-                  height={180}
+                  width={200}
+                  height={200}
                 />
               </Link>
             ))}
