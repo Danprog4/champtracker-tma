@@ -19,7 +19,6 @@ const YourChallengesPage = () => {
   return (
     <div className="flex min-h-screen flex-col pb-12 overflow-y-auto h-auto">
       <Header />
-      <Modal />
       <ChallengeList challenges={challenges} />
       {!isPremium(user) ? (
         <BuyPremium>
