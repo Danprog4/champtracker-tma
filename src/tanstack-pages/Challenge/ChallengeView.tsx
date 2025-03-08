@@ -29,12 +29,14 @@ const ChallengeView: React.FC = () => {
 
         <div className="absolute inset-0 flex flex-col p-3 pt-24  text-start ">
           <span className="text-sm font-medium text-white">Задание</span>
-          <span className="text-lg  font-druk text-black ">{card?.title}</span>
+          <span className="text-lg  font-druk text-black z-[1000]">
+            {card?.title}
+          </span>
         </div>
         <img
           src={card?.imageUrl}
           alt={card?.title}
-          className="absolute w-full h-[55vh] object-contain"
+          className="absolute w-full h-[50vh] object-contain"
         />
         <div className="absolute bottom-3 flex pl-3">
           {card?.duration?.map((dur) => (
