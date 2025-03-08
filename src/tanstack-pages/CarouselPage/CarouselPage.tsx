@@ -14,23 +14,23 @@ const slides = [
   {
     title: "Достигай целей вместе с нами",
     description:
-      "Создавай задания, отслеживай прогресс и развивайся каждый день. Мы поможем тебе стать лучшей версией себя.",
+      "Создавай свои или готовые задания под твои цели, отслеживай прогресс и развивайся каждый день. Мы поможем тебе стать лучшей версией себя.",
     bgColor: "bg-red-400",
-    image: "/images/main.png",
+    image: "/images/IMG_0401.jpg",
   },
   {
     title: "Формируй полезные привычки",
     description:
-      "Перестать откладывать все на потом. Регулярно выполняй задания, получай награды и превращай желаемые действия в устойчивые привычки.",
+      "Регулярно выполняй задания и отслеживай свой прогресс, получай награды и превращай желаемые действия в устойчивые привычки.",
     bgColor: "bg-purple-400",
-    image: "/images/info.png",
+    image: "/images/IMG_0402.jpg",
   },
   {
-    title: "Соревнуйся и побеждай",
+    title: "Зарабатывай токены и получай награды",
     description:
-      "Участвуй в рейтинге игроков, получай премиум токены за достижения и обменивай их на ценные призы. Будь лучшим!",
+      "Участвуй в рейтинге игроков, получай токены за пройденые дни и покупай за них премиум-функции. Стань лучшим!",
     bgColor: "bg-blue-400",
-    image: "/images/raiting.png",
+    image: "/images/IMG_0403.jpg",
   },
 ];
 
@@ -64,12 +64,10 @@ export function CarouselDApiDemo() {
             <CarouselItem key={index}>
               <div
                 className={`flex w-screen items-center flex-col justify-end bottom-28 p-0 h-screen  relative text-white`}>
-                <Image
+                <img
                   src={slide.image}
                   alt={slide.title}
-                  width={300}
-                  height={300}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] max-w-[300px]"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] object-contain"
                 />
                 <span className="text-2xl font-semibold pb-2  text-center font-druk">
                   {slide.title}
@@ -88,7 +86,7 @@ export function CarouselDApiDemo() {
               onClick={() => {
                 updateOnBoarding(true);
               }}>
-              <CarouselNext className="bg-yellow-400 w-[250px] h-[30px]" />
+              <CarouselNext className="bg-yellow-400 w-[250px] h-[30px]  " />
             </Link>
           )}
         </div>
