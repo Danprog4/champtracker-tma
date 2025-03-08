@@ -7,8 +7,12 @@ import UpdatePageView from "./UpdatePageView";
 
 const UpdatePage: React.FC = () => {
   const taskId = Number(useParams({ strict: false }).taskId);
-  const { getOneChallege, updateChallengeMutation, deleteChallengeMutation } =
-    useChallenges();
+  const {
+    getOneChallege,
+    updateChallengeMutation,
+    deleteChallengeMutation,
+    fastUpdateChallenge,
+  } = useChallenges();
   const task = getOneChallege(taskId);
 
   if (!task) {
@@ -63,7 +67,7 @@ const UpdatePage: React.FC = () => {
         regularity !== task.regularity ? [] : task.userCheckedDates,
     };
 
-    updateChallengeMutation({ id: Number(taskId), body: updatedTask });
+    fastUpdateChallenge({ id: Number(taskId), body: updatedTask });
     navigate({ to: "/" });
   };
 

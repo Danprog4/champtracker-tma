@@ -64,6 +64,28 @@ export const useChallenges = () => {
     },
   });
 
+  // Wrapper for updateChallengeMutation that provides immediate UI updates
+  const fastUpdateChallenge = ({
+    id,
+    body,
+  }: {
+    id: number;
+    body: UpdateChallenge;
+  }) => {
+    // IMMEDIATE UI UPDATE: Update the local cache immediately for fast UI response
+    queryClient.setQueryData([getChallenges.name], (old: Challenge[] = []) => {
+      return old.map((ch) =>
+        ch.id === id ? ({ ...ch, ...body } as Challenge) : ch
+      );
+    });
+
+    // Send the update to the server in the background
+    updateChallengeMutation({
+      id,
+      body,
+    });
+  };
+
   const {
     mutate: deleteChallengeMutation,
     isPending: isDeleteChallengePending,
@@ -136,15 +158,8 @@ export const useChallenges = () => {
       userCheckedDates: updatedCheckedDays,
     };
 
-    // IMMEDIATE UI UPDATE: Update the local cache immediately for fast UI response
-    queryClient.setQueryData([getChallenges.name], (old: Challenge[] = []) => {
-      return old.map((ch) =>
-        ch.id === updatedTask.id ? (updatedTask as Challenge) : ch
-      );
-    });
-
-    // Send the update to the server in the background
-    updateChallengeMutation({
+    // Send the update with immediate UI response
+    fastUpdateChallenge({
       id: task.id,
       body: updatedTask,
     });
@@ -166,7 +181,9 @@ export const useChallenges = () => {
     createChallenge,
     isCreateChallengePending,
 
+    // Return both the original and fast update functions
     updateChallengeMutation,
+    fastUpdateChallenge,
     isUpdateChallengePending,
 
     deleteChallengeMutation,
