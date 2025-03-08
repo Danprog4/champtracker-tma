@@ -16,21 +16,21 @@ const slides = [
     description:
       "Создавай свои или готовые задания под твои цели, отслеживай прогресс и развивайся каждый день. Мы поможем тебе стать лучшей версией себя.",
     bgColor: "bg-red-400",
-    image: "/images/IMG_0401.jpg",
+    image: "/images/IMG_0405.PNG",
   },
   {
     title: "Формируй полезные привычки",
     description:
       "Регулярно выполняй задания и отслеживай свой прогресс, получай награды и превращай желаемые действия в устойчивые привычки.",
     bgColor: "bg-purple-400",
-    image: "/images/IMG_0402.jpg",
+    image: "/images/IMG_0405.PNG",
   },
   {
     title: "Зарабатывай токены и получай награды",
     description:
       "Участвуй в рейтинге игроков, получай токены за пройденые дни и покупай за них премиум-функции. Стань лучшим!",
     bgColor: "bg-blue-400",
-    image: "/images/IMG_0403.jpg",
+    image: "/images/IMG_0407.PNG",
   },
 ];
 
@@ -67,7 +67,12 @@ export function CarouselDApiDemo() {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] object-contain"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65%] rounded-3xl h-[65%] object-"
+                />
+                <img
+                  src="images/pngwing.com.png"
+                  alt=""
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100%] h-[70%] object-contain"
                 />
                 <span className="text-2xl pb-2  text-center font-druk">
                   {slide.title}
