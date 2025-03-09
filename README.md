@@ -1,6 +1,6 @@
-# ChampTracker
+# Champtracker
 
-@ChampTracker in Telgram is a modern habit-tracking and challenge management application that helps users build discipline and track their progress through customizable challenges.
+@Champtracker in Telgram is a modern habit-tracking and challenge management application that helps users build discipline and track their progress through customizable challenges.
 
 ## 🚀 Features
 
