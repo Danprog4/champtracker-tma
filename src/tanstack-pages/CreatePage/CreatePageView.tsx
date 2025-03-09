@@ -63,7 +63,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
 
   return (
-    <div className="flex h-full flex-col pb-20 overflow-x-hidden">
+    <div className="flex  flex-col pb-20 overflow-x-hidden">
       <div
         className={`fixed top-0 h-[fit] pt-24   items-center pl-3 flex w-full ${color}`}>
         <Link to={getNavigationPath()} className="absolute text-black ">
