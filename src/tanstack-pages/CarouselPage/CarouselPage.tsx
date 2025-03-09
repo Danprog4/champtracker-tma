@@ -67,17 +67,17 @@ export function CarouselDApiDemo() {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[65%] rounded-3xl h-[65%] object-"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[51%] rounded-3xl h-[70%] object-contain md:w-[450px] md:h-[620px]"
                 />
                 <img
                   src="images/pngwing.com.png"
                   alt=""
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100%] h-[70%] object-contain"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%]  h-[70%] object-contain md:w-[450px] md:h-[800px]"
                 />
-                <span className="text-2xl pb-2  text-center font-druk">
+                <span className="text-2xl md:text-4xl pb-2  text-center font-druk ">
                   {slide.title}
                 </span>
-                <p className="text-sm text-center px-4 pb-3">
+                <p className="text-sm text-center px-4 pb-3 md:text-xl ">
                   {slide.description}
                 </p>
               </div>

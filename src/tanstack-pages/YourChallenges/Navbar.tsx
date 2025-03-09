@@ -21,18 +21,7 @@ export const Navbar = () => {
           Статс
         </span>
       </div>
-      <Link
-        to={"/profile"}
-        className="group flex flex-col items-center cursor-pointer">
-        <div className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
-          <span className="text-white group-hover:text-orange-400 transition-colors duration-200 mt-4">
-            <MyProfile />
-          </span>
-        </div>
-        <span className="text-white text-sm font-bold  group-hover:text-orange-400 transition-colors duration-200">
-          Профиль
-        </span>
-      </Link>
+
       <Link to={"/new"} className="flex flex-col items-center  group">
         <button className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
           <span className="text-white group-hover:text-orange-400 transition-colors duration-200 mt-4">
@@ -43,6 +32,18 @@ export const Navbar = () => {
           Новый
         </span>
         <span className="text-white text-xs  group-hover:text-orange-400 transition-colors duration-200"></span>
+      </Link>
+      <Link
+        to={"/profile"}
+        className="group flex flex-col items-center cursor-pointer">
+        <div className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
+          <span className="text-white group-hover:text-orange-400 transition-colors duration-200 mt-4">
+            <MyProfile />
+          </span>
+        </div>
+        <span className="text-white text-xs font-bold  group-hover:text-orange-400 transition-colors duration-200">
+          Профиль
+        </span>
       </Link>
     </footer>
   );

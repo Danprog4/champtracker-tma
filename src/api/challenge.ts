@@ -3,7 +3,6 @@ import api from "./axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// Todo: add onboarding get
 
 export const createInvoice = async () => {
   const response = await api.get("/createInvoice");
