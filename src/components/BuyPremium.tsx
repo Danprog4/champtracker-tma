@@ -84,7 +84,7 @@ export const BuyPremium: React.FC<BuyPremiumProps> = ({ children }) => {
                       <span>Покупка...</span>
                     ) : (
                       <div className="flex justify-center items-center gap-1">
-                        <span>Купить за 49</span> <TelegramStar />
+                        <span>Купить за 15</span> <TelegramStar />
                       </div>
                     )}
                   </Button>

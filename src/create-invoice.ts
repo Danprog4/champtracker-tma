@@ -11,7 +11,7 @@ export const handleCreateInvoice = async (userId: number) => {
   const description = "Buy Premium";
   const payload = JSON.stringify({ userId });
   const currency = "XTR";
-  const prices = [{ amount: 49, label: title }];
+  const prices = [{ amount: 15, label: title }];
   const provider_token = "";
 
   const invoiceUrl = await bot.api.createInvoiceLink(
