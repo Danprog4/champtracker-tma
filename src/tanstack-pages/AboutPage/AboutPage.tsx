@@ -93,8 +93,8 @@ const AboutPage: React.FC = () => {
         </div> */}
       <footer className="mb-[72px] pr-3 mt-auto flex justify-between pl-3 ">
         <div className="flex flex-col">
-          <div className="text-lg font-druk">ChampTracker</div>
-          <div className="text-xs font-semibold">Версия Beta 1.0.0</div>
+          <div className="text-lg font-druk">Champtracker</div>
+          <div className="text-xs font-semibold">Версия Alfa 1.0.0</div>
         </div>
         <div className="flex flex-col items-end font-thin">
           <Image
