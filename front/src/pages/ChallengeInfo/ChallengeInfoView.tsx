@@ -88,37 +88,47 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
         </div>
       ) : (
         <div>
-          {weeks.map((weekGroup, index) => (
-            <div key={index} className="mb-5">
-              <h2 className="text-xl font-bold text-black">
-                НЕДЕЛЯ {weekGroup.week}
-              </h2>
-              <div className="grid grid-cols-5 gap-0">
-                {weekGroup.days.map((day: string, indexDay: number) => {
-                  const hasChecked =
-                    challenge.userCheckedDates &&
-                    challenge.userCheckedDates.includes(day);
-                  const isToday =
-                    formatDate(new Date(day)) === today && !hasChecked;
-                  const hasFailed =
-                    !isToday && !hasChecked && dayBeforeToday(day);
+          {weeks.map((weekGroup, weekIndex) => {
+            const previousDaysCount = weeks
+              .slice(0, weekIndex)
+              .reduce((acc, week) => acc + week.days.length, 0);
 
-                  return (
-                    <button
-                      onClick={() => checkDay(challenge.id.toString(), index)}
-                      key={day}
-                      className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
-                        isToday && "bg-yellow-500"
-                      } ${hasFailed && "bg-red-500"} ${
-                        hasChecked && "bg-green-500"
-                      }`}>
-                      <span>{indexDay + 1}</span>
-                    </button>
-                  );
-                })}
+            return (
+              <div key={weekIndex} className="mb-5">
+                <h2 className="text-xl font-bold text-black">
+                  НЕДЕЛЯ {weekGroup.week}
+                </h2>
+                <div className="grid grid-cols-5 gap-0">
+                  {weekGroup.days.map((day: string, indexDay: number) => {
+                    const globalDayIndex = previousDaysCount + indexDay;
+
+                    const hasChecked =
+                      challenge.userCheckedDates &&
+                      challenge.userCheckedDates.includes(day);
+                    const isToday =
+                      formatDate(new Date(day)) === today && !hasChecked;
+                    const hasFailed =
+                      !isToday && !hasChecked && dayBeforeToday(day);
+                    console.log(globalDayIndex, "globalDayIndex");
+                    return (
+                      <button
+                        onClick={() =>
+                          checkDay(challenge.id.toString(), globalDayIndex)
+                        }
+                        key={day}
+                        className={`aspect-square rounded-full border border-black text-lg font-bold text-black ${
+                          isToday && "bg-yellow-500"
+                        } ${hasFailed && "bg-red-500"} ${
+                          hasChecked && "bg-green-500"
+                        }`}>
+                        <span>{globalDayIndex + 1}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
       {calculateDaysSinceStart < 0 &&

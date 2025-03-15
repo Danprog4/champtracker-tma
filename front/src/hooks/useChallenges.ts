@@ -91,7 +91,8 @@ export const useChallenges = () => {
       ? task.userCheckedDates?.filter(
           (checkedDate) => checkedDate !== targetDate,
         ) || [] // Убираем дату из списка
-      : [...(task.userCheckedDates || []), targetDate]; // Добавляем дату в список
+      : [...(task.userCheckedDates || []), targetDate]; 
+     // Добавляем дату в список
 
     // Локальное состояние для хранения обновленных дней
     const updatedTask = {

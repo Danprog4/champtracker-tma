@@ -19,18 +19,12 @@ export const calculateDaysSinceStart = (taskDates: string[]): number => {
     return 0;
   }
 
-  const startDate = new Date(taskDates[0]); // Преобразуем в Date
-  const today = new Date();
+  const startDate = dayjs(taskDates[0]).startOf("day"); // Преобразуем в Date
+  const today = dayjs().startOf("day");
 
-  // Обнуляем время у обеих дат, чтобы считать только дни
-  startDate.setUTCHours(0, 0, 0, 0);
-  today.setUTCHours(0, 0, 0, 0);
+  const daysSinceStart = today.diff(startDate, "day");
 
-  // Разница в миллисекундах
-  const timeDifference = today.getTime() - startDate.getTime();
-
-  // Вычисляем количество дней
-  const daysSinceStart = Math.floor(timeDifference / (1000 * 3600 * 24));
+  console.log(daysSinceStart, "daysSinceStart()");
 
   return daysSinceStart + 1;
 };
@@ -54,20 +48,6 @@ export const getDatesForDaysOfWeek = (
   regularity: string
 ): string[] => {
   const taskDays: string[] = [];
-
-  // if (regularity !== 'everyday') {
-  //   for (let i = 0; i < duration; i++) {
-  //     if (selectedDays && selectedDays.includes(currentDate.day())) {
-  //       taskDays.push(formatDateWithTimezone(currentDate.toISOString())); // Без времени
-  //     }
-  //     currentDate = currentDate.add(1, 'day');
-  //   }
-  // } else {
-  //   for (let i = 0; i < duration; i++) {
-  //     taskDays.push(formatDateWithTimezone(currentDate.toISOString())); // Без времени
-  //     currentDate = currentDate.add(1, 'day');
-  //   }
-  // }
 
   if (regularity === "everyday") {
     for (let i = 0; i < duration; i++) {
@@ -129,4 +109,10 @@ export const calculateWeeks = (
   }
 
   return weeks;
+};
+export const getGlobalDayIndex = (
+  date: string,
+  taskDates: string[]
+): number => {
+  return taskDates.indexOf(date);
 };

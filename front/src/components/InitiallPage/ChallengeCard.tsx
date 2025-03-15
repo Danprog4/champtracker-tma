@@ -1,11 +1,13 @@
 import { useChallenges } from "@/hooks/useChallenges";
-import { calculateDaysSinceStart } from "@/lib/dateUtils";
+import { calculateDaysSinceStart, getGlobalDayIndex } from "@/lib/dateUtils";
 import { Months } from "@/configs/Months.config";
 import { Challenge } from "@back-types";
 import { Link } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import CheckImg from "../../assets/images/icons8-галочка.svg";
 import { DateInfo } from "./DateInfo";
+
+// refactor this fucking shit
 
 type ChallengeCardProps = {
   challenge: Challenge;
@@ -24,68 +26,83 @@ const ChallengeCard = ({ challenge, isLast }: ChallengeCardProps) => {
     userCheckedDates,
   } = challenge;
   const { checkDay } = useChallenges();
-
   const startDate = dayjs(challengeStartAt).startOf("day");
   const daysSinceStart = calculateDaysSinceStart(taskDates);
+  const Days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
   const isDayChecked = userCheckedDates?.some((date) =>
     dayjs(date).isSame(dayjs(), "day")
   );
 
-  const handleDayClick = (challengeId: string, dayCount: number) => {
-    checkDay(challengeId, dayCount);
-  };
-
   const formattedStartDate = `${startDate.date()} ${Months[startDate.month()]}`;
-  const firstTaskDate = taskDates?.[0] ? dayjs(taskDates[0]) : null;
+  const isDayAvailable = challenge.taskDates.some((date) =>
+    dayjs(date).startOf("day").isSame(dayjs().startOf("day"))
+  );
+
+  const shouldRenderCircle =
+    isDayAvailable || startDate.isAfter(dayjs().startOf("day"));
+
+  // Находим текущую дату в формате, соответствующем taskDates
+  const todayFormatted = dayjs().startOf("day").format("YYYY-MM-DD");
+  const globalDayIndex = getGlobalDayIndex(
+    todayFormatted,
+    taskDates.map((date) => dayjs(date).format("YYYY-MM-DD"))
+  );
+
+  const weeks = Math.floor(daysSinceStart / 7);
 
   return (
     <Link
       to={`/challenge/$taskId`}
       params={{ taskId: id.toString() }}
-      className={`${color} flex h-[16vh] w-[90vw] items-center justify-between rounded-lg p-3 pr-0 ${isLast ? "mb-10" : ""}`}>
-      <div className="flex flex-col">
-        <span className="text-lg font-extrabold text-black">{title}</span>
-        <div className="mt-5 flex">
-          <span className="text-5xl font-extrabold text-black">
-            {Math.max(0, daysSinceStart)}
-          </span>
-          <div className="ml-1 mt-3 flex-col text-sm font-medium text-black">
-            <div className="mb-[-7px]">{formattedStartDate}</div>
-            <div>
-              /
-              {regularity === "everyday"
-                ? `${duration} дн.`
-                : `${duration / 7} нед.`}
+      className={`${color} flex h-[16vh] w-[90vw] items-center justify-between rounded-lg pr-0 p-3 ${isLast ? "mb-10" : ""}`}>
+      <div className="flex justify-between items-end w-full">
+        <div className="flex flex-col">
+          <span className="text-lg font-extrabold text-black">{title}</span>
+          <div className="mt-5 flex">
+            <span className="text-5xl font-extrabold text-black">
+              {Math.max(0, daysSinceStart) !== 0 && regularity === "everyday"
+                ? Math.max(0, daysSinceStart)
+                : Math.floor(Math.max(0, daysSinceStart) / 7)}
+            </span>
+            <div className="ml-1 mt-3 flex-col text-sm font-medium text-black">
+              <div className="mb-[-7px]">{formattedStartDate}</div>
+              <div>
+                {Math.max(0, daysSinceStart) !== 0 && "/"}
+                {regularity === "everyday"
+                  ? `${duration} дн.`
+                  : `${duration / 7} нед.`}
+              </div>
             </div>
           </div>
         </div>
+        {!isDayAvailable && !startDate.isAfter(dayjs().startOf("day")) && (
+          <div className="text-lg font-bold text-black mt-6 pr-4">
+            {challenge.daysOfWeek &&
+              challenge.daysOfWeek
+                .map((dayIndex: number) => Days[dayIndex])
+                .join("/")}
+          </div>
+        )}
       </div>
-      <div>
+      {shouldRenderCircle && (
         <div
           className="relative flex aspect-square h-[16vh] items-center justify-center gap-2 rounded-full bg-black"
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            handleDayClick(id.toString(), daysSinceStart - 1);
+            checkDay(id.toString(), globalDayIndex);
           }}>
           <div className="text-md font-extrabold text-white">
             {isDayChecked ? (
               <img src={CheckImg} alt="check_image" className="w-[30px]" />
-            ) : daysSinceStart <= 0 ? (
+            ) : startDate.isAfter(dayjs().startOf("day")) ? (
               <DateInfo label="НАЧАЛО" date={formattedStartDate} />
-            ) : regularity !== "everyday" &&
-              !startDate.isSame(dayjs().startOf("day")) &&
-              firstTaskDate ? (
-              <DateInfo
-                label="ПЕРВЫЙ ДЕНЬ"
-                date={`${firstTaskDate.date()} ${Months[firstTaskDate.month()]}`}
-              />
             ) : (
               <span>ГОТОВО</span>
             )}
           </div>
         </div>
-      </div>
+      )}
     </Link>
   );
 };
