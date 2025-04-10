@@ -8,20 +8,25 @@ import { CrossIcon } from "@/icons/Cross";
 import { useUser } from "@/hooks/useUser";
 import { isPremium } from "@/lib/challengeUtills";
 import PremiumFeatures from "@/components/ui/PremiumFeatures";
+import { useIsMobile } from "@/hooks/usePlatform";
 
 const AboutPage: React.FC = () => {
   const { user } = useUser();
+  const isMobile = useIsMobile();
 
   return (
     <div className="flex h-full flex-col pb-20 overflow-x-hidden">
-      <header className="fixed flex w-full justify-start bg-black  pt-24 pb-3 h-[fit] pl-3 items-end">
+      <header
+        data-mobile={isMobile}
+        className="fixed flex w-full justify-start bg-black data-[mobile=true]:pt-24 pb-3 h-[fit] pl-3 items-end">
         <Link to="/">
           <CrossIcon />
         </Link>
       </header>
       <Link
+        data-mobile={isMobile}
         to="/hints"
-        className=" flex w-full h-[200px] mt-40  items-center justify-center rounded-full bg-yellow-400 p-32">
+        className=" flex w-full h-[200px] data-[mobile=true]:mt-40  items-center justify-center rounded-full bg-yellow-400 p-32">
         <span className="text-center font-druk text-xl  text-black leading-6">
           ПОДСКАЗКИ <br></br> И СОВЕТЫ
         </span>

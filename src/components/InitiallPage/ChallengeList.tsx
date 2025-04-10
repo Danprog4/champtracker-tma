@@ -3,6 +3,7 @@ import { ChallengeCard } from "./ChallengeCard/ChallengeCard";
 import dayjs from "dayjs";
 import { expiredChallenges, isPremium } from "@/lib/challengeUtills";
 import { useUser } from "@/hooks/useUser";
+import { useIsMobile } from "@/hooks/usePlatform";
 
 type ChallengeListProps = {
   challenges: Challenge[];
@@ -10,6 +11,7 @@ type ChallengeListProps = {
 
 const ChallengeList = ({ challenges }: ChallengeListProps) => {
   const { user } = useUser();
+  const isMobile = useIsMobile();
 
   const sortedChallenges = challenges.sort((a, b) => {
     return dayjs(a.createdAt).diff(dayjs(b.createdAt));
@@ -33,7 +35,9 @@ const ChallengeList = ({ challenges }: ChallengeListProps) => {
     }));
   console.log(nonExpiredChallenges);
   return (
-    <div className="mt-40 flex flex-col items-center justify-center gap-2 pb-28">
+    <div
+      data-mobile={isMobile}
+      className="data-[mobile=true]:mt-40 mt-16  flex flex-col items-center justify-center gap-2 pb-28">
       {nonExpiredChallenges.map((challenge, index) => (
         <ChallengeCard
           key={challenge.id}

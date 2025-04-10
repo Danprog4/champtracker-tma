@@ -2,6 +2,7 @@ import { BuyPremium } from "@/components/BuyPremium";
 import { TelegramStar } from "@/components/shared/TelegramStar";
 import PremiumFeatures from "@/components/ui/PremiumFeatures";
 import { useChallenges } from "@/hooks/useChallenges";
+import { useIsMobile } from "@/hooks/usePlatform";
 import { usePremium } from "@/hooks/usePremium";
 import { useTokens } from "@/hooks/useTokens";
 import { useUser } from "@/hooks/useUser";
@@ -13,6 +14,7 @@ import dayjs from "dayjs";
 
 export const ProfilePage = () => {
   const { user } = useUser();
+  const isMobile = useIsMobile();
   const fakeUsers = [
     {
       name: "SmitkaJS22",
@@ -42,13 +44,17 @@ export const ProfilePage = () => {
   return (
     <div className="flex flex-col  overflow-x-hidden ">
       <div className="flex items-center justify-center ">
-        <div className="fixed z-10  flex w-[100vw] justify-between items-center bg-black h-[fit] pt-24  p-3 top-0">
+        <div
+          data-moble={isMobile}
+          className="fixed z-10  flex w-[100vw] justify-between items-center bg-black h-[fit] data-[mobile=true]:pt-24  p-3 top-0">
           <Link to="/">
             <BackIcon />
           </Link>
         </div>
       </div>
-      <div className="flex flex-col items-start justify-center p-3 gap-2  mt-36">
+      <div
+        data-moble={isMobile}
+        className="flex flex-col items-start justify-center p-3 gap-2 data-[mobile=true]:mt-36 mt-12">
         <div className="text-start text-2xl font-druk  flex items-end gap-2">
           <div className="flex gap-1">
             <div>{user.name}</div>

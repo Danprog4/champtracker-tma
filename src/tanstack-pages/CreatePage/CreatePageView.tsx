@@ -14,6 +14,7 @@ import ColorsSchema from "@/components/Colors/ColorsSchema";
 import { Colors } from "@/configs/bgColors.config";
 import { useUser } from "@/hooks/useUser";
 import { isPremium } from "@/lib/challengeUtills";
+import { useIsMobile } from "@/hooks/usePlatform";
 interface CreateDumpProps {
   card: any;
   title: string;
@@ -61,17 +62,20 @@ const CreateDump: React.FC<CreateDumpProps> = ({
 }) => {
   const { user } = useUser();
   const getNavigationPath = () => (card ? `/card/${card.id}` : "/new");
+  const isMobile = useIsMobile();
 
   return (
     <div className="flex  flex-col pb-20 overflow-x-hidden">
       <div
-        className={`fixed top-0 h-[fit] pt-24   items-center pl-3 flex w-full ${color}`}>
+        data-mobile={isMobile}
+        className={`fixed top-0 h-[fit] data-[mobile=true]:pt-24 pt-2   items-center pl-3 flex w-full ${color}`}>
         <Link to={getNavigationPath()} className="absolute text-black ">
           <CrossIcon />
         </Link>
         <span className="w-full text-center text-black">Новое задание</span>
       </div>
-      <div className={`${color} min-h-[fit] pb-1 pt-24`}>
+      <div
+        className={`${color} min-h-[fit] pb-1 data-[mobile=true]:pt-24 pt-8`}>
         <Title title={title} setTitle={setTitle} />
       </div>
       <div className="mt-3 flex flex-col pl-3 pt-4 text-start">

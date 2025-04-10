@@ -9,6 +9,7 @@ import ColorsSchema from "@/components/Colors/ColorsSchema";
 import { CrossIcon } from "@/icons/Cross";
 import { DrawerAlert } from "@/components/ui/alert";
 import { Colors } from "@/configs/bgColors.config";
+import { useIsMobile } from "@/hooks/usePlatform";
 type UpdatePageProps = {
   task: any;
   color: string;
@@ -52,11 +53,13 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
   checkIfChanged,
   deleteChallengeMutation,
 }) => {
+  const isMobile = useIsMobile();
   return (
     <div className="flex h-full flex-col overflow-x-hidden pb-20">
       <div className="flex flex-col w-full relative">
         <div
-          className={`fixed top-0 h-[fit] pt-24  pl-3 flex w-full pb-3 items-end ${color}`}>
+          data-mobile={isMobile}
+          className={`fixed top-0 h-[fit] data-[mobile=true]:pt-24 pt-2  pl-3 flex w-full pb-3 items-end ${color}`}>
           <Link
             to={`/challenge/$taskId`}
             params={{
@@ -69,7 +72,9 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
             Редактировать
           </span>
         </div>
-        <div className={`${color} min-h-[fit] pb-1 pt-24`}>
+        <div
+          data-mobile={isMobile}
+          className={`${color} min-h-[fit] pb-1 data-[mobile=true]:pt-24 pt-8`}>
           <Title title={title} setTitle={setTitle} />
         </div>
       </div>

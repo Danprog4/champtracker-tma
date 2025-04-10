@@ -3,8 +3,10 @@ import { Link, useParams } from "@tanstack/react-router";
 import { categories } from "@/configs/cards.config";
 import { CrossIcon } from "@/icons/Cross";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration";
+import { useIsMobile } from "@/hooks/usePlatform";
 const ChallengeView: React.FC = () => {
   const { id } = useParams({ from: "/card/$id" });
+  const isMobile = useIsMobile();
 
   const category = categories.find((category) =>
     category.items.some((item) => item.id === Number(id))
@@ -21,13 +23,15 @@ const ChallengeView: React.FC = () => {
         <div
           className={`${category?.color} h-[65vh] w-full object-cover rounded-b-3xl`}
         />
-        <div className="absolute top-24 right-3 text-black z-[1000]">
+        <div
+          data-mobile={isMobile}
+          className="absolute data-[mobile=true]:top-24 top-2 right-3 text-black z-[1000]">
           <Link to="/new">
             <CrossIcon />
           </Link>
         </div>
 
-        <div className="absolute inset-0 flex flex-col p-3 pt-24  text-start ">
+        <div className="absolute inset-0 flex flex-col p-3 data-[mobile=true]:pt-24  text-start ">
           <span className="text-sm font-medium text-white">Задание</span>
           <span className="text-lg  font-druk text-black z-[1000]">
             {card?.title}

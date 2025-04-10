@@ -10,7 +10,6 @@ function App() {
   usePrefetchQueries();
   useScrollRestoration();
   const { user } = useUser();
-  const isOnboarding = user.onBoarding;
 
   // Access the auth state
   const { isLoading, authError } = useAuthState();

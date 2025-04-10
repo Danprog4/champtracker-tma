@@ -4,18 +4,10 @@ import { CarouselDApiDemo } from "../CarouselPage/CarouselPage";
 import { useUser } from "@/hooks/useUser";
 
 const InitiallPage = () => {
-  const { user } = useUser();
-  const isOnboarding = user.onBoarding;
   return (
     <div className="flex h-screen flex-col">
-      {isOnboarding === false ? (
-        <CarouselDApiDemo />
-      ) : (
-        <>
-          <Header />
-          <EmptyState />
-        </>
-      )}
+      <Header />
+      <EmptyState />
     </div>
   );
 };

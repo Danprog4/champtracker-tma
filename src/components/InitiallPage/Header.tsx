@@ -9,16 +9,16 @@ import { BuyPremium } from "../BuyPremium";
 import { Button } from "../ui/button";
 import { TelegramStar } from "../shared/TelegramStar";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { useIsMobile } from "@/hooks/usePlatform";
 
 const Header = () => {
   const { user } = useUser();
+  const isMobile = useIsMobile();
 
   return (
-    <div className="fixed z-10 flex w-full justify-between items-center bg-black  p-3 h-[fit] pt-[92px] pb-3">
-      <Link to="/about">
-        <BarsIcon />
-      </Link>
-
+    <div
+      data-mobile={isMobile}
+      className="fixed z-10 flex w-full justify-end items-center bg-black p-3 h-[fit] data-[mobile=true]:pt-[92px] pb-3">
       <div className="flex items-center gap-2">
         {isPremium(user) ? (
           <PremiumFeatures>

@@ -41,6 +41,7 @@ export const getUserFromToken = async (token: string): Promise<User | null> => {
 export const validateJwtMiddleware = async (
   req: HonoRequest
 ): Promise<User> => {
+  
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {

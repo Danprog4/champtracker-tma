@@ -12,6 +12,7 @@ import { SettingsIcon } from "@/icons/Settings";
 import { Colors } from "@/configs/bgColors.config";
 import { CrossIcon } from "@/icons/Cross";
 import { Check } from "@/icons/Check";
+import { useIsMobile } from "@/hooks/usePlatform";
 type ChallengeInfoDisplayProps = {
   challenge: Challenge;
   today: dayjs.Dayjs;
@@ -37,10 +38,12 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
   );
   console.log(dayjs(challenge.taskDates[0]).startOf("day"), "taskdate");
   console.log(today, "today");
+  const isMobile = useIsMobile();
   return (
     <div className="flex flex-col h-full w-full bg-black overflow-y-auto challenge-container">
       <div
-        className={`fixed top-0 z-10 flex w-full justify-between ${challenge.color} text-black items-center p-3 h-[fit] pt-24`}>
+        data-mobile={isMobile}
+        className={`fixed     top-0 z-10 flex w-full justify-between ${challenge.color} text-black items-center p-3 h-[fit]  data-[mobile=true]:pt-24`}>
         <Link to={"/"}>
           <BackIcon />
         </Link>
@@ -54,8 +57,8 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
         </Link>
       </div>
       <div
-        className={`${challenge.color} pb-20 p-3 pt-40 w-full overflow-y-auto flex-1`}>
-        <div className="flex justify-between">
+        className={`${challenge.color} pb-20 p-3 data-[mobile=true]:pt-40 w-full overflow-y-auto flex-1 pt-16`}>
+        <div data-mobile={isMobile} className="flex justify-between">
           <div className="max-w-[70vw] text-xl leading-6 text-black font-druk mt-5">
             {challenge.title}
           </div>

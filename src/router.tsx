@@ -59,11 +59,7 @@ const indexRoute = createRoute({
   pendingComponent: UnifiedLoadingState, // Use the same loading component
   component: () => {
     const { challenges } = useChallenges();
-    const { user } = useUser();
-    const isOnBoarding = user.onBoarding;
-    if (isOnBoarding === false) {
-      return <Navigate to="/welcome" />;
-    }
+
     if (challenges.length === 0) {
       return <Navigate to="/initiall" />;
     }
@@ -136,12 +132,6 @@ const updateRoute = createRoute({
   },
 });
 
-const carouselPage = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/welcome",
-  component: CarouselDApiDemo,
-});
-
 const profileRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/profile",
@@ -159,7 +149,6 @@ const routeTree = rootRoute.addChildren([
   hintsRoute,
   challengeRoute,
   updateRoute,
-  carouselPage,
   initiallRoute,
   profileRoute,
   testSliderRoute,
