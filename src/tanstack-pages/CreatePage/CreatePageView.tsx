@@ -75,6 +75,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         <span className="w-full text-center text-black">Новое задание</span>
       </div>
       <div
+        data-mobile={isMobile}
         className={`${color} min-h-[fit] data-[mobile=true]:pt-32 pt-8 pb-1 `}>
         <Title title={title} setTitle={setTitle} />
       </div>
