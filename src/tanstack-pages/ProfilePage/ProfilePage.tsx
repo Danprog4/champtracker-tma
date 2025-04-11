@@ -45,7 +45,7 @@ export const ProfilePage = () => {
     <div className="flex flex-col  overflow-x-hidden ">
       <div className="flex items-center justify-center ">
         <div
-          data-moble={isMobile}
+          data-mobile={isMobile}
           className="fixed z-10  flex w-[100vw] justify-between items-center bg-black h-[fit] data-[mobile=true]:pt-24  p-3 top-0">
           <Link to="/">
             <BackIcon />
@@ -53,8 +53,8 @@ export const ProfilePage = () => {
         </div>
       </div>
       <div
-        data-moble={isMobile}
-        className="flex flex-col items-start justify-center p-3 gap-2 data-[mobile=true]:mt-36 mt-12">
+        data-mobile={isMobile}
+        className="flex flex-col items-start justify-center p-3 gap-2 data-[mobile=true]:mt-40 mt-16">
         <div className="text-start text-2xl font-druk  flex items-end gap-2">
           <div className="flex gap-1">
             <div>{user.name}</div>
