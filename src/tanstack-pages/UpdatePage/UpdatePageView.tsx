@@ -74,7 +74,7 @@ const UpdatePage: React.FC<UpdatePageProps> = ({
         </div>
         <div
           data-mobile={isMobile}
-          className={`${color} min-h-[fit] pb-1  pt-8`}>
+          className={`${color} min-h-[fit] pb-1 data-[mobile=true]:pt-40 pt-8`}>
           <Title title={title} setTitle={setTitle} />
         </div>
       </div>
