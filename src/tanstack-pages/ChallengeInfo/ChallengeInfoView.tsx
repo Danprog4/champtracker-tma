@@ -57,7 +57,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
         </Link>
       </div>
       <div
-        className={`${challenge.color} pb-20 p-3 data-[mobile=true]:pt-[180px] w-full overflow-y-auto flex-1 pt-16`}>
+        className={`${challenge.color} pb-20 p-3  data-[mobile=true]:pt-24 w-full overflow-y-auto flex-1 pt-16`}>
         <div data-mobile={isMobile} className="flex justify-between">
           <div className="max-w-[70vw] text-xl leading-6 text-black font-druk mt-5">
             {challenge.title}
