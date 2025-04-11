@@ -33,7 +33,7 @@ const ChallengeView: React.FC = () => {
 
         <div
           data-mobile={isMobile}
-          className="absolute inset-0 flex flex-col p-3 pt-16 data-[mobile=true]:mt-40  text-start ">
+          className="absolute inset-0 flex flex-col p-3 pt-16 data-[mobile=true]:pt-22  text-start ">
           <span className="text-sm font-medium text-white">Задание</span>
           <span className="text-lg  font-druk text-black z-[1000]">
             {card?.title}
