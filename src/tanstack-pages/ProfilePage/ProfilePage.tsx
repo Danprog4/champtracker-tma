@@ -54,7 +54,7 @@ export const ProfilePage = () => {
       </div>
       <div
         data-moble={isMobile}
-        className="flex flex-col items-start justify-center p-3 gap-2 data-[mobile=true]:mt-36 mt-12">
+        className="flex flex-col items-start justify-center p-3 gap-2  mt-12">
         <div className="text-start text-2xl font-druk  flex items-end gap-2">
           <div className="flex gap-1">
             <div>{user.name}</div>

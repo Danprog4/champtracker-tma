@@ -31,7 +31,7 @@ const ChallengeView: React.FC = () => {
           </Link>
         </div>
 
-        <div className="absolute inset-0 flex flex-col p-3 data-[mobile=true]:pt-24  text-start ">
+        <div className="absolute inset-0 flex flex-col p-3 pt-16  text-start ">
           <span className="text-sm font-medium text-white">Задание</span>
           <span className="text-lg  font-druk text-black z-[1000]">
             {card?.title}
