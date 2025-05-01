@@ -1,8 +1,8 @@
-export type PostCreateInvoiceResponse = {
+import { Bot } from "grammy";
+
+  export type PostCreateInvoiceResponse = {
   invoiceUrl: string;
 };
-
-import { Bot } from "grammy";
 
 export const handleCreateInvoice = async (userId: number) => {
   const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN!);
