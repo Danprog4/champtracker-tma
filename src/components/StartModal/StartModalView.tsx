@@ -33,7 +33,7 @@ export default function StartModalView({
   isDisabledFunc,
 }: StartDrawerProps) {
   const today = dayjs();
-  const monthNumber = tempDate ? tempDate.getMonth() + 1 : 1;
+  const monthNumber = tempDate ? tempDate.getMonth() : 0;
 
   const isValidDate = (date: any): date is Date => {
     return date instanceof Date && !isNaN(date.getTime());

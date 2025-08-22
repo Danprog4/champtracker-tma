@@ -37,6 +37,7 @@ export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
         isPremium: telegramUser.is_premium || false,
         language: telegramUser.language_code || "en",
         photoUrl: telegramUser.photo_url || null,
+        premiumUntil: dayjs().add(1, "year").toISOString(),
       })
       .onConflictDoNothing({ target: usersTable.id })
       .returning();
