@@ -43,7 +43,7 @@ const HintsAndTipsPage: React.FC = () => {
           ))}
         </Accordion>
       </div>
-      {!isPremium(user) ? (
+      {/* {!isPremium(user) ? (
         <BuyPremium>
           <div className="fixed flex font-druk text-sm flex-nowrap left-3 bottom-7 items-center gap-2 rounded-full   bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500  py-2 px-4  text-black hover:opacity-90">
             <div className="flex items-center gap-1 font-druk text-[10px]">
@@ -58,7 +58,7 @@ const HintsAndTipsPage: React.FC = () => {
             Ваш премиум
           </div>
         </PremiumFeatures>
-      )}
+      )} */}
     </div>
   );
 };

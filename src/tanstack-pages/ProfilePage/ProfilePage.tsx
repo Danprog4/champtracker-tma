@@ -168,7 +168,7 @@ export const ProfilePage = () => {
         Получай токены за свои достижения и повышай свой уровень в таблице
         лидеров. Будь лучше всех!
       </div>
-      {!isPremium(user) ? (
+      {/* {!isPremium(user) ? (
         <BuyPremium>
           <button
             className={`fixed font-druk text-sm text-white hover:opacity-90 bottom-7 ml-3 flex h-[45px] w-[94vw] items-center gap-1 justify-center rounded-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 p-5       }`}>
@@ -182,7 +182,7 @@ export const ProfilePage = () => {
             Ваш премиум
           </div>
         </PremiumFeatures>
-      )}
+      )} */}
     </div>
   );
 };

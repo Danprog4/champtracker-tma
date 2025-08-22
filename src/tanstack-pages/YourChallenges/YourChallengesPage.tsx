@@ -20,7 +20,7 @@ const YourChallengesPage = () => {
     <div className="flex min-h-screen flex-col pb-12 overflow-y-auto h-auto">
       <Header />
       <ChallengeList challenges={challenges} />
-      {!isPremium(user) ? (
+      {/* {!isPremium(user) ? (
         <BuyPremium>
           <Button
             variant="ghost"
@@ -35,7 +35,7 @@ const YourChallengesPage = () => {
             У вас есть премиум!
           </div>
         </PremiumFeatures>
-      )}
+      )} */}
       <Navbar />
     </div>
   );

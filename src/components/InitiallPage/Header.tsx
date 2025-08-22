@@ -28,6 +28,11 @@ const Header = () => {
         </div>
       </Link>
 
+      <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 text-black font-druk text-sm">
+        <TokenIcon />
+        <span className="font-medium">{user?.tokens || 0}</span>
+      </div>
+
       <Link to={"/new"} className="flex flex-col items-center group">
         <button className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
           <span className="text-white  transition-colors duration-200">
