@@ -141,11 +141,15 @@ export const ProfilePage = () => {
               key={index}
               className={`p-3 border rounded-lg ${
                 achievement.completed
-                  ? "border-yellow-400 bg-neutral-800"
+                  ? "border-yellow-400 bg-yellow-400 text-black"
                   : "border-neutral-600 bg-neutral-900"
               }`}>
-              <div className="text-sm  mb-1">{achievement.title}</div>
-              <div className="text-xs text-neutral-400">
+              <div
+                className={`text-sm mb-1 ${achievement.completed ? "text-black font-bold" : "text-white"}`}>
+                {achievement.title}
+              </div>
+              <div
+                className={`text-xs ${achievement.completed ? "text-black/70" : "text-neutral-400"}`}>
                 {achievement.description}
               </div>
             </div>
