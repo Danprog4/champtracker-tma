@@ -17,7 +17,10 @@ const Header = () => {
   const isMobile = useIsMobile();
 
   return (
-    <header className="w-full h-16 bg-black flex justify-between items-center px-4">
+    <header
+      className={`w-full h-16 bg-black flex justify-between items-center px-4 ${
+        isMobile ? "pt-[92px" : ""
+      }`}>
       <Link to={"/profile"} className="flex flex-col items-center group">
         <div className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
           <span className="text-white group-hover:text-orange-400 transition-colors duration-200">
