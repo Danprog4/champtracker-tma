@@ -23,7 +23,7 @@ const Challenges: React.FC = () => {
     <div className="flex flex-col items-start  overflow-x-hidden pb-20 ">
       <div
         data-mobile={isMobile}
-        className="fixed z-50 flex w-[100vw] justify-between bg-black h-[fit] data-[mobile=true]:pt-24 pt-2 pb-3 items-center pl-3 top-0">
+        className="fixed z-50 flex w-[100vw] justify-between bg-black h-[fit] data-[mobile=true]:pt-[100px] pt-2 pb-3 items-center pl-4 top-0">
         <button
           onClick={() => {
             if (challenges.length === 0) {

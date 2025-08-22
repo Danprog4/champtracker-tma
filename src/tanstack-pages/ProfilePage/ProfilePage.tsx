@@ -46,7 +46,7 @@ export const ProfilePage = () => {
       <div className="flex items-center justify-center ">
         <div
           data-mobile={isMobile}
-          className="fixed z-10  flex w-[100vw] justify-between items-center bg-black h-[fit] data-[mobile=true]:pt-24  p-3 top-0">
+          className="fixed z-10  flex w-[100vw] justify-between items-center bg-black h-[fit] data-[mobile=true]:pt-[100px]  p-4 top-0">
           <Link to="/">
             <BackIcon />
           </Link>
@@ -54,27 +54,15 @@ export const ProfilePage = () => {
       </div>
       <div
         data-mobile={isMobile}
-        className="flex flex-col items-start justify-center p-3 gap-2 data-[mobile=true]:mt-40 mt-16">
+        className="flex flex-col items-start justify-center p-4 pt-0 gap-2 data-[mobile=true]:mt-40 mt-16">
         <div className="text-start text-2xl font-druk  flex items-end gap-2">
           <div className="flex gap-1">
             <div>{user.name}</div>
-            {isPremium(user) && (
-              <div className="pt-[5px]">
-                <TelegramStar />
-              </div>
-            )}
           </div>
         </div>
         <div>
           <div className="text-white text-sm ">
             Выполненных заданий: {user.completedChallengesCount}
-          </div>
-          <div className="text-white text-sm ">
-            {isPremium(user) ? (
-              <>Премиум до {dayjs(user.premiumUntil).format("DD.MM.YYYY")}</>
-            ) : (
-              <>Премиум: нет</>
-            )}
           </div>
         </div>
       </div>

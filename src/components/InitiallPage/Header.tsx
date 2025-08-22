@@ -28,9 +28,9 @@ const Header = () => {
         </div>
       </Link>
 
-      <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 text-black font-druk text-md">
+      <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 text-black font-bold text-md">
         <TokenIcon />
-        <span className="font-medium">{user?.tokens || 0}</span>
+        <span>{user?.tokens || 0}</span>
       </div>
 
       <Link to={"/new"} className="flex flex-col items-center group">
