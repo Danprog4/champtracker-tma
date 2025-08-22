@@ -118,13 +118,13 @@ export const ProfilePage = () => {
           {[
             {
               title: "Первые шаги",
-              description: "Выполнить первое задание",
-              completed: user.completedChallengesCount > 0,
+              description: "Отметить свой первый день",
+              completed: user.totalActiveDays > 0,
             },
             {
               title: "Активист",
-              description: "Выполнить 10 заданий",
-              completed: user.completedChallengesCount >= 10,
+              description: "Отметить 7 дней подряд",
+              completed: user.totalActiveDays >= 7,
             },
             {
               title: "Коллекционер",

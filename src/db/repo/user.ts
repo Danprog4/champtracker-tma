@@ -110,3 +110,10 @@ export const updateCompletedChallengesCount = async (
     .set({ completedChallengesCount: count })
     .where(eq(usersTable.id, id));
 };
+
+export const updateTotalActiveDays = async (id: number, totalActiveDays: number) => {
+  await db
+    .update(usersTable)
+    .set({ totalActiveDays })
+    .where(eq(usersTable.id, id));
+};

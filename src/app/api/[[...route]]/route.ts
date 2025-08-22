@@ -21,6 +21,7 @@ import {
   updateOnBoarding,
   updatePremium,
   updateTokens,
+  updateTotalActiveDays,
 } from "../../../db/repo";
 import { UpdateChallenge } from "../../../db/schema";
 import { CreateChallengeReq } from "../../../types";
@@ -144,6 +145,16 @@ app.put("/updateTokens", async (c) => {
   await updateTokens(user.id, body.tokens);
 
   return c.json({ tokens: user.tokens });
+});
+
+app.put("/updateTotalActiveDays", async (c) => {
+  const user = await getValidatedUser(c.req);
+
+  const body = await c.req.json<{ totalActiveDays: number }>();
+
+  await updateTotalActiveDays(user.id, body.totalActiveDays);
+
+  return c.json({ totalActiveDays: body.totalActiveDays });
 });
 
 app.get("/getPremium", async (c) => {

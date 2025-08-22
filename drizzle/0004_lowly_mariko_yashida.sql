@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "total_active_days" integer DEFAULT 0 NOT NULL;

@@ -50,6 +50,11 @@ export const updateTokens = async (tokens: number) => {
   return response.data;
 };
 
+export const updateTotalActiveDays = async (totalActiveDays: number) => {
+  const response = await api.put("/updateTotalActiveDays", { totalActiveDays });
+  return response.data;
+};
+
 export const getChallenges = async () => {
   console.log("API_URL", API_URL);
   const response = await api.get("/getChallenges");

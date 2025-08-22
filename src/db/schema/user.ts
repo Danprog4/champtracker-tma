@@ -35,6 +35,9 @@ export const usersTable = pgTable("users", {
   completedChallengesCount: integer("completed_challenges_count")
     .notNull()
     .default(0),
+  totalActiveDays: integer("total_active_days")
+    .notNull()
+    .default(0),
 });
 
 export type User = InferSelectModel<typeof usersTable>;

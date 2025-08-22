@@ -17,6 +17,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useLastActiveDate } from "./useLastActiveDate";
 import { useUser } from "./useUser";
 import { useTokens } from "./useTokens";
+import { useTotalActiveDays } from "./useTotalActiveDays";
 import { toast } from "sonner";
 import dayjs from "dayjs";
 import { isPremium } from "@/lib/challengeUtills";
@@ -27,6 +28,7 @@ export const useChallenges = () => {
   const { updateLastActiveDate } = useLastActiveDate();
   const { user } = useUser();
   const { updateTokens } = useTokens();
+  const { updateTotalActiveDays } = useTotalActiveDays();
 
   const { data: challenges } = useSuspenseQuery<Challenge[]>({
     queryKey: [getChallenges.name],
@@ -131,6 +133,7 @@ export const useChallenges = () => {
             updateLastActiveDate();
             const tokenAmount = isPremium(user) ? 10 : 5;
             updateTokens(user.tokens + tokenAmount);
+            updateTotalActiveDays(user.totalActiveDays + 1);
             toast.success(`Вы успешно получили ${tokenAmount} токенов`);
             return [...(task.userCheckedDates || []), targetDate];
           })()
