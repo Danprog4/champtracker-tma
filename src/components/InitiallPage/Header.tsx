@@ -18,8 +18,8 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full h-16 bg-black flex justify-between items-center px-4 ${
-        isMobile ? "pt-[92px" : ""
+      className={`w-full h-16 bg-black flex justify-between items-center  ${
+        isMobile ? "pt-[92px px-4" : "px-4"
       }`}>
       <Link to={"/profile"} className="flex flex-col items-center group">
         <div className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
