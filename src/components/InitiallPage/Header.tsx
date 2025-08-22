@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header
       data-mobile={isMobile}
-      className={`w-full h-16 fixed top-0  bg-black flex justify-between items-center data-[mobile=true]:pt-28 px-2`}>
+      className={`w-full h-16 fixed top-0  bg-black flex justify-between items-center data-[mobile=true]:pt-28 px-2 `}>
       <Link to={"/profile"} className="flex flex-col items-center group">
         <div className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
           <span className="text-white  transition-colors duration-200">
@@ -28,7 +28,7 @@ const Header = () => {
         </div>
       </Link>
 
-      <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 text-black font-druk text-sm">
+      <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-300 via-orange-400 to-orange-500 py-2 px-4 text-black font-druk text-md">
         <TokenIcon />
         <span className="font-medium">{user?.tokens || 0}</span>
       </div>
