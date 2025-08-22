@@ -95,7 +95,7 @@ const DurationModalView: React.FC<DurProps> = ({
                   />
                   {isLong && (
                     <div className="pl-2 text-sm text-red-600">
-                      {isEveryday ? "Максимум 300 дней" : "Максимум 40 недель"}
+                      {isEveryday ? "Максимум 365 дней" : "Максимум 40 недель"}
                     </div>
                   )}
                 </div>

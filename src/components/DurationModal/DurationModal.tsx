@@ -61,7 +61,7 @@ const DurationModal: React.FC<DurPropsSmart> = ({
 
     const durationInDays =
       regularity === "everyday" ? weeksOrDays : weeksOrDays * 7;
-    const maxDuration = regularity === "everyday" ? 300 : 280;
+    const maxDuration = regularity === "everyday" ? 365 : 280;
     const isExceedingLimit = durationInDays > maxDuration;
     setIsLong(isExceedingLimit);
 
