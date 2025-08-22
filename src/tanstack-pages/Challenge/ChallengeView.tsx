@@ -25,7 +25,7 @@ const ChallengeView: React.FC = () => {
         />
         <div
           data-mobile={isMobile}
-          className="absolute data-[mobile=true]:top-24 top-2 right-3 text-black z-[1000]">
+          className="absolute data-[mobile=true]:top-24 top-4 right-4 text-black z-[1000]">
           <Link to="/new">
             <CrossIcon />
           </Link>

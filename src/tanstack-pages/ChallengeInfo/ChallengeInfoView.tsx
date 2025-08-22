@@ -43,7 +43,7 @@ export const ChallengeInfoDisplay: React.FC<ChallengeInfoDisplayProps> = ({
     <div className="flex flex-col h-full w-full bg-black overflow-y-auto challenge-container">
       <div
         data-mobile={isMobile}
-        className={`fixed     top-0 z-10 flex w-full justify-between ${challenge.color} text-black items-center p-3 h-[fit]   data-[mobile=true]:pt-24`}>
+        className={`fixed     top-0 z-10 flex w-full justify-between ${challenge.color} text-black items-center p-4 h-[fit]   data-[mobile=true]:pt-24`}>
         <Link to={"/"}>
           <BackIcon />
         </Link>

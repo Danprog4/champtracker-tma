@@ -23,7 +23,7 @@ const Challenges: React.FC = () => {
     <div className="flex flex-col items-start  overflow-x-hidden pb-20 ">
       <div
         data-mobile={isMobile}
-        className="fixed z-50 flex w-[100vw] justify-between bg-black h-[fit] data-[mobile=true]:pt-[100px] pt-2 pb-3 items-center pl-4 top-0">
+        className="fixed z-50 flex w-[100vw] justify-between bg-black h-[fit] data-[mobile=true]:pt-[100px] pt-4 pb-4 items-center pl-4 top-0">
         <button
           onClick={() => {
             if (challenges.length === 0) {
@@ -42,7 +42,7 @@ const Challenges: React.FC = () => {
         className="data-[mobile=true]:pt-[105px] mt-16  flex flex-col px-3">
         <h1 className="mb-2 text-2xl   font-druk ">НОВОЕ ЗАДАНИЕ</h1>
         <p className="mb-12 text-start text-sm text-neutral-400">
-          Выберите одно из 10 готовых заданий <br /> или создайте свое
+          Выбери одно из 10 готовых заданий <br /> или создай свое
         </p>
       </div>
 

@@ -68,7 +68,7 @@ const CreateDump: React.FC<CreateDumpProps> = ({
     <div className="flex  flex-col pb-20 overflow-x-hidden">
       <div
         data-mobile={isMobile}
-        className={`fixed top-0 h-[fit] data-[mobile=true]:pt-24 pt-2   items-center pl-3 flex w-full ${color}`}>
+        className={`fixed top-0 h-[fit] data-[mobile=true]:pt-24 pt-4   items-center pl-4 flex w-full ${color}`}>
         <Link to={getNavigationPath()} className="absolute text-black ">
           <CrossIcon />
         </Link>
