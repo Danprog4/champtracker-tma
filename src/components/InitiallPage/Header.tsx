@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header
       data-mobile={isMobile}
-      className={`w-full h-16 fixed top-0  bg-black flex justify-between items-center data-[mobile=true]:pt-28 px-2 `}>
+      className={`w-full min-h-16 h-fit z-[100] pb-2 fixed top-0  bg-black flex justify-between items-center data-[mobile=true]:pt-28 px-2 `}>
       <Link to={"/profile"} className="flex flex-col items-center group">
         <div className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
           <span className="text-white  transition-colors duration-200">

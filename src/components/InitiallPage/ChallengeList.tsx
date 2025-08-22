@@ -37,7 +37,7 @@ const ChallengeList = ({ challenges }: ChallengeListProps) => {
   return (
     <div
       data-mobile={isMobile}
-      className="data-[mobile=true]:mt-40 mt-16  flex flex-col items-center justify-center gap-2 pb-28">
+      className="data-[mobile=true]:mt-44 mt-20  flex flex-col items-center justify-center gap-2 pb-28">
       {nonExpiredChallenges.map((challenge, index) => (
         <ChallengeCard
           key={challenge.id}
