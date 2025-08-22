@@ -19,10 +19,10 @@ const Header = () => {
   return (
     <header
       data-mobile={isMobile}
-      className={`w-full h-16 bg-black flex justify-between items-center data-[mobile=true]:pt-28  px-4`}>
+      className={`w-full h-16 fixed top-0  bg-black flex justify-between items-center data-[mobile=true]:pt-28 px-2`}>
       <Link to={"/profile"} className="flex flex-col items-center group">
         <div className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
-          <span className="text-white group-hover:text-orange-400 transition-colors duration-200">
+          <span className="text-white  transition-colors duration-200">
             <MyProfile />
           </span>
         </div>
@@ -30,7 +30,7 @@ const Header = () => {
 
       <Link to={"/new"} className="flex flex-col items-center group">
         <button className="text-white bg-transparent rounded-full aspect-square h-10 flex items-center justify-center border border-transparent">
-          <span className="text-white group-hover:text-orange-400 transition-colors duration-200">
+          <span className="text-white  transition-colors duration-200">
             <PlusIcon className="h-6 w-6" />
           </span>
         </button>
