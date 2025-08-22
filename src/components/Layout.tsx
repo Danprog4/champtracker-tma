@@ -1,6 +1,7 @@
 import { Toaster } from "sonner";
 import { Outlet } from "@tanstack/react-router";
 import React from "react";
+import { useIsMobile } from "@/hooks/usePlatform";
 
 // Auth retry loading overlay component
 const AuthRetryOverlay = () => (
@@ -36,12 +37,19 @@ export function Layout({ isRetrying }: LayoutProps) {
     };
   }, [isRetrying]);
 
+  const isMobile = useIsMobile();
+
   return (
     <div
       className="bg-black text-white overflow-hidden min-h-screen height-fix flex flex-col w-full"
       style={{ minHeight: "100vh", backgroundColor: "black" }}>
       <Outlet />
-      <Toaster position="top-center" className="mt-20" theme="dark" />
+      <Toaster
+        data-mobile={isMobile}
+        position="top-center"
+        className={`data-[mobile=true]:mt-20 mt-0`}
+        theme="dark"
+      />
 
       {/* Show retry overlay when refreshing authentication */}
       {isRetrying && <AuthRetryOverlay />}
