@@ -97,12 +97,12 @@ const CreateDump: React.FC<CreateDumpProps> = ({
         />
         <StartModal date={date} setDate={setDate} disabled={false} />
       </div>
-      <Notifications
+      {/* <Notifications
         notifications={notifications}
         isNotifications={isNotifications}
         setIsNotifications={setIsNotifications}
         setNotifications={setNotifications}
-      />
+      /> */}
       <ColorsSchema color={color} setColor={setColor} />
       <button
         className="flex items-center justify-center pl-0  mb-10"
