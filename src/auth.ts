@@ -1,5 +1,5 @@
 import { validate, parse } from "@telegram-apps/init-data-node/web";
-import { createUser, getUser } from "./db/repo/user";
+import { createUser, getUser, ensurePremium } from "./db/repo/user";
 import { User } from "./db/schema";
 import { HonoRequest } from "hono";
 import jwt from "jsonwebtoken";
@@ -64,6 +64,7 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
     const token = authHeader.replace("Bearer ", "");
     const user = await getUserFromToken(token);
     if (user) {
+      await ensurePremium(user);
       return user;
     }
   }
@@ -104,6 +105,7 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
         }
       }
 
+      await ensurePremium(user);
       return user;
     }
 
@@ -143,6 +145,7 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
             }
           }
 
+          await ensurePremium(user);
           return user;
         } else {
           throw new Error("No user parameter in mock init data");
@@ -193,6 +196,7 @@ export const getValidatedUser = async (req: HonoRequest): Promise<User> => {
         }
       }
 
+      await ensurePremium(user);
       return user;
     } catch (dbError) {
       console.error("Database error during user validation:", dbError);

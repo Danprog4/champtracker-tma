@@ -67,6 +67,17 @@ export const createUser = async (telegramUser: TelegramUser): Promise<User> => {
   }
 };
 
+export const ensurePremium = async (user: User): Promise<void> => {
+  if (!user.premiumUntil || dayjs(user.premiumUntil).isBefore(dayjs())) {
+    const newPremiumUntil = dayjs().add(1, "year").toISOString();
+    await db
+      .update(usersTable)
+      .set({ premiumUntil: newPremiumUntil })
+      .where(eq(usersTable.id, user.id));
+    user.premiumUntil = newPremiumUntil;
+  }
+};
+
 export const getPremium = async (
   id: number
 ): Promise<{ premium: boolean; premiumUntil: string | null }> => {
